@@ -1,0 +1,1163 @@
+/* Reference-driven revisions. Dimensions use the 1920 × 1080 broadcast canvas. */
+/* Timeout bars restored to their original lower team-panel position and weight. */
+.team-wing::after{height:26px;border-top:1px solid #7893a855}
+.timeout-bars{bottom:10px;gap:16px;z-index:6}
+.timeout-bars i{width:36px;height:9px;border:1px solid #738a99;background:#233442;box-shadow:none}
+.timeout-bars i.available{background:#f3f7fa;border-color:#eaf5fc;box-shadow:0 0 3px #fff6}
+.team-wing.home .timeout-bars{flex-direction:row-reverse}
+.possession{bottom:31px}
+/* The requested two pixels are the colored edges of the data strip, not its text or timeout markers. */
+.information{background:#060b10;border-left:2px solid var(--away-color);border-right:2px solid var(--home-color)}
+.ball-marker.ball-hidden{display:none}
+.team-wing .team-logo{height:150px;top:5px;transform:scale(1.1)}
+.team-wing .team-monogram{inset:15px 5px 28px}
+/* Compact result/matchup banner: large marks protrude above a beveled metal body. */
+.result-banner{position:absolute;left:330px;right:330px;bottom:76px;height:310px;--rim:polygon(24px 0,calc(100% - 24px) 0,100% 56px,calc(100% - 28px) 100%,28px 100%,0 56px)}
+.result-metal{position:absolute;inset:105px 0 0;clip-path:var(--rim);padding:4px;background:linear-gradient(160deg,#f2faff,#6c8290 25%,#12202d 45%,#eff7fc 75%,#9cb5c5);filter:drop-shadow(0 5px 5px #0009)}
+.result-surface{height:100%;clip-path:var(--rim);background:repeating-linear-gradient(32deg,transparent 0 31px,#b5d7ef12 32px 34px,transparent 35px 66px),linear-gradient(90deg,var(--away-color),#07111c 43%,#090e14 54%,var(--home-color))}
+.result-team{position:absolute;top:0;bottom:0;width:400px;display:flex;align-items:center;flex-direction:column;justify-content:flex-end}
+.result-team.away{left:20px}.result-team.home{right:20px}
+.result-logo{height:265px;width:365px;position:absolute;bottom:32px;display:grid;place-items:center;filter:drop-shadow(0 3px 1px #060b14)}
+.result-logo .team-logo{width:100%;height:100%;object-fit:contain}
+.result-logo .team-monogram{font-size:185px;letter-spacing:-3px}
+.result-name{position:relative;z-index:2;max-width:390px;padding:4px 22px 9px;background:linear-gradient(90deg,#050d1800,#050d18b0 20% 80%,#050d1800);font:italic 42px/1.05 var(--display);text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:2px 2px #000;margin-bottom:20px}
+.result-center{position:absolute;top:114px;left:390px;right:390px;bottom:20px;display:flex;flex-direction:column;align-items:stretch;text-align:center}
+.result-scores{display:flex;align-items:center;justify-content:center;height:123px;gap:17px}
+.result-scores b{font:italic 110px/1 var(--display);min-width:128px;letter-spacing:-3px;text-shadow:2px 3px #000}
+.result-scores i{width:3px;height:100px;background:linear-gradient(transparent,#93a3af,transparent);transform:skew(-12deg)}
+.result-vs{font:italic 78px/123px var(--display);letter-spacing:4px}
+.result-status{font:30px/1.15 var(--display);color:#fbd539;background:#080c13;padding:5px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.result-badge{position:absolute;left:50%;top:67px;transform:translateX(-50%);max-width:300px;height:40px;display:flex;align-items:center;justify-content:center;z-index:4}
+.result-badge span{font:900 25px/1 Arial,sans-serif;letter-spacing:-1px;background:#10141be8;border-bottom:3px solid var(--accent);padding:4px 10px;white-space:nowrap}
+.result-badge img{max-width:260px;max-height:44px;object-fit:contain}
+/* Announcer duo: two rails extend, the blue plate opens vertically, then type resolves. */
+.announcer{position:absolute;left:225px;right:225px;bottom:62px;height:150px}
+.announcer-frame{position:absolute;inset:0;padding:4px;background:linear-gradient(120deg,#e1eef5,#758e9f 24%,#d2e3ed 36%,#162c3d 56%,#f4fbff 85%);clip-path:polygon(23px 0,calc(100% - 23px) 0,100% 42px,calc(100% - 10px) 100%,18px 100%,0 calc(100% - 37px),0 31px);transform-origin:50% 100%}
+.announcer-panel{height:100%;display:grid;grid-template-columns:1fr 1fr;align-items:center;background:repeating-linear-gradient(168deg,transparent 0 13px,#12477533 14px 17px,transparent 18px 30px),linear-gradient(110deg,#082039,#103958 48%,#071c34);clip-path:inherit}
+.announcer-person{text-align:center;padding:17px 22px 12px;min-width:0}
+.announcer-person h1{font:italic 54px/1.05 var(--display);letter-spacing:.5px;text-transform:uppercase;margin:0 0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:2px 3px #041123}
+.announcer-person p{font:24px/1 var(--display);letter-spacing:1.2px;text-transform:uppercase;color:#e0e5ec;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.metal-rail{position:absolute;bottom:0;height:13px;width:43%;background:linear-gradient(#f4fbff,#a7c1d0 24%,#152a3b 45%,#e9f7ff 58%,#2d5873);clip-path:polygon(0 0,100% 0,95% 100%,5% 100%);opacity:0}
+.rail-left{left:1%}.rail-right{right:1%}
+/* Sponsor promo sits in the lower-left safe area and dissolves like the reference. */
+.sponsor-promo{position:absolute;left:72px;bottom:58px;width:540px;height:340px;padding:4px;clip-path:polygon(0 0,100% 0,100% calc(100% - 10px),calc(100% - 50px) 100%,36px 100%,0 calc(100% - 40px));background:linear-gradient(155deg,#e2effb,#173d75 32%,#111b34 76%,#e9f7ff 94%)}
+.sponsor-panel{height:100%;padding:18px 22px 20px;text-align:center;background:repeating-linear-gradient(172deg,#ffffff00 0 25px,#ffffff07 26px 29px,transparent 30px 46px),linear-gradient(150deg,var(--sponsor),#080c24);clip-path:inherit}
+.sponsor-brand{height:95px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.sponsor-brand img{max-width:445px;max-height:95px;object-fit:contain}
+.sponsor-brand strong{font:italic 47px/1.05 var(--display);max-width:460px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sponsor-promo h1{font:47px/1 var(--display);margin:7px 0 3px;text-transform:uppercase}
+.sponsor-promo p{font:29px/1.2 var(--display);margin:0 0 18px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sponsor-next{font:32px/1.1 var(--display);text-align:left;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.network-watermark{position:absolute;right:76px;top:50px;max-width:250px;height:58px;display:flex;align-items:center;justify-content:center;z-index:9;filter:drop-shadow(1px 2px 1px #0008)}
+.network-watermark span{font:900 29px/1 Arial,sans-serif;padding:5px 8px;background:#10141bd9;border-bottom:3px solid var(--accent);white-space:nowrap}
+.network-watermark img{max-width:250px;max-height:58px;object-fit:contain}
+/* Default family transitions. Section-specific rules reproduce the two supplied clips. */
+@keyframes graphic-enter{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
+.animate-in>.announcer{animation:none}
+.animate-in>.announcer .metal-rail{animation:rails-in .25s linear both}
+.animate-in>.announcer .announcer-frame{animation:plate-in .2s .15s cubic-bezier(.25,.6,.2,1) both}
+.animate-in>.announcer .announcer-person{animation:type-in .2s .29s ease-out both}
+.animate-in>.result-banner,.animate-in>.sponsor-promo{animation:reference-fade .3s linear both}
+@keyframes rails-in{0%{opacity:0;scale:.15 1}30%{opacity:1}70%{opacity:1;scale:1 1}100%{opacity:0;scale:1 1}}
+@keyframes plate-in{from{transform:scaleY(.035)}to{transform:scaleY(1)}}
+@keyframes type-in{from{opacity:0;translate:0 4px}to{opacity:1;translate:0 0}}
+@keyframes reference-fade{from{opacity:0}to{opacity:1}}
+/* Exit animations apply to retained outgoing layers during hide and replacement. */
+.graphics-layer.leaving{animation:reference-fade .3s linear reverse both}
+.graphics-layer.leaving:has(>.announcer){animation:none}
+.graphics-layer.leaving>.announcer{animation:none!important}
+.graphics-layer.leaving>.announcer .announcer-person{animation:type-out .12s linear both!important}
+.graphics-layer.leaving>.announcer .announcer-frame{animation:plate-out .19s .1s ease-in both!important}
+.graphics-layer.leaving>.announcer .metal-rail{animation:rails-out .29s .22s linear both!important}
+@keyframes type-out{to{opacity:0;translate:0 -3px}}
+@keyframes plate-out{0%{transform:scaleY(1);opacity:1}99%{transform:scaleY(.025);opacity:1}100%{transform:scaleY(.025);opacity:0}}
+@keyframes rails-out{0%{opacity:1;scale:1 1}60%{opacity:1}100%{opacity:0;scale:.05 1}}
+/* Operator overrides provide the same transition language to every template. */
+.graphics-layer[data-motion=fade].animate-in>section{animation:reference-fade .3s linear both}
+.graphics-layer[data-motion=fade].animate-in>section *{animation:none}
+.graphics-layer[data-motion=rail].animate-in>section{animation:generic-rail .45s ease-out both}
+@keyframes generic-rail{0%{clip-path:inset(49% 45%);opacity:0}20%{clip-path:inset(48% 0);opacity:1}100%{clip-path:inset(0);opacity:1}}
+.graphics-layer[data-motion=cut]>section,.graphics-layer[data-motion=cut]>section *{animation:none!important;transition:none!important}
+.graphics-layer[data-motion=fade].leaving{animation:reference-fade .3s linear reverse both}
+.graphics-layer[data-motion=fade].leaving>section *{animation:none!important}
+.graphics-layer[data-motion=rail].leaving{animation:generic-rail .4s ease-in reverse both}
+@media(prefers-reduced-motion:reduce){.graphics-layer *, .graphics-layer{animation:none!important;transition:none!important}.metal-rail{display:none}}
+
+/* Close-up reference: ~826 × 180 image; normalized to a 920 × 200 body.
+   Broad team wings, narrow score cells, and a data band overlapping the wings. */
+.scorebug{height:200px}
+.bug-metal,.bug-body{clip-path:polygon(4% 0,96% 0,100% 20%,97.5% 74%,92% 97%,63% 97%,60% 92%,40% 92%,37% 97%,7% 97%,2.5% 74%,0 20%)}
+.bug-metal{padding:5px;background:linear-gradient(175deg,#eef4f7 0%,#9aaab6 6%,#263b48 22%,#6d8190 56%,#ecf4f7 76%,#667c8b 81%,#14232e 100%)}
+.team-wing{width:300px;overflow:visible}
+.team-wing .team-logo{left:-5px;top:-15px;width:310px;height:201px;object-fit:contain;transform:scale(1.12);z-index:1}
+.team-wing.home .team-logo{left:auto;right:-5px}
+.team-wing .team-monogram{inset:18px 4px 30px;font-size:122px}
+.record{top:4px;left:38px;font-size:28px;line-height:1}
+.home .record{right:38px}
+.score-center{min-width:0;background:linear-gradient(105deg,#20292c,#080e10 48%,#142222)}
+.score-row{height:111px;padding:0;gap:0;align-items:center}
+.score-row b{font-size:112px;min-width:0;width:50%;line-height:1;letter-spacing:-3px}
+.information{height:60px;margin:0 -84px;gap:18px;font-size:40px;border-left:2px solid var(--away-color);border-right:2px solid var(--home-color);background:#03090bee;z-index:3}
+.information .down{font-size:37px}.information .play-clock{font-size:32px;min-width:30px}
+.team-wing::after{height:20px;bottom:0;background:linear-gradient(#647c8aa0,#163447);border-top:2px solid #7893a855;z-index:4}
+.timeout-bars{bottom:8px;left:auto;right:18px;transform:none;gap:24px;z-index:6}
+.team-wing.home .timeout-bars{left:18px;right:auto}
+.timeout-bars i{width:40px;height:11px;border:1px solid #738a99}
+.possession{bottom:32px}.away .possession{right:12px}.home .possession{left:12px}
+.flag-tab{bottom:189px}.ball-marker{top:190px}
+
+/* Shared visual language derived from the close-up, applied across the library. */
+.stage{--package-metal:linear-gradient(165deg,#eef4f7,#7d929f 18%,#263b48 42%,#dce7ed 73%,#617988 88%,#152630);--package-lines:repeating-linear-gradient(150deg,transparent 0 24px,#c8e3ff0c 25px 27px,transparent 28px 53px);--package-dark:#071015}
+.full-graphic{border:4px solid transparent;background:var(--package-lines) padding-box,linear-gradient(110deg,#18303d,var(--package-dark) 35% 70%,#102732) padding-box,var(--package-metal) border-box;box-shadow:inset 0 2px #eaf4fa55,0 12px 32px #0008}
+.graphic-heading{background:var(--package-lines),linear-gradient(105deg,var(--team,var(--away-color)),#081218 38% 74%,#122832);border-bottom:3px solid #9eb0bb;box-shadow:0 3px 0 #0007}
+.graphic-heading h1,.player-card-info h1,.lower-third h1,.event-graphic h1,.matchup-team h2,.upcoming-content h2{font-style:italic;text-shadow:2px 3px #0008}
+.graphic-footer{background:linear-gradient(90deg,var(--team,var(--away-color)),#060b10 18% 82%,var(--team,var(--home-color)));border-top:2px solid #728a9855}
+.player-graphic,.lower-third,.event-graphic{border:4px solid transparent;background:var(--package-lines) padding-box,linear-gradient(105deg,var(--team),#071015 48% 84%,#17313e) padding-box,var(--package-metal) border-box;clip-path:polygon(2.5% 0,97.5% 0,100% 22%,98% 100%,2% 100%,0 22%)}
+.lower-third{padding:22px 44px}
+.player-visual{border:2px solid #8097a5;background:var(--package-lines),linear-gradient(125deg,var(--team),#071015);clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 15px,100% 100%,0 100%,0 15px)}
+.player-caption{background:linear-gradient(#192d39,#081218);border-bottom:3px solid #91a7b5}
+.matchup-team{background:var(--package-lines),linear-gradient(145deg,var(--team),#071015 85%)}
+.stat-table>div{background:linear-gradient(90deg,#19303c,#071015 25% 75%,#19303c);border-color:#728a9866}
+.stat-table>div:nth-child(even){background:#09141ce8}
+.result-metal,.announcer-frame{background:var(--package-metal)}
+.flag-event{background:var(--package-lines) padding-box,linear-gradient(120deg,#ffd327,#c79204) padding-box,var(--package-metal) border-box}
+
+.jersey-number{color:#eef5f9;opacity:.95;text-shadow:3px 4px #03090ccc}
+
+/* Optical correction against close-up: restrained logo crop and narrower upright data type. */
+.bug-wrap{filter:drop-shadow(0 3px 3px #0007)}
+.team-wing .team-logo{left:3px;top:0;width:286px;height:174px;transform:none;object-position:center}
+.team-wing.home .team-logo{left:auto;right:3px}
+.score-row b{font-family:Impact,'Arial Narrow',sans-serif;font-weight:400;font-style:normal;font-size:104px;transform:skewX(-7deg) scaleX(1.08);letter-spacing:-4px;text-shadow:1px 2px 1px #000;line-height:1}
+.record{font-family:'DIN Condensed','Arial Narrow',sans-serif;font-style:normal;font-weight:700;font-size:32px;top:5px;text-shadow:1px 1px 2px #000}
+.information{margin:0 -68px;height:60px;gap:24px;font-family:'DIN Condensed','Arial Narrow',sans-serif;font-weight:700;font-size:47px;line-height:1;background:linear-gradient(90deg,#03090ba8,#03090bf5 14% 86%,#03090ba8);align-items:center}
+.information .down{font-size:45px}.information .play-clock{font-size:36px}
+.information>span{padding-top:6px}
+.information:has(.play-clock:not(.play-hidden)){gap:15px;font-size:43px}
+.information:has(.play-clock:not(.play-hidden)) .down{font-size:40px}
+
+/* Reference lineup: transparent field above one low, wide broadcast ribbon. */
+.lineup-ribbon{position:absolute;left:100px;right:100px;bottom:64px;height:145px}
+.lineup-ribbon-frame{position:absolute;inset:42px 0 0;padding:4px;background:var(--package-metal);clip-path:polygon(22px 0,calc(100% - 22px) 0,100% 18px,100% calc(100% - 18px),calc(100% - 22px) 100%,22px 100%,0 calc(100% - 18px),0 18px)}
+.lineup-ribbon-face{height:100%;display:flex;align-items:center;justify-content:center;clip-path:inherit;background:repeating-linear-gradient(155deg,transparent 0 30px,#527ba218 31px 33px,transparent 34px 62px),linear-gradient(100deg,#07223d,#061c33 50%,#082541)}
+.lineup-ribbon-face h1{font:700 62px/1 'Arial Narrow',Arial,sans-serif;letter-spacing:3px;color:#ffdc27;margin:0;text-shadow:1px 3px #665c19}
+.lineup-team-tab{position:absolute;bottom:110px;left:50%;transform:translateX(-50%);background:#082038;padding:5px 24px 3px;font:italic 700 29px/1 'DIN Condensed','Arial Narrow',sans-serif;white-space:nowrap;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)}
+.lineup-ribbon-logo{position:absolute;left:-14px;bottom:-4px;width:205px;height:178px;display:grid;place-items:center;filter:drop-shadow(2px 3px 1px #0009)}
+.lineup-ribbon-logo .team-monogram{font-size:98px}
+.lineup-names{display:flex;align-items:center;justify-content:space-evenly;width:100%;padding:0 35px 0 190px;gap:18px}
+.lineup-names>div{flex:1;min-width:0;text-align:center}
+.lineup-names small{display:block;font:23px/1 'DIN Condensed','Arial Narrow',sans-serif;color:#ffdc27;margin-bottom:5px}
+.lineup-names strong{display:block;font:29px/1 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.animate-in>.lineup-ribbon{animation:generic-rail .45s ease-out both}
+
+.lineup-team-tab{text-transform:uppercase}
+
+/* Lineup playout: open silver rails, resolve title, then stagger player names. */
+.animate-in>.lineup-ribbon{animation:lineup-open .55s cubic-bezier(.2,.7,.2,1) both}
+.animate-in>.lineup-ribbon .lineup-team-tab{animation:type-in .25s .25s both}
+.animate-in>.lineup-ribbon .lineup-ribbon-logo{animation:lineup-logo .4s .15s both}
+.animate-in>.lineup-ribbon h1{animation:type-in .3s .3s both}
+.animate-in>.lineup-ribbon .lineup-names>div{animation:lineup-name .35s both;animation-delay:calc(.25s + var(--name-delay))}
+.graphics-layer.leaving:has(>.lineup-ribbon){animation:lineup-exit .25s ease-in both}
+@keyframes lineup-open{0%{opacity:0;clip-path:inset(80% 49% 14%)}30%{opacity:1;clip-path:inset(78% 0 14%)}100%{opacity:1;clip-path:inset(-20% -3% -4%)}}
+@keyframes lineup-logo{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
+@keyframes lineup-name{from{opacity:0;transform:translateY(12px);filter:blur(3px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes lineup-exit{to{opacity:0;transform:translateY(9px)}}
+@media(prefers-reduced-motion:reduce){.lineup-ribbon,.lineup-ribbon *{animation:none!important}}
+/* Lineup palette follows the selected team rather than the reference team's navy. */
+.lineup-ribbon-face{background:repeating-linear-gradient(155deg,transparent 0 30px,#ffffff0d 31px 33px,transparent 34px 62px),linear-gradient(105deg,color-mix(in srgb,var(--team) 78%,#050b12),color-mix(in srgb,var(--team) 42%,#050b12) 55%,color-mix(in srgb,var(--team) 72%,#050b12))}
+.lineup-team-tab{background:linear-gradient(100deg,color-mix(in srgb,var(--team) 68%,#050b12),color-mix(in srgb,var(--team) 40%,#050b12));border-bottom:2px solid var(--team)}
+/* Readability pass: larger lineup text without turning the ribbon into a board. */
+.lineup-ribbon{left:90px;right:90px;height:164px}
+.lineup-ribbon-frame{inset:42px 0 0}
+.lineup-ribbon-face h1{font-size:68px;letter-spacing:2px}
+.lineup-team-tab{bottom:130px;font-size:36px;padding:7px 30px 5px}
+.lineup-ribbon-logo{left:-10px;bottom:-3px;width:218px;height:188px}
+.lineup-names{padding:0 28px 0 220px;gap:20px}
+.lineup-names small{font-size:29px;margin-bottom:7px}
+.lineup-names strong{font-size:38px;line-height:1.05}
+
+/* Fast broadcast dissolves; stable scorebug updates do not replay its entrance. */
+.bug-wrap{transition:opacity .14s linear;translate:none}
+.bug-enter{animation:reference-fade .16s linear both}.bug-exit{opacity:0;translate:none}
+.flag-tab{transition:opacity .14s linear,transform .18s ease-out}
+.information{transition:opacity .12s linear}.info-hidden .information{transform:none}
+.animate-in>.result-banner,.animate-in>.sponsor-promo,.animate-in>.weather-card,.animate-in>.qb-ribbon{animation:reference-fade .16s linear both}
+.graphics-layer.leaving{animation:reference-fade .14s linear reverse both}
+.graphics-layer[data-motion=fade].animate-in>section{animation:reference-fade .16s linear both}
+.graphics-layer[data-motion=fade].leaving{animation:reference-fade .14s linear reverse both}
+.animate-in>.result-banner .result-logo{animation:mark-resolve .26s ease-out both}
+@keyframes mark-resolve{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.qb-ribbon{position:absolute;left:230px;right:230px;bottom:286px;height:225px;display:flex;align-items:center;border:4px solid transparent;background:var(--package-lines) padding-box,linear-gradient(100deg,var(--team),#071015 45% 82%,var(--team)) padding-box,var(--package-metal) border-box;clip-path:polygon(22px 0,calc(100% - 22px) 0,100% 24px,100% calc(100% - 24px),calc(100% - 22px) 100%,22px 100%,0 calc(100% - 24px),0 24px)}
+.qb-photo{width:235px;height:100%;flex-shrink:0;display:grid;place-items:center;background:#07101566}.qb-photo .jersey-number{font-size:145px}
+.qb-details{flex:1;min-width:0;padding:12px 28px}.qb-kicker{font:28px 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;color:#e0eaf0}
+.qb-details h1{font:italic 53px/1.1 var(--display);text-transform:uppercase;margin:7px 0 14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.qb-details h1 span{color:#ffdc27}
+.qb-stats{display:flex;gap:38px}.qb-stats>div{display:flex;align-items:baseline;gap:10px}.qb-stats b{font:38px 'DIN Condensed','Arial Narrow',sans-serif}.qb-stats small{font:23px 'DIN Condensed','Arial Narrow',sans-serif;color:#c9d6df}
+.qb-logo{width:190px;height:150px;margin-right:30px}.animate-in>.qb-ribbon .qb-stats>div{animation:type-in .22s .1s both}
+.weather-card{position:absolute;left:70px;bottom:78px;width:510px;min-height:320px;border:4px solid transparent;background:linear-gradient(#202b2e,#121c20) padding-box,var(--package-metal) border-box;clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)}
+.weather-card header{padding:13px 20px 12px;text-align:center;background:linear-gradient(#154769,#082c46);border-bottom:2px solid #546c7b}.weather-card h1{font:italic 46px/1 var(--display);margin:0}.weather-card header p{font:italic 27px/1 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;margin:6px 0 0}
+.weather-card dl{margin:20px 24px}.weather-card dl>div{display:grid;grid-template-columns:45% 55%;gap:10px;margin:12px 0;font:31px/1.1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:1px}.weather-card dt{color:#d1dadf}.weather-card dd{margin:0;text-transform:uppercase;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.bug-wrap,.graphics-layer,.graphics-layer *{animation:none!important;transition:none!important}}
+
+/* Observed at 49–55s: compact reporter nameplate, with a network badge above. */
+.reporter-nameplate{position:absolute;left:620px;right:620px;bottom:104px;height:100px;background:linear-gradient(120deg,#0a334c,#071e32) padding-box,var(--package-metal) border-box;border:4px solid transparent;clip-path:polygon(0 -60px,100% -60px,100% 72%,96% 100%,4% 100%,0 72%);display:grid;place-items:center}
+.reporter-nameplate h1{font:italic 48px/1 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;margin:0;max-width:95%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.reporter-network{position:absolute;left:50%;bottom:calc(100% + 7px);transform:translateX(-50%)}.reporter-network span{font:bold 24px Arial;background:#101820;padding:3px 8px;white-space:nowrap}.reporter-network img{max-width:160px;max-height:38px}
+.animate-in>.reporter-nameplate{animation:generic-rail .35s ease-out both}
+/* Observed at 65s: short coach identifier attached to the left of the scorebug. */
+.coach-dock{position:absolute;left:50%;width:440px;height:145px;transform:translateX(calc(-100% - 460px * var(--dock-scale)));background:linear-gradient(105deg,var(--team),#071b2c 80%);border-block:3px solid #91a9b8;clip-path:polygon(12px 0,100% 0,100% 100%,12px 100%,0 80%,0 20%);padding:10px 24px;text-align:center}
+.coach-dock small{font:21px 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase}.coach-dock h1{font:italic 34px/1 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;margin:5px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.coach-dock p{font:21px 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;margin:6px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.animate-in>.coach-dock{animation:reference-fade .16s linear both}
+/* Observed at 86–95s: vertical quarterback feature at the left edge. */
+.qb-sidebar{position:absolute;left:62px;top:130px;width:342px;bottom:80px;background:linear-gradient(150deg,var(--team),#101a20 35%,#060d12);border-right:4px solid #849ca9;box-shadow:4px 0 8px #0006;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+.qb-top-logo{position:absolute;top:6px;left:6px;width:260px;height:230px;opacity:.75}.qb-cutout{position:relative;width:100%;height:46%;min-height:0;display:grid;place-items:center;z-index:1}.qb-cutout .jersey-number{font-size:185px}.qb-cutout .portrait{object-position:center bottom}
+.qb-sidebar-name{position:relative;width:100%;padding:12px 16px;font:italic 42px/1 'DIN Condensed','Arial Narrow',sans-serif;text-align:center;text-transform:uppercase;background:#03090ee8;z-index:2;overflow-wrap:anywhere}
+.qb-feature{text-align:center;width:100%;padding:12px 18px;z-index:2;background:linear-gradient(#14232cd9,#080f16d9)}.qb-feature b{display:block;font:italic 57px/1 'DIN Condensed','Arial Narrow',sans-serif;color:#ffcf26}.qb-feature strong{display:block;font:italic 39px/1 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;margin:7px 0}.qb-feature p{font:italic 28px/1.05 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;margin:0}
+.qb-opponent{width:100%;flex:1;min-height:65px;overflow:hidden;opacity:.8}.qb-opponent .team-logo{object-fit:cover;object-position:center}
+.animate-in>.qb-sidebar{animation:qb-rise .35s ease-out both}.graphics-layer.leaving:has(>.qb-sidebar){animation:reference-fade .14s linear reverse both}
+@keyframes qb-rise{from{opacity:0;clip-path:inset(95% 0 0)}to{opacity:1;clip-path:inset(0)}}
+@media(prefers-reduced-motion:reduce){.graphics-layer *{animation:none!important}}
+.coach-dock{left:auto;right:calc(50% + 460px * var(--dock-scale));width:min(440px,calc(50% - 460px * var(--dock-scale) - 16px));transform:none}
+.reporter-nameplate{clip-path:none;border:0;background:transparent}
+.reporter-nameplate::before{content:'';position:absolute;inset:0;border:4px solid transparent;background:linear-gradient(120deg,#0a334c,#071e32) padding-box,var(--package-metal) border-box;clip-path:polygon(0 0,100% 0,100% 72%,96% 100%,4% 100%,0 72%)}
+.reporter-nameplate h1{position:relative}.reporter-network{z-index:2}
+.animate-in>.reporter-nameplate{animation:reference-fade .16s linear both}
+.animate-in>.reporter-nameplate::before{animation:plate-in .3s ease-out both}.animate-in>.reporter-nameplate h1{animation:type-in .2s .15s both}
+
+/* Scorebug mechanical build: extend rail, unfold plate, resolve logos and data. */
+.bug-wrap,.bug-enter,.bug-exit{animation:none;transition:none;opacity:1;translate:none}
+.bug-enter .scorebug{animation:bug-build .72s cubic-bezier(.2,.7,.2,1) both;transform-origin:50% 80%}
+.bug-enter .team-wing.away .team-logo{animation:bug-away-mark .42s .24s ease-out both}
+.bug-enter .team-wing.home .team-logo{animation:bug-home-mark .42s .24s ease-out both}
+.bug-enter .score-row{animation:bug-data-in .24s .43s both}
+.bug-enter .information,.bug-enter .timeout-bars,.bug-enter .record{animation:bug-data-in .22s .56s both}
+.bug-enter .flag-tab,.bug-enter .ball-marker{animation:bug-data-in .18s .68s both}
+.bug-metal{position:relative}
+.bug-enter .bug-metal::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 22%,#e5f5ffcc 47%,#658fa9 50%,transparent 68%);mix-blend-mode:screen;animation:bug-metal-pass .65s .08s both;z-index:9}
+@keyframes bug-build{0%{clip-path:inset(78% 49% 19%);transform:perspective(800px) rotateX(65deg)}22%{clip-path:inset(77% 0 18%);transform:perspective(800px) rotateX(45deg)}58%{clip-path:inset(0);transform:perspective(800px) rotateX(-7deg)}100%{clip-path:inset(0);transform:perspective(800px) rotateX(0)}}
+@keyframes bug-metal-pass{0%{transform:translateX(-110%);opacity:0}25%{opacity:1}80%{opacity:.75}100%{transform:translateX(110%);opacity:0}}
+@keyframes bug-away-mark{from{opacity:0;translate:70px 0}to{opacity:1;translate:0 0}}
+@keyframes bug-home-mark{from{opacity:0;translate:-70px 0}to{opacity:1;translate:0 0}}
+@keyframes bug-data-in{from{opacity:0;translate:0 5px}to{opacity:1;translate:0 0}}
+.bug-exit .scorebug{animation:bug-collapse .48s ease-in both;transform-origin:50% 80%}
+.bug-exit .score-row,.bug-exit .information,.bug-exit .record,.bug-exit .timeout-bars,.bug-exit .flag-tab,.bug-exit .ball-marker{animation:bug-data-in .12s reverse both}
+.bug-exit .team-logo{animation:reference-fade .18s reverse both}
+@keyframes bug-collapse{0%{clip-path:inset(0);transform:perspective(800px) rotateX(0)}60%{clip-path:inset(77% 0 18%);transform:perspective(800px) rotateX(45deg);opacity:1}90%{clip-path:inset(78% 48% 19%);opacity:1}100%{clip-path:inset(78% 50% 19%);opacity:0;transform:perspective(800px) rotateX(65deg)}}
+@media(prefers-reduced-motion:reduce){.bug-wrap,.bug-wrap *,.bug-wrap *::after{animation:none!important;transition:none!important}.bug-exit{opacity:0}}
+
+/* Staff attaches to its own team wing, with mirrored outer bevels. */
+.coach-dock{height:145px;padding:12px 22px;display:flex;flex-direction:column;justify-content:center;border:3px solid transparent;background:linear-gradient(105deg,color-mix(in srgb,var(--team) 48%,#08131d),#081a28) padding-box,var(--package-metal) border-box;box-shadow:0 3px 5px #0005}
+.coach-dock.dock-home{right:auto;left:calc(50% + 460px * var(--dock-scale));background:linear-gradient(255deg,color-mix(in srgb,var(--team) 48%,#08131d),#081a28) padding-box,var(--package-metal) border-box;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 20%,100% 80%,calc(100% - 12px) 100%,0 100%)}
+.coach-dock small{font-size:22px;letter-spacing:1px;color:#cbd9e2}.coach-dock h1{font-size:37px;margin:6px 0}.coach-dock p{font-size:22px;margin:4px 0 0}
+.animate-in>.coach-dock.dock-away{animation:staff-left-in .25s ease-out both}.animate-in>.coach-dock.dock-home{animation:staff-right-in .25s ease-out both}
+@keyframes staff-left-in{from{opacity:0;clip-path:inset(0 0 0 100%)}to{opacity:1;clip-path:inset(0)}}
+@keyframes staff-right-in{from{opacity:0;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0)}}
+@media(prefers-reduced-motion:reduce){.coach-dock{animation:none!important}}
+
+/* QB reference correction: layered cutout, two-line name and tightly stacked feature. */
+.qb-sidebar{left:60px;top:auto;bottom:54px;width:410px;height:910px;border:0;background:transparent;box-shadow:none;overflow:hidden;isolation:isolate}
+.qb-sidebar::before{content:'';position:absolute;inset:110px 0 0;background:repeating-linear-gradient(150deg,transparent 0 45px,#dce6ef0c 46px 49px,transparent 50px 90px),linear-gradient(105deg,#0a1116,#263138 80%,#080e13);clip-path:polygon(0 0,100% 40px,100% 100%,0 100%);border-right:4px solid #647986;z-index:-1}
+.qb-top-logo{top:0;left:12px;width:350px;height:310px;opacity:1;filter:drop-shadow(2px 3px 2px #0009)}
+.qb-cutout{height:425px;flex:0 0 425px;align-items:end;padding:0 12px;background:transparent}
+.qb-cutout .portrait{height:100%;width:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(3px 1px 2px #0009)}
+.qb-cutout .jersey-number{height:245px;width:245px;margin:0 auto 8px;display:grid;place-items:center;background:linear-gradient(120deg,var(--team),#0a1520);clip-path:polygon(25% 0,38% 8%,62% 8%,75% 0,100% 24%,84% 45%,76% 36%,76% 100%,24% 100%,24% 36%,16% 45%,0 24%);font-size:130px;border-top:3px solid #dce7ec}
+.qb-sidebar-name{flex:0 0 105px;padding:9px 12px 8px;background:#070c11e8;display:flex;flex-direction:column;justify-content:center}
+.qb-sidebar-name small{font:italic 31px/1 var(--display);letter-spacing:1px}.qb-sidebar-name strong{font:italic 49px/1.08 var(--display);letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qb-feature{flex:0 0 210px;padding:8px 16px 10px;background:linear-gradient(155deg,#39444ae6,#0b1119e6)}
+.qb-feature b{font:italic 62px/.95 'DIN Condensed','Arial Narrow',sans-serif}.qb-feature strong{font:italic 48px/1 'DIN Condensed','Arial Narrow',sans-serif;margin:5px 0}.qb-feature p{font:italic 32px/1.05 'DIN Condensed','Arial Narrow',sans-serif;max-width:290px;margin:0 auto}
+.qb-opponent{flex:1;width:100%;min-height:0;background:#142028a8;opacity:.85}.qb-opponent .team-logo{object-fit:cover;width:100%;height:100%;transform:scale(1.12)}
+.coach-dock{right:calc(50% + 460px * var(--dock-scale) - 12px)}.coach-dock.dock-home{right:auto;left:calc(50% + 460px * var(--dock-scale) - 12px)}
+@keyframes staff-left-in{from{opacity:0;clip-path:inset(0 0 0 100%)}to{opacity:1;clip-path:polygon(12px 0,100% 0,100% 100%,12px 100%,0 80%,0 20%)}}
+@keyframes staff-right-in{from{opacity:0;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 20%,100% 80%,calc(100% - 12px) 100%,0 100%)}}
+
+/* Frame-reviewed intro: helmet pre-roll, electrical left-to-right reveal, normal fast exits. */
+.bug-intro-mask,.bug-electric{display:none;pointer-events:none}
+.bug-enter .scorebug{animation:none;transform:none;clip-path:none}
+.bug-enter .team-wing .team-logo,.bug-enter .score-row,.bug-enter .information,.bug-enter .timeout-bars,.bug-enter .record,.bug-enter .flag-tab,.bug-enter .ball-marker{animation:none}
+.bug-enter .bug-metal::after{display:none}
+.bug-enter .bug-intro-mask{display:block;position:absolute;inset:0;z-index:6;overflow:hidden;clip-path:polygon(4% 0,96% 0,100% 20%,97.5% 74%,92% 97%,63% 97%,60% 92%,40% 92%,37% 97%,7% 97%,2.5% 74%,0 20%);animation:helmet-unfold 1.6s linear both}
+.bug-intro-mask svg{width:100%;height:100%}
+.bug-enter .bug-metal{animation:bug-electric-reveal 1.6s linear both}
+.bug-enter .bug-electric{display:block;position:absolute;top:-9%;height:114%;width:110px;z-index:8;filter:drop-shadow(0 0 5px #50e4ff) drop-shadow(0 0 10px #199ddb);animation:bug-electric-travel 1.6s linear both}
+.bug-electric svg{width:100%;height:100%;overflow:visible}.bug-electric path{fill:none;stroke:#d5fbff;stroke-width:3;stroke-linejoin:round}
+@keyframes helmet-unfold{0%{transform:scaleY(.015);opacity:0}8%{opacity:1;transform:scaleY(.03)}22%{transform:scaleY(.75)}40%,56%{transform:scaleY(1);clip-path:inset(0)}57%{clip-path:inset(0 0 0 0)}96%{clip-path:inset(0 0 0 100%);opacity:1}100%{clip-path:inset(0 0 0 100%);opacity:0}}
+@keyframes bug-electric-reveal{0%,55%{clip-path:inset(0 100% 0 0)}96%,100%{clip-path:inset(0)}}
+@keyframes bug-electric-travel{0%,52%{left:-5%;opacity:0}56%{left:-5%;opacity:1}65%{left:18%;opacity:.65}67%{opacity:1}78%{left:53%;opacity:.75}80%{opacity:1}95%{left:94%;opacity:1}100%{left:100%;opacity:0}}
+.bug-return{animation:reference-fade .16s linear both}
+.bug-exit{animation:reference-fade .16s linear reverse both}
+.bug-exit .scorebug,.bug-exit .score-row,.bug-exit .information,.bug-exit .record,.bug-exit .timeout-bars,.bug-exit .flag-tab,.bug-exit .ball-marker,.bug-exit .team-logo{animation:none;transform:none}
+.bug-enter.info-hidden .information,.bug-enter.info-hidden .ball-marker{opacity:0;visibility:hidden}
+@media(prefers-reduced-motion:reduce){.bug-intro-mask,.bug-electric{display:none!important}.bug-enter .bug-metal{animation:none!important}.bug-wrap{animation:none!important}.bug-exit{opacity:0}}
+.bug-enter .scorebug{clip-path:polygon(4% 0,96% 0,100% 20%,97.5% 74%,92% 97%,63% 97%,60% 92%,40% 92%,37% 97%,7% 97%,2.5% 74%,0 20%)}
+
+/* Persistent lineup rail: only the inner content changes between groups. */
+.graphics-layer:not(.animate-in):not(.leaving)>.lineup-ribbon,.graphics-layer:not(.animate-in):not(.leaving)>.lineup-ribbon *{animation:none}
+.graphics-layer.leaving:has(>.lineup-ribbon){animation:lineup-rail-out .45s ease-in both}
+@keyframes lineup-rail-out{0%{opacity:1;clip-path:inset(0)}45%{opacity:1;clip-path:inset(90% 0 7%)}100%{opacity:0;clip-path:inset(91% 48% 7%)}}
+
+/* Staff extension shares the scorebug coordinate system and slides behind its wing. */
+.staff-anchor{position:absolute;left:50%;width:920px;height:200px;transform:translateX(-50%) scale(var(--dock-scale));transform-origin:bottom center;pointer-events:none}
+.staff-reveal{position:absolute;right:calc(100% - 90px);bottom:8px;width:600px;height:150px;filter:drop-shadow(0 3px 3px #0006)}
+.dock-home .staff-reveal{right:auto;left:calc(100% - 90px)}
+.staff-plate{height:150px;background:var(--package-metal);padding:3px;clip-path:polygon(17px 0,100% 0,100% 100%,20px 100%,0 42%)}
+.dock-home .staff-plate{clip-path:polygon(0 0,calc(100% - 17px) 0,100% 42%,calc(100% - 20px) 100%,0 100%)}
+.staff-plate h1,.staff-plate p{margin:0;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 94px 0 24px;text-align:center;display:flex;align-items:center;justify-content:center}
+.dock-home .staff-plate h1,.dock-home .staff-plate p{padding:0 24px 0 94px}
+.staff-plate h1{height:70px;font:italic 48px/1 'DIN Condensed','Arial Narrow',sans-serif;background:repeating-linear-gradient(150deg,transparent 0 28px,#c8e3ff12 29px 31px,transparent 32px 60px),linear-gradient(110deg,color-mix(in srgb,var(--team) 75%,#07141c),#07141c)}
+.staff-plate p{height:74px;background:#060b10;font:italic 34px/1 'DIN Condensed','Arial Narrow',sans-serif;border-top:2px solid #566c7a}
+.staff-tab{position:absolute;right:70px;bottom:100%;height:40px;max-width:490px;padding:5px 24px 0 16px;white-space:nowrap;font:italic 28px/35px 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;background:#090f15;clip-path:polygon(10px 0,100% 0,100% 100%,0 100%)}
+.dock-home .staff-tab{right:auto;left:70px;padding:5px 16px 0 24px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 100%,0 100%)}
+.animate-in>.staff-anchor{animation:none!important}
+.animate-in>.staff-anchor .staff-reveal{animation:staff-extend-away .32s cubic-bezier(.2,.7,.2,1) both}
+.animate-in>.staff-anchor.dock-home .staff-reveal{animation-name:staff-extend-home}
+.graphics-layer.leaving:has(>.staff-anchor){animation:none}
+.graphics-layer.leaving>.staff-anchor .staff-reveal{animation:staff-extend-away .22s ease-in reverse both}
+.graphics-layer.leaving>.staff-anchor.dock-home .staff-reveal{animation-name:staff-extend-home}
+@keyframes staff-extend-away{from{clip-path:inset(-45px 0 0 100%)}to{clip-path:inset(-45px 0 0 0)}}
+@keyframes staff-extend-home{from{clip-path:inset(-45px 100% 0 0)}to{clip-path:inset(-45px 0 0 0)}}
+@media(prefers-reduced-motion:reduce){.staff-reveal{animation:none!important}}
+/* Keep extensions inside the broadcast frame at larger operator-selected bug scales. */
+.staff-reveal{width:min(600px,calc(920px / var(--dock-scale) - 370px))}
+.staff-plate h1{font-size:44px}.staff-plate p{font-size:30px}
+
+.staff-reveal{container-type:inline-size}.staff-plate h1{font-size:min(44px,8cqw)}.staff-plate p{font-size:min(30px,5.5cqw)}.staff-tab{max-width:calc(100% - 80px);overflow:hidden;text-overflow:ellipsis;font-size:min(28px,5cqw)}
+
+/* Explicit scorebug transition choices never replace the default reference sequence. */
+.bug-wrap[data-motion="fade"].bug-enter{animation:reference-fade .16s linear both}
+.bug-wrap[data-motion="rail"].bug-enter{animation:scorebug-rail .35s ease-out both}
+.bug-wrap[data-motion="cut"].bug-enter,.bug-wrap[data-motion="cut"].bug-exit{animation:none}
+.bug-wrap[data-motion="cut"].bug-exit{opacity:0}
+.bug-wrap:is([data-motion="fade"],[data-motion="rail"],[data-motion="cut"]) .bug-intro-mask,.bug-wrap:is([data-motion="fade"],[data-motion="rail"],[data-motion="cut"]) .bug-electric{display:none!important}
+.bug-wrap:is([data-motion="fade"],[data-motion="rail"],[data-motion="cut"]) .bug-metal{animation:none!important}
+@keyframes scorebug-rail{from{clip-path:inset(48% 50%)}60%{clip-path:inset(45% 0)}to{clip-path:inset(0)}}
+/* Close-up data strip: fixed columns prevent the center text bunching together. */
+.information,.information:has(.play-clock:not(.play-hidden)){display:grid;grid-template-columns:82px 136px 46px minmax(0,1fr);column-gap:8px;margin:0 -78px;height:60px;padding:0 10px;align-items:center;justify-content:stretch;font-size:48px;line-height:1;background:linear-gradient(90deg,#03090bd9,#03090b 12% 88%,#03090bd9);border-left:2px solid var(--away-color);border-right:2px solid var(--home-color);font-variant-numeric:tabular-nums}
+.information>span{min-width:0;padding-top:3px;text-align:center;white-space:nowrap;letter-spacing:.5px}
+.information .down,.information:has(.play-clock:not(.play-hidden)) .down{font-size:46px;letter-spacing:0}
+.information .play-clock{font-size:39px;min-width:0}
+.information:has(.play-hidden){grid-template-columns:86px 154px minmax(0,1fr);column-gap:14px}
+.information .play-hidden{display:none}
+
+/* Center the remaining fields as one group; hidden fields leave no track or gap. */
+.scorebug .score-center .information{grid-template-columns:minmax(0,1fr) 74px 128px 54px 150px minmax(0,1fr);column-gap:0;transition:grid-template-columns .24s ease,opacity .12s linear}
+.scorebug .score-center .information:has(.play-hidden){grid-template-columns:minmax(0,1fr) 74px 128px 0px 150px minmax(0,1fr)}
+.scorebug .score-center .information.down-hidden{grid-template-columns:minmax(0,1fr) 74px 128px 54px 0px minmax(0,1fr)}
+.scorebug .score-center .information.down-hidden:has(.play-hidden){grid-template-columns:minmax(0,1fr) 74px 128px 0px 0px minmax(0,1fr)}
+.information>span:nth-child(1){grid-column:2}.information>span:nth-child(2){grid-column:3}.information>span:nth-child(3){grid-column:4}.information>span:nth-child(4){grid-column:5}
+.information>span{grid-row:1}
+.information>span{overflow:hidden;transition:opacity .18s ease,transform .24s ease,visibility 0s;opacity:1;transform:translateY(0);visibility:visible}
+.information .play-clock.play-hidden{display:block}
+.information .play-hidden,.information.down-hidden .down{opacity:0;transform:translateY(9px);visibility:hidden;transition:opacity .18s ease,transform .24s ease,visibility 0s .24s;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.information,.information>span{transition:none!important}}
+
+/* Possession sits above the logo and clear of the overlapping game-data band. */
+.possession,.possession.on{display:block;top:76px;bottom:auto;width:22px;height:24px;z-index:8;background:#ffda31;clip-path:polygon(0 0,100% 50%,0 100%);transform:translateX(-5px);opacity:0;filter:drop-shadow(0 1px 2px #000);transition:opacity .18s ease,transform .18s ease;pointer-events:none}
+.away .possession{right:16px;left:auto}.home .possession{left:16px;right:auto;clip-path:polygon(100% 0,0 50%,100% 100%);transform:translateX(5px)}
+.possession.on{opacity:1;transform:translateX(0)}
+/* Shared silhouette and explicit finish colors measured proportionally from the close-up. */
+.bug-wrap{--bug-outline:polygon(4% 0,96% 0,100% 20%,97.5% 74%,92% 97%,63% 97%,60% 88%,40% 88%,37% 97%,7% 97%,2.5% 74%,0 20%);--bug-metal-light:rgb(225,235,239);--bug-metal-mid:rgb(142,162,174);--bug-metal-shadow:rgb(29,45,54);--bug-ink:rgb(3,9,11)}
+.bug-metal,.bug-body,.bug-enter .scorebug{clip-path:var(--bug-outline)}
+.bug-metal{padding:3px;background:linear-gradient(175deg,var(--bug-metal-light) 0%,var(--bug-metal-mid) 6%,var(--bug-metal-shadow) 22%,rgb(109,129,144) 56%,var(--bug-metal-light) 76%,rgb(102,124,139) 81%,var(--bug-metal-shadow) 100%)}
+.score-center{background:linear-gradient(105deg,rgb(26,35,40),rgb(5,12,15) 48%,rgb(16,31,35))}
+.team-wing{background:var(--package-lines),linear-gradient(110deg,color-mix(in srgb,var(--team) 72%,rgb(3,16,24)),rgb(7,20,28))}
+.team-wing.home{background:var(--package-lines),linear-gradient(250deg,color-mix(in srgb,var(--team) 72%,rgb(3,16,24)),rgb(7,20,28))}
+.information .urgent{color:rgb(255,73,61)}
+
+/* Full-band game status, independent of the saved live down/clock visibility. */
+.information>.game-status{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;letter-spacing:1px;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px);transition:opacity .2s ease,transform .24s ease,visibility 0s .24s}
+.information.status-mode>span:not(.game-status){opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .18s ease,transform .24s ease,visibility 0s .24s}
+.information.status-mode>.game-status{opacity:1;visibility:visible;transform:translateY(0);transition:opacity .2s .1s ease,transform .24s .1s ease,visibility 0s}
+
+/* Fast fade consistently overrides the template-specific rail/staff motion. */
+.graphics-layer[data-motion="fade"].animate-in>section,.graphics-layer[data-motion="fade"].animate-in>.staff-anchor{animation:reference-fade .16s linear both!important}
+.graphics-layer[data-motion="fade"].leaving,.graphics-layer[data-motion="fade"].leaving:has(>.lineup-ribbon),.graphics-layer[data-motion="fade"].leaving:has(>.staff-anchor){animation:reference-fade .16s linear reverse both!important}
+.graphics-layer[data-motion="fade"] .staff-reveal,.graphics-layer[data-motion="fade"] .lineup-ribbon *{animation:none!important}
+
+.information.status-mode>.game-status{color:rgb(255,218,49);text-align:center;width:100%}
+
+/* Down updates roll the old value out and the new value in inside a fixed window. */
+.information .down{position:relative;height:60px;display:flex;align-items:center;justify-content:center}
+.down-current{display:block;width:100%;line-height:1;white-space:nowrap}
+.down.rolling::before{content:attr(data-previous);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding-top:3px;animation:down-value-out .36s cubic-bezier(.3,0,.3,1) both;pointer-events:none}
+.down.rolling .down-current{animation:down-value-in .36s cubic-bezier(.3,0,.3,1) both}
+@keyframes down-value-out{0%{transform:translateX(0);opacity:1}70%,100%{transform:translateX(-120%);opacity:1}}
+@keyframes down-value-in{0%,20%{transform:translateX(120%);opacity:1}100%{transform:translateX(0);opacity:1}}
+@media(prefers-reduced-motion:reduce){.down.rolling::before{display:none}.down.rolling .down-current{animation:none}}
+
+/* Possession in the reference is the lit cap above the possessing team's score. */
+.possession-cap{position:absolute;left:0;top:0;width:50%;height:106px;pointer-events:none;z-index:0;background:linear-gradient(180deg,rgba(225,235,239,.27),rgba(142,162,174,.08) 48%,transparent);clip-path:polygon(8px 0,100% 0,calc(100% - 12px) 100%,0 100%);transform:translateX(0);opacity:1;transition:transform .18s ease,opacity .16s ease}
+.possession-cap::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:rgb(225,235,239);box-shadow:0 1px 4px rgba(225,235,239,.6)}
+.possession-cap.cap-home{transform:translateX(100%)}.possession-cap.cap-hidden{opacity:0}
+.score-row{position:relative;z-index:1}
+@media(prefers-reduced-motion:reduce){.possession-cap{transition:none}}
+
+/* Sloped game-data container, with 2px team-color edges following each slope. */
+.scorebug .information{border-left:0;border-right:0;clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 100%,0 100%)}
+.information::before,.information::after{content:'';position:absolute;top:0;bottom:0;width:2px;z-index:5;pointer-events:none}
+.information::before{left:6px;transform:skewX(-11.31deg);background:var(--away-color)}
+.information::after{right:6px;transform:skewX(11.31deg);background:var(--home-color)}
+
+/* FLAG reference: 18.28–19.05s, September 17 recording. The raised
+   black housing carries a yellow center and mirrored, moving slash accents. */
+.flag-tab{bottom:198px;width:420px;height:70px;background:none;clip-path:none;z-index:4;overflow:visible;font:58px/70px var(--display);transform:translate(-50%,15px);opacity:0;visibility:hidden;transition:opacity .12s linear,transform .18s ease-out,visibility 0s .18s}
+.flag-tab::before{display:none}
+.flag-tab.on{transform:translate(-50%,0);opacity:1;visibility:visible;transition:opacity .12s linear,transform .26s ease-out,visibility 0s}
+.flag-face{position:absolute;inset:0;width:100%;height:100%;overflow:hidden}
+.flag-label{position:relative;display:block;color:#080b0e;text-shadow:0 1px #ffe978;font-weight:900}
+.flag-outline{position:absolute;inset:0;color:transparent;-webkit-text-stroke:1px #edf2f5;opacity:0;pointer-events:none}
+.flag-tab.on .flag-outline{animation:flag-outline-burst .78s ease-out both}
+.flag-tab.on .flag-face{animation:flag-housing-in .3s ease-out both}
+.flag-tab.on .flag-stripes{animation:flag-stripe-pulse 1.7s ease-in-out infinite}
+@keyframes flag-outline-burst{0%{opacity:0;transform:translateY(20px) scale(.5)}18%{opacity:.8;transform:translateY(0) scale(.85)}52%{opacity:.75;transform:translateY(7px) scale(1.65)}100%{opacity:0;transform:translateY(22px) scale(2.15)}}
+@keyframes flag-housing-in{from{clip-path:inset(100% 0 0)}to{clip-path:inset(0)}}
+@keyframes flag-stripe-pulse{0%,100%{opacity:1}50%{opacity:.12}}
+/* Compact final/matchup banner proportions from the Cowboys–Browns frame. */
+.result-banner{left:200px;right:200px;height:420px;bottom:90px;--rim:polygon(2.5% 0,97.5% 0,100% 30%,98.7% 78%,95% 100%,62% 100%,58% 94%,42% 94%,38% 100%,5% 100%,1.3% 78%,0 30%)}
+.result-metal{inset:168px 0 0}
+.result-team{width:510px}.result-team.away{left:42px}.result-team.home{right:42px}
+.result-logo{width:490px;height:410px;bottom:10px}
+.result-name{width:470px;max-width:470px;text-align:center;font-size:58px;margin-bottom:37px;padding:4px 16px 8px;clip-path:polygon(3% 0,100% 0,96% 100%,0 100%)}
+.result-center{top:169px;left:550px;right:550px;bottom:39px}
+.result-scores{height:142px;gap:19px}.result-scores b{font-size:142px;min-width:154px}.result-scores i{height:110px}
+.result-status{font-size:44px;line-height:1;padding:9px 10px;clip-path:polygon(4% 0,96% 0,100% 100%,0 100%);border-left:3px solid var(--away-color);border-right:3px solid var(--home-color)}
+.result-badge{top:121px;height:48px}.result-badge img{max-height:48px}
+@media(prefers-reduced-motion:reduce){.flag-tab,.flag-tab *{animation:none!important;transition:none!important}}
+
+.venue-banner .result-center{justify-content:center;gap:9px;left:535px;right:535px}
+.result-venue{font:46px/1.05 var(--display);text-transform:uppercase;text-wrap:balance;overflow-wrap:anywhere;text-shadow:2px 3px #000;padding:0 5px}
+.venue-banner .result-status{font:46px/1.05 var(--display);color:#f6f9fc;text-shadow:2px 3px #000;white-space:normal;text-transform:uppercase;overflow-wrap:anywhere;min-height:0}
+.venue-banner .result-status:empty{display:none}
+
+/* Final result: broad nameplates and a silver lower rail, from the supplied frame. */
+.final-banner .result-metal{padding:4px 5px 13px;background:linear-gradient(180deg,#e1e8ed 0%,#8399a7 7%,#233642 27%,#c4d2dc 70%,#f2f6f8 86%,#7c939f 100%)}
+.final-banner .result-surface{background:var(--package-lines),linear-gradient(100deg,color-mix(in srgb,var(--away-color) 75%,#02090e),#080d12 43% 57%,color-mix(in srgb,var(--home-color) 85%,#02090e))}
+.final-banner .result-name{font-family:'Arial Black',Arial,sans-serif;font-weight:950;font-style:italic;font-size:55px;letter-spacing:-2px;line-height:1.05;background:linear-gradient(90deg,#030a13a0,#030a13e8);text-shadow:2px 3px 1px #000; padding:4px 10px 9px}
+.final-banner .result-team.home .result-name{clip-path:polygon(0 0,97% 0,100% 100%,4% 100%)}
+.final-banner .result-status{color:#ffda31;background:#05090e;font-family:'DIN Condensed','Arial Narrow',var(--display);font-weight:700}
+.final-banner::after{content:'';position:absolute;bottom:2px;left:38%;width:24%;height:15px;clip-path:polygon(5% 0,20% 0,30% 100%,0 100%,5% 0,95% 0,100% 100%,70% 100%,80% 0);background:linear-gradient(90deg,var(--away-color) 0 40%,transparent 40% 60%,var(--home-color) 60% 100%);pointer-events:none}
+/* Independent QB game strip. A sibling layer preserves the scorebug DOM and clocks. */
+.qb-live-anchor{position:absolute;left:50%;width:920px;height:200px;transform:translateX(-50%) scale(var(--bug-scale));transform-origin:bottom center;pointer-events:none;z-index:5}
+.qb-live-bar{position:absolute;left:28px;right:28px;bottom:200px;height:58px;display:flex;align-items:center;background:linear-gradient(105deg,var(--team),#080f15 32%);border-top:3px solid #c9d6de;border-bottom:2px solid #506674;clip-path:polygon(15px 0,calc(100% - 15px) 0,100% 100%,0 100%);padding:3px 20px;gap:20px;transition:bottom .16s ease-out}
+.qb-live-anchor.flag-raised .qb-live-bar{bottom:270px}
+.qb-live-name{font:italic 32px/1 var(--display);text-transform:uppercase;max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qb-live-values{display:flex;align-items:center;justify-content:flex-end;gap:24px;flex:1}
+.qb-live-values span{display:flex;align-items:baseline;gap:7px;white-space:nowrap}.qb-live-values b{font:32px/1 'DIN Condensed','Arial Narrow',sans-serif}.qb-live-values small{font:23px/1 'DIN Condensed','Arial Narrow',sans-serif;color:#d8e1e7}
+.qb-live-out{opacity:0;transition:opacity .16s linear}
+/* QB introduction reference: portrait continues behind the name and feature panel. */
+.qb-sidebar{width:410px;height:910px;bottom:54px;left:60px}
+.qb-sidebar::before{inset:25px 0 0;background:var(--package-lines),linear-gradient(110deg,#080f15,color-mix(in srgb,var(--team) 35%,#151e23));clip-path:polygon(0 0,100% 35px,100% 100%,0 100%)}
+.qb-top-logo{top:0;left:35px;width:330px;height:300px;z-index:0}
+.qb-cutout{position:absolute;inset:35px 0 0;height:auto;padding:0;width:100%;z-index:1;display:block}
+.qb-cutout .portrait{height:100%;width:100%;object-fit:cover;object-position:50% 0}
+.qb-cutout .jersey-number{margin-top:100px}
+.qb-sidebar-name{position:absolute;top:390px;height:105px;flex:none;background:#050a10de}
+.qb-sidebar-name strong{font:italic 900 48px/1.05 'Arial Black',Arial,sans-serif;letter-spacing:-1px}
+.qb-feature{position:absolute;top:495px;min-height:210px;height:auto;flex:none;background:linear-gradient(#182127e8,#0b1119da);padding:12px 16px 18px}
+@media(prefers-reduced-motion:reduce){.qb-live-anchor,.qb-live-bar{transition:none!important;animation:none!important}}
+
+/* The angled base follows only the visible game-data tracks. */
+.scorebug .score-center .information{--info-play:54px;--info-down:150px;position:relative;left:50%;translate:-50% 0;margin:0;width:calc(74px + 128px + var(--info-play) + var(--info-down) + 48px);padding-inline:24px;transition:width .24s ease,grid-template-columns .24s ease,opacity .12s linear}
+.scorebug .score-center .information:has(.play-hidden){--info-play:0px}
+.scorebug .score-center .information.down-hidden{--info-down:0px}
+.scorebug .score-center .information.status-mode{width:var(--status-width,300px)}
+@media(prefers-reduced-motion:reduce){.scorebug .score-center .information{transition:none}}
+
+/* Default final motion keeps the approved logo settle; Fast fade is fade only. */
+.graphics-layer[data-motion="fade"].animate-in>.result-banner .result-logo{animation:none!important}
+
+/* Frame-reviewed group update: names down, brief blank, title up; then silver wipe right-to-left. */
+.lineup-ribbon-face{position:relative;overflow:hidden}
+.lineup-ribbon-face>.lineup-outgoing{position:absolute;inset:0;width:100%;height:100%;margin:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2}
+.lineup-ribbon-face>h1.lineup-outgoing{padding:0}
+.lineup-update-wipe{position:absolute;top:0;bottom:0;width:24%;z-index:3;background:linear-gradient(115deg,#a7bcc7e6,#e9f1f5f2 60%,#97adb8e6);clip-path:polygon(0 0,70% 0,100% 100%,30% 100%);pointer-events:none}
+
+/* Weather uses the same three-row label/value arrangement as its editor. */
+.weather-card dl>div{grid-template-columns:minmax(0,42fr) minmax(0,58fr);gap:12px;align-items:center}
+.weather-card dd{text-align:center;white-space:normal;overflow-wrap:anywhere;line-height:1.1}
+.weather-card header p{overflow-wrap:anywhere}
+/* Staff identifiers travel from behind the team wing; the dock edge masks travel. */
+.staff-anchor{clip-path:inset(-60px 830px -12px -1200px)}
+.staff-anchor.dock-home{clip-path:inset(-60px -1200px -12px 830px)}
+.animate-in>.staff-anchor .staff-reveal{animation:staff-slide-away .42s cubic-bezier(.22,.65,.3,1) both}
+.animate-in>.staff-anchor.dock-home .staff-reveal{animation-name:staff-slide-home}
+.graphics-layer.leaving>.staff-anchor .staff-reveal{animation:staff-slide-away .3s ease-in reverse both}
+.graphics-layer.leaving>.staff-anchor.dock-home .staff-reveal{animation-name:staff-slide-home}
+@keyframes staff-slide-away{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@keyframes staff-slide-home{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+/* One entrance owner: the default scorebug builds directly, without a pre-fade. */
+.bug-wrap.bug-enter:not([data-motion="fade"]){animation:none!important;transition:none!important;opacity:1}
+.bug-wrap.bug-enter:not([data-motion="fade"]) .bug-metal{animation:bug-electric-reveal 1.6s linear both}
+.team-wing{overflow:hidden}
+.team-wing .team-logo{width:310px;height:190px;left:-9px;top:-8px;object-fit:contain;transform:none}
+.team-wing.home .team-logo{left:auto;right:-9px}
+/* Keep lineup artwork in its allocated end-cap, including during entry. */
+.lineup-ribbon-logo{overflow:hidden;max-height:188px}
+.lineup-ribbon-logo .team-logo{width:100%;height:100%;object-fit:contain}
+/* QB strip tracks the team's side and the lower rail, independently of the bug. */
+.qb-live-anchor{z-index:0;clip-path:inset(-60px 830px -12px -1200px)}
+.qb-live-anchor.dock-home{clip-path:inset(-60px -1200px -12px 830px)}
+.qb-live-bar{left:auto;right:calc(100% - 90px);bottom:8px!important;width:min(740px,calc(920px / var(--bug-scale) - 370px));height:52px;gap:14px;padding:4px 25px 4px 14px;border-top:0;border-bottom:2px solid #607987;background:linear-gradient(100deg,#080f14ed,var(--team));clip-path:polygon(10px 0,100% 0,100% 100%,0 100%);animation:staff-slide-away .32s ease-out both;container-type:inline-size}
+.dock-home .qb-live-bar{left:calc(100% - 90px);right:auto;padding:4px 14px 4px 25px;background:linear-gradient(100deg,var(--team),#080f14ed);clip-path:polygon(0 0,100% 0,calc(100% - 10px) 100%,0 100%);animation-name:staff-slide-home}
+.qb-live-name{font-size:clamp(16px,4cqw,27px);max-width:35%;flex-shrink:1}
+.qb-live-values{gap:clamp(5px,1.5cqw,16px)}.qb-live-values span{gap:4px}.qb-live-values b{font-size:clamp(15px,4cqw,26px)}.qb-live-values small{font-size:clamp(12px,3cqw,21px)}
+.qb-live-out{opacity:1;transition:none}.qb-live-out .qb-live-bar{animation:staff-slide-away .3s ease-in reverse both}.qb-live-out.dock-home .qb-live-bar{animation-name:staff-slide-home}
+.qb-live-anchor[data-motion="fade"] .qb-live-bar{animation:reference-fade .16s linear both}.qb-live-anchor[data-motion="fade"].qb-live-out .qb-live-bar{animation-direction:reverse}
+.situation-anchor{position:absolute;left:50%;width:920px;height:200px;transform:translateX(-50%) scale(var(--dock-scale));transform-origin:bottom center;clip-path:inset(-70px 830px -10px -1200px)}
+.situation-anchor.dock-home{clip-path:inset(-70px -1200px -10px 830px)}
+.situation-reveal{position:absolute;bottom:8px;right:calc(100% - 90px);width:min(620px,calc(920px / var(--dock-scale) - 370px));min-height:90px;background:linear-gradient(110deg,var(--team),#060c13);border-block:3px solid #a6b9c4;clip-path:polygon(14px 0,100% 0,100% 100%,14px 100%,0 50%);padding:12px 30px;text-align:center}
+.dock-home .situation-reveal{right:auto;left:calc(100% - 90px);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%)}
+.situation-reveal h1{font:30px/1.1 var(--display);margin:0;color:#ffdc28}.situation-reveal p{font:28px/1.15 var(--display);margin:7px 0 0}.situation-reveal p:empty{display:none}
+.attempt-tag,.attempt-tag.dock-home{clip-path:none}.attempt-tag .situation-reveal{left:26px;right:auto;bottom:32px;min-height:45px;width:256px;padding:5px 8px;z-index:8}.attempt-tag.dock-home .situation-reveal{left:auto;right:26px}.attempt-tag .situation-reveal h1{font-size:22px}.attempt-tag .situation-reveal p{font-size:21px;margin-top:3px}
+.graphics-layer:has(.attempt-tag){z-index:4}
+.animate-in>.situation-anchor{animation:none}.animate-in>.situation-anchor .situation-reveal{animation:staff-slide-away .32s ease-out both}.animate-in>.situation-anchor.dock-home .situation-reveal{animation-name:staff-slide-home}
+.graphics-layer.leaving:has(.situation-anchor){animation:none}.graphics-layer.leaving .situation-reveal{animation:staff-slide-away .3s ease-in reverse both}.graphics-layer.leaving .dock-home .situation-reveal{animation-name:staff-slide-home}
+.animate-in>.attempt-tag .situation-reveal{animation:reference-fade .16s linear both}.graphics-layer.leaving .attempt-tag .situation-reveal{animation:reference-fade .16s linear reverse both}
+.commercial{position:absolute;left:220px;right:220px;bottom:100px;background:var(--package-metal);padding:4px;clip-path:polygon(22px 0,calc(100% - 22px) 0,100% 22px,100% calc(100% - 22px),calc(100% - 22px) 100%,22px 100%,0 calc(100% - 22px),0 22px)}
+.commercial-surface{padding:20px 40px;text-align:center;background:var(--package-lines),linear-gradient(105deg,var(--away-color),#070e16 42% 58%,var(--home-color))}
+.commercial header{font:24px var(--display);letter-spacing:3px}.commercial-teams{display:flex;justify-content:space-around;gap:80px}.commercial-teams>div{display:flex;align-items:center;gap:20px;flex:1;min-width:0}.commercial-logo{width:150px;height:120px;overflow:hidden;flex-shrink:0}.commercial-teams span{font:36px var(--display);text-transform:uppercase;flex:1}.commercial-teams b{font:italic 90px var(--display)}.commercial h1{font:42px var(--display);color:#ffdc28;margin:12px 0 5px}.commercial p{font:25px var(--display);margin:0;text-transform:uppercase}
+.commercial-large,.commercial-stinger{inset:70px 96px}.commercial-large .commercial-surface,.commercial-stinger .commercial-surface{height:100%;display:flex;flex-direction:column;justify-content:center;gap:30px}.commercial-large .commercial-logo,.commercial-stinger .commercial-logo{width:240px;height:240px}.commercial-large h1,.commercial-stinger h1{font-size:65px}.commercial-large .commercial-teams b,.commercial-stinger .commercial-teams b{font-size:150px}
+.animate-in>.commercial{animation:commercial-in .4s ease-out both}.graphics-layer.leaving:has(>.commercial){animation:commercial-in .3s ease-in reverse both}
+.animate-in>.commercial-stinger{animation:commercial-stinger .65s cubic-bezier(.2,.7,.2,1) both}.graphics-layer.leaving:has(>.commercial-stinger){animation:commercial-stinger .5s ease-in reverse both}
+@keyframes commercial-in{from{clip-path:inset(0 50%);opacity:0}to{clip-path:inset(0);opacity:1}}@keyframes commercial-stinger{from{transform:translateX(-110%) skewX(-12deg)}to{transform:translateX(0) skewX(0)}}
+.graphics-layer[data-motion="fade"] .situation-reveal{animation:none!important}
+/* The outline burst is a single event, not a persistent flashing alert. */
+.flag-tab.on .flag-stripes{animation:flag-stripe-pulse .65s ease-out 1}
+@media(prefers-reduced-motion:reduce){.qb-live-bar,.situation-reveal,.commercial{animation:none!important}}
+.qb-live-bar{justify-content:center}.qb-live-values{flex:0 1 auto;justify-content:center}
+@keyframes commercial-in{from{clip-path:inset(0 50%);opacity:0}to{clip-path:polygon(22px 0,calc(100% - 22px) 0,100% 22px,100% calc(100% - 22px),calc(100% - 22px) 100%,22px 100%,0 calc(100% - 22px),0 22px);opacity:1}}
+/* Default out reverses the expanding silhouette, without replaying electricity. */
+.bug-wrap.bug-exit:not([data-motion="fade"]){animation:none!important;opacity:1;translate:none;transition:none}
+.bug-wrap.bug-exit:not([data-motion="fade"]) .scorebug{animation:bug-shrink-out .52s cubic-bezier(.55,.05,.8,.45) both;transform-origin:50% 80%}
+.bug-wrap.bug-exit .bug-intro-mask,.bug-wrap.bug-exit .bug-electric{display:none!important}
+.bug-wrap.bug-exit:not([data-motion="fade"]) .flag-tab,.bug-wrap.bug-exit:not([data-motion="fade"]) .ball-marker{animation:reference-fade .12s linear reverse both}
+.bug-wrap[data-motion="fade"].bug-exit{animation:reference-fade .16s linear reverse both!important}
+.bug-wrap[data-motion="fade"].bug-exit .scorebug{animation:none!important}
+@keyframes bug-shrink-out{0%{transform:scale(1,1);opacity:1}65%{transform:scale(1,.035);opacity:1}90%{transform:scale(.18,.015);opacity:1}100%{transform:scale(0,.01);opacity:0}}
+/* Consistent logo containers: retain aspect ratio and cap artwork at its slot. */
+.result-logo,.matchup-logo,.card-team-logo,.event-logo,.heading-mark,.lower-mark,.commercial-logo,.qb-top-logo{overflow:hidden}
+.result-logo .team-logo,.matchup-logo .team-logo,.card-team-logo .team-logo,.event-logo .team-logo,.heading-mark .team-logo,.lower-mark .team-logo,.commercial-logo .team-logo,.qb-top-logo .team-logo{display:block;max-width:100%;max-height:100%;object-fit:contain}
+.result-logo{width:460px;height:385px;max-width:100%}
+.lineup-ribbon-logo{left:0;width:202px;height:174px;bottom:0}
+/* September 20 12:32 recording: vertical feature occupies roughly a quarter width. */
+.qb-sidebar{left:20px;bottom:0;width:500px;height:1020px}
+.qb-top-logo{left:65px;top:0;width:360px;height:340px}
+.qb-sidebar-name{top:450px;height:115px;padding:8px 14px}
+.qb-sidebar-name small{font-size:38px}.qb-sidebar-name strong{font-size:58px}
+.qb-feature{top:565px;min-height:255px;padding:12px 20px 20px}.qb-feature b{font-size:76px}.qb-feature strong{font-size:57px}.qb-feature p{font-size:38px;max-width:420px}
+.qb-live-name{flex:0 1 auto}.qb-live-values{min-width:0}
+@media(prefers-reduced-motion:reduce){.bug-wrap.bug-exit:not([data-motion="fade"]) .scorebug{animation:none!important;opacity:0}}
+/* QB lower-rail strip, measured against the 245s close-up. */
+.qb-live-bar,.dock-home .qb-live-bar{height:44px;width:min(840px,calc(880px / var(--bug-scale) - 370px));bottom:8px!important;background:#050c09c9;border:0;padding:3px 20px;gap:12px;overflow:hidden}
+.qb-live-bar::after{content:'';position:absolute;inset:0 auto 0 0;width:6px;background:var(--team);transform:skewX(16deg)}
+.dock-home .qb-live-bar::after{left:auto;right:3px;transform:skewX(-16deg)}
+.qb-live-name{font:italic 29px/1 'DIN Condensed','Arial Narrow',sans-serif;font-weight:700;max-width:42%}
+.qb-live-values{gap:10px}.qb-live-values span{gap:4px}.qb-live-values b{font:italic 29px/1 'DIN Condensed','Arial Narrow',sans-serif}.qb-live-values small{font:italic 23px/1 'DIN Condensed','Arial Narrow',sans-serif;color:#e0e5e0}
+@container(max-width:420px){.qb-live-name,.qb-live-values b{font-size:22px}.qb-live-values small{font-size:18px}.qb-live-values{gap:6px}}
+/* Keep the complete QB attachment outside the scorebug's bounds, including travel. */
+.qb-live-anchor{z-index:0;clip-path:inset(-60px 920px -12px -1200px)}
+.qb-live-anchor.dock-home{clip-path:inset(-60px -1200px -12px 920px)}
+.qb-live-bar{right:100%;width:min(840px,calc(880px / var(--bug-scale) - 460px))}
+.dock-home .qb-live-bar{left:100%;right:auto;width:min(840px,calc(880px / var(--bug-scale) - 460px))}
+.bug-wrap{z-index:1}
+/* Team-colored side housing with a clipped metallic bevel. */
+.qb-live-bar,.dock-home .qb-live-bar{isolation:isolate;background:linear-gradient(180deg,#eef4f6 0%,#8ba0ac 9%,#344c5a 45%,#142b39 74%,#b6c9d3 100%);padding:4px 16px;border:0;clip-path:polygon(12px 0,100% 0,100% 100%,0 100%)}
+.dock-home .qb-live-bar{clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%)}
+.qb-live-bar::before{content:'';position:absolute;inset:2px;z-index:-1;background:linear-gradient(180deg,color-mix(in srgb,var(--team) 80%,white),var(--team) 24%,color-mix(in srgb,var(--team) 64%,black));clip-path:inherit}
+.qb-live-bar::after{display:none}
+.qb-live-name,.qb-live-values{position:relative;text-shadow:0 1px 2px #000}
+.qb-live-name,.qb-live-values b{font-size:clamp(10px,5cqw,29px)}
+.qb-live-values small{font-size:clamp(9px,4cqw,23px)}
+.qb-live-bar,.dock-home .qb-live-bar{gap:clamp(4px,1.5cqw,12px)}
+.qb-live-values{flex:0 0 auto;gap:clamp(3px,1.4cqw,10px)}.qb-live-values span{gap:clamp(2px,.6cqw,4px)}
+.qb-live-name{min-width:0;flex:0 1 auto}
+/* Reference join: housing under the angled corner, text masked beyond the wing. */
+.qb-live-anchor{clip-path:inset(-60px 830px -12px -1200px)}
+.qb-live-anchor.dock-home{clip-path:inset(-60px -1200px -12px 830px)}
+.qb-live-bar{right:calc(100% - 90px);width:min(840px,calc(880px / var(--bug-scale) - 370px));padding:0}
+.dock-home .qb-live-bar{left:calc(100% - 90px);right:auto;width:min(840px,calc(880px / var(--bug-scale) - 370px));padding:0}
+.qb-live-content{position:absolute;inset:3px 94px 3px 14px;display:flex;justify-content:center;align-items:center;gap:10px;overflow:hidden;container-type:inline-size}
+.dock-home .qb-live-content{inset:3px 14px 3px 94px}
+.qb-live-name,.qb-live-values b{font-size:clamp(10px,5cqw,29px)}.qb-live-values small{font-size:clamp(9px,4cqw,23px)}
+/* QB51: match the 233.8–245s reference, superseding the full-color housing. */
+.qb-live-bar,.dock-home .qb-live-bar{width:min(770px,calc(880px / var(--bug-scale) - 370px));height:48px;bottom:6px!important;padding:0;border:0;background:rgba(5,12,9,.76);box-shadow:none;filter:none}
+.qb-live-bar{clip-path:polygon(12px 0,100% 0,100% 100%,0 100%)}
+.dock-home .qb-live-bar{clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%)}
+.qb-live-bar::before{display:none}
+.qb-live-bar::after{display:block;content:'';position:absolute;top:0;bottom:0;left:4px;right:auto;width:6px;background:linear-gradient(90deg,#9aadb5,var(--team) 35%,var(--team));transform:skewX(-14deg)}
+.dock-home .qb-live-bar::after{left:auto;right:5px;transform:skewX(-14deg)}
+.qb-live-content{inset:3px 94px 3px 15px;gap:9px}.dock-home .qb-live-content{inset:3px 15px 3px 94px}
+.qb-live-name{font-style:italic;font-weight:700;letter-spacing:0;color:#f3f4ef;text-shadow:0 1px 1px #0006}
+.qb-live-values b,.qb-live-values small{font-style:italic;font-weight:400;color:#dedfd9;text-shadow:0 1px 1px #0006}
+.qb-live-values{gap:8px}
+/* Situational identifiers reconstructed from 108s, 148s and 276s. */
+.situation-group{position:absolute;inset:0;pointer-events:none}
+.animate-in>.situation-group{animation:none!important}
+.situation-group .situation-reveal{padding:0;border:0;bottom:6px;min-height:0;background:linear-gradient(100deg,#ccd7dc,#354c5a);width:min(690px,calc(880px / var(--dock-scale) - 370px));clip-path:polygon(18px 0,100% 0,100% 100%,18px 100%,0 42%);container-type:inline-size}
+.situation-group .dock-home .situation-reveal{clip-path:polygon(0 0,calc(100% - 18px) 0,100% 42%,calc(100% - 18px) 100%,0 100%)}
+.situation-group .situation-reveal h1{height:66px;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 94px 0 20px;margin:0;background:var(--package-lines),linear-gradient(100deg,var(--team),color-mix(in srgb,var(--team) 50%,#05111a));color:#f1f4f4;font:italic clamp(18px,5.2cqw,43px)/1 'DIN Condensed','Arial Narrow',sans-serif;white-space:nowrap;overflow:hidden}
+.situation-group .situation-reveal p{height:88px;display:flex;align-items:center;justify-content:center;gap:14px;padding:0 94px 0 20px;margin:0 2px 2px;background:#050b09f5;color:#edf2ec;font:italic 34px/1 'DIN Condensed','Arial Narrow',sans-serif;overflow:hidden;white-space:nowrap}
+.situation-group .dock-home .situation-reveal h1,.situation-group .dock-home .situation-reveal p{padding:0 20px 0 94px}
+.situation-group .situation-reveal p b{font-size:clamp(27px,7cqw,56px)}.situation-group .situation-reveal p span{font-size:clamp(17px,4.5cqw,37px)}
+.situation-group .punt-panel .situation-reveal{width:min(620px,calc(880px / var(--dock-scale) - 370px))}
+.situation-group .punt-panel h1{height:49px;font-size:clamp(16px,5cqw,36px)}.situation-group .punt-panel h1 small{font-size:.8em}
+.situation-group .punt-panel p{height:44px;font-size:clamp(16px,5cqw,34px)}
+.animate-in .situation-anchor .situation-reveal{animation:staff-slide-away .36s ease-out both}.animate-in .situation-anchor.dock-home .situation-reveal{animation-name:staff-slide-home}
+.situation-group .attempt-tag .situation-reveal{width:256px;bottom:32px}.situation-group .attempt-tag h1{height:27px;padding:0 6px;font-size:22px}.situation-group .attempt-tag p{height:25px;padding:0 6px;font-size:21px}
+.animate-in .attempt-tag .situation-reveal{animation:reference-fade .16s linear both}
+.graphics-layer:has(.attempt-tag){z-index:4}
+.graphics-layer[data-motion="fade"] .situation-reveal{animation:none!important}
+/* Each player has its own team-colored name panel, as in the lineup recording. */
+.lineup-names{height:100%;padding:0 12px 0 210px;gap:0;align-items:stretch}
+.lineup-names>.lineup-player-panel{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;padding:10px 12px 12px;overflow:hidden;background:var(--package-lines),linear-gradient(115deg,color-mix(in srgb,var(--team) 78%,#030d15),color-mix(in srgb,var(--team) 46%,#040d15));border-left:2px solid #020a1280;border-right:1px solid #bad5e21a;clip-path:polygon(0 0,100% 0,100% calc(100% - 5px),calc(100% - 18px) 100%,0 100%)}
+.lineup-player-panel::after{content:'';position:absolute;bottom:0;left:0;right:18px;height:3px;background:linear-gradient(90deg,#c6d7df,#718a99 70%,#243c4b)}
+.lineup-names .lineup-player-panel small{color:#e1e9ed;text-transform:uppercase;font:italic 27px/1.05 'DIN Condensed','Arial Narrow',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}
+.lineup-names .lineup-player-panel strong{color:#f4f7f9;font:italic 38px/1.05 'DIN Condensed','Arial Narrow',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:1px 2px #0007}
+.qb-live-name{font-size:clamp(11px,5.8cqw,34px)}.qb-live-values b{font-size:clamp(11px,5.5cqw,32px)}.qb-live-values small{font-size:clamp(10px,4.7cqw,27px)}
+.situation-group .situation-reveal h1,.situation-group .situation-reveal p{text-transform:uppercase}
+
+/* Reference55: one opaque mechanical build followed by a synchronized electrical wipe. */
+.bug-enter .bug-intro-mask{animation:helmet-unfold 1.6s linear both;transform-origin:50% 50%}
+.bug-enter .bug-intro-mask svg{animation:helmet-pullback 1.6s linear both;transform-origin:50% 50%}
+@keyframes helmet-unfold{0%{transform:scale(.72,.012);opacity:1;clip-path:inset(0)}5%{transform:scale(1,.025)}30%,50%{transform:scale(1);clip-path:inset(0)}94%,100%{transform:scale(1);clip-path:inset(0 0 0 100%);opacity:1}}
+@keyframes helmet-pullback{0%,8%{transform:scale(1.55)}50%,100%{transform:scale(1)}}
+@keyframes bug-electric-reveal{0%,50%{clip-path:inset(0 100% 0 0)}94%,100%{clip-path:inset(0)}}
+.bug-enter .bug-electric{width:90px;top:0;height:100%;filter:drop-shadow(0 0 3px #e4ffff) drop-shadow(0 0 8px #31d7ed);animation:bug-electric-travel 1.6s linear both}
+@keyframes bug-electric-travel{0%,49.9%{left:-45px;opacity:0}50%{left:-45px;opacity:1}94%{left:calc(100% - 45px);opacity:1}98%,100%{left:calc(100% + 10px);opacity:0}}
+.bug-electric path{stroke:#d8ffff;stroke-width:2;stroke-linecap:round}
+.bug-electric .arc{animation:arc-flicker .09s steps(1,end) infinite}
+.bug-electric .arc-b{animation-delay:-.03s}.bug-electric .arc-c{animation-delay:-.06s}
+@keyframes arc-flicker{0%,32%{opacity:1}33%,100%{opacity:0}}
+/* Weather plate: top blue band, charcoal body, silver lower-left chamfer. */
+.weather-card{width:550px;min-height:360px;left:70px;bottom:66px;border:0;padding:5px;background:var(--package-metal);clip-path:polygon(0 0,100% 0,100% 100%,36px 100%,0 calc(100% - 36px));isolation:isolate}
+.weather-card::before{content:'';position:absolute;inset:5px;z-index:-1;background:linear-gradient(120deg,#303233ed,#202223ed);clip-path:polygon(0 0,100% 0,100% 100%,33px 100%,0 calc(100% - 33px))}
+.weather-card header{min-height:116px;padding:10px 18px;background:linear-gradient(110deg,#143d56,#082b44);border:0;display:flex;flex-direction:column;justify-content:center}
+.weather-card h1{font-size:49px;line-height:1}.weather-card header p{font-size:34px;line-height:1.05;margin:5px 0 0}
+.weather-card dl{margin:19px 22px 25px}.weather-card dl>div{grid-template-columns:minmax(0,43fr) minmax(0,57fr);margin:12px 0;font-size:36px;line-height:1.15;letter-spacing:1.5px;min-height:42px}
+.weather-card dt{color:#f0f1f2}.weather-card dd{text-align:center;color:#f0f1f2}
+@media(prefers-reduced-motion:reduce){.bug-enter .bug-intro-mask svg,.bug-electric .arc{animation:none!important}}
+
+/* Softer electrical edge: broad glow, one main arc and a subdued secondary branch. */
+.bug-enter .bug-electric{width:140px;filter:drop-shadow(0 0 5px #bdffff) drop-shadow(0 0 14px #46cddd);}
+.bug-electric path{stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.bug-electric .arc{animation:arc-breathe .32s ease-in-out infinite alternate}
+.bug-electric .arc-b{animation-delay:-.16s;opacity:.2}.bug-electric .arc-c{display:none}
+@keyframes arc-breathe{from{opacity:.55}to{opacity:1}}
+.bug-electric .arc-b{animation-name:arc-breathe-secondary}
+@keyframes arc-breathe-secondary{from{opacity:0}to{opacity:.25}}
+@keyframes bug-electric-travel{0%,49.9%{left:-70px;opacity:0}50%{left:-70px;opacity:0}53%{opacity:1}94%{left:calc(100% - 70px);opacity:1}98%,100%{left:calc(100% + 10px);opacity:0}}
+/* September 21 recording: FG attempt is above the kicking team's score/wing. */
+.situation-group .attempt-tag .situation-reveal{left:auto;right:0;bottom:198px;width:500px;height:65px;overflow:hidden;background:var(--package-metal);padding:3px;clip-path:polygon(7% 0,93% 0,100% 100%,0 100%)}
+.situation-group .dock-away.attempt-tag .situation-reveal{left:0;right:auto}
+.situation-group .attempt-tag h1{height:59px;padding:0 20px;font-size:43px;gap:9px;background:linear-gradient(180deg,color-mix(in srgb,var(--team) 55%,#000),var(--team));clip-path:polygon(7% 0,93% 0,100% 100%,0 100%)}
+.situation-group .attempt-tag h1 b{font-size:48px}.attempt-tag{z-index:4}
+.situation-group .kicker-panel .situation-reveal{overflow:visible;clip-path:none;background:none;width:min(740px,calc(880px / var(--dock-scale) - 370px))}
+.situation-group .kicker-panel h1{height:67px;font-size:clamp(24px,6cqw,49px);clip-path:polygon(12px 0,calc(100% - 15px) 0,100% 100%,0 100%)}
+.situation-group .kicker-panel p{height:78px;margin:0;border-bottom:3px solid #79919a;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%);gap:9px}
+.situation-group .kicker-panel p b{font-size:clamp(25px,7.2cqw,55px)}.situation-group .kicker-panel p span{font-size:clamp(18px,4.5cqw,35px)}
+.kicker-context{position:absolute;bottom:100%;left:20px;min-width:180px;padding:5px 18px;background:#090e0ce8;color:#e9eeec;font:30px/1 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 100%,0 100%)}
+.dock-home .kicker-context{left:94px}.dock-away .kicker-context{left:auto;right:94px}
+.drive-card{position:absolute;left:70px;bottom:74px;width:560px;min-height:310px;padding:5px;background:var(--package-metal);clip-path:polygon(0 0,100% 0,100% 96%,89% 100%,35px 100%,0 calc(100% - 35px))}
+.drive-surface{background:var(--package-lines),linear-gradient(110deg,var(--team),color-mix(in srgb,var(--team) 65%,#111));min-height:300px;clip-path:polygon(0 0,100% 0,100% 96%,88% 100%,32px 100%,0 calc(100% - 32px))}
+.drive-card header{height:98px;display:flex;align-items:center;gap:12px;padding:0 14px;background:linear-gradient(#0001,#0004);border-bottom:1px solid #ffffff12}
+.drive-logo{width:140px;height:98px;flex-shrink:0}.drive-logo .team-logo{object-fit:contain;max-width:100%;max-height:100%}.drive-card h1{font:italic 58px/1 'DIN Condensed','Arial Narrow',sans-serif;margin:0;white-space:nowrap;text-shadow:2px 2px #0008}
+.drive-body{text-align:center;padding:17px 18px 24px;font:35px/1.15 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:1px}.drive-body p{margin:0 0 21px}.drive-body strong{display:block;font-weight:500}.drive-body small{display:block;color:#f6ce32;font-size:32px;margin-top:7px}
+.animate-in>.drive-card{animation:reference-fade .16s linear both}.graphics-layer.leaving:has(>.drive-card){animation:reference-fade .16s linear reverse both}
+/* Mini break is a stacked lower-left score box; the large version remains an overlay. */
+.commercial-mini{position:absolute;left:70px;bottom:76px;width:300px;padding:5px 5px 15px;background:var(--package-metal);clip-path:polygon(0 0,100% 0,100% 96%,85% 100%,30px 100%,0 calc(100% - 30px))}
+.commercial-mini header{height:63px;display:grid;place-items:center;background:#123c67;color:#f1f4f5;font:30px 'DIN Condensed','Arial Narrow',sans-serif;overflow:hidden;text-align:center;padding:4px}
+.mini-team{height:100px;background:var(--package-lines),linear-gradient(100deg,var(--team),color-mix(in srgb,var(--team) 60%,#000));display:flex;align-items:center;padding:0 22px 0 12px;gap:18px;overflow:hidden}.mini-team>div{width:170px;height:105px;display:grid;place-items:center}.mini-team .team-logo{width:170px;height:105px;object-fit:contain}.mini-team b{font:italic 86px/1 var(--display);text-shadow:2px 2px #0008;margin-left:auto}
+.commercial-mini footer{height:52px;background:#101411;color:#f5f5ee;text-align:center;font:36px/52px 'DIN Condensed','Arial Narrow',sans-serif;white-space:pre}
+.animate-in>.commercial-mini{animation:reference-fade .16s linear both}.graphics-layer.leaving:has(>.commercial-mini){animation:reference-fade .16s linear reverse both}
+.commercial-large{inset:auto 200px 90px;height:340px}.commercial-large .commercial-surface{padding:14px 38px;gap:6px}.commercial-large .commercial-logo{width:210px;height:170px}.commercial-large .commercial-teams{gap:55px}.commercial-large .commercial-teams b{font-size:115px}.commercial-large h1{font-size:43px;margin:0}.commercial-large p{font-size:30px}
+.animate-in>.commercial-large,.animate-in>.venue-banner{animation:reference-fade .16s linear both!important}.animate-in>.venue-banner .result-logo{animation:none!important}.graphics-layer.leaving:has(>.commercial-large),.graphics-layer.leaving:has(>.venue-banner){animation:reference-fade .16s linear reverse both!important}
+/* FLAG: one outline burst, solid black type and mirrored yellow slash accents. */
+.flag-label{font:700 62px/70px 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:1px;text-shadow:none}
+.flag-rim-outline{position:absolute;inset:0;width:100%;height:100%;overflow:visible;opacity:0;pointer-events:none}.flag-rim-outline path{fill:none;stroke:#eef3f3;stroke-width:1.4}
+.flag-tab.on .flag-rim-outline{animation:flag-rim-burst .78s ease-out both}
+@keyframes flag-rim-burst{0%,22%{opacity:0;transform:scale(.6)}40%{opacity:.75;transform:translateY(5px) scale(1.04)}78%{opacity:.4;transform:translateY(19px) scale(1.42)}100%{opacity:0;transform:translateY(24px) scale(1.5)}}
+.bug-enter .bug-electric{width:120px;filter:drop-shadow(0 0 4px #c5ffff) drop-shadow(0 0 10px #35d5e8)}
+@keyframes bug-electric-travel{0%,49.9%{left:-60px;opacity:0}50%{left:-60px;opacity:0}53%{opacity:1}94%{left:calc(100% - 60px);opacity:1}98%,100%{left:calc(100% + 10px);opacity:0}}
+@media(prefers-reduced-motion:reduce){.flag-rim-outline{animation:none!important}.drive-card,.commercial-mini{animation:none!important}}
+
+/* Mini: reserve a complete score column, including two/three-digit scores. */
+.mini-team{display:grid;grid-template-columns:minmax(0,1fr) 100px;gap:8px;padding:0 12px;height:103px}.mini-team>div{width:100%;min-width:0;height:103px}.mini-team .team-logo{width:100%;height:103px;object-fit:contain}.mini-team b{width:100%;margin:0;font-size:78px;letter-spacing:-2px;text-align:center}.commercial-mini header{display:flex;align-items:center;justify-content:center;gap:10px;padding:8px 12px}.commercial-mini header img{max-width:100%;max-height:47px;object-fit:contain}.commercial-mini header:has(.mini-sponsor)>*{max-width:48%}.commercial-mini .mini-sponsor{max-height:44px}.commercial-mini footer{font-size:34px;letter-spacing:1px}.commercial-mini{padding-bottom:10px;clip-path:polygon(0 0,100% 0,100% 96%,88% 100%,30px 100%,0 calc(100% - 30px))}
+.situation-group .kicker-panel h1{font-size:clamp(32px,7.4cqw,49px)}.situation-group .kicker-panel p b{font-size:clamp(36px,8.2cqw,58px)}
+
+/* Reference59: names retain a distinct small first line and strong surname. */
+.lineup-names>.lineup-player-panel{container-type:inline-size;padding-inline:10px}
+.lineup-names .lineup-player-panel small{font-size:24px;font-weight:400;line-height:1;letter-spacing:.5px;margin-bottom:3px}
+.lineup-names .lineup-player-panel strong{font-size:clamp(18px,calc(170cqw / var(--surname-length,8)),42px);font-weight:700;line-height:1.04;letter-spacing:.1px;padding-inline:3px;text-shadow:1px 1px #0008}
+.qb-sidebar-name small{font:italic 34px/1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:1px}
+.qb-sidebar-name strong{font:italic 700 62px/1.05 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:0}
+/* Mini sequence measured at 34.82–37.60s: rail, upward build, badge hold, score resolve. */
+.commercial-mini{transform-origin:50% 100%;isolation:isolate}
+.mini-content{position:relative;z-index:1}.mini-intro{display:none;position:absolute;inset:5px 5px 10px;background:linear-gradient(115deg,#242626,#101413);align-items:center;justify-content:center;z-index:2}
+.mini-badge{width:220px;min-height:260px;padding:15px 8px 25px;text-align:center;background:linear-gradient(#f0f3f4,#adbcc4);clip-path:polygon(0 0,100% 0,100% 85%,50% 100%,0 85%);position:relative;isolation:isolate;color:#f1f5f4}
+.mini-badge::before{content:'';position:absolute;inset:4px;z-index:-1;background:linear-gradient(#153949 0 89%,#b62337 90% 92%,#153949 93%);clip-path:inherit}
+.mini-badge small{display:block;font:22px/1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:2px}.mini-badge strong{display:block;font:700 68px/.92 'DIN Condensed','Arial Narrow',sans-serif}.mini-badge span{display:block;font:26px/1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:2px}.mini-badge i{display:block;font:16px/1.8 Arial;font-style:normal;letter-spacing:4px}
+.animate-in>.commercial-mini{animation:mini-build .58s cubic-bezier(.22,.7,.25,1) both}
+.animate-in>.commercial-mini .mini-intro{display:flex;animation:mini-badge-resolve 2.85s linear both}
+.animate-in>.commercial-mini .mini-content{animation:mini-score-resolve 2.85s linear both}
+.animate-in>.commercial-mini .mini-team .team-logo{animation:mini-logo-resolve .26s 2.5s ease-out both}
+@keyframes mini-build{0%{transform:scale(.08,.012)}22%{transform:scale(1,.018)}100%{transform:scale(1)}}
+@keyframes mini-badge-resolve{0%,83%{opacity:1}91%,100%{opacity:0;visibility:hidden}}
+@keyframes mini-score-resolve{0%,83%{opacity:0}96%,100%{opacity:1}}
+@keyframes mini-logo-resolve{from{transform:translateX(-35px);opacity:0}to{transform:translateX(0);opacity:1}}
+.graphics-layer.leaving:has(>.commercial-mini){animation:reference-fade .16s linear reverse both}
+.graphics-layer.leaving .mini-intro{display:none!important}
+.graphics-layer[data-motion="fade"] .commercial-mini,.graphics-layer[data-motion="fade"] .mini-content{animation:reference-fade .16s linear both!important}
+.graphics-layer[data-motion="fade"] .mini-intro{display:none!important}.graphics-layer[data-motion="fade"] .mini-team .team-logo{animation:none!important}
+.graphics-layer.leaving[data-motion="fade"] .commercial-mini,.graphics-layer.leaving[data-motion="fade"] .mini-content{animation:none!important}
+@media(prefers-reduced-motion:reduce){.mini-intro{display:none!important}.commercial-mini,.mini-content,.mini-team .team-logo{animation:none!important}}
+
+/* One stacking contract for every dock, including its exiting clone. */
+.graphics-layer:has(.staff-anchor),.graphics-layer:has(.situation-anchor){z-index:0!important}
+.qb-live-anchor{z-index:0}.bug-wrap{z-index:2}.bug-wrap>.scorebug{position:relative;z-index:2}.bug-wrap>.flag-tab{z-index:0}
+/* The mini badge recedes toward its header before the team faces resolve. */
+@keyframes mini-badge-resolve{0%,82%{opacity:1;transform:translateY(0) scale(1)}91%{opacity:0;transform:translateY(-95px) scale(.48)}100%{opacity:0;visibility:hidden;transform:translateY(-95px) scale(.48)}}
+@keyframes mini-score-resolve{0%,83%{opacity:0}93%,100%{opacity:1}}
+.animate-in>.commercial-mini .mini-team .team-logo{animation:mini-logo-resolve .28s 2.48s ease-out both}
+/* Reference60: thin top highlights, shadowed sides and a wider lower metal lip. */
+.stage{--package-metal:linear-gradient(172deg,#e5ecee 0%,#aab7bc 5%,#53636b 12%,#26343b 40%,#66777f 72%,#d8e0e3 78%,#9eafb8 86%,#354952 100%)}
+.bug-wrap{--bug-outline:polygon(4% 0,96% 0,100% 20%,97.5% 74%,92% 97%,63% 97%,60% 88%,40% 88%,37% 97%,8% 97%,2.5% 74%,0 20%)}
+.lineup-ribbon-frame{padding:3px 3px 7px;clip-path:polygon(18px 0,calc(100% - 18px) 0,100% 16px,100% calc(100% - 17px),calc(100% - 22px) 100%,22px 100%,0 calc(100% - 17px),0 16px)}
+.lineup-ribbon-face{clip-path:polygon(16px 0,calc(100% - 16px) 0,100% 14px,100% calc(100% - 12px),calc(100% - 19px) 100%,19px 100%,0 calc(100% - 12px),0 14px)}
+.result-metal{padding:3px 4px 8px;background:var(--package-metal);filter:drop-shadow(0 3px 3px #0006)}
+.announcer-frame{padding:3px 4px 7px;background:var(--package-metal)}
+.staff-plate{padding:2px 3px 5px;background:var(--package-metal)}
+.situation-group .kicker-panel .situation-reveal{isolation:isolate}
+.situation-group .kicker-panel .situation-reveal::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--package-metal);clip-path:polygon(12px 0,calc(100% - 15px) 0,100% 45%,calc(100% - 14px) 100%,0 100%)}
+.situation-group .kicker-panel h1{margin:2px 2px 0;height:65px}.situation-group .kicker-panel p{margin:0 2px 4px;border:0;height:74px}
+.situation-group .situation-reveal p{border-bottom-color:#8da0aa}
+.weather-card{padding:3px 2px 7px 5px}.weather-card::before{inset:3px 2px 7px 5px}
+.drive-card{padding:3px 3px 7px 5px}.drive-surface{min-height:300px}
+.commercial-mini{padding:3px 3px 9px 5px}.mini-content{clip-path:polygon(0 0,100% 0,100% 100%,24px 100%,0 calc(100% - 24px))}.mini-intro{inset:3px 3px 9px 5px;clip-path:polygon(0 0,100% 0,100% 100%,24px 100%,0 calc(100% - 24px))}
+.qb-sidebar::before{border-right:3px solid #84949c}.reporter-nameplate::before{border-width:3px 3px 6px}
+
+/* Electrical shapes sampled from the supplied 12:32 recording, 39.30–40.93s. */
+.bug-enter .bug-electric{left:0;top:0;width:100%;height:100%;filter:none;background-image:url('./assets/scorebug-electric-reference.svg');background-size:100% 5000%;background-repeat:no-repeat;animation:reference-electric-frames 1.667s steps(49,end) both;opacity:1}
+.bug-electric>svg{display:none}
+@keyframes reference-electric-frames{from{background-position:0 0}to{background-position:0 100%}}
+.bug-enter .bug-intro-mask{background:url('./assets/scorebug-mask-reference.svg') center/100% 100% no-repeat;animation:helmet-unfold 1.667s linear both}
+.bug-intro-mask>svg{visibility:hidden}.bug-wrap.bug-enter:not([data-motion="fade"]) .bug-metal{animation:bug-electric-reveal 1.667s linear both}
+@keyframes helmet-unfold{0%{transform:scale(.72,.012);opacity:1;clip-path:inset(0)}5%{transform:scale(1,.025)}30%,62%{transform:scale(1);clip-path:inset(0)}94%,100%{transform:scale(1);clip-path:inset(0 0 0 100%);opacity:1}}
+@keyframes bug-electric-reveal{0%,62%{clip-path:inset(0 100% 0 0)}94%,100%{clip-path:inset(0)}}
+.timeout-anchor{position:absolute;left:50%;width:920px;height:200px;transform:translateX(-50%) scale(var(--bug-scale));transform-origin:bottom center;z-index:0;pointer-events:none}
+.timeout-notice{position:absolute;bottom:196px;left:0;width:510px;padding:3px;background:var(--package-metal);clip-path:polygon(24px 0,calc(100% - 24px) 0,100% 100%,0 100%);animation:timeout-rise .24s ease-out both;text-align:center}
+.dock-home .timeout-notice{left:auto;right:0}.timeout-notice>div{padding:8px 18px 7px;background:linear-gradient(var(--team),color-mix(in srgb,var(--team) 50%,#070f12));clip-path:inherit}.timeout-notice strong{display:block;font:italic 36px/1 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase}.timeout-notice small{display:block;font:25px/1.1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:1px;margin-top:4px}.timeout-anchor.out .timeout-notice{animation:timeout-rise .2s ease-in reverse both}
+@keyframes timeout-rise{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.timeout-notice{animation:none!important}}
+
+.situation-group .conversion-panel p{gap:12px;flex-wrap:wrap;height:auto;min-height:88px;padding-block:10px}.conversion-count,.conversion-average{display:flex;flex-direction:column;align-items:center;font-variant-numeric:tabular-nums}.conversion-count small,.conversion-average small{font-size:17px;line-height:1;margin-top:4px}.situation-group .conversion-panel p .conversion-context{font-size:24px;flex-basis:100%;text-align:center}
+
+/* Current operator selection always controls the exit, independently of entry. */
+.timeout-anchor.out[data-motion="fade"] .timeout-notice{animation:reference-fade .16s linear reverse both}
+/* Condensed reference typography, with count and distance kept readable beside the percentage. */
+.situation-group .conversion-panel h1{font-weight:700;font-size:clamp(24px,6.2cqw,43px);letter-spacing:.2px}
+.situation-group .conversion-panel p{gap:14px;min-height:96px;line-height:1.02}
+.situation-group .conversion-panel p>b{font-size:clamp(36px,9.6cqw,62px);font-weight:700;letter-spacing:-.5px}
+.situation-group .conversion-panel p .conversion-count{font-size:clamp(32px,8.5cqw,56px);font-weight:700}
+.situation-group .conversion-panel p .conversion-average{font-size:clamp(28px,7.5cqw,48px);font-weight:700}
+.conversion-count small,.conversion-average small{font-size:clamp(16px,3.7cqw,23px);font-weight:400;letter-spacing:.4px;margin-top:5px}
+.graphics-layer.leaving[data-motion="fade"]{animation:reference-fade .16s linear reverse both!important}
+.graphics-layer.leaving[data-motion="fade"] *{animation:none!important}
+
+/* The selected scorebug exit has a single JS timeline; legacy fades cannot compete. */
+.bug-wrap.bug-exit.managed-exit{animation:none!important;transition:none!important;opacity:1;translate:none}
+.bug-wrap.bug-exit.managed-exit *{animation:none!important;transition:none!important}
+.bug-wrap.bug-exit.managed-exit .scorebug{transform-origin:50% 80%}
+.bug-wrap.bug-exit.managed-exit:not([data-motion="fade"]) :is(.flag-tab,.ball-marker){visibility:hidden}
+/* Reference scorebug: oversized marks fill each wing and crop within its bevel. */
+.scorebug .team-wing .team-logo{width:324px;height:206px;left:-12px;top:-10px;object-fit:cover;object-position:center;transform:none}
+.scorebug .team-wing.home .team-logo{left:auto;right:-12px}
+/* Reference66: normalized metal edges with the darker side strip from the long recording. */
+.qb-live-bar,.dock-home .qb-live-bar{background:rgba(15,15,15,.78);height:46px}
+.qb-live-bar::after{width:5px;background:linear-gradient(90deg,#b9c3c8 0 28%,var(--team) 28% 100%)}
+.qb-live-name,.qb-live-values b,.qb-live-values small{color:#f0f0ea}
+.flag-label{font:italic 700 44px/70px 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:-.7px;color:#101210}
+.flag-outline{display:none}.flag-tab{width:360px;height:60px;bottom:195px}.flag-face,.flag-rim-outline{width:100%;height:100%}.flag-label{line-height:60px}
+.bug-wrap.penalty-away .team-wing.away,.bug-wrap.penalty-home .team-wing.home{background:var(--package-lines),linear-gradient(100deg,#f0bf08,#ffdf25)}
+.situation-group .penalty-panel .situation-reveal{bottom:6px;padding:3px 0 5px;background:var(--package-metal);width:min(610px,calc(880px / var(--dock-scale) - 370px))}
+.situation-group .penalty-panel h1{height:92px;background:#f8d115;color:#080b0c;font-size:clamp(28px,7.5cqw,48px);font-weight:700}
+.situation-group .penalty-panel.with-player h1{height:64px}
+.situation-group .penalty-panel p{height:52px;font-size:28px;background:#0b1114;color:#ffda20;border:0}
+.situation-group .penalty-panel p b{font-size:30px}
+.situation-group .conversion-panel .situation-reveal{padding:2px 0 5px;background:var(--package-metal)}
+.situation-group .conversion-panel h1{height:60px;font-size:clamp(25px,6.4cqw,42px)}
+.situation-group .conversion-panel p{min-height:76px;height:76px;padding-block:0;gap:16px;flex-wrap:nowrap}
+.situation-group .conversion-panel p.conversion-layout-count>b{color:#f7d622;font-size:clamp(32px,8.5cqw,54px)}
+.situation-group .conversion-panel .conversion-made small{font-size:.68em}
+.situation-group .conversion-panel p.conversion-layout-count>span{font-size:clamp(20px,5cqw,32px);display:flex;gap:12px;align-items:baseline}
+.situation-group .conversion-panel p.conversion-layout-count strong{font-size:1.4em}
+.situation-group .conversion-panel p.conversion-layout-percentage>span{font-size:clamp(21px,5cqw,32px)}
+.timeout-notice{width:460px;padding:2px 2px 0;bottom:197px}.timeout-notice>div{padding:7px 14px 6px}.timeout-notice strong{font-size:32px}
+.score-add{position:absolute;z-index:12;top:-35px;left:350px;color:#fff;font:italic 700 45px/1 'DIN Condensed','Arial Narrow',sans-serif;text-shadow:1px 2px 2px #000;animation:score-add-rise 1.8s ease-out both}.score-add.home{left:510px}
+@keyframes score-add-rise{0%{opacity:0;transform:translateY(30px) scale(.65)}12%,62%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-25px)}}
+.bevel-card{position:absolute;background:var(--package-metal);padding:3px 4px 8px;clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 26px,calc(100% - 16px) calc(100% - 18px),calc(100% - 36px) 100%,25px 100%,5px calc(100% - 18px),0 24px);filter:drop-shadow(0 3px 3px #0005)}
+.referee-card{left:260px;right:260px;bottom:85px;overflow:visible;clip-path:none;background:none;padding:0}
+.referee-face{height:150px;display:flex;align-items:center;gap:30px;padding:14px 40px 14px 210px;background:var(--package-lines),linear-gradient(100deg,#072344,#123855);border-bottom:6px solid #a6b8c1;clip-path:polygon(18px 0,calc(100% - 20px) 0,100% 30px,calc(100% - 18px) calc(100% - 15px),calc(100% - 35px) 100%,20px 100%,0 calc(100% - 20px),0 20px)}
+.referee-mark{position:absolute;left:32px;bottom:15px;width:150px;height:185px;display:grid;place-items:center}.secondary-mark{width:100%;height:100%;object-fit:contain}.referee-card h1{font:italic 700 48px/1 var(--display);margin:0 0 15px}.referee-card p{font:35px/1 var(--display);letter-spacing:1px;margin:0}.referee-card em{color:#ffda23;font-style:normal}
+.tiers-card{left:160px;right:160px;bottom:80px;min-height:230px;overflow:visible}.tiers-face{min-height:220px;background:var(--package-lines),linear-gradient(100deg,var(--away-color),#10191c 40% 60%,var(--home-color));display:flex;align-items:center;justify-content:center;padding:10px 250px;clip-path:inherit}
+.tiers-logo{position:absolute;top:-50px;bottom:0;width:275px;display:grid;place-items:center}.tiers-logo.away{left:0}.tiers-logo.home{right:0}.tiers-logo .team-logo{width:100%;height:100%;object-fit:contain}.tiers-copy{text-align:center;text-transform:uppercase}.tier{font:44px/1.1 var(--display)}.tier-1{font-weight:700;font-size:58px}.tier.yellow,.tiers-copy footer{color:#f6c625}.tiers-copy footer{font:30px/1.2 var(--display);margin-top:8px}
+.standings-card{left:85px;bottom:85px;width:700px}.standings-face{padding:20px 26px;background:var(--package-lines),linear-gradient(#16334c,#08151e)}.standings-card header{font:italic 700 48px/1 var(--display);padding-bottom:20px}.standings-card table{width:100%;border-collapse:collapse;font:34px/1.3 var(--display)}.standings-card th{text-align:left}.standings-card td{text-align:center}.standings-card thead{color:#f6c625}.standings-card tr{border-bottom:1px solid #778b98}.standings-card td,.standings-card th{padding:9px}
+.touchdown-ribbon{position:absolute;left:0;right:0;bottom:68px;height:330px;isolation:isolate;text-align:center;display:flex;justify-content:center;align-items:flex-end}.td-rails{position:absolute;bottom:0;left:0;right:0;height:112px;background:linear-gradient(180deg,var(--team) 0 7%,#9caeb4 8% 10%,var(--team) 11% 21%,#041115 23% 36%,var(--team) 38% 45%,#a6b1b6 47% 49%,#15191b 51% 65%,#a3afb4 68% 72%,#4a555c 76%,#090c0e 100%);z-index:-1}.touchdown-ribbon h1{margin:0;font:italic 700 160px/.9 var(--display);letter-spacing:-4px;background:linear-gradient(#fff 0 50%,#9ca2a5 65%,#e4e7e9);background-clip:text;color:transparent;z-index:2}.td-identity{position:absolute;bottom:70px;height:245px;width:320px;left:calc(50% - 390px)}.td-identity :is(.portrait,.team-logo){width:100%;height:100%;object-fit:contain}.td-player{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;background:#111a1f;padding:4px 22px;font:italic 40px/1 var(--display);white-space:nowrap}.td-player b{color:#111;background:#f6d326;padding:4px 7px}
+.animate-in>.touchdown-ribbon .td-rails{animation:td-rail-build .42s ease-out both}.animate-in>.touchdown-ribbon h1{animation:td-title-build .55s .1s ease-out both}.animate-in>.touchdown-ribbon .td-identity,.animate-in>.touchdown-ribbon .td-player{animation:reference-fade .24s .45s both}.graphics-layer.leaving:has(.touchdown-ribbon){animation:td-title-build .35s ease-in reverse both}
+@keyframes td-rail-build{from{transform:scaleX(0)}to{transform:scaleX(1)}}@keyframes td-title-build{from{transform:scaleX(.1) translateY(20px);opacity:0}to{transform:scaleX(1) translateY(0);opacity:1}}
+.broadcast-transition{position:absolute;inset:0;isolation:isolate;display:grid;place-items:center;overflow:hidden}.transition-shutter{position:absolute;inset:0;background:var(--package-lines),linear-gradient(125deg,var(--team),#04101b);border-block:18px solid #a4b5be;z-index:-1}.transition-emblem{width:580px;height:650px;display:grid;place-items:center;filter:drop-shadow(0 10px 5px #0008)}.transition-emblem :is(.team-logo,.secondary-mark){width:100%;height:100%;object-fit:contain}.transition-person{position:absolute;bottom:130px;text-align:center;background:#051019ed;border-bottom:6px solid #9db3c1;padding:20px 80px}.transition-person h1{font:italic 700 85px/1 var(--display);margin:8px}.transition-person :is(p,small){font:35px/1 var(--display);margin:0}
+.animate-in>.broadcast-transition .transition-shutter{animation:broadcast-shutter .6s cubic-bezier(.2,.7,.2,1) both}.animate-in>.broadcast-transition .transition-emblem{animation:broadcast-emblem .7s ease-out both}.graphics-layer.leaving:has(.broadcast-transition){animation:broadcast-shutter .45s ease-in reverse both}
+@keyframes broadcast-shutter{from{clip-path:polygon(0 0,0 0,0 100%,0 100%)}to{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}}@keyframes broadcast-emblem{from{transform:scale(.25) rotateY(-70deg);opacity:0}to{transform:scale(1) rotateY(0);opacity:1}}
+.animate-in>:is(.referee-card,.tiers-card,.standings-card){animation:reference-fade .18s ease-out both}.graphics-layer.leaving:has(>.bevel-card){animation:reference-fade .16s linear reverse both}
+.graphics-layer[data-motion="fade"] :is(.touchdown-ribbon,.broadcast-transition){animation:reference-fade .16s linear both!important}.graphics-layer[data-motion="fade"] :is(.touchdown-ribbon,.broadcast-transition) *{animation:none!important}
+/* Mini box: a 3.5s badge hold before the score faces, measured at 879–883s. */
+.mini-badge{background:none;clip-path:none;padding:8px;width:220px;height:280px;min-height:0;display:grid;place-items:center}.mini-badge::before{display:none}.mini-badge .network-mark{transform:scale(1.6)}
+.animate-in>.commercial-mini .mini-intro{animation:mini-badge-resolve 4s linear both}.animate-in>.commercial-mini .mini-content{animation:mini-score-resolve 4s linear both}.animate-in>.commercial-mini .mini-team .team-logo{animation:mini-logo-resolve .28s 3.48s ease-out both}
+/* Shared large break / final banner behavior. */
+.animate-in>.final-banner{animation:reference-fade .16s linear both!important}.animate-in>.final-banner .result-logo{animation:none!important}.graphics-layer.leaving:has(>.final-banner){animation:reference-fade .16s linear reverse both!important}
+@media(prefers-reduced-motion:reduce){.score-add,.td-rails,.touchdown-ribbon h1,.transition-shutter,.transition-emblem{animation:none!important}}
+.referee-mark{z-index:2}.tiers-card{clip-path:none;background:none;isolation:isolate}.tiers-card::before{content:'';position:absolute;inset:0;background:var(--package-metal);clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 26px,calc(100% - 16px) calc(100% - 18px),calc(100% - 36px) 100%,25px 100%,5px calc(100% - 18px),0 24px);z-index:-1}.tiers-face{clip-path:polygon(18px 0,calc(100% - 18px) 0,100% 24px,calc(100% - 14px) calc(100% - 14px),calc(100% - 30px) 100%,23px 100%,4px calc(100% - 14px),0 22px)}.tiers-logo{z-index:2}
+.situation-group .conversion-panel h1{font-size:clamp(28px,7.8cqw,44px)}
+
+.upcoming-tiers .tiers-copy{padding:12px 55px}.upcoming-tiers .tier{display:flex;align-items:center;justify-content:space-between;gap:30px}.upcoming-tiers .tier strong{font-size:38px}.upcoming-tiers .tier small{font-size:28px}.upcoming-tiers .matchup-at{font-size:.7em;margin:0 12px}
+
+/* Motion68: each sequence owns its entrance; no generic pre-fade. */
+.graphics-layer[data-motion="auto"].animate-in>.touchdown-ribbon,
+.graphics-layer[data-motion="auto"].animate-in>.broadcast-transition{animation:none}
+.touchdown-ribbon h1{display:flex;justify-content:center;gap:0;background:none;color:#eff3f4;perspective:800px}
+.touchdown-ribbon h1>span{display:inline-block;background:linear-gradient(#fff 0 42%,#9ca2a5 67%,#e4e7e9);background-clip:text;color:transparent}
+.td-fragments{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:4}
+.td-fragments i{position:absolute;left:50%;bottom:calc(45px + var(--y));width:180px;height:90px;background:linear-gradient(135deg,#122328 5%,var(--team) 65%,var(--secondary));clip-path:polygon(0 0,100% 42%,30% 57%,65% 100%);opacity:0}
+.graphics-layer[data-motion="auto"].animate-in>.touchdown-ribbon .td-fragments i{animation:td-fragment-burst .8s calc(var(--i)*.015s) ease-out both}
+.graphics-layer[data-motion="auto"].animate-in>.touchdown-ribbon .td-rails{animation:td-rail-build .46s .15s cubic-bezier(.16,.7,.2,1) both}
+.graphics-layer[data-motion="auto"].animate-in>.touchdown-ribbon h1{animation:none}
+.graphics-layer[data-motion="auto"].animate-in>.touchdown-ribbon h1>span{animation:td-letter-build .55s calc(.18s + var(--i)*.025s) cubic-bezier(.18,.75,.3,1) both}
+.graphics-layer[data-motion="auto"].animate-in>.touchdown-ribbon :is(.td-identity,.td-player){animation:reference-fade .22s .68s both}
+@keyframes td-fragment-burst{0%{opacity:0;transform:translateX(-500px) scale(.2) rotate(var(--r))}18%{opacity:1}65%{opacity:1}100%{opacity:0;transform:translateX(calc((var(--i) - 6)*160px)) translateY(-110px) scale(1.4) rotate(calc(var(--r)*2))}}
+@keyframes td-letter-build{0%{opacity:0;transform:translateX(-95px) translateY(20px) rotateY(80deg) scaleY(1.4)}45%{opacity:1}100%{opacity:1;transform:none}}
+.graphics-layer.leaving:has(>.touchdown-ribbon){animation:none}
+.graphics-layer.leaving>.touchdown-ribbon h1>span{animation:td-letter-build .32s calc(var(--i)*.012s) ease-in reverse both}
+.graphics-layer.leaving>.touchdown-ribbon .td-rails{animation:td-rail-build .38s .1s ease-in reverse both}
+.graphics-layer.leaving>.touchdown-ribbon :is(.td-identity,.td-player){animation:reference-fade .16s linear reverse both}
+.graphics-layer.leaving>.touchdown-ribbon .td-fragments{display:none}
+.graphics-layer[data-motion="auto"].leaving:has(>.commercial-mini){animation:none}
+.graphics-layer[data-motion="auto"].leaving>.commercial-mini{animation:mini-build .38s ease-in reverse both!important}
+.graphics-layer[data-motion="fade"].leaving{animation:reference-fade .16s linear reverse both!important}
+.graphics-layer[data-motion="fade"].leaving *{animation:none!important}
+@media(prefers-reduced-motion:reduce){.td-fragments{display:none}.graphics-layer .touchdown-ribbon *,.graphics-layer.leaving>.commercial-mini{animation:none!important}}
+
+.graphics-layer:has(>.touchdown-ribbon){z-index:3}.touchdown-ribbon .td-rails{height:130px}.touchdown-ribbon h1{font-size:180px}.touchdown-ribbon .td-player{bottom:32px;font-size:42px}
+
+/* Alerts use the half-width tab attached behind the team wing. */
+.situation-group .alert-tab .situation-reveal{width:460px;height:auto;min-height:54px;bottom:197px;clip-path:polygon(7% 0,93% 0,100% 100%,0 100%);padding:2px 3px 3px}
+.situation-group .alert-tab h1{height:48px;font-size:34px;letter-spacing:.4px;padding:0 24px;white-space:nowrap}
+.situation-group .alert-tab p{height:36px;padding:0 20px;font-size:26px;margin:0;background:#0e171b}
+.situation-group .review-tab .situation-reveal{left:230px;right:auto}
+.situation-group .kicker-panel .kicker-photo{position:absolute;left:12px;bottom:118px;width:200px;height:190px;z-index:-1;overflow:hidden}
+.situation-group .dock-home.kicker-panel .kicker-photo{left:auto;right:12px}
+.situation-group .kicker-panel .kicker-photo .portrait{object-fit:contain;object-position:bottom}
+.situation-group .attempt-tag h1{font-size:36px;height:51px}.situation-group .attempt-tag h1 b{font-size:38px}.situation-group .attempt-tag .situation-reveal{height:57px;width:480px}
+.situation-group .alert-tab .situation-reveal{height:auto;width:460px}.situation-group .alert-tab h1{font-size:32px;height:46px}
+/* TD title spans roughly two scorebug widths in the supplied scoring sequence. */
+.touchdown-ribbon{height:380px}.touchdown-ribbon .td-rails{height:206px}.touchdown-ribbon h1{font-size:260px;letter-spacing:-3px}.touchdown-ribbon .td-identity{width:400px;height:300px;bottom:100px;left:calc(50% - 500px)}.touchdown-ribbon .td-player{font-size:48px;bottom:46px}
+
+.td-player{max-width:900px;overflow:hidden}.staff-plate h1,.situation-reveal h1{min-width:0}
+
+.qb-feature.qb-season{padding:9px 22px 16px;min-height:255px}.qb-season header{font:italic 30px/1.2 'DIN Condensed','Arial Narrow',sans-serif;color:#ffce28;letter-spacing:1px;margin-bottom:8px}.qb-season dl{margin:0}.qb-season dl>div{display:flex;align-items:baseline;justify-content:space-between;gap:18px;border-top:1px solid #ffffff22;padding:5px 0}.qb-season dt{font:italic 29px/1.1 'DIN Condensed','Arial Narrow',sans-serif;color:#eee}.qb-season dd{font:italic 39px/1.1 'DIN Condensed','Arial Narrow',sans-serif;color:white;margin:0;font-variant-numeric:tabular-nums}
+.qb-feature.qb-season{padding:8px 22px 10px;height:255px;min-height:255px}.qb-season header{font-size:28px;line-height:30px;margin-bottom:4px}.qb-season dl>div{padding:2px 0;min-height:38px}.qb-season dt{font-size:26px}.qb-season dd{font-size:30px;line-height:32px}
+
+/* QB intro: larger season totals and clearer featured text on the existing card. */
+.qb-sidebar-name strong{font-size:70px}.qb-sidebar-name small{font-size:40px}
+.qb-feature:not(.qb-season) b{font-size:88px}.qb-feature:not(.qb-season) strong{font-size:62px}.qb-feature:not(.qb-season) p{font-size:44px}
+.qb-feature.qb-season{height:350px;min-height:350px;padding:14px 22px}.qb-season header{font-size:36px;line-height:40px;margin-bottom:7px}.qb-season dl>div{min-height:52px;padding:3px 0}.qb-season dt{font-size:35px}.qb-season dd{font-size:44px;line-height:46px}
+/* Both-team bumper has a finite timeline; the server also clears its cue. */
+.graphics-layer:has(>.two-team-bumper){z-index:6}.two-team-bumper{position:absolute;inset:0;overflow:hidden;pointer-events:none}.animate-in>.two-team-bumper{animation:none}
+.bumper-panels{position:absolute;inset:-40px;display:flex;animation:bumper-cycle var(--bumper-time) cubic-bezier(.2,.65,.3,1) both;background:#101b22}
+.bumper-team{position:relative;flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;background:var(--package-lines),radial-gradient(ellipse at 50% 45%,var(--team),#050b10);overflow:hidden;border-block:12px solid #8199a6}
+.bumper-team.home{background:var(--package-lines),radial-gradient(ellipse at 50% 45%,var(--team),#050b10)}
+.bumper-logo{width:650px;height:650px;display:grid;place-items:center;filter:drop-shadow(0 16px 10px #0006);animation:bumper-logo-cycle var(--bumper-time) ease-out both}.bumper-logo .team-monogram{font-size:300px}
+.bumper-team strong{font:italic 700 75px/1 var(--display);text-transform:uppercase;color:white;text-shadow:3px 4px #0008}
+.bumper-seam{position:absolute;top:-10%;bottom:-10%;left:50%;width:22px;background:linear-gradient(90deg,#34444e,#d3dee2 35%,#6b8191 55%,#14252f);transform:skewX(-9deg)}
+.bumper-network{position:absolute;left:50%;top:95px;transform:translateX(-50%);width:180px;height:140px;display:grid;place-items:center}.bumper-network img{width:100%;height:100%;object-fit:contain}
+@keyframes bumper-cycle{0%{clip-path:inset(0 50%);transform:scale(1.12)}22%{clip-path:inset(0);transform:scale(1)}78%{clip-path:inset(0);transform:scale(1);animation-timing-function:cubic-bezier(.7,0,.8,.35)}100%{clip-path:inset(0 50%);transform:scale(1.12)}}
+@keyframes bumper-logo-cycle{0%,8%{transform:scale(.65);opacity:0}30%{transform:scale(1);opacity:1}70%{transform:scale(1);opacity:1;animation-timing-function:ease-in}92%,100%{transform:scale(.65);opacity:0}}
+.graphics-layer[data-motion=fade]>.two-team-bumper .bumper-panels{animation:bumper-fade-cycle var(--bumper-time) linear both!important}.graphics-layer[data-motion=fade]>.two-team-bumper .bumper-logo{animation:none!important}
+@keyframes bumper-fade-cycle{0%,100%{opacity:0}8%,92%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.two-team-bumper *{animation:none!important}}
+
+.qb-feature p.qb-context-yellow{color:#ffce28}
+.graphics-layer.leaving:has(>.two-team-bumper){display:none}
+/* Broadcast copy is uppercase; operator inputs retain their original spelling. */
+.stage,.stage *{text-transform:uppercase!important}
+
+/* Timed bumper preview stays readable; program still runs once with no hold. */
+.stage.is-preview .two-team-bumper .bumper-panels,.stage.is-preview .two-team-bumper .bumper-logo{animation:none!important;opacity:1;transform:none;clip-path:none}
+.graphics-layer.animate-in:has(>.two-team-bumper){animation:none!important}
+.graphics-layer.animate-in>.two-team-bumper{animation:none!important}
+
+/* Choose In and Out independently, including the timed two-team bumper. */
+.graphics-layer[data-motion=auto]>.two-team-bumper[data-out-motion=fade] .bumper-panels{animation-name:bumper-open-fade}
+.graphics-layer[data-motion=auto]>.two-team-bumper[data-out-motion=fade] .bumper-logo{animation-name:bumper-logo-in-hold}
+.graphics-layer[data-motion=fade]>.two-team-bumper[data-out-motion=auto] .bumper-panels{animation:bumper-fade-close var(--bumper-time) linear both!important}
+.graphics-layer[data-motion=fade]>.two-team-bumper[data-out-motion=auto] .bumper-logo{animation:bumper-logo-out var(--bumper-time) ease-in both!important}
+@keyframes bumper-open-fade{0%{clip-path:inset(0 50%);transform:scale(1.12);opacity:1}22%,92%{clip-path:inset(0);transform:scale(1);opacity:1}100%{clip-path:inset(0);transform:scale(1);opacity:0}}
+@keyframes bumper-logo-in-hold{0%,8%{transform:scale(.65);opacity:0}30%,100%{transform:scale(1);opacity:1}}
+@keyframes bumper-fade-close{0%{opacity:0;clip-path:inset(0);transform:scale(1)}8%{opacity:1;clip-path:inset(0);transform:scale(1)}78%{opacity:1;clip-path:inset(0);transform:scale(1);animation-timing-function:cubic-bezier(.7,0,.8,.35)}100%{opacity:1;clip-path:inset(0 50%);transform:scale(1.12)}}
+@keyframes bumper-logo-out{0%,70%{transform:scale(1);opacity:1}92%,100%{transform:scale(.65);opacity:0}}
+.stage.is-preview .two-team-bumper .bumper-panels,.stage.is-preview .two-team-bumper .bumper-logo{animation:none!important}
+
+@media(prefers-reduced-motion:reduce){.stage .graphics-layer .two-team-bumper .bumper-panels,.stage .graphics-layer .two-team-bumper .bumper-logo{animation:none!important}}
+
+/* Cowboys–Eagles reference, 09:40: folded matchup shutter. */
+.graphics-layer:has(>.two-team-bumper){z-index:100}
+.two-team-bumper .bumper-panels{inset:0;background:transparent;animation:matchup-envelope var(--bumper-time) linear both;isolation:isolate}
+.two-team-bumper .bumper-team{flex:0 0 50%;min-width:0;border:0;background:linear-gradient(90deg,color-mix(in srgb,var(--team) 75%,#07111b),var(--team));animation:matchup-left var(--bumper-time) cubic-bezier(.22,.7,.25,1) both;overflow:visible}
+.two-team-bumper .bumper-team.home{animation-name:matchup-right}
+.bumper-folds{position:absolute;inset:0;display:flex;overflow:hidden;border-bottom:30px solid #b8c5cb;background:linear-gradient(110deg,#ffffff14,transparent 40%,#0007)}
+.bumper-fold{position:relative;width:50%;height:100%;background:linear-gradient(90deg,#0005,transparent 8%,#ffffff15 49%,#0007 51%,transparent 95%)}
+.bumper-fold i{position:absolute;left:0;right:0;top:calc(var(--row)*98px - 75px);height:145px;clip-path:polygon(0 0,50% 50px,100% 0,100% 78px,50% 128px,0 78px);background:linear-gradient(180deg,#a9d8ec55 0%,#061018b0 8%,transparent 16%,#0005 59%,#d9f4ff55 64%,#020a10 71%,#07131acc 82%);filter:drop-shadow(0 9px 3px #0008)}
+.two-team-bumper .bumper-logo{position:relative;width:690px;height:690px;max-width:82%;animation:matchup-logo var(--bumper-time) ease-out both;filter:drop-shadow(14px 18px 8px #0009);z-index:2}
+.two-team-bumper .bumper-logo img{width:100%;height:100%;object-fit:contain}
+.bumper-edge{position:absolute;inset:0 0 0 auto;width:45px;background:linear-gradient(90deg,#536875,#fff 25%,#f7f8f6 80%,#a6b9c4);clip-path:polygon(0 0,100% 0,100% 100%,0 96%);z-index:3;animation:matchup-edge var(--bumper-time) linear both}
+.home .bumper-edge{left:0;right:auto;transform:scaleX(-1)}
+.bumper-versus{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:22px;pointer-events:none;animation:matchup-vs var(--bumper-time) linear both;color:#d5e4e9;text-shadow:0 4px 3px #000;font:700 76px/1 var(--display)}
+.bumper-versus b{font-size:54px;color:#728d9b}.bumper-versus span{font-family:Arial,sans-serif;font-size:110px}
+@keyframes matchup-envelope{0%,100%{visibility:hidden}1%,99%{visibility:visible}}
+@keyframes matchup-left{0%{transform:translateX(100%) scaleX(0)}27%,49%{transform:translateX(0) scaleX(1)}100%{transform:translateX(-108%) scaleX(1)}}
+@keyframes matchup-right{0%{transform:translateX(-100%) scaleX(0)}27%,49%{transform:translateX(0) scaleX(1)}100%{transform:translateX(108%) scaleX(1)}}
+@keyframes matchup-logo{0%{opacity:0;transform:scale(.6)}12%{opacity:1}32%,100%{opacity:1;transform:scale(1)}}
+@keyframes matchup-edge{0%,15%{opacity:1;width:65px}28%,46%{opacity:0;width:0}58%,100%{opacity:1;width:65px}}
+@keyframes matchup-vs{0%,20%{opacity:0;transform:scale(.7)}30%,48%{opacity:1;transform:scale(1)}65%,100%{opacity:0;transform:scale(1.3)}}
+/* Fade selections replace only their assigned half of the timeline. */
+.graphics-layer[data-motion=fade]>.two-team-bumper .bumper-panels{animation:matchup-envelope var(--bumper-time) linear both!important}
+.graphics-layer[data-motion=fade]>.two-team-bumper .bumper-team.away{animation-name:matchup-left-fade-in}
+.graphics-layer[data-motion=fade]>.two-team-bumper .bumper-team.home{animation-name:matchup-right-fade-in}
+.two-team-bumper[data-out-motion=fade] .bumper-team.away{animation-name:matchup-left-fade-out}
+.two-team-bumper[data-out-motion=fade] .bumper-team.home{animation-name:matchup-right-fade-out}
+.graphics-layer[data-motion=fade]>.two-team-bumper[data-out-motion=fade] .bumper-team{animation-name:matchup-fade}
+@keyframes matchup-left-fade-in{0%{opacity:0;transform:none}15%,49%{opacity:1;transform:none}100%{opacity:1;transform:translateX(-108%)}}
+@keyframes matchup-right-fade-in{0%{opacity:0;transform:none}15%,49%{opacity:1;transform:none}100%{opacity:1;transform:translateX(108%)}}
+@keyframes matchup-left-fade-out{0%{transform:translateX(100%) scaleX(0);opacity:1}27%,85%{transform:none;opacity:1}100%{transform:none;opacity:0}}
+@keyframes matchup-right-fade-out{0%{transform:translateX(-100%) scaleX(0);opacity:1}27%,85%{transform:none;opacity:1}100%{transform:none;opacity:0}}
+@keyframes matchup-fade{0%,100%{opacity:0}15%,85%{opacity:1}}
+.stage.is-preview .two-team-bumper .bumper-team,.stage.is-preview .two-team-bumper .bumper-versus{animation:none!important;transform:none;opacity:1}
+.stage.is-preview .two-team-bumper .bumper-edge{animation:none;opacity:0}
+@media(prefers-reduced-motion:reduce){.stage .two-team-bumper *{animation:none!important}.stage .two-team-bumper .bumper-edge{opacity:0}}
+/* The generic fast-fade rule must not erase the timed shutter's duration. */
+.graphics-layer[data-motion=fade].animate-in>.two-team-bumper .bumper-team{animation-duration:var(--bumper-time);animation-timing-function:cubic-bezier(.22,.7,.25,1);animation-fill-mode:both}
+.graphics-layer[data-motion=fade].animate-in>.two-team-bumper .bumper-versus{animation:matchup-vs var(--bumper-time) linear both}
+.graphics-layer>.two-team-bumper .bumper-logo{animation:matchup-logo var(--bumper-time) ease-out both!important}
+.graphics-layer[data-motion=fade]>.two-team-bumper .bumper-logo{animation:none!important;opacity:1;transform:none}
+.graphics-layer>.two-team-bumper[data-out-motion=fade] .bumper-edge{animation:none;opacity:0}
+.stage.is-preview .graphics-layer>.two-team-bumper .bumper-panels,.stage.is-preview .graphics-layer>.two-team-bumper .bumper-logo,.stage.is-preview .graphics-layer>.two-team-bumper .bumper-team,.stage.is-preview .graphics-layer>.two-team-bumper .bumper-versus{animation:none!important;visibility:visible;opacity:1;transform:none;clip-path:none}
+.bumper-fold i{height:188px;clip-path:polygon(0 0,50% 105px,100% 0,100% 65px,50% 170px,0 65px);background:linear-gradient(90deg,#0005,transparent 45%,#a9d8ec44 49%,#020a1077 51%,transparent),linear-gradient(180deg,#8fbece88,#07131a99 12%,transparent 20%,#020a10dd 92%,#c5dfeb77);}
+
+/* Lineup lower third: reference lettering, continuous team surface and fine bevel. */
+.lineup-ribbon{left:104px;right:104px;bottom:64px;height:150px}
+.lineup-ribbon-frame{inset:40px 0 0;padding:2px 3px 6px;background:linear-gradient(165deg,#e3edf0 0%,#738c9c 17%,#243b49 47%,#bdcdd5 78%,#d8e1e5 86%,#4c687b 100%);clip-path:polygon(17px 0,calc(100% - 17px) 0,100% 15px,100% calc(100% - 14px),calc(100% - 22px) 100%,22px 100%,0 calc(100% - 14px),0 15px)}
+.lineup-ribbon-face{background:url('./assets/lineup-contours.svg') center/520px 160px repeat,linear-gradient(100deg,color-mix(in srgb,var(--team) 80%,#020c17),color-mix(in srgb,var(--team) 56%,#030e19) 52%,color-mix(in srgb,var(--team) 80%,#020c17));clip-path:polygon(15px 0,calc(100% - 15px) 0,100% 13px,100% calc(100% - 11px),calc(100% - 19px) 100%,19px 100%,0 calc(100% - 11px),0 13px)}
+.lineup-ribbon-face h1{font:700 64px/1 var(--display);font-style:normal;letter-spacing:1px;color:#ffdc27;text-shadow:0 2px 1px #74620f;margin:0}
+.lineup-team-tab{bottom:116px;padding:3px 22px 2px;font:italic 700 31px/1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:.5px;border:0;background:url('./assets/lineup-contours.svg') center/400px 130px,linear-gradient(100deg,color-mix(in srgb,var(--team) 85%,#071321),color-mix(in srgb,var(--team) 62%,#030a12));clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,8px 100%,0 50%)}
+.lineup-ribbon-logo{left:-12px;bottom:-2px;width:204px;height:182px;z-index:4}
+.lineup-names{padding:0 14px 0 186px;gap:0}
+.lineup-names>.lineup-player-panel{padding:10px 8px 8px;background:linear-gradient(110deg,#0000000d,transparent 60%,#00000015);border:0;clip-path:none;overflow:hidden}
+.lineup-player-panel::after{display:none}
+.lineup-names .lineup-player-panel small{display:flex;align-items:baseline;justify-content:center;gap:7px;font:italic 700 30px/1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:.3px;margin:0 0 1px;overflow:hidden;color:#eff3f6}
+.lineup-position{font-size:.74em;color:#bfcbd4;white-space:nowrap}.lineup-first{overflow:hidden;text-overflow:ellipsis}
+.lineup-names .lineup-player-panel strong{font:italic 700 clamp(23px,calc(295cqw / var(--surname-length,8)),49px)/1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:.3px;padding:0;color:#f5f8fa;text-shadow:1px 2px 1px #0007}
+
+/* FOX lineup lettering: allow cap/descender space and fit complete names. */
+.lineup-ribbon{height:164px}
+.lineup-team-tab{bottom:130px;font-size:42px;line-height:1.18;padding:6px 34px 5px;min-width:390px;text-align:center;clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,12px 100%,0 50%)}
+.lineup-names>.lineup-player-panel{padding:7px 8px 10px;overflow:visible}
+.lineup-names .lineup-player-panel small{display:block;flex-shrink:0;overflow:visible;line-height:1.22;font-size:29px;margin:0;white-space:nowrap;text-align:center}
+.lineup-names .lineup-player-panel strong{display:block;flex-shrink:0;overflow:visible;text-overflow:clip;font-size:49px;line-height:1.22;white-space:nowrap;text-align:center;padding:0 5px}
+.lineup-copy{display:inline-block;width:max-content;max-width:none;transform-origin:center;white-space:nowrap}
+.lineup-first{overflow:visible;text-overflow:clip}.lineup-position{margin-right:6px}
+/* Individual player-info backplates sit inside the shared FOX-style ribbon. */
+.lineup-names>.lineup-player-panel{isolation:isolate;background:none}
+.lineup-names>.lineup-player-panel::before{content:'';position:absolute;inset:4px 3px 5px;z-index:-1;pointer-events:none;clip-path:polygon(10px 0,100% 0,100% calc(100% - 9px),calc(100% - 12px) 100%,0 100%,0 10px);background:url('./assets/lineup-contours.svg') center/430px 132px,linear-gradient(110deg,color-mix(in srgb,var(--team) 78%,#07101b),color-mix(in srgb,var(--team) 40%,#020912) 85%);box-shadow:inset 0 1px #bad4e044,inset 0 -3px #68849788,inset 1px 0 #bcd0df24}
+/* Reference lineup In/Out: 90.9–91.4 and 104.45–104.8 in the long recording.
+   Deliberately scoped to take/hide; persistent group-update motion is unchanged. */
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon{animation:none;overflow:visible}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame{transform-origin:50% 100%;animation:lineup-frame-in82 .48s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-ribbon-logo{transform-origin:50% 80%;animation:lineup-logo-in82 .48s ease-out both;backface-visibility:hidden}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-team-tab{animation:lineup-tab-in82 .48s ease-out both}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon h1,.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-names>div{animation:lineup-copy-in82 .48s ease-out both;animation-delay:0s}
+@keyframes lineup-frame-in82{0%{transform:scale(.02,.025)}45%{transform:scale(1,.025)}84%,100%{transform:scale(1,1)}}
+@keyframes lineup-logo-in82{0%,42%{opacity:0;transform:perspective(700px) rotateY(90deg)}43%{opacity:1;transform:perspective(700px) rotateY(90deg)}88%,100%{opacity:1;transform:perspective(700px) rotateY(0)}}
+@keyframes lineup-tab-in82{0%,58%{opacity:0;transform:translate(-50%,18px) scaleY(.15)}94%,100%{opacity:1;transform:translate(-50%,0) scaleY(1)}}
+@keyframes lineup-copy-in82{0%,64%{opacity:0;transform:translateY(16px)}96%,100%{opacity:1;transform:translateY(0)}}
+.graphics-layer.leaving[data-motion=auto]:has(>.lineup-ribbon){animation:none;opacity:1;clip-path:none;transform:none}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon{animation:none;clip-path:none;transform:none;opacity:1}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame{transform-origin:50% 100%;animation:lineup-frame-out82 .36s ease-in both}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-ribbon-logo{animation:lineup-logo-out82 .18s ease-in both;transform-origin:50% 80%;backface-visibility:hidden}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-team-tab{animation:lineup-tab-out82 .16s ease-in both}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon h1,.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-names>div{animation:lineup-copy-out82 .14s ease-in both}
+@keyframes lineup-frame-out82{0%,10%{transform:scale(1,1);opacity:1}60%{transform:scale(1,.025);opacity:1}99%{transform:scale(.01,.025);opacity:1}100%{transform:scale(0,.025);opacity:0}}
+@keyframes lineup-logo-out82{0%{transform:perspective(700px) rotateY(0);opacity:1}99%{transform:perspective(700px) rotateY(90deg);opacity:1}100%{transform:perspective(700px) rotateY(90deg);opacity:0}}
+@keyframes lineup-tab-out82{from{opacity:1;transform:translate(-50%,0)}to{opacity:0;transform:translate(-50%,18px)}}
+@keyframes lineup-copy-out82{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(16px)}}
+@media(prefers-reduced-motion:reduce){.graphics-layer.animate-in>.lineup-ribbon *,.graphics-layer.leaving>.lineup-ribbon *{animation:none!important}.graphics-layer.leaving:has(>.lineup-ribbon){opacity:0!important}}
+
+.lineup-rookie{display:inline-block;color:#ffdc27;font-size:.64em;letter-spacing:.5px;margin-left:7px;font-style:normal;vertical-align:baseline}
+
+/* Separate position/jersey from the name stack; rookie sits below the surname. */
+.lineup-names>.lineup-player-panel{display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;padding:5px 8px;column-gap:3px}
+.lineup-player-panel>.lineup-position{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;margin:0;color:#c7d2dc;font:italic 700 22px/1.1 'DIN Condensed','Arial Narrow',sans-serif;align-self:center}
+.lineup-name-stack{min-width:0;text-align:center}
+.lineup-names .lineup-player-panel small{font-size:28px;line-height:1.18}
+.lineup-names .lineup-player-panel strong{font-size:44px;line-height:1.18;padding:0 4px}
+.lineup-name-stack>.lineup-rookie{display:block;height:21px;margin:0;color:#ffdc27;font:700 18px/21px 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:1px}
+
+/* Visible silver facets belong to the shell so every reveal/exit carries them. */
+.bug-metal>.bug-frame-rails{position:absolute;inset:0;width:100%;height:100%;z-index:8;pointer-events:none;object-fit:fill;user-select:none}
+
+/* Rails sit outside the content, with chrome above only the possessing score. */
+.bug-metal{width:calc(100% + 16px);height:calc(100% + 16px);left:-8px;top:-8px;padding:11px;background:#071015}
+.bug-enter .scorebug{clip-path:none}
+.bug-possession-rail{position:absolute;left:311px;top:0;width:157px;height:6px;background:linear-gradient(#f5f8fa,#b2c2cc 45%,#526b7b);z-index:8;transition:transform .18s ease,opacity .16s ease}
+.bug-possession-rail.home{transform:translateX(100%)}.bug-possession-rail.off{opacity:0}
+.possession-cap::before{display:none}
+
+/* The frame grows outwards; the existing content retains its original bounds. */
+
+.bug-enter .scorebug{clip-path:none}
+/* Separate dark ribbons with a narrow team-color end cap, behind the wing. */
+.qb-live-bar.side-stat-stack{height:calc(var(--side-rows) * 46px + (var(--side-rows) - 1) * 9px);background:none;clip-path:none;display:flex;flex-direction:column;gap:9px;overflow:visible}
+.qb-live-bar.side-stat-stack::after{display:none}
+.side-stat-row{position:relative;flex:0 0 46px;width:100%;background:rgba(15,15,15,.78);clip-path:polygon(12px 0,100% 0,100% 100%,0 100%)}
+.dock-home .side-stat-row{clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%)}
+.side-stat-row::after{content:'';position:absolute;top:0;bottom:0;left:4px;width:5px;background:linear-gradient(90deg,#b9c3c8 0 28%,var(--team) 28% 100%);transform:skewX(-14deg)}
+.dock-home .side-stat-row::after{left:auto;right:5px}
+.bug-possession-rail{clip-path:polygon(4px 0,100% 0,calc(100% - 4px) 100%,0 100%)}
+
+/* Player strips: legible stat separators and name fitting within each face. */
+.side-stat-copy{display:flex;align-items:center;justify-content:center;gap:12px;width:max-content;flex:0 0 auto;white-space:nowrap;transform-origin:center}
+.side-stat-copy .qb-live-name{flex:0 0 auto;font-size:38px}
+.side-stat-copy .qb-live-values{flex:0 0 auto;gap:9px}
+.side-stat-copy .qb-live-values b{font-size:36px}.side-stat-copy .qb-live-values small{font-size:29px}
+.side-stat-copy .qb-live-values span{gap:5px}
+.side-stat-copy .qb-live-values span:not(:last-child)::after{content:',';font:italic 29px/1 'DIN Condensed','Arial Narrow',sans-serif;margin-left:-4px}
+
+/* Keep the bevel silhouette throughout the electrical wipe; never reveal a rectangle. */
+.bug-enter .bug-intro-mask{inset:-8px;clip-path:var(--bug-outline);mask-image:linear-gradient(#000,#000);mask-repeat:no-repeat;mask-position:right center}
+.bug-wrap.bug-enter:not([data-motion="fade"]) .bug-metal{mask-image:linear-gradient(#000,#000);mask-repeat:no-repeat;mask-position:left center}
+@keyframes helmet-unfold{0%{transform:scale(.72,.012);opacity:1;mask-size:100% 100%}5%{transform:scale(1,.025)}30%,62%{transform:scale(1);mask-size:100% 100%}94%,100%{transform:scale(1);mask-size:0% 100%;opacity:0}}
+@keyframes bug-electric-reveal{0%,62%{clip-path:var(--bug-outline);mask-size:0% 100%}94%,100%{clip-path:var(--bug-outline);mask-size:100% 100%}}
+/* Large break and final: lower rail expands, face opens, then raised logos and data resolve. */
+.graphics-layer[data-motion="auto"].animate-in>.final-banner{animation:none}
+.graphics-layer[data-motion="auto"].animate-in>.final-banner .result-metal{transform-origin:50% 100%;animation:result-frame-build86 .68s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer[data-motion="auto"].animate-in>.final-banner .result-logo{transform-origin:50% 100%;animation:result-logo-build86 .76s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer[data-motion="auto"].animate-in>.final-banner .result-name{animation:result-copy-build86 .72s ease-out both}
+.graphics-layer[data-motion="auto"].animate-in>.final-banner .result-center{animation:result-copy-build86 .78s ease-out both}
+.graphics-layer[data-motion="auto"].animate-in>.final-banner .result-badge{animation:result-copy-build86 .84s ease-out both}
+@keyframes result-frame-build86{0%{transform:scale(.03,.015)}28%{transform:scale(1,.015)}46%{transform:scale(1,.04)}100%{transform:scale(1)}}
+@keyframes result-logo-build86{0%,44%{opacity:0;transform:translateY(65px) scale(.82);clip-path:inset(100% 0 0)}68%{opacity:1}100%{opacity:1;transform:none;clip-path:inset(0)}}
+@keyframes result-copy-build86{0%,65%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:none}}
+/* Reference cuts away from the held banner: use a brief clean fade on exit. */
+.graphics-layer[data-motion="auto"].leaving:has(>.final-banner){animation:reference-fade .16s linear reverse both}
+.graphics-layer[data-motion="auto"].leaving>.final-banner,.graphics-layer[data-motion="auto"].leaving>.final-banner *{animation:none!important}
+@media(prefers-reduced-motion:reduce){.graphics-layer[data-motion="auto"].animate-in>.final-banner *{animation:none!important}}
+
+/* Smaller native type: fit long player names by font size, never squash or crop. */
+.side-stat-copy{--side-type-scale:1;gap:calc(10px * var(--side-type-scale));transform:none!important}
+.side-stat-copy .qb-live-name{font-size:calc(28px * var(--side-type-scale))}
+.side-stat-copy .qb-live-values b{font-size:calc(26px * var(--side-type-scale))}
+.side-stat-copy .qb-live-values small,.side-stat-copy .qb-live-values span:not(:last-child)::after{font-size:calc(22px * var(--side-type-scale))}
+.side-stat-copy .qb-live-values{gap:calc(7px * var(--side-type-scale))}
+.side-stat-copy .qb-live-values span{gap:calc(4px * var(--side-type-scale))}
+/* Preserve the established electrical timing. Clip the entire intro assembly,
+   outside the enlarged metal frame, instead of changing the reveal mechanism. */
+.bug-enter .scorebug{clip-path:polygon(29.44px -8px,890.56px -8px,928px 35.2px,904.6px 151.84px,853.12px 201.52px,581.68px 201.52px,553.6px 182.08px,366.4px 182.08px,338.32px 201.52px,66.88px 201.52px,15.4px 151.84px,-8px 35.2px)}
+.bug-enter .bug-intro-mask{inset:-8px;mask-image:none}
+.bug-wrap.bug-enter:not([data-motion="fade"]) .bug-metal{mask-image:none}
+@keyframes helmet-unfold{0%{transform:scale(.72,.012);opacity:1;clip-path:inset(0)}5%{transform:scale(1,.025)}30%,62%{transform:scale(1);clip-path:inset(0)}94%,100%{transform:scale(1);clip-path:inset(0 0 0 100%);opacity:1}}
+@keyframes bug-electric-reveal{0%,62%{clip-path:inset(0 100% 0 0)}94%,100%{clip-path:inset(0)}}
+
+/* Reference top strips are narrow, inset, and stop before the score cells. */
+.bug-metal{background:linear-gradient(transparent 0 8px,#071015 8px)}
+.bug-possession-rail{top:8px;height:4px}
+
+/* Close-up reference proportions: 920 × 200; no oversized external shell. */
+.bug-metal{width:100%;height:100%;left:0;top:0;padding:3px;background:#071015}
+.bug-enter .scorebug{clip-path:var(--bug-outline)}
+.bug-enter .bug-intro-mask{inset:0}
+.bug-possession-rail{left:303px;top:0;width:157px;height:3px}
+
+/* Measured reference: stepped upper chrome and broader lower diagonal facets. */
+.bug-possession-rail{top:3px;height:5px}
+.scorebug .timeout-bars{bottom:10px}
+
+/* Raised wing rails live outside the clipped team face, with their own reveal. */
+.bug-top-rail-reveal{position:absolute;left:0;right:0;top:-8px;height:8px;z-index:8;pointer-events:none}
+.bug-top-rail-reveal img{display:block;width:100%;height:100%}
+.bug-enter .scorebug{clip-path:polygon(4% -8px,96% -8px,100% 20%,97.5% 74%,92% 97%,63% 97%,60% 88%,40% 88%,37% 97%,8% 97%,2.5% 74%,0 20%)}
+.bug-wrap.bug-enter:not([data-motion="fade"]) .bug-top-rail-reveal{animation:top-rails-reveal92 1.667s linear both}
+@keyframes top-rails-reveal92{0%,62%{clip-path:inset(0 100% 0 0)}94%,100%{clip-path:inset(0)}}
+@media(prefers-reduced-motion:reduce){.bug-wrap.bug-enter:not([data-motion="fade"]) .bug-top-rail-reveal{animation:none}}
+/* Lift surface shading without changing team color settings, logos, or timeout pips. */
+.scorebug .team-wing{background:var(--package-lines),linear-gradient(110deg,color-mix(in srgb,var(--team) 88%,rgb(3,16,24)),color-mix(in srgb,var(--team) 48%,rgb(7,20,28)))}
+.scorebug .team-wing.home{background:var(--package-lines),linear-gradient(250deg,color-mix(in srgb,var(--team) 88%,rgb(3,16,24)),color-mix(in srgb,var(--team) 48%,rgb(7,20,28)))}
+.scorebug .team-wing::after{filter:brightness(1.45)}
+/* Small inset aligns the raised rails with the wing shoulders. */
+.bug-top-rail-reveal{left:4px;right:4px;top:-6px}
+/* Reference face design: contour texture and team-tinted, angled score shading. */
+.scorebug .team-wing{background-image:linear-gradient(110deg,color-mix(in srgb,var(--team) 88%,#031018),color-mix(in srgb,var(--team) 48%,#07141c))}
+.scorebug .team-wing.home{background-image:linear-gradient(250deg,color-mix(in srgb,var(--team) 88%,#031018),color-mix(in srgb,var(--team) 48%,#07141c))}
+.scorebug .team-wing::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:url('./assets/scorebug-contours.svg') center/100% 100% no-repeat;opacity:.16}
+.scorebug .team-wing.home::before{transform:scaleX(-1)}
+.scorebug .score-center{background:linear-gradient(100deg,color-mix(in srgb,var(--away-color) 38%,#030a0e),#050c0f 49%,color-mix(in srgb,var(--home-color) 38%,#030a0e))}
+.scorebug .score-center::before{content:'';position:absolute;left:50%;top:0;width:2px;height:111px;background:#02070980;transform:skewX(-8deg);pointer-events:none}
+.scorebug .possession-cap{clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%);background:linear-gradient(180deg,#e1ebef42,#8ea2ae15 52%,transparent)}
+.scorebug .score-row b{background:linear-gradient(180deg,#fff 12%,#f4f7f8 55%,#d4dde1 100%);background-clip:text;-webkit-background-clip:text;color:transparent;text-shadow:1px 2px 1px #0005}
+.scorebug .score-row b{text-shadow:none;filter:drop-shadow(1px 2px 1px #0009)}
+
+/* Mirror the inward logo crop toward each team's score panel. */
+.scorebug .bug-logo-crop{position:absolute;inset:0;z-index:1;overflow:hidden;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%)}
+.scorebug .home .bug-logo-crop{clip-path:polygon(14px 0,100% 0,100% 100%,0 100%)}
+.scorebug .team-wing .team-logo{left:0;right:auto}
+.scorebug .team-wing.home .team-logo{left:auto;right:0}
+
+/* Fine alignment from the enlarged rail screenshot. */
+.bug-top-rail-reveal{left:6px;right:6px;top:-5px}
+
+/* One outer frame cut: nested copies of the bevel caused corner notches. */
+.scorebug .bug-body{clip-path:none}
+.scorebug .bug-logo-crop,.scorebug .home .bug-logo-crop{clip-path:none;overflow:visible}
+.scorebug .team-wing .team-logo{left:-12px;right:auto}
+.scorebug .team-wing.home .team-logo{left:auto;right:-12px}
+.bug-top-rail-reveal{left:4px;right:4px;top:-6px}
+
+/* Align the rail feet to the single outer frame and the panel top at y=3. */
+.bug-top-rail-reveal{left:0;right:0;top:-5px}
+/* Controlled opening: horizontal rail first, then one smooth vertical unfold. */
+@keyframes helmet-unfold{
+ 0%{transform:scale(.12,.025);opacity:1;clip-path:inset(0);animation-timing-function:cubic-bezier(.2,.65,.3,1)}
+ 10%{transform:scale(1,.025);animation-timing-function:cubic-bezier(.3,0,.25,1)}
+ 36%,62%{transform:scale(1);clip-path:inset(0);animation-timing-function:linear}
+ 94%,100%{transform:scale(1);clip-path:inset(0 0 0 100%);opacity:1}
+}
+/* Compact record bases keep the record readable over oversized team artwork. */
+.scorebug .record{isolation:isolate;padding:2px 7px 3px;top:5px;line-height:1;min-width:58px;text-align:center}
+.scorebug .record::before{content:'';position:absolute;inset:0 -4px;z-index:-1;background:linear-gradient(110deg,color-mix(in srgb,var(--team) 45%,#060c12),#060c12ed);clip-path:polygon(7px 0,100% 0,calc(100% - 7px) 100%,0 100%);border-top:1px solid #c2d1da66;box-shadow:inset 0 -1px #020609}
+.scorebug .home .record::before{background:linear-gradient(250deg,color-mix(in srgb,var(--team) 45%,#060c12),#060c12ed);clip-path:polygon(0 0,calc(100% - 7px) 0,100% 100%,7px 100%)}
+
+/* Record tabs sit flush under the upper rails; timeout beds are opaque team paint. */
+.scorebug .record{top:0;padding:3px 4px 2px;min-width:48px}
+.scorebug .record::before{inset:0 -3px;background:linear-gradient(110deg,color-mix(in srgb,var(--team) 45%,#060c12),#060c12)}
+.scorebug .home .record::before{background:linear-gradient(250deg,color-mix(in srgb,var(--team) 45%,#060c12),#060c12)}
+.scorebug .team-wing::after{background:var(--team);filter:none;opacity:1;border-top:1px solid color-mix(in srgb,var(--team) 65%,#fff)}
+
+/* Wider reference record plates extend toward the outer shoulder. */
+.scorebug .record{top:0;left:25px;min-width:82px;padding:4px 12px 7px}
+.scorebug .home .record{left:auto;right:25px}
+.scorebug .record::before{inset:0 -5px;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%)}
+.scorebug .home .record::before{clip-path:polygon(0 0,calc(100% - 12px) 0,100% 100%,12px 100%)}
+
+/* Broadcast record bed joins the outside shoulder rather than floating as a badge. */
+.scorebug .record{top:0;left:38px;min-width:0;padding:4px 0 5px;text-align:left}
+.scorebug .home .record{left:auto;right:38px;text-align:right}
+.scorebug .record::before{inset:auto;left:-41px;top:-1px;width:132px;height:47px;border:0;box-shadow:none;background:linear-gradient(180deg,#030a10f5,color-mix(in srgb,var(--team) 32%,#030a10) 100%);clip-path:polygon(0 0,100% 0,calc(100% - 15px) 100%,0 100%)}
+.scorebug .home .record::before{left:auto;right:-41px;background:linear-gradient(180deg,#030a10f5,color-mix(in srgb,var(--team) 32%,#030a10) 100%);clip-path:polygon(0 0,100% 0,100% 100%,15px 100%)}
+
+/* Record corners belong to the face reveal, not a second data entrance. */
+.bug-wrap.bug-enter:not([data-motion="fade"]) .record{animation:none;opacity:1;transform:none}

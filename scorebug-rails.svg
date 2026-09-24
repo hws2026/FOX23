@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 200" preserveAspectRatio="none">
+<defs>
+ <linearGradient id="top" x2="0" y2="1"><stop stop-color="#f5f8fa"/><stop offset=".3" stop-color="#dce4e9"/><stop offset=".55" stop-color="#7c929f"/><stop offset="1" stop-color="#263946"/></linearGradient>
+ <linearGradient id="lower" x2="0" y2="1"><stop stop-color="#edf3f6"/><stop offset=".24" stop-color="#c5d1d9"/><stop offset=".55" stop-color="#8095a2"/><stop offset=".8" stop-color="#aabac4"/><stop offset="1" stop-color="#304654"/></linearGradient>
+ <linearGradient id="side"><stop stop-color="#5d7281"/><stop offset=".32" stop-color="#f1f6f8"/><stop offset=".6" stop-color="#d9e3e9"/><stop offset="1" stop-color="#667f8f"/></linearGradient>
+</defs>
+<!-- Separate facets follow the shell, leaving the center notch open. -->
+<!-- Upper shoulder slants omitted beside the record tabs. -->
+
+
+<path fill="url(#side)" d="M0 40L23 148L74 194L77 183L32 143L5 40Z"/>
+<path fill="url(#side)" d="M920 40L897 148L846 194L843 183L888 143L915 40Z"/>
+<path fill="url(#lower)" d="M74 189H348L340 194H74Z M572 189H846V194H580Z"/>
+<path fill="#263e4e" d="M79 192H340L365 176H552L580 192H841V196H577L550 180H368L343 196H79Z"/>
+<path fill="none" stroke="#f5f9fb" stroke-opacity=".85" stroke-width="1.2" d="M25 147L75 189H347 M573 189H845L895 147"/>
+<path fill="none" stroke="#162b39" stroke-width="1.5" d="M33 142L78 184 M842 184L887 142"/>
+</svg>

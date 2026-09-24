@@ -1,0 +1,1073 @@
+{
+  "take": {
+    "label": "TAKE",
+    "action": "take",
+    "payload": {}
+  },
+  "out": {
+    "label": "OUT",
+    "action": "hide",
+    "payload": {}
+  },
+  "bug-in": {
+    "label": "BUG IN",
+    "action": "bug",
+    "payload": {
+      "visible": true
+    }
+  },
+  "bug-out": {
+    "label": "BUG OUT",
+    "action": "bug",
+    "payload": {
+      "visible": false
+    }
+  },
+  "clock-start": {
+    "label": "CLOCK START",
+    "action": "clock",
+    "payload": {
+      "running": true
+    }
+  },
+  "clock-pause": {
+    "label": "CLOCK PAUSE",
+    "action": "clock",
+    "payload": {
+      "running": false
+    }
+  },
+  "play-40": {
+    "label": "PLAY 40",
+    "action": "play_clock_preset",
+    "payload": {
+      "seconds": 40
+    }
+  },
+  "play-25": {
+    "label": "PLAY 25",
+    "action": "play_clock_preset",
+    "payload": {
+      "seconds": 25
+    }
+  },
+  "play-pause": {
+    "label": "PLAY PAUSE",
+    "action": "clock",
+    "payload": {
+      "key": "playClock",
+      "running": false
+    }
+  },
+  "first-10": {
+    "label": "FIRST 10",
+    "action": "game",
+    "payload": {
+      "down": "1ST",
+      "distance": "10",
+      "showDownDistance": true,
+      "bottomStatus": "LIVE"
+    }
+  },
+  "flag-on": {
+    "label": "FLAG ON",
+    "action": "game",
+    "payload": {
+      "flag": true
+    }
+  },
+  "flag-off": {
+    "label": "FLAG OFF",
+    "action": "game",
+    "payload": {
+      "flag": false
+    }
+  },
+  "side-out": {
+    "label": "SIDE OUT",
+    "action": "qb_stats_visibility",
+    "payload": {
+      "visible": false
+    }
+  },
+  "away-pat": {
+    "label": "AWAY PAT",
+    "action": "score",
+    "payload": {
+      "team": "away",
+      "delta": 1
+    }
+  },
+  "away-safety": {
+    "label": "AWAY SAFETY",
+    "action": "score",
+    "payload": {
+      "team": "away",
+      "delta": 2
+    }
+  },
+  "away-fg": {
+    "label": "AWAY FG",
+    "action": "score",
+    "payload": {
+      "team": "away",
+      "delta": 3
+    }
+  },
+  "away-td": {
+    "label": "AWAY TD",
+    "action": "score",
+    "payload": {
+      "team": "away",
+      "delta": 6
+    }
+  },
+  "away-minus": {
+    "label": "AWAY MINUS",
+    "action": "score",
+    "payload": {
+      "team": "away",
+      "delta": -1
+    }
+  },
+  "away-timeout": {
+    "label": "AWAY TIMEOUT",
+    "action": "timeout",
+    "payload": {
+      "team": "away",
+      "delta": -1
+    }
+  },
+  "away-possession": {
+    "label": "AWAY POSSESSION",
+    "action": "game",
+    "payload": {
+      "possession": "away"
+    }
+  },
+  "home-pat": {
+    "label": "HOME PAT",
+    "action": "score",
+    "payload": {
+      "team": "home",
+      "delta": 1
+    }
+  },
+  "home-safety": {
+    "label": "HOME SAFETY",
+    "action": "score",
+    "payload": {
+      "team": "home",
+      "delta": 2
+    }
+  },
+  "home-fg": {
+    "label": "HOME FG",
+    "action": "score",
+    "payload": {
+      "team": "home",
+      "delta": 3
+    }
+  },
+  "home-td": {
+    "label": "HOME TD",
+    "action": "score",
+    "payload": {
+      "team": "home",
+      "delta": 6
+    }
+  },
+  "home-minus": {
+    "label": "HOME MINUS",
+    "action": "score",
+    "payload": {
+      "team": "home",
+      "delta": -1
+    }
+  },
+  "home-timeout": {
+    "label": "HOME TIMEOUT",
+    "action": "timeout",
+    "payload": {
+      "team": "home",
+      "delta": -1
+    }
+  },
+  "home-possession": {
+    "label": "HOME POSSESSION",
+    "action": "game",
+    "payload": {
+      "possession": "home"
+    }
+  },
+  "toggle-showInfo": {
+    "label": "Bottom data toggle",
+    "mode": "toggle",
+    "section": "game",
+    "field": "showInfo",
+    "action": "game",
+    "payloadKey": "showInfo"
+  },
+  "toggle-showDownDistance": {
+    "label": "Down & distance toggle",
+    "mode": "toggle",
+    "section": "game",
+    "field": "showDownDistance",
+    "action": "game",
+    "payloadKey": "showDownDistance"
+  },
+  "toggle-showPlayClock": {
+    "label": "Play clock visibility toggle",
+    "mode": "toggle",
+    "section": "game",
+    "field": "showPlayClock",
+    "action": "game",
+    "payloadKey": "showPlayClock"
+  },
+  "toggle-showBallPosition": {
+    "label": "Ball position toggle",
+    "mode": "toggle",
+    "section": "game",
+    "field": "showBallPosition",
+    "action": "game",
+    "payloadKey": "showBallPosition"
+  },
+  "toggle-flag": {
+    "label": "Flag toggle",
+    "mode": "toggle",
+    "section": "game",
+    "field": "flag",
+    "action": "game",
+    "payloadKey": "flag"
+  },
+  "toggle-bug": {
+    "label": "Scorebug toggle",
+    "mode": "toggle",
+    "section": "program",
+    "field": "bug",
+    "action": "bug",
+    "payloadKey": "visible"
+  },
+  "toggle-watermark": {
+    "label": "Network bug toggle",
+    "mode": "toggle",
+    "section": "program",
+    "field": "watermark",
+    "action": "watermark",
+    "payloadKey": "visible"
+  },
+  "clock-toggle": {
+    "label": "Game clock start / pause",
+    "mode": "toggle",
+    "section": "clock",
+    "field": "running",
+    "action": "clock",
+    "payloadKey": "running"
+  },
+  "play-toggle": {
+    "label": "Play clock start / pause",
+    "mode": "toggle",
+    "section": "playClock",
+    "field": "running",
+    "action": "clock",
+    "payloadKey": "running",
+    "payload": {
+      "key": "playClock"
+    }
+  },
+  "quarter-1st": {
+    "label": "Quarter 1ST",
+    "action": "game",
+    "payload": {
+      "quarter": "1ST"
+    }
+  },
+  "quarter-2nd": {
+    "label": "Quarter 2ND",
+    "action": "game",
+    "payload": {
+      "quarter": "2ND"
+    }
+  },
+  "quarter-3rd": {
+    "label": "Quarter 3RD",
+    "action": "game",
+    "payload": {
+      "quarter": "3RD"
+    }
+  },
+  "quarter-4th": {
+    "label": "Quarter 4TH",
+    "action": "game",
+    "payload": {
+      "quarter": "4TH"
+    }
+  },
+  "quarter-ot": {
+    "label": "Quarter OT",
+    "action": "game",
+    "payload": {
+      "quarter": "OT"
+    }
+  },
+  "down-1st": {
+    "label": "1ST",
+    "action": "game",
+    "payload": {
+      "down": "1ST",
+      "showDownDistance": true
+    }
+  },
+  "down-2nd": {
+    "label": "2ND",
+    "action": "game",
+    "payload": {
+      "down": "2ND",
+      "showDownDistance": true
+    }
+  },
+  "down-3rd": {
+    "label": "3RD",
+    "action": "game",
+    "payload": {
+      "down": "3RD",
+      "showDownDistance": true
+    }
+  },
+  "down-4th": {
+    "label": "4TH",
+    "action": "game",
+    "payload": {
+      "down": "4TH",
+      "showDownDistance": true
+    }
+  },
+  "down-2nd-down": {
+    "label": "2ND DOWN",
+    "action": "game",
+    "payload": {
+      "down": "2ND DOWN",
+      "showDownDistance": true
+    }
+  },
+  "down-3rd-down": {
+    "label": "3RD DOWN",
+    "action": "game",
+    "payload": {
+      "down": "3RD DOWN",
+      "showDownDistance": true
+    }
+  },
+  "down-4th-down": {
+    "label": "4TH DOWN",
+    "action": "game",
+    "payload": {
+      "down": "4TH DOWN",
+      "showDownDistance": true
+    }
+  },
+  "status-live": {
+    "label": "LIVE",
+    "action": "game",
+    "payload": {
+      "bottomStatus": "LIVE"
+    }
+  },
+  "status-halftime": {
+    "label": "HALFTIME",
+    "action": "game",
+    "payload": {
+      "bottomStatus": "HALFTIME"
+    }
+  },
+  "status-final": {
+    "label": "FINAL",
+    "action": "game",
+    "payload": {
+      "bottomStatus": "FINAL"
+    }
+  },
+  "status-end-of-regulation": {
+    "label": "END OF REGULATION",
+    "action": "game",
+    "payload": {
+      "bottomStatus": "END OF REGULATION"
+    }
+  },
+  "away-timeouts-0": {
+    "label": "AWAY timeouts = 0",
+    "action": "timeout",
+    "payload": {
+      "team": "away",
+      "value": 0
+    }
+  },
+  "away-timeouts-1": {
+    "label": "AWAY timeouts = 1",
+    "action": "timeout",
+    "payload": {
+      "team": "away",
+      "value": 1
+    }
+  },
+  "away-timeouts-2": {
+    "label": "AWAY timeouts = 2",
+    "action": "timeout",
+    "payload": {
+      "team": "away",
+      "value": 2
+    }
+  },
+  "away-timeouts-3": {
+    "label": "AWAY timeouts = 3",
+    "action": "timeout",
+    "payload": {
+      "team": "away",
+      "value": 3
+    }
+  },
+  "away-reset-score": {
+    "label": "AWAY reset score",
+    "action": "score",
+    "payload": {
+      "team": "away",
+      "value": 0
+    }
+  },
+  "home-timeouts-0": {
+    "label": "HOME timeouts = 0",
+    "action": "timeout",
+    "payload": {
+      "team": "home",
+      "value": 0
+    }
+  },
+  "home-timeouts-1": {
+    "label": "HOME timeouts = 1",
+    "action": "timeout",
+    "payload": {
+      "team": "home",
+      "value": 1
+    }
+  },
+  "home-timeouts-2": {
+    "label": "HOME timeouts = 2",
+    "action": "timeout",
+    "payload": {
+      "team": "home",
+      "value": 2
+    }
+  },
+  "home-timeouts-3": {
+    "label": "HOME timeouts = 3",
+    "action": "timeout",
+    "payload": {
+      "team": "home",
+      "value": 3
+    }
+  },
+  "home-reset-score": {
+    "label": "HOME reset score",
+    "action": "score",
+    "payload": {
+      "team": "home",
+      "value": 0
+    }
+  },
+  "possession-none": {
+    "label": "Clear possession",
+    "action": "game",
+    "payload": {
+      "possession": "none"
+    }
+  },
+  "clear": {
+    "label": "Clear on-air graphics",
+    "action": "clear",
+    "payload": {}
+  },
+  "lineup-play": {
+    "label": "Lineup play",
+    "mode": "lineup",
+    "step": "play"
+  },
+  "lineup-pause": {
+    "label": "Lineup pause",
+    "mode": "lineup",
+    "step": "pause"
+  },
+  "lineup-next": {
+    "label": "Lineup next",
+    "mode": "lineup",
+    "step": "next"
+  },
+  "lineup-reveal": {
+    "label": "Lineup reveal",
+    "mode": "lineup",
+    "step": "reveal"
+  },
+  "apply-live": {
+    "label": "Apply selected edits on air",
+    "mode": "apply"
+  },
+  "graphic-announcers-away": {
+    "label": "ANNOUNCERS \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "announcers",
+      "team": "away"
+    }
+  },
+  "graphic-announcers-home": {
+    "label": "ANNOUNCERS \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "announcers",
+      "team": "home"
+    }
+  },
+  "graphic-break-away": {
+    "label": "BREAK \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "break",
+      "team": "away"
+    }
+  },
+  "graphic-break-home": {
+    "label": "BREAK \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "break",
+      "team": "home"
+    }
+  },
+  "graphic-coach-away": {
+    "label": "COACH \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "coach",
+      "team": "away"
+    }
+  },
+  "graphic-coach-home": {
+    "label": "COACH \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "coach",
+      "team": "home"
+    }
+  },
+  "graphic-defense-away": {
+    "label": "DEFENSE \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "defense",
+      "team": "away"
+    }
+  },
+  "graphic-defense-home": {
+    "label": "DEFENSE \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "defense",
+      "team": "home"
+    }
+  },
+  "graphic-event-away": {
+    "label": "EVENT \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "away"
+    }
+  },
+  "graphic-event-home": {
+    "label": "EVENT \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "home"
+    }
+  },
+  "graphic-final-away": {
+    "label": "FINAL \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "final",
+      "team": "away"
+    }
+  },
+  "graphic-final-home": {
+    "label": "FINAL \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "final",
+      "team": "home"
+    }
+  },
+  "graphic-lowerthird-away": {
+    "label": "LOWERTHIRD \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "lowerthird",
+      "team": "away"
+    }
+  },
+  "graphic-lowerthird-home": {
+    "label": "LOWERTHIRD \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "lowerthird",
+      "team": "home"
+    }
+  },
+  "graphic-matchup-away": {
+    "label": "MATCHUP \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "matchup",
+      "team": "away"
+    }
+  },
+  "graphic-matchup-home": {
+    "label": "MATCHUP \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "matchup",
+      "team": "home"
+    }
+  },
+  "graphic-offense-away": {
+    "label": "OFFENSE \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "offense",
+      "team": "away"
+    }
+  },
+  "graphic-offense-home": {
+    "label": "OFFENSE \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "offense",
+      "team": "home"
+    }
+  },
+  "graphic-period-away": {
+    "label": "PERIOD \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "period",
+      "team": "away"
+    }
+  },
+  "graphic-period-home": {
+    "label": "PERIOD \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "period",
+      "team": "home"
+    }
+  },
+  "graphic-player-away": {
+    "label": "PLAYER \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "player",
+      "team": "away"
+    }
+  },
+  "graphic-player-home": {
+    "label": "PLAYER \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "player",
+      "team": "home"
+    }
+  },
+  "graphic-qbstats-away": {
+    "label": "QBSTATS \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "qbstats",
+      "team": "away"
+    }
+  },
+  "graphic-qbstats-home": {
+    "label": "QBSTATS \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "qbstats",
+      "team": "home"
+    }
+  },
+  "graphic-quarterback-away": {
+    "label": "QUARTERBACK \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "quarterback",
+      "team": "away"
+    }
+  },
+  "graphic-quarterback-home": {
+    "label": "QUARTERBACK \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "quarterback",
+      "team": "home"
+    }
+  },
+  "graphic-referee-away": {
+    "label": "REFEREE \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "referee",
+      "team": "away"
+    }
+  },
+  "graphic-referee-home": {
+    "label": "REFEREE \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "referee",
+      "team": "home"
+    }
+  },
+  "graphic-reporter-away": {
+    "label": "REPORTER \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "reporter",
+      "team": "away"
+    }
+  },
+  "graphic-reporter-home": {
+    "label": "REPORTER \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "reporter",
+      "team": "home"
+    }
+  },
+  "graphic-scoringdrive-away": {
+    "label": "SCORINGDRIVE \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "scoringdrive",
+      "team": "away"
+    }
+  },
+  "graphic-scoringdrive-home": {
+    "label": "SCORINGDRIVE \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "scoringdrive",
+      "team": "home"
+    }
+  },
+  "graphic-situation-away": {
+    "label": "SITUATION \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "situation",
+      "team": "away"
+    }
+  },
+  "graphic-situation-home": {
+    "label": "SITUATION \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "situation",
+      "team": "home"
+    }
+  },
+  "graphic-sponsor-away": {
+    "label": "SPONSOR \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "sponsor",
+      "team": "away"
+    }
+  },
+  "graphic-sponsor-home": {
+    "label": "SPONSOR \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "sponsor",
+      "team": "home"
+    }
+  },
+  "graphic-standings-away": {
+    "label": "STANDINGS \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "standings",
+      "team": "away"
+    }
+  },
+  "graphic-standings-home": {
+    "label": "STANDINGS \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "standings",
+      "team": "home"
+    }
+  },
+  "graphic-stats-away": {
+    "label": "STATS \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "stats",
+      "team": "away"
+    }
+  },
+  "graphic-stats-home": {
+    "label": "STATS \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "stats",
+      "team": "home"
+    }
+  },
+  "graphic-teamstats-away": {
+    "label": "TEAMSTATS \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "teamstats",
+      "team": "away"
+    }
+  },
+  "graphic-teamstats-home": {
+    "label": "TEAMSTATS \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "teamstats",
+      "team": "home"
+    }
+  },
+  "graphic-tiers-away": {
+    "label": "TIERS \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "tiers",
+      "team": "away"
+    }
+  },
+  "graphic-tiers-home": {
+    "label": "TIERS \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "tiers",
+      "team": "home"
+    }
+  },
+  "graphic-transition-away": {
+    "label": "TRANSITION \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "transition",
+      "team": "away"
+    }
+  },
+  "graphic-transition-home": {
+    "label": "TRANSITION \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "transition",
+      "team": "home"
+    }
+  },
+  "graphic-upcoming-away": {
+    "label": "UPCOMING \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "upcoming",
+      "team": "away"
+    }
+  },
+  "graphic-upcoming-home": {
+    "label": "UPCOMING \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "upcoming",
+      "team": "home"
+    }
+  },
+  "graphic-weather-away": {
+    "label": "WEATHER \u00b7 AWAY",
+    "mode": "graphic",
+    "cue": {
+      "type": "weather",
+      "team": "away"
+    }
+  },
+  "graphic-weather-home": {
+    "label": "WEATHER \u00b7 HOME",
+    "mode": "graphic",
+    "cue": {
+      "type": "weather",
+      "team": "home"
+    }
+  },
+  "transition-auto": {
+    "label": "IN auto",
+    "action": "preview",
+    "payload": {
+      "transition": "auto"
+    }
+  },
+  "outTransition-auto": {
+    "label": "OUT auto",
+    "action": "preview",
+    "payload": {
+      "outTransition": "auto"
+    }
+  },
+  "transition-fade": {
+    "label": "IN fade",
+    "action": "preview",
+    "payload": {
+      "transition": "fade"
+    }
+  },
+  "outTransition-fade": {
+    "label": "OUT fade",
+    "action": "preview",
+    "payload": {
+      "outTransition": "fade"
+    }
+  },
+  "set-away-score": {
+    "label": "Set away score",
+    "action": "score",
+    "payload": {
+      "team": "away"
+    },
+    "parameter": {
+      "field": "value",
+      "type": "number",
+      "default": 0
+    }
+  },
+  "set-home-score": {
+    "label": "Set home score",
+    "action": "score",
+    "payload": {
+      "team": "home"
+    },
+    "parameter": {
+      "field": "value",
+      "type": "number",
+      "default": 0
+    }
+  },
+  "set-game-clock": {
+    "label": "Set game clock (seconds)",
+    "action": "clock",
+    "payload": {
+      "running": false
+    },
+    "parameter": {
+      "field": "seconds",
+      "type": "number",
+      "default": 900
+    }
+  },
+  "set-play-clock": {
+    "label": "Set & start play clock (seconds)",
+    "action": "play_clock_preset",
+    "payload": {},
+    "parameter": {
+      "field": "seconds",
+      "type": "number",
+      "default": 40
+    }
+  },
+  "set-distance": {
+    "label": "Set distance",
+    "action": "game",
+    "payload": {},
+    "parameter": {
+      "field": "distance",
+      "type": "text",
+      "default": "10"
+    }
+  },
+  "set-ball-on": {
+    "label": "Set ball on",
+    "action": "game",
+    "payload": {},
+    "parameter": {
+      "field": "ballOn",
+      "type": "text",
+      "default": "25"
+    }
+  },
+  "set-overtime": {
+    "label": "Set overtime number",
+    "action": "game",
+    "payload": {},
+    "parameter": {
+      "field": "overtimePeriod",
+      "type": "number",
+      "default": 2
+    }
+  },
+  "set-weather-temp": {
+    "label": "Weather temperature",
+    "action": "preview",
+    "payload": {
+      "type": "weather"
+    },
+    "parameter": {
+      "field": "weatherTemp",
+      "type": "text",
+      "default": "67\u00b0"
+    }
+  },
+  "set-weather-wind": {
+    "label": "Weather wind",
+    "action": "preview",
+    "payload": {
+      "type": "weather"
+    },
+    "parameter": {
+      "field": "weatherWind",
+      "type": "text",
+      "default": "NW 6 MPH"
+    }
+  },
+  "set-weather-forecast": {
+    "label": "Weather forecast",
+    "action": "preview",
+    "payload": {
+      "type": "weather"
+    },
+    "parameter": {
+      "field": "weatherForecast",
+      "type": "text",
+      "default": "CLEAR"
+    }
+  },
+  "set-title": {
+    "label": "Selected graphic title",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "title",
+      "type": "text",
+      "default": ""
+    }
+  },
+  "set-subtitle": {
+    "label": "Selected graphic subtitle",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "subtitle",
+      "type": "text",
+      "default": ""
+    }
+  }
+}

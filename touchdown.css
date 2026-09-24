@@ -1,0 +1,49 @@
+/* Touchdown sequence: 757.95–762.40 in the supplied full-game reference.
+   Coordinates are on the package's 1920 × 1080 stage. */
+.graphics-layer:has(>.td-sequence){z-index:3;pointer-events:none}
+.td-sequence{position:absolute;inset:auto 0 0;height:520px;isolation:isolate;overflow:hidden}
+.graphics-layer.animate-in>.td-sequence,.graphics-layer.leaving:has(>.td-sequence){animation:none}
+.td70-rails{position:absolute;inset:auto 0 0;height:var(--td-cover-height,268px);background:linear-gradient(180deg,#d4e9e7 0 2px,var(--team) 3px 14px,#021416 16px 34px,var(--team) 36px 43px,#24484b 44px 47px,#9ba7a5 49px 51px,#092023 55px 64px,var(--team) 67px 77px,#101314 81px 98px,#515052 102px 106px,#171819 112px 131px,#7c7a7e 139px 142px,#222226 148px 166px,#5a595c 176px 181px,#202124 190px);z-index:0}
+.td70-rails i{position:absolute;left:0;right:0;height:3px;top:24px;background:linear-gradient(90deg,transparent,#c4eeea99,transparent 70%)}.td70-rails i:nth-child(2){top:66px;opacity:.5}.td70-rails i:nth-child(3){top:154px;background:linear-gradient(90deg,#adb1b144,#d9dad899,transparent)}
+.td70-title{position:absolute;left:50%;bottom:7px;transform:translateX(-50%);margin:0;display:flex;justify-content:center;font:italic 700 260px/.88 var(--display);letter-spacing:-4px;white-space:nowrap;z-index:2;perspective:1000px}
+.td70-title span{display:block;background:linear-gradient(#fafbfa 0 48%,#b8b8b9 67%,#858388 94%,#c3c1c4);background-clip:text;color:transparent;-webkit-text-stroke:1px #ebebed66;transform-origin:50% 75%}
+.td70-portrait{position:absolute;left:calc(50% - 825px);bottom:105px;width:820px;height:410px;z-index:1;transform-origin:50% 100%}
+.td70-portrait :is(.portrait,.team-logo){width:100%;height:100%;object-fit:contain;object-position:center bottom}
+.td-sequence[data-variant=team] .td70-portrait{left:calc(50% - 650px);width:410px;height:350px;bottom:140px}
+.td70-portrait .team-monogram{display:grid;place-items:center;height:100%;font-size:220px}
+.td70-name{position:absolute;bottom:69px;left:calc(50% - 190px);transform:translateX(-50%) skewX(-7deg);display:flex;align-items:center;max-width:950px;z-index:3;font:italic 700 51px/1 'DIN Condensed','Arial Narrow',sans-serif;white-space:nowrap;text-transform:uppercase}
+.td70-name strong{display:block;min-width:0;overflow:hidden;background:linear-gradient(110deg,#1b1d20,#151618);padding:12px 24px 10px;font-weight:700}
+.td70-name b{position:relative;align-self:flex-start;margin-top:-20px;margin-right:-3px;background:#ffe019;color:#060609;padding:8px 8px 6px;font:italic 700 53px/1 var(--display);z-index:1}
+.td70-burst{position:absolute;left:calc(50% - 570px);bottom:140px;width:1px;height:1px;z-index:5;perspective:600px}
+.td70-burst i{position:absolute;left:0;bottom:0;width:var(--blade);height:calc(var(--blade)*.75);background:linear-gradient(125deg,#03080a 0 55%,var(--team) 60% 84%,#b5d1ce);clip-path:polygon(0 0,100% 40%,51% 46%,68% 100%,22% 62%);opacity:0;transform-origin:10% 70%}
+.td70-burst i:nth-child(4n){background:linear-gradient(100deg,#e3e5e4,#8b8f92)}.td70-burst i:nth-child(7n){background:#eace26;width:90px;height:13px}
+.td70-electric{position:absolute;left:0;bottom:95px;width:920px;height:480px;z-index:6;overflow:visible;opacity:0;pointer-events:none}
+.td70-electric path{stroke:color-mix(in srgb,var(--team),#6affff 78%);stroke-width:5;stroke-linejoin:bevel;fill:none;filter:drop-shadow(0 0 3px #caffff);stroke-dasharray:150 900;stroke-dashoffset:0}
+/* A traveling arc, then fractured letters, followed by the player silhouette. */
+.animate-in[data-motion=auto]>.td-sequence .td70-electric{animation:td70-electric-in .54s linear both}
+.animate-in[data-motion=auto]>.td-sequence .td70-electric path{animation:td70-arc-travel .54s linear both}
+.animate-in[data-motion=auto]>.td-sequence .td70-burst i{animation:td70-fracture-in .67s calc(.16s + var(--i)*.004s) cubic-bezier(.12,.55,.3,1) both}
+.animate-in[data-motion=auto]>.td-sequence .td70-rails{animation:td70-rail-in .32s .4s ease-out both}
+.animate-in[data-motion=auto]>.td-sequence .td70-title span{animation:td70-letter-in .48s calc(.34s + var(--i)*.027s) cubic-bezier(.16,.7,.3,1) both}
+.animate-in[data-motion=auto]>.td-sequence .td70-portrait{animation:td70-person-in .38s .73s ease-out both}
+.animate-in[data-motion=auto]>.td-sequence .td70-name{animation:td70-name-in .33s .74s ease-out both}
+@keyframes td70-electric-in{0%{opacity:0}8%,70%{opacity:1}100%{opacity:0}}
+@keyframes td70-arc-travel{from{stroke-dashoffset:190;stroke-width:3}40%{stroke-width:8}to{stroke-dashoffset:-840;stroke-width:2}}
+@keyframes td70-fracture-in{0%{opacity:0;transform:translate(-300px,-130px) rotate(var(--turn)) scale(.08)}18%{opacity:1}60%{opacity:1;transform:translate(var(--dx),var(--dy)) rotate(calc(var(--turn) + 90deg)) scale(1)}100%{opacity:0;transform:translate(calc(var(--dx)*1.35),calc(var(--dy)*1.25)) rotate(calc(var(--turn) + 180deg)) scale(.2)}}
+@keyframes td70-rail-in{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+@keyframes td70-letter-in{0%{opacity:0;transform:translateX(calc(140px - var(--i)*26px)) scaleY(1.5) rotateY(78deg);clip-path:polygon(5% 0,95% 0,45% 31%,100% 44%,31% 62%,80% 100%,0 100%,32% 55%,0 33%)}26%{opacity:1}70%{clip-path:polygon(0 0,100% 0,100% 30%,100% 45%,100% 65%,100% 100%,0 100%,0 55%,0 30%)}100%{opacity:1;transform:none;clip-path:polygon(0 0,100% 0,100% 30%,100% 45%,100% 65%,100% 100%,0 100%,0 55%,0 30%)}}
+@keyframes td70-person-in{0%{opacity:0;clip-path:inset(100% 0 0);filter:brightness(5) drop-shadow(0 0 5px white)}20%{opacity:1}55%{filter:brightness(1.8) drop-shadow(0 0 2px white)}100%{opacity:1;clip-path:inset(0);filter:none}}
+@keyframes td70-name-in{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+/* Exit: a separate burst erases the content left-to-right; never reverse the intro. */
+.leaving[data-motion=auto]>.td-sequence .td70-electric{left:calc(50% - 630px);width:420px;bottom:80px;animation:td70-electric-in .3s linear both}
+.leaving[data-motion=auto]>.td-sequence .td70-electric path{animation:td70-arc-travel .3s linear both;stroke:#a1c3ff}
+.leaving[data-motion=auto]>.td-sequence .td70-burst i{animation:td70-fracture-out .5s calc(.12s + var(--i)*.003s) ease-out both}
+.leaving[data-motion=auto]>.td-sequence :is(.td70-portrait,.td70-name){animation:td70-erase .24s .2s linear both}
+.leaving[data-motion=auto]>.td-sequence .td70-title span{animation:td70-letter-out .22s calc(.22s + var(--i)*.012s) ease-in both}
+.leaving[data-motion=auto]>.td-sequence .td70-rails{animation:td70-erase .2s .3s linear both}
+@keyframes td70-fracture-out{0%{opacity:0;transform:scale(.05)}15%{opacity:1}60%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--turn)) scale(.2)}}
+@keyframes td70-erase{from{clip-path:inset(0)}to{clip-path:inset(0 0 0 100%)}}
+@keyframes td70-letter-out{from{opacity:1;transform:none;clip-path:inset(0)}to{opacity:0;transform:translateX(-55px) rotateY(-65deg);clip-path:inset(0 0 0 100%)}}
+.animate-in[data-motion=fade]>.td-sequence{animation:reference-fade .16s linear both!important}.graphics-layer[data-motion=fade]>.td-sequence *{animation:none!important}
+.leaving[data-motion=fade]:has(>.td-sequence){animation:reference-fade .16s linear reverse both!important}
+@media(prefers-reduced-motion:reduce){.td-sequence,.td-sequence *{animation:none!important}.td70-electric,.td70-burst{display:none}}
