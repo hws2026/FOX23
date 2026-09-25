@@ -47,3 +47,45 @@
 .animate-in[data-motion=fade]>.td-sequence{animation:reference-fade .16s linear both!important}.graphics-layer[data-motion=fade]>.td-sequence *{animation:none!important}
 .leaving[data-motion=fade]:has(>.td-sequence){animation:reference-fade .16s linear reverse both!important}
 @media(prefers-reduced-motion:reduce){.td-sequence,.td-sequence *{animation:none!important}.td70-electric,.td70-burst{display:none}}
+
+/* 141: safe italic bounds and stable reference placement for all TD variants. */
+.td-sequence{height:600px;overflow:visible;text-transform:uppercase}
+.td70-title{bottom:14px;font-size:240px;line-height:1.15;letter-spacing:-5px;width:max-content;max-width:1760px;padding:0 28px;overflow:visible}
+.td70-title span{flex:0 0 auto;overflow:visible;clip-path:none;padding:0 .035em;margin:0 -.035em;backface-visibility:hidden}
+.td70-portrait{left:calc(50% - 800px);bottom:130px;width:770px;height:425px;overflow:visible}
+.td70-portrait :is(.portrait,.team-logo){position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;object-position:center bottom;transform:none}
+.td-sequence .td70-portrait.td-logo-only{left:calc(50% - 630px);bottom:160px;width:440px;height:350px}
+.td70-name{bottom:75px;left:calc(50% - 170px);width:max-content;max-width:900px;color:#fff;isolation:isolate}
+.td70-name strong{color:#fff;max-width:800px;padding:10px 24px 9px;line-height:1.15;overflow:visible;text-shadow:0 1px 1px #000}
+.td70-name b{flex:0 0 auto;margin-top:-13px;line-height:1.08}
+.td70-rails{box-shadow:inset 0 1px #ffffff40;background:linear-gradient(180deg,#becdd0 0 2px,var(--team) 3px 13px,#061315 15px 27px,color-mix(in srgb,var(--team) 75%,#050909) 29px 42px,#4d6c72 44px 46px,#071013 49px 62px,var(--team) 64px 73px,#16191d 76px 102px,#637079 104px 107px,#1c2025 110px 140px,#42494e 142px 145px,#161a1f 148px 100%)}
+/* Leave no persistent masks on slanted glyphs after the fragments assemble. */
+@keyframes td70-letter-in{0%{opacity:0;transform:translateX(calc(125px - var(--i)*22px)) translateY(12px) rotateY(55deg);clip-path:none}25%{opacity:1}100%{opacity:1;transform:none;clip-path:none}}
+@keyframes td70-person-in{0%{opacity:0;clip-path:inset(100% -8% -8%);filter:brightness(2)}35%{opacity:1}100%{opacity:1;clip-path:inset(-8%);filter:none}}
+.animate-in[data-motion=auto]>.td-sequence .td70-rails{animation-duration:.34s;animation-delay:.4s}
+.animate-in[data-motion=auto]>.td-sequence .td70-title span{animation-duration:.5s;animation-delay:calc(.34s + var(--i)*.022s)}
+.animate-in[data-motion=auto]>.td-sequence .td70-name{animation-duration:.26s;animation-delay:.76s}
+.leaving[data-motion=auto]>.td-sequence .td70-title span{animation:td-letter-out141 .24s calc(.25s + var(--i)*.026s) ease-in both}
+@keyframes td-letter-out141{from{opacity:1;transform:none}to{opacity:0;transform:translateX(24px) rotateY(-24deg)}}
+.leaving[data-motion=auto]>.td-sequence .td70-rails{animation:td70-erase .33s .28s linear both}
+.leaving[data-motion=auto]>.td-sequence :is(.td70-portrait,.td70-name){animation:td70-erase .3s .2s linear both}
+.graphics-layer[data-motion=fade]>.td-sequence :is(.td70-electric,.td70-burst){display:none}
+@media(prefers-reduced-motion:reduce){.td-sequence,.td-sequence *{animation:none!important}}
+
+/* 142: gradient text paints only inside its own background box, even with
+   overflow visible. Reserve the full italic overhang without changing spacing.
+   The raised jersey tile also extends above the nameplate's layout box. */
+.td70-title span{padding:0 .22em;margin:0 -.22em}
+@keyframes td70-name-in{from{clip-path:inset(-32px 100% -12px -24px)}to{clip-path:inset(-32px -24px -12px -24px)}}
+.leaving[data-motion=auto]>.td-sequence .td70-name{animation:td-name-out142 .3s .2s linear both}
+@keyframes td-name-out142{from{clip-path:inset(-32px -24px -12px -24px)}to{clip-path:inset(-32px -24px -12px 100%)}}
+
+/* 143: fixed player identifier anchor, with position above the name strip. */
+.td-sequence[data-variant=player] .td70-name{left:520px;bottom:70px;transform:skewX(-7deg);max-width:990px;align-items:flex-end;gap:0}
+.td-sequence[data-variant=player] .td70-name b{align-self:flex-end;margin:0 -3px 28px 0;padding:8px 12px;font-size:60px}
+.td70-identity{position:relative;min-width:0;max-width:870px;background:#17191c}
+.td70-identity small{position:absolute;left:24px;bottom:100%;font:italic 700 28px/1.1 'DIN Condensed','Arial Narrow',sans-serif;color:#fff;background:#17191c;padding:5px 12px 3px}
+.td70-identity strong{font-size:60px;max-width:870px;min-width:360px;padding:12px 24px 10px}
+.td-sequence[data-variant=player] .td70-portrait.td-has-photo{left:130px;bottom:120px;width:820px;height:420px}
+@keyframes td70-name-in{from{clip-path:inset(-64px 100% -12px -24px)}to{clip-path:inset(-64px -24px -12px -24px)}}
+@keyframes td-name-out142{from{clip-path:inset(-64px -24px -12px -24px)}to{clip-path:inset(-64px -24px -12px 100%)}}

@@ -1,5 +1,5 @@
 <!doctype html><meta charset="utf-8"><title>Stream Deck command</title><p id="status">Sending command…</p><a href="./">Open control panel</a><script type="module">
-import{channel}from'./bridge.js?v=lineups140';const id=crypto.randomUUID(),command=new URLSearchParams(location.search).get('command');let finished=false;
+import{channel}from'./bridge.js?v=td143b';const id=crypto.randomUUID(),command=new URLSearchParams(location.search).get('command');let finished=false;
 channel.onmessage=({data})=>{if(data.kind==='ack'&&data.id===id){finished=true;document.querySelector('#status').textContent=data.error||'Command sent: '+command;if(!data.error)setTimeout(()=>window.close(),300);}};
 channel.postMessage({kind:'command',command,id});setTimeout(()=>{if(!finished)document.querySelector('#status').textContent='No response. Keep the control panel open in this same browser profile. Check the show before pressing again.';},5000);
 </script>
