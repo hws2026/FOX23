@@ -259,7 +259,7 @@ def _update(action,p):
             else: raise ValueError('Invalid team field or image. Use PNG, JPEG, or WebP under 2 MB.')
     elif action=='branding':
         for k,v in p.items():
-            if k in ['network','competition','venue','city','sponsorName']: STATE['branding'][k]=bounded_text(v,100)
+            if k in ['network','competition','venue','city','sponsorName','refereeName','refereeRole','refereeExperience']: STATE['branding'][k]=bounded_text(v,100)
             elif k=='stateAbbr':
                 value=str(v).strip().upper()
                 if value and (len(value)!=2 or not value.isascii() or not value.isalpha()): raise ValueError('Use a two-letter state abbreviation, such as TX.')

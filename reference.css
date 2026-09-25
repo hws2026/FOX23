@@ -1372,3 +1372,32 @@
 /* Supplied league artwork, bundled for Pages and offline show previews. */
 .standings-card>.conference-logo{position:absolute;left:-35px;top:-30px;width:205px;height:145px;object-fit:contain;z-index:3;pointer-events:none}
 .referee-mark>.secondary-mark{width:100%;height:100%;object-fit:contain}
+/* Referee reference, 554.6–555.2 in / 564.2–564.6 out: rail, face, then copy/shield. */
+.referee-card{left:200px;right:200px;bottom:62px;height:210px;padding:0;background:none;border:0;clip-path:none;overflow:visible;isolation:isolate}
+.referee-shell{position:absolute;inset:0;transform-origin:50% 100%;z-index:0}
+.referee-card .referee-face{position:absolute;inset:4px 6px 10px;height:auto;padding:0;border:0;background:url('./assets/lineup-contours.svg') center/500px 160px,linear-gradient(110deg,#052545,#082d50 55%,#062746);clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 55px,calc(100% - 22px) calc(100% - 30px),calc(100% - 57px) 100%,57px 100%,22px calc(100% - 30px),0 55px)}
+.referee-card .referee-rails{position:absolute;inset:0;background:url('./referee-rails.svg?v=126') center/100% 100% no-repeat;z-index:2}
+.referee-card .referee-mark{left:28px;bottom:14px;width:267px;height:305px;z-index:3;transform-origin:center bottom}
+.referee-copy{position:absolute;left:360px;right:60px;top:7px;bottom:19px;z-index:2;display:flex;flex-direction:column;justify-content:space-around}
+.referee-card .referee-copy h1{font:italic 700 62px/1.08 var(--display);margin:0;letter-spacing:.5px;white-space:normal;overflow-wrap:anywhere}
+.referee-card .referee-copy p{font:46px/1.16 'DIN Condensed',Impact,sans-serif;letter-spacing:2.1px;text-align:center;margin:0;white-space:normal}
+.referee-copy em{color:#ffcb22;font-style:normal}.referee-copy em small{font-size:.68em;letter-spacing:0}
+.graphics-layer[data-motion=auto].animate-in>.referee-card{animation:none!important;opacity:1;transform:none}
+.graphics-layer[data-motion=auto].animate-in>.referee-card .referee-shell{animation:referee-shell-in126 .62s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer[data-motion=auto].animate-in>.referee-card :is(.referee-face,.referee-rails){animation:none}
+.graphics-layer[data-motion=auto].animate-in>.referee-card .referee-copy{animation:referee-copy-in126 .62s ease-out both}
+.graphics-layer[data-motion=auto].animate-in>.referee-card .referee-mark{animation:referee-mark-in126 .62s ease-out both}
+.graphics-layer.leaving[data-motion=auto]:has(>.referee-card){animation:none!important;transform:none;opacity:1;clip-path:none}
+.graphics-layer.leaving[data-motion=auto]>.referee-card .referee-shell{animation:referee-shell-out126 .44s ease-in both}
+.graphics-layer.leaving[data-motion=auto]>.referee-card :is(.referee-face,.referee-rails){animation:none}
+.graphics-layer.leaving[data-motion=auto]>.referee-card :is(.referee-copy,.referee-mark){animation:reference-fade .14s linear reverse both}
+@keyframes referee-shell-in126{0%{clip-path:inset(94% 44% 0)}30%{clip-path:inset(94% 0 0)}42%{clip-path:inset(94% 0 0)}100%{clip-path:inset(0)}}
+@keyframes referee-shell-out126{0%{clip-path:inset(0)}50%{clip-path:inset(94% 0 0)}70%{clip-path:inset(94% 0 0)}100%{clip-path:inset(94% 50% 0)}}
+@keyframes referee-copy-in126{0%,48%{opacity:0}100%{opacity:1}}
+@keyframes referee-mark-in126{0%,42%{opacity:0;clip-path:inset(100% 0 0);transform:translateY(14px)}100%{opacity:1;clip-path:inset(0);transform:translateY(0)}}
+.graphics-layer[data-motion=fade]>.referee-card :is(.referee-shell,.referee-mark,.referee-copy,.referee-face,.referee-rails){animation:none!important;transform:none;opacity:1;clip-path:none}
+/* Preserve the face's angled outline when the whole graphic uses fast fade. */
+.graphics-layer[data-motion=fade]>.referee-card .referee-face{clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 55px,calc(100% - 22px) calc(100% - 30px),calc(100% - 57px) 100%,57px 100%,22px calc(100% - 30px),0 55px)}
+@media(prefers-reduced-motion:reduce){.graphics-layer .referee-card *{animation:none!important}}
+.referee-card .referee-copy h1{font-size:72px}
+.referee-card .referee-copy p{font-size:54px;letter-spacing:3.4px}

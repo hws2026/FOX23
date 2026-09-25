@@ -1,5 +1,5 @@
-import{base}from'./bridge.js?v=logos125';
-import{deckControl}from'./panel.js?v=logos125';
+import{base}from'./bridge.js?v=referee126';
+import{deckControl}from'./panel.js?v=referee126';
 const storageKey='gridiron-deck-key:'+base.pathname;
 const button=document.createElement('button');button.className='button subtle';button.textContent='Connect Stream Deck';document.querySelector('.topbar-right').prepend(button);
 let socket,timer,enabled=false;const processed=new Map();
