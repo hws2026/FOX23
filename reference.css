@@ -1297,3 +1297,19 @@
 
 /* One aligned metal assembly owns the lineup base and corner joins. */
 .lineup-ribbon::after{display:none}
+/* Upper tabs rest above the scorebug, with full bevels and mirrored insets. */
+.situation-group .attempt-tag{clip-path:none}
+.situation-group .attempt-tag .situation-reveal{left:32px;right:auto;width:480px;bottom:205px;transform-origin:50% 100%}
+.situation-group .dock-away.attempt-tag .situation-reveal{left:32px;right:auto}
+.situation-group .dock-home.attempt-tag .situation-reveal{left:auto;right:32px}
+.timeout-anchor{clip-path:none}
+.timeout-anchor .timeout-notice{left:32px;right:auto;width:460px;bottom:205px;transform-origin:50% 100%}
+.timeout-anchor.dock-home .timeout-notice{left:auto;right:32px}
+.graphics-layer.animate-in[data-motion=auto]:has(.attempt-tag),.graphics-layer.leaving[data-motion=auto]:has(.attempt-tag){animation:none;transform:none;opacity:1;clip-path:none}
+.graphics-layer.animate-in[data-motion=auto] .attempt-tag .situation-reveal,.timeout-anchor:not([data-motion=fade]):not(.out) .timeout-notice{animation:upper-dock-in117 .24s cubic-bezier(.18,.65,.3,1) both}
+.graphics-layer.leaving[data-motion=auto] .attempt-tag .situation-reveal,.timeout-anchor.out:not([data-motion=fade]) .timeout-notice{animation:upper-dock-out117 .18s ease-in both}
+.graphics-layer[data-motion=fade] .attempt-tag .situation-reveal{animation:none;transform:none}
+.timeout-anchor[data-motion=fade]:not(.out) .timeout-notice{animation:reference-fade .16s linear both}
+@keyframes upper-dock-in117{from{transform:translateY(calc(100% + 5px))}to{transform:translateY(0)}}
+@keyframes upper-dock-out117{from{transform:translateY(0)}to{transform:translateY(calc(100% + 5px))}}
+@media(prefers-reduced-motion:reduce){.graphics-layer .attempt-tag .situation-reveal,.timeout-anchor .timeout-notice{animation:none!important}}

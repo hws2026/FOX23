@@ -1,4 +1,4 @@
-import {esc} from './graphics.js?v=playlist116';
+import {esc} from './graphics.js?v=location123';
 let selected='',generation=0;
 export function libraryView(){return `<div class="section-heading"><div><h2>Team library</h2><p>Save teams once. Choose a home and away team for each broadcast.</p></div></div><div id="team-library-content" aria-live="polite">Loading saved teams…</div>`;}
 export async function bindLibrary({act,state,open,toast,imageFile}){

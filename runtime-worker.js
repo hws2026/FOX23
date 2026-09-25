@@ -7,7 +7,7 @@ async function init(){
  db=await database();const saved=await read();
  py=await loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v0.29.2/full/'});
  py.FS.mkdirTree('/studio/data');py.FS.mkdirTree('/studio/catalog');
- for(const [url,path] of [['core.py?v=playlist116','/studio/core.py'],['team_library.py','/studio/team_library.py'],['nfl-2026.json','/studio/catalog/nfl-2026.json']]){
+ for(const [url,path] of [['core.py?v=location123','/studio/core.py'],['team_library.py','/studio/team_library.py'],['nfl-2026.json','/studio/catalog/nfl-2026.json']]){
   const r=await fetch(url);if(!r.ok)throw Error('Cannot load '+url);py.FS.writeFile(path,await r.text());
  }
  if(saved){py.FS.writeFile('/studio/data/game.json',JSON.stringify(saved.state));py.FS.writeFile('/studio/data/team-library.json',JSON.stringify(saved.library));}
