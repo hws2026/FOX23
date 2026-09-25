@@ -1401,3 +1401,17 @@
 @media(prefers-reduced-motion:reduce){.graphics-layer .referee-card *{animation:none!important}}
 .referee-card .referee-copy h1{font-size:72px}
 .referee-card .referee-copy p{font-size:54px;letter-spacing:3.4px}
+/* Unified offensive/defensive entrance, measured against 90.8–91.5 in the reference. */
+.lineup-ribbon-frame::after{background-image:url('./lineup-rails.svg?v=127');inset:-2px -2px -1px}
+.lineup-ribbon-face{clip-path:polygon(17px 0,calc(100% - 17px) 0,100% 36%,calc(100% - 19px) calc(100% - 15px),calc(100% - 38px) 100%,38px 100%,19px calc(100% - 15px),0 36%)}
+.graphics-layer.animate-in[data-motion=auto]:has(>.lineup-ribbon){animation:none;opacity:1;transform:none;clip-path:none}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame{animation:lineup-frame-in127 .64s cubic-bezier(.2,.65,.3,1) both;transform:none}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-ribbon-logo{animation:lineup-logo-in127 .64s ease-out both;transform-origin:center bottom}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-team-tab{animation:lineup-tab-in127 .64s ease-out both}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon h1,.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-names>div{animation:lineup-copy-in127 .64s ease-out both;animation-delay:0s}
+@keyframes lineup-frame-in127{0%{clip-path:inset(calc(100% - 7px) 47% -2px)}30%{clip-path:inset(calc(100% - 7px) -3px -2px)}42%{clip-path:inset(calc(100% - 7px) -3px -2px)}88%,100%{clip-path:inset(-3px)}}
+@keyframes lineup-logo-in127{0%,35%{opacity:0;clip-path:inset(100% 0 0);transform:translateY(12px)}78%,100%{opacity:1;clip-path:inset(0);transform:translateY(0)}}
+@keyframes lineup-tab-in127{0%,58%{opacity:0;transform:translate(-50%,12px)}94%,100%{opacity:1;transform:translate(-50%,0)}}
+@keyframes lineup-copy-in127{0%,62%{opacity:0;transform:translateY(7px)}95%,100%{opacity:1;transform:translateY(0)}}
+.graphics-layer[data-motion=fade]>.lineup-ribbon :is(.lineup-ribbon-frame,.lineup-ribbon-logo,.lineup-team-tab,h1,.lineup-names>div){animation:none!important}
+@media(prefers-reduced-motion:reduce){.graphics-layer>.lineup-ribbon *{animation:none!important}}

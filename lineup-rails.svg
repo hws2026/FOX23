@@ -1,17 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1716 128" preserveAspectRatio="none">
-<defs>
-<linearGradient id="top" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f1f6f8"/><stop offset=".28" stop-color="#c1d1d9"/><stop offset=".55" stop-color="#8096a3"/><stop offset="1" stop-color="#344d5e"/></linearGradient>
-<linearGradient id="base" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#dce8ed"/><stop offset=".35" stop-color="#aebfca"/><stop offset=".72" stop-color="#718996"/><stop offset="1" stop-color="#344d5e"/></linearGradient>
-<linearGradient id="side" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#f1f6f8"/><stop offset=".45" stop-color="#c1d1d9"/><stop offset="1" stop-color="#8096a3"/></linearGradient>
-</defs>
-<!-- Open upper corners; top rail and lower U-frame are separate metal pieces. -->
-<path d="M28 0H1688L1692 6H1190L1180 4H536L526 6H24Z" fill="url(#top)"/>
-<path d="M29 1H1687" stroke="#f1f5f7" stroke-width="1.2"/>
-<!-- Lower corner facets follow the sloping face, with open upper corners. -->
-<path d="M2 76L8 76L12 105L28 119H419L436 124L422 128H24L5 110Z" fill="url(#base)"/>
-<path d="M1714 76H1708L1704 105L1688 119H1297L1280 124L1294 128H1692L1711 110Z" fill="url(#base)"/>
-<path d="M2 76H8L12 105L28 119L24 126L5 110Z" fill="url(#side)"/>
-<path d="M1714 76H1708L1704 105L1688 119L1692 126L1711 110Z" fill="url(#side)"/>
-<path d="M3 77L6 109L25 126H421L434 123M1713 77L1710 109L1691 126H1295L1282 123" fill="none" stroke="#f1f5f7" stroke-width="1.2"/>
-<path d="M28 118H419L437 123H1279L1297 118H1688" fill="none" stroke="#263e4b" stroke-width="2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1716 128" preserveAspectRatio="none"><defs><linearGradient id="top" x2="0" y2="1"><stop stop-color="#f1f6f8"/><stop offset=".3" stop-color="#c1d1d9"/><stop offset="1" stop-color="#536d7c"/></linearGradient><linearGradient id="base" x2="0" y2="1"><stop stop-color="#e4edf1"/><stop offset=".35" stop-color="#b8c9d3"/><stop offset=".72" stop-color="#617c8d"/><stop offset="1" stop-color="#a9becb"/></linearGradient></defs>
+<!-- Horizontal cap; upper diagonal corners remain open. -->
+<path d="M20 0H1696L1699 4H1240L1230 3H486L476 4H17Z" fill="url(#top)"/>
+<!-- Sloping lower endcaps join the two raised base wings. -->
+<path d="M0 46L6 47L23 104L43 120H419L435 124L422 128H38L17 110Z" fill="url(#base)"/>
+<path d="M1716 46L1710 47L1693 104L1673 120H1297L1281 124L1294 128H1678L1699 110Z" fill="url(#base)"/>
+<path d="M434 123H1282L1293 126H423Z" fill="#536d7c"/>
+<path d="M2 48L20 108L40 125H420M1714 48L1696 108L1676 125H1296" fill="none" stroke="#f6f8f9" stroke-width="1.6"/>
+<path d="M419 121L435 117H497L483 123ZM1219 117H1281L1297 121L1233 123Z" fill="#367797"/>
+<path d="M183 121L187 126M190 121L194 126M197 121L201 126M1515 121L1519 126M1522 121L1526 126M1529 121L1533 126" stroke="#405868" stroke-width="1.5"/>
 </svg>
