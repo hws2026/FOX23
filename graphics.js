@@ -173,10 +173,11 @@ if(s.program.watermark){const content=networkMark(s);if(!wm){wm=document.createE
 }
 function fitGraphicLabels(layer){
  // Fit operator-entered names and alert labels without clipping their last letters.
- for(const el of layer.querySelectorAll('.situation-reveal h1,.staff-plate h1,.td70-name strong,.result-name,.referee-copy h1')){
+ for(const el of layer.querySelectorAll('.situation-reveal h1,.staff-plate h1,.td70-name strong,.result-name,.referee-copy h1,.reporter-nameplate h1')){
   el.style.removeProperty('font-size');
   const style=getComputedStyle(el),size=parseFloat(style.fontSize),width=el.clientWidth;
   if(width>0&&el.scrollWidth>width+1){const padding=parseFloat(style.paddingLeft)+parseFloat(style.paddingRight);el.style.fontSize=Math.max(size*.45,size*(width-padding)/Math.max(1,el.scrollWidth-padding))+'px';}
+  if(el.matches('.reporter-nameplate h1')){for(let i=0;i<4&&el.scrollWidth>el.clientWidth;i++){const size=parseFloat(getComputedStyle(el).fontSize);el.style.fontSize=(size*Math.min(.98,(el.clientWidth-16)/el.scrollWidth))+'px';}}
  }
 }
 function freezeGraphicFrame(source,clone){

@@ -259,6 +259,15 @@ def _update(action,p):
             if k in ['network','competition','venue','sponsorName']: STATE['branding'][k]=bounded_text(v,100)
             elif k in ['networkLogo','sponsorLogo','secondaryLogo'] and valid_image(v): STATE['branding'][k]=v
             elif k in ['accent','sponsorColor']: STATE['branding'][k]=color(v)
+            elif k=='crew':
+                if not isinstance(v,list) or len(v)>50: raise ValueError('Use up to 50 crew members.')
+                clean=[];ids=set()
+                for row in v:
+                    if not isinstance(row,dict): raise ValueError('Invalid crew member.')
+                    member={key:bounded_text(row.get(key,''),120) for key in ['id','name','role']}
+                    if not member['id'] or member['id'] in ids or not member['name'].strip(): raise ValueError('Crew members need unique IDs and names.')
+                    ids.add(member['id']);clean.append(member)
+                STATE['branding']['crew']=clean
             elif k=='bugScale': STATE['branding'][k]=max(.65,min(1.4,float(v)))
             elif k=='bugBottom': STATE['branding'][k]=max(20,min(240,int(v)))
             else: raise ValueError('Invalid branding setting.')
