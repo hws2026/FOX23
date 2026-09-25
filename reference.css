@@ -1368,3 +1368,7 @@
 .standings-card>.conference-letter{top:-18px;bottom:auto;z-index:3}
 
 .break-banner .result-scores{gap:24px}.break-banner .result-scores i{flex:0 0 3px;height:106px}
+
+/* Supplied league artwork, bundled for Pages and offline show previews. */
+.standings-card>.conference-logo{position:absolute;left:-35px;top:-30px;width:205px;height:145px;object-fit:contain;z-index:3;pointer-events:none}
+.referee-mark>.secondary-mark{width:100%;height:100%;object-fit:contain}
