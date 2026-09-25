@@ -1415,3 +1415,8 @@
 @keyframes lineup-copy-in127{0%,62%{opacity:0;transform:translateY(7px)}95%,100%{opacity:1;transform:translateY(0)}}
 .graphics-layer[data-motion=fade]>.lineup-ribbon :is(.lineup-ribbon-frame,.lineup-ribbon-logo,.lineup-team-tab,h1,.lineup-names>div){animation:none!important}
 @media(prefers-reduced-motion:reduce){.graphics-layer>.lineup-ribbon *{animation:none!important}}
+
+/* 128: one shared outline for the lineup face and metal, with no transparent gutter. */
+.lineup-ribbon-frame{padding:0}
+.lineup-ribbon-frame::after{inset:0;background-image:url('./lineup-rails.svg?v=128')}
+.lineup-ribbon-face{height:100%;clip-path:polygon(1.1655% 0,98.8345% 0,100% 35.9375%,99.0093% 85.9375%,97.7855% 100%,2.2145% 100%,.9907% 85.9375%,0 35.9375%)}
