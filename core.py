@@ -24,7 +24,10 @@ def default_state():
     cue={'type':'matchup','team':'away','playerId':'away-1','title':'FRIDAY NIGHT FOOTBALL','subtitle':'Live from Memorial Stadium','event':'TOUCHDOWN','period':'HALFTIME','nextAway':'NORTH RIDGE','nextHome':'EAST VALLEY','nextTime':'FRIDAY • 7:00 PM','rosterPage':1,'transition':'auto','leftName':'ALEX MORGAN','leftRole':'PLAY-BY-PLAY','rightName':'JORDAN REED','rightRole':'ANALYST','sponsorTitle':'POSTGAME','sponsorSubtitle':'PRESENTED BY OUR PARTNER','sponsorNext':'COMING UP NEXT','weatherTemp':'67°','weatherWind':'NW 6 MPH','weatherForecast':'CLEAR','reporterName':'REPORTER NAME','qbValue':'','qbLabel':'','qbDetail':'SEASON STATS','staffName':'','staffRole':'HEAD COACH','staffDetail':'','stats':[{'label':'PASSING YDS','away':'248','home':'212'},{'label':'RUSHING YDS','away':'126','home':'98'},{'label':'FIRST DOWNS','away':'19','home':'17'}]}
     return {'revision':0,'teams':teams,'lineups':lineups,'game':{'scores':{'away':0,'home':0},'timeouts':{'away':3,'home':3},'possession':'away','quarter':'1ST','down':'1ST','distance':'10','ballOn':'25','flag':False,'clock':{'remaining':900,'running':False,'anchor':time.time()},'playClock':{'remaining':40,'running':False,'anchor':time.time()},'showPlayClock':True,'showDownDistance':True,'bottomStatus':'LIVE','overtimePeriod':1,'showInfo':True,'showBallPosition':False},'branding':{'network':'GRIDIRON','competition':'FRIDAY NIGHT FOOTBALL','venue':'MEMORIAL STADIUM','accent':'#f9cb40','bugScale':1.0,'bugBottom':64,'networkLogo':'','sponsorName':'YOUR SPONSOR','sponsorLogo':'','sponsorColor':'#101349','secondaryLogo':''},'program':{'qbStats':{'visible':False,'team':'away'},'bug':True,'watermark':False,'graphic':{'type':'none'},'takeId':0},'preview':cue}
 TEAM_CUES={'transition','scoringdrive','offense','defense','quarterback','qbstats','player','stats','coach','roster','event','lowerthird','situation'}
+DIVISION_TEAMS = {'AFC EAST': ['BUFFALO', 'MIAMI', 'NEW ENGLAND', 'NY JETS'], 'AFC SOUTH': ['HOUSTON', 'INDIANAPOLIS', 'JACKSONVILLE', 'TENNESSEE'], 'AFC NORTH': ['BALTIMORE', 'CINCINNATI', 'CLEVELAND', 'PITTSBURGH'], 'AFC WEST': ['DENVER', 'KANSAS CITY', 'LAS VEGAS', 'LA CHARGERS'], 'NFC EAST': ['PHILADELPHIA', 'DALLAS', 'WASHINGTON', 'NY GIANTS'], 'NFC SOUTH': ['ATLANTA', 'CAROLINA', 'NEW ORLEANS', 'TAMPA BAY'], 'NFC NORTH': ['CHICAGO', 'DETROIT', 'GREEN BAY', 'MINNESOTA'], 'NFC WEST': ['ARIZONA', 'LA RAMS', 'SAN FRANCISCO', 'SEATTLE']}
+
 def cue_key(c):
+    if c['type']=='standings': return 'standings:'+c.get('divisionId','NFC EAST')
     if c['type']=='transition':
         style=c.get('transitionStyle','team')
         return 'transition:'+style+(':'+c.get('team','away') if style in ['team','person'] else '')
@@ -334,8 +337,14 @@ def _update(action,p):
         library=STATE['program'].setdefault('cueLibrary',{})
         library[cue_key(current)]=copy.deepcopy(current)
         style=p.get('transitionStyle',current.get('transitionStyle','team') if current['type']=='transition' else STATE['program'].get('lastTransitionStyle','team'))
-        key=cue_key({'type':kind,'team':target_team,'transitionStyle':style})
+        division=p.get('divisionId',current.get('divisionId','NFC EAST'))
+        key=cue_key({'type':kind,'team':target_team,'transitionStyle':style,'divisionId':division})
         cue=copy.deepcopy(current) if key==cue_key(current) else copy.deepcopy(library.get(key,initial_cue(kind,target_team)))
+        if kind=='standings':
+            if division not in DIVISION_TEAMS: raise ValueError('Select an NFL division.')
+            if key not in library and key!=cue_key(current):
+                cue.update(standingsRows=[{'name':name,'wins':0,'losses':0,'ties':0} for name in DIVISION_TEAMS[division]])
+            cue.update(divisionId=division,divisionTitle=division)
         if kind=='transition':
             cue['transitionStyle']=style
             STATE['program']['lastTransitionStyle']=style
@@ -385,6 +394,8 @@ def _update(action,p):
             elif k in ['qbContextYellow','tier1Yellow','tier2Yellow','tier3Yellow']:
                 if isinstance(v,str): v=v=='true'
                 if type(v) is not bool: raise ValueError('Invalid highlight toggle.')
+            elif k=='divisionId':
+                if v not in DIVISION_TEAMS: raise ValueError('Select an NFL division.')
             elif k=='standingsRows':
                 if isinstance(v,str):
                     v=[dict(zip(['name','wins','losses','ties'],line.split('|'))) for line in v.splitlines() if line.strip()]

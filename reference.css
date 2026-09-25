@@ -1313,3 +1313,58 @@
 @keyframes upper-dock-in117{from{transform:translateY(calc(100% + 5px))}to{transform:translateY(0)}}
 @keyframes upper-dock-out117{from{transform:translateY(0)}to{transform:translateY(calc(100% + 5px))}}
 @media(prefers-reduced-motion:reduce){.graphics-layer .attempt-tag .situation-reveal,.timeout-anchor .timeout-notice{animation:none!important}}
+
+/* Compact division panel: reference header, alternating charcoal records, metal foot. */
+.standings-card{position:absolute;left:70px;right:auto;bottom:64px;width:500px;padding:0;background:none;clip-path:none;overflow:visible}
+.standings-face{padding:0 0 26px;background:repeating-linear-gradient(48deg,transparent 0 8px,#ffffff05 8px 10px),#282b2e;clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 29px) 100%,32px 100%,0 calc(100% - 30px))}
+.standings-card header{position:relative;height:84px;padding:0 18px 0 175px;display:flex;align-items:center;background:url('./assets/lineup-contours.svg') center/430px 130px,linear-gradient(#185c91,#063052);border-top:3px solid #d6e4eb}
+.standings-card header h1{margin:0;white-space:nowrap;font:italic 700 58px/1 'DIN Condensed',Impact,sans-serif;color:#f5f7f9;text-shadow:2px 3px #07101b}
+.conference-letter{position:absolute;left:-14px;bottom:-5px;font:900 140px/.85 Georgia,serif;color:#125a93;-webkit-text-stroke:3px #e3edf4;filter:drop-shadow(3px 4px 0 #071622)}
+.conference-letter small{position:absolute;left:25px;top:27px;width:55px;font:20px/1 sans-serif;color:#fff;-webkit-text-stroke:0;transform:rotate(36deg)}
+.conference-afc .conference-letter{color:#b22231}
+.division-records>div{height:68px;display:grid;grid-template-columns:1fr 110px;align-items:center;padding:0 22px 0 32px;background:#ffffff04}
+.division-records>div:nth-child(even){background:#ffffff0b}
+.division-records b,.division-records strong{font:italic 700 42px/1.12 'DIN Condensed',Impact,sans-serif;color:#f5f5f5;text-shadow:2px 2px #151719;white-space:nowrap}
+.division-records strong{text-align:center;font-style:normal;font-size:44px}
+.standings-rail{position:absolute;left:0;right:0;bottom:-3px;height:34px;background:url('./standings-rails.svg?v=124') center/100% 100% no-repeat;pointer-events:none}
+/* Referee: raised mark, compact two-line face, independent faceted metal frame. */
+.referee-card{left:245px;right:245px;bottom:74px;isolation:isolate}
+.referee-face{height:178px;border:0;padding:14px 36px 18px 265px;background:url('./assets/lineup-contours.svg') center/520px 160px,linear-gradient(105deg,#06284c,#092f53 65%,#061e36);clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 50px,calc(100% - 20px) calc(100% - 24px),calc(100% - 46px) 100%,36px 100%,0 calc(100% - 33px),0 30px)}
+.referee-card h1{font:italic 700 62px/1.12 var(--display);margin:0 0 13px;letter-spacing:1px}
+.referee-card p{font:39px/1.18 'DIN Condensed',Impact,sans-serif;letter-spacing:2px;white-space:normal}
+.referee-mark{left:16px;bottom:11px;width:218px;height:245px;z-index:3}
+.referee-rails{position:absolute;inset:0;pointer-events:none;z-index:2;background:url('./lineup-rails.svg?v=116') center/100% 100% no-repeat}
+/* Large commercial break proportions; final and mini banners stay independent. */
+.break-banner{left:230px;right:230px;height:390px;bottom:76px}
+.break-banner .result-metal{inset:155px 0 0}
+.break-banner .result-team{width:455px}
+.break-banner .result-team.away{left:32px}.break-banner .result-team.home{right:32px}
+.break-banner .result-logo{width:430px;height:350px;bottom:20px}
+.break-banner .result-name{width:425px;max-width:425px;margin-bottom:33px;font-size:54px;letter-spacing:-1px}
+.break-banner .result-center{left:485px;right:485px;top:157px;bottom:34px}
+.break-banner .result-scores{height:138px;gap:14px}.break-banner .result-scores b{font-size:137px;min-width:130px}
+.break-banner .result-badge{top:134px}
+.break-banner .break-record{bottom:102px}
+.graphics-layer[data-motion=auto].animate-in>.break-banner .result-metal{animation:break-frame124 .68s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer[data-motion=auto].animate-in>.break-banner .result-logo{animation:break-logo124 .76s ease-out both!important}
+.graphics-layer.leaving[data-motion=auto]:has(>.break-banner){animation:none;opacity:1;transform:none;clip-path:none}
+.graphics-layer.leaving[data-motion=auto]>.break-banner .result-metal{animation:break-frame124 .48s ease-in reverse both}
+.graphics-layer.leaving[data-motion=auto]>.break-banner .result-logo{animation:break-logo124 .4s ease-in reverse both!important}
+.graphics-layer.leaving[data-motion=auto]>.break-banner :is(.result-name,.result-center,.break-record,.result-badge){animation:reference-fade .15s linear reverse both}
+@keyframes break-frame124{0%{clip-path:inset(95% 44% 0)}30%{clip-path:inset(95% 0 0)}100%{clip-path:inset(0)}}
+@keyframes break-logo124{0%,40%{opacity:0;transform:translateY(45px)}72%{opacity:1}100%{opacity:1;transform:translateY(0)}}
+.graphics-layer[data-motion=auto].animate-in>.referee-card{animation:none}
+.graphics-layer[data-motion=auto].animate-in>.referee-card .referee-face{animation:referee-face124 .42s ease-out both}
+.graphics-layer[data-motion=auto].animate-in>.referee-card .referee-rails{animation:referee-rail124 .42s ease-out both}
+.graphics-layer[data-motion=auto].animate-in>.referee-card .referee-mark{animation:reference-fade .2s .2s both}
+.graphics-layer.leaving[data-motion=auto]:has(>.referee-card){animation:none;opacity:1}
+.graphics-layer.leaving[data-motion=auto]>.referee-card .referee-face{animation:referee-face124 .32s ease-in reverse both}
+.graphics-layer.leaving[data-motion=auto]>.referee-card .referee-rails{animation:referee-rail124 .32s ease-in reverse both}
+.graphics-layer.leaving[data-motion=auto]>.referee-card .referee-mark{animation:reference-fade .12s linear reverse both}
+@keyframes referee-face124{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes referee-rail124{from{clip-path:inset(0 50%)}to{clip-path:inset(0)}}
+@media(prefers-reduced-motion:reduce){.graphics-layer :is(.break-banner,.referee-card) *{animation:none!important}}
+
+.standings-card>.conference-letter{top:-18px;bottom:auto;z-index:3}
+
+.break-banner .result-scores{gap:24px}.break-banner .result-scores i{flex:0 0 3px;height:106px}

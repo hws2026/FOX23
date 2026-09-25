@@ -1,5 +1,5 @@
-import {startController} from './bridge.js?v=location123';
+import {startController} from './bridge.js?v=graphics124';
 const status=document.querySelector('#connection');
 status.textContent='Loading browser engine…';
-try{await startController();await import('./panel.js?v=location123');await import('./pair-controller.js?v=location123');await import('./plugin-download.js?v=location123');await import('./deck-connect.js?v=location123');}
+try{await startController();await import('./panel.js?v=graphics124');await import('./pair-controller.js?v=graphics124');await import('./plugin-download.js?v=graphics124');await import('./deck-connect.js?v=graphics124');}
 catch(e){status.textContent='Setup failed';status.className='connection offline';const error=document.createElement('div');error.className='card';error.textContent=e.message+' Reload to retry. First launch requires internet to download the browser engine.';document.querySelector('#controls').replaceChildren(error);}
