@@ -1190,3 +1190,52 @@
 @keyframes lineup-base-close107{0%,58%{transform:scaleX(1);opacity:1}99%{transform:scaleX(.02);opacity:1}100%{transform:scaleX(0);opacity:0}}
 .graphics-layer[data-motion=fade]>.lineup-ribbon::after{animation:none!important}
 @media(prefers-reduced-motion:reduce){.graphics-layer>.lineup-ribbon::after{animation:none!important}}
+
+/* Weather card metal frame and automatic rail-first reveal. */
+.weather-card{padding:5px 7px 12px 9px;background:none;clip-path:none;overflow:visible}
+.weather-card::before{inset:5px 7px 12px 9px;clip-path:polygon(0 0,100% 0,100% 100%,29px 100%,0 calc(100% - 29px))}
+.weather-card::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;background:url('./weather-rails.svg?v=108') center/100% 100% no-repeat}
+.weather-card dl{margin:19px 22px 25px}
+.graphics-layer.animate-in[data-motion=auto]>.weather-card{animation:weather-rail-in108 .48s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer.animate-in[data-motion=auto]>.weather-card :is(header h1,header p,dl){animation:weather-copy-in108 .18s .27s ease-out both}
+.graphics-layer.leaving[data-motion=auto]:has(>.weather-card){animation:none;opacity:1;transform:none;clip-path:none}
+.graphics-layer.leaving[data-motion=auto]>.weather-card{animation:weather-rail-out108 .36s ease-in both}
+.graphics-layer.leaving[data-motion=auto]>.weather-card :is(header h1,header p,dl){animation:weather-copy-out108 .12s ease-in both}
+@keyframes weather-rail-in108{0%{clip-path:inset(calc(100% - 10px) 49% 0);opacity:1}32%{clip-path:inset(calc(100% - 10px) 0 0);opacity:1}100%{clip-path:inset(-2px);opacity:1}}
+@keyframes weather-rail-out108{0%{clip-path:inset(-2px);opacity:1}66%{clip-path:inset(calc(100% - 10px) 0 0);opacity:1}99%{clip-path:inset(calc(100% - 10px) 49% 0);opacity:1}100%{clip-path:inset(100% 50% 0);opacity:0}}
+@keyframes weather-copy-in108{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
+@keyframes weather-copy-out108{from{opacity:1;translate:0 0}to{opacity:0;translate:0 6px}}
+.graphics-layer[data-motion=fade]>.weather-card :is(header h1,header p,dl){animation:none!important}
+@media(prefers-reduced-motion:reduce){.graphics-layer.leaving:has(>.weather-card){opacity:0!important}}
+
+/* Large break banner: separate raised logos and data from the expanding metal base. */
+.break-banner{height:420px;--rim:polygon(2.5% 0,97.5% 0,100% 30%,98.7% 78%,95% 100%,62% 100%,59% 95%,41% 95%,38% 100%,5% 100%,1.3% 78%,0 30%)}
+.break-banner .result-metal{padding:0;background:none;filter:none;isolation:isolate}
+.break-banner .result-metal::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:url('./break-rails.svg?v=108') center/100% 100% no-repeat}
+.break-banner .result-surface{position:relative;clip-path:var(--rim);background:linear-gradient(100deg,color-mix(in srgb,var(--away-color) 86%,#02090e),#080d12 43% 57%,color-mix(in srgb,var(--home-color) 86%,#02090e))}
+.break-banner .result-team{width:500px;bottom:0}
+.break-banner .result-team.away{left:38px}.break-banner .result-team.home{right:38px}
+.break-banner .result-logo{width:475px;height:385px;bottom:20px;max-width:100%;overflow:visible}
+.break-banner .result-logo .team-logo{object-fit:contain;object-position:center bottom}
+.break-banner .result-name{width:450px;max-width:450px;margin-bottom:37px;padding:6px 14px 10px;font-size:52px;line-height:1.12;letter-spacing:-1.5px}
+.break-banner .result-center{left:535px;right:535px;top:174px;bottom:39px}
+.break-banner .result-scores{height:142px;gap:12px}.break-banner .result-scores b{font-size:140px;min-width:142px;line-height:1}
+.break-banner .result-status{font-size:40px;line-height:1.15;white-space:nowrap;letter-spacing:.4px;color:#f2f6f8}
+.break-banner .result-status [data-game-clock]{color:#ffda31;margin-left:10px}
+.break-record{position:absolute;left:-2px;bottom:104px;font:italic 26px/1.1 'DIN Condensed',Impact,sans-serif;color:#f1f5f7;text-shadow:1px 2px #000}
+.break-banner .home .break-record{left:auto;right:-2px}
+.graphics-layer[data-motion=auto].animate-in>.break-banner{animation:none!important}
+.graphics-layer[data-motion=auto].animate-in>.break-banner .result-metal{animation:break-metal-in108 .72s cubic-bezier(.2,.65,.3,1) both;transform-origin:50% 100%}
+.graphics-layer[data-motion=auto].animate-in>.break-banner .result-logo{animation:break-logo-in108 .84s cubic-bezier(.2,.65,.3,1) both!important;transform-origin:center bottom}
+.graphics-layer[data-motion=auto].animate-in>.break-banner :is(.result-name,.break-record){animation:result-copy-build86 .78s ease-out both}
+.graphics-layer[data-motion=auto].animate-in>.break-banner .result-center{animation:result-copy-build86 .86s ease-out both}
+.graphics-layer[data-motion=auto].animate-in>.break-banner .result-badge{animation:break-badge-in108 .9s ease-out both}
+@keyframes break-metal-in108{0%{transform:scale(.03,.03)}28%,38%{transform:scale(1,.03)}100%{transform:scale(1)}}
+@keyframes break-logo-in108{0%,38%{opacity:0;transform:translateY(75px);clip-path:inset(100% 0 0)}65%{opacity:1}100%{opacity:1;transform:translateY(0);clip-path:inset(0)}}
+@keyframes break-badge-in108{0%,73%{opacity:0;translate:0 8px}100%{opacity:1;translate:0 0}}
+.graphics-layer[data-motion=fade].animate-in>.break-banner .result-logo{animation:none!important}
+@media(prefers-reduced-motion:reduce){.graphics-layer[data-motion=auto].animate-in>.break-banner *{animation:none!important}}
+
+.break-banner .result-surface::before,.break-banner .result-surface::after{content:'';position:absolute;top:0;bottom:0;width:34%;background:url('./assets/scorebug-contours.svg') center/100% 100%;opacity:.13;pointer-events:none}
+.break-banner .result-surface::before{left:0;mask-image:linear-gradient(90deg,#000 75%,transparent)}
+.break-banner .result-surface::after{right:0;transform:scaleX(-1);mask-image:linear-gradient(90deg,#000 75%,transparent)}
