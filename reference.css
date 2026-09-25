@@ -1629,3 +1629,32 @@
 @keyframes intro-side-left138{from{translate:-480px 0;opacity:1}to{translate:0 0;opacity:1}}
 @keyframes intro-side-right138{from{translate:480px 0;opacity:1}to{translate:0 0;opacity:1}}
 @media(prefers-reduced-motion:reduce){.graphics-layer.animate-in[data-motion=auto]>.opening-intro .intro-fin{animation:none!important}}
+
+/* 139: independent moving metal pieces, with a connected recessed lower bevel. */
+.lineup-ribbon-frame::after{display:none}.lineup-metal-pieces{position:absolute;inset:0;pointer-events:none;z-index:3}
+.lineup-metal-pieces>i{position:absolute;inset:0;background:url('./lineup-rails.svg?v=139') center/100% 100% no-repeat}
+.lineup-metal-left{clip-path:inset(5px 50% 0 0);transform-origin:center bottom}.lineup-metal-right{clip-path:inset(5px 0 0 50%);transform-origin:center bottom}.lineup-metal-top{clip-path:inset(0 0 calc(100% - 5px));transform-origin:center bottom}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame{animation:none;clip-path:none;transform:none}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-metal-left{animation:lineup-left139 .64s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-metal-right{animation:lineup-right139 .64s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-metal-top{animation:lineup-top139 .64s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-ribbon-face{animation:lineup-face139 .64s cubic-bezier(.2,.65,.3,1) both}
+@keyframes lineup-left139{0%{transform:translateX(35%);clip-path:inset(calc(100% - 9px) 76% 0 0)}38%{transform:translateX(0);clip-path:inset(calc(100% - 9px) 50% 0 0)}85%,100%{transform:none;clip-path:inset(5px 50% 0 0)}}
+@keyframes lineup-right139{0%{transform:translateX(-35%);clip-path:inset(calc(100% - 9px) 0 0 76%)}38%{transform:translateX(0);clip-path:inset(calc(100% - 9px) 0 0 50%)}85%,100%{transform:none;clip-path:inset(5px 0 0 50%)}}
+@keyframes lineup-top139{0%,32%{translate:0 calc(100% - 5px);scale:.2 1;opacity:0}38%{opacity:1;scale:1 1;translate:0 calc(100% - 5px)}85%,100%{translate:0 0;scale:1;opacity:1}}
+@keyframes lineup-face139{0%,35%{clip-path:polygon(1.1655% 100%,98.8345% 100%,100% 100%,99.0093% 100%,97.7855% 100%,2.2145% 100%,.9907% 100%,0 100%)}85%,100%{clip-path:polygon(1.1655% 0,98.8345% 0,100% 35.9375%,99.0093% 85.9375%,97.7855% 100%,2.2145% 100%,.9907% 85.9375%,0 35.9375%)}}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame{animation:none;clip-path:none}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-metal-left{animation:lineup-left139 .4s ease-in reverse both}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-metal-right{animation:lineup-right139 .4s ease-in reverse both}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-metal-top{animation:lineup-top139 .4s ease-in reverse both}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-ribbon-face{animation:lineup-face139 .4s ease-in reverse both}
+.graphics-layer[data-motion=fade]>.lineup-ribbon .lineup-metal-pieces>i,.graphics-layer[data-motion=fade]>.lineup-ribbon .lineup-ribbon-face{animation:none!important}
+@media(prefers-reduced-motion:reduce){.graphics-layer>.lineup-ribbon *{animation:none!important}}
+
+/* 140: keep lineup copy in step with the moving face, including long group titles. */
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon h1{animation:lineup-title-in140 .28s .29s cubic-bezier(.2,.65,.3,1) both}
+@keyframes lineup-title-in140{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon h1{animation:lineup-title-out140 .12s ease-in both}
+@keyframes lineup-title-out140{to{opacity:0;transform:translateY(8px)}}
+.graphics-layer[data-motion=fade]>.lineup-ribbon h1{animation:none!important}
+@media(prefers-reduced-motion:reduce){.graphics-layer>.lineup-ribbon h1{animation:none!important}}

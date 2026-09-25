@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1716 128" preserveAspectRatio="none"><defs><linearGradient id="top" x2="0" y2="1"><stop stop-color="#f1f6f8"/><stop offset=".3" stop-color="#c1d1d9"/><stop offset="1" stop-color="#536d7c"/></linearGradient><linearGradient id="base" x2="0" y2="1"><stop stop-color="#e4edf1"/><stop offset=".35" stop-color="#b8c9d3"/><stop offset=".72" stop-color="#617c8d"/><stop offset="1" stop-color="#a9becb"/></linearGradient></defs>
 <!-- Horizontal cap; upper diagonal corners remain open. -->
 <path d="M20 0H1696L1699 4H1240L1230 3H486L476 4H17Z" fill="url(#top)"/>
+<path d="M38 119H1678L1678 128H38Z" fill="#263e4c"/><path d="M40 120H1676V122H40Z" fill="#718d9d"/>
 <!-- Sloping lower endcaps join the two raised base wings. -->
 <path d="M0 46L6 47L23 104L43 120H419L435 124L422 128H38L17 110Z" fill="url(#base)"/>
 <path d="M1716 46L1710 47L1693 104L1673 120H1297L1281 124L1294 128H1678L1699 110Z" fill="url(#base)"/>
@@ -8,4 +9,7 @@
 <path d="M2 48L20 108L40 125H420M1714 48L1696 108L1676 125H1296" fill="none" stroke="#f6f8f9" stroke-width="1.6"/>
 <path d="M419 121L435 117H497L483 123ZM1219 117H1281L1297 121L1233 123Z" fill="#367797"/>
 <path d="M183 121L187 126M190 121L194 126M197 121L201 126M1515 121L1519 126M1522 121L1526 126M1529 121L1533 126" stroke="#405868" stroke-width="1.5"/>
+<path d="M7 49L25 102L45 117H414L432 122M1709 49L1691 102L1671 117H1302L1284 122" fill="none" stroke="#1a303e" stroke-width="2"/>
+<path d="M38 128H421L435 124H1281L1295 128H1678" fill="none" stroke="#16303f" stroke-width="2"/>
+<path d="M22 1H1694" stroke="#f4f8fa" stroke-width="1"/>
 </svg>
