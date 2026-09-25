@@ -1,4 +1,4 @@
-/* Reference-driven revisions. Dimensions use the 1920 Ã— 1080 broadcast canvas. */
+/* Reference-driven revisions. Dimensions use the 1920 Ãƒâ€” 1080 broadcast canvas. */
 /* Timeout bars restored to their original lower team-panel position and weight. */
 .team-wing::after{height:26px;border-top:1px solid #7893a855}
 .timeout-bars{bottom:10px;gap:16px;z-index:6}
@@ -83,7 +83,7 @@
 .graphics-layer[data-motion=rail].leaving{animation:generic-rail .4s ease-in reverse both}
 @media(prefers-reduced-motion:reduce){.graphics-layer *, .graphics-layer{animation:none!important;transition:none!important}.metal-rail{display:none}}
 
-/* Close-up reference: ~826 Ã— 180 image; normalized to a 920 Ã— 200 body.
+/* Close-up reference: ~826 Ãƒâ€” 180 image; normalized to a 920 Ãƒâ€” 200 body.
    Broad team wings, narrow score cells, and a data band overlapping the wings. */
 .scorebug{height:200px}
 .bug-metal,.bug-body{clip-path:polygon(4% 0,96% 0,100% 20%,97.5% 74%,92% 97%,63% 97%,60% 92%,40% 92%,37% 97%,7% 97%,2.5% 74%,0 20%)}
@@ -199,7 +199,7 @@
 .weather-card dl{margin:20px 24px}.weather-card dl>div{display:grid;grid-template-columns:45% 55%;gap:10px;margin:12px 0;font:31px/1.1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:1px}.weather-card dt{color:#d1dadf}.weather-card dd{margin:0;text-transform:uppercase;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(prefers-reduced-motion:reduce){.bug-wrap,.graphics-layer,.graphics-layer *{animation:none!important;transition:none!important}}
 
-/* Observed at 49â€“55s: compact reporter nameplate, with a network badge above. */
+/* Observed at 49Ã¢â‚¬â€œ55s: compact reporter nameplate, with a network badge above. */
 .reporter-nameplate{position:absolute;left:620px;right:620px;bottom:104px;height:100px;background:linear-gradient(120deg,#0a334c,#071e32) padding-box,var(--package-metal) border-box;border:4px solid transparent;clip-path:polygon(0 -60px,100% -60px,100% 72%,96% 100%,4% 100%,0 72%);display:grid;place-items:center}
 .reporter-nameplate h1{font:italic 48px/1 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;margin:0;max-width:95%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .reporter-network{position:absolute;left:50%;bottom:calc(100% + 7px);transform:translateX(-50%)}.reporter-network span{font:bold 24px Arial;background:#101820;padding:3px 8px;white-space:nowrap}.reporter-network img{max-width:160px;max-height:38px}
@@ -208,7 +208,7 @@
 .coach-dock{position:absolute;left:50%;width:440px;height:145px;transform:translateX(calc(-100% - 460px * var(--dock-scale)));background:linear-gradient(105deg,var(--team),#071b2c 80%);border-block:3px solid #91a9b8;clip-path:polygon(12px 0,100% 0,100% 100%,12px 100%,0 80%,0 20%);padding:10px 24px;text-align:center}
 .coach-dock small{font:21px 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase}.coach-dock h1{font:italic 34px/1 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;margin:5px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.coach-dock p{font:21px 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;margin:6px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .animate-in>.coach-dock{animation:reference-fade .16s linear both}
-/* Observed at 86â€“95s: vertical quarterback feature at the left edge. */
+/* Observed at 86Ã¢â‚¬â€œ95s: vertical quarterback feature at the left edge. */
 .qb-sidebar{position:absolute;left:62px;top:130px;width:342px;bottom:80px;background:linear-gradient(150deg,var(--team),#101a20 35%,#060d12);border-right:4px solid #849ca9;box-shadow:4px 0 8px #0006;display:flex;flex-direction:column;align-items:center;overflow:hidden}
 .qb-top-logo{position:absolute;top:6px;left:6px;width:260px;height:230px;opacity:.75}.qb-cutout{position:relative;width:100%;height:46%;min-height:0;display:grid;place-items:center;z-index:1}.qb-cutout .jersey-number{font-size:185px}.qb-cutout .portrait{object-position:center bottom}
 .qb-sidebar-name{position:relative;width:100%;padding:12px 16px;font:italic 42px/1 'DIN Condensed','Arial Narrow',sans-serif;text-align:center;text-transform:uppercase;background:#03090ee8;z-index:2;overflow-wrap:anywhere}
@@ -397,7 +397,7 @@
 .information::before{left:6px;transform:skewX(-11.31deg);background:var(--away-color)}
 .information::after{right:6px;transform:skewX(11.31deg);background:var(--home-color)}
 
-/* FLAG reference: 18.28â€“19.05s, September 17 recording. The raised
+/* FLAG reference: 18.28Ã¢â‚¬â€œ19.05s, September 17 recording. The raised
    black housing carries a yellow center and mirrored, moving slash accents. */
 .flag-tab{bottom:198px;width:420px;height:70px;background:none;clip-path:none;z-index:4;overflow:visible;font:58px/70px var(--display);transform:translate(-50%,15px);opacity:0;visibility:hidden;transition:opacity .12s linear,transform .18s ease-out,visibility 0s .18s}
 .flag-tab::before{display:none}
@@ -411,7 +411,7 @@
 @keyframes flag-outline-burst{0%{opacity:0;transform:translateY(20px) scale(.5)}18%{opacity:.8;transform:translateY(0) scale(.85)}52%{opacity:.75;transform:translateY(7px) scale(1.65)}100%{opacity:0;transform:translateY(22px) scale(2.15)}}
 @keyframes flag-housing-in{from{clip-path:inset(100% 0 0)}to{clip-path:inset(0)}}
 @keyframes flag-stripe-pulse{0%,100%{opacity:1}50%{opacity:.12}}
-/* Compact final/matchup banner proportions from the Cowboysâ€“Browns frame. */
+/* Compact final/matchup banner proportions from the CowboysÃ¢â‚¬â€œBrowns frame. */
 .result-banner{left:200px;right:200px;height:420px;bottom:90px;--rim:polygon(2.5% 0,97.5% 0,100% 30%,98.7% 78%,95% 100%,62% 100%,58% 94%,42% 94%,38% 100%,5% 100%,1.3% 78%,0 30%)}
 .result-metal{inset:168px 0 0}
 .result-team{width:510px}.result-team.away{left:42px}.result-team.home{right:42px}
@@ -578,7 +578,7 @@
 .qb-live-content{position:absolute;inset:3px 94px 3px 14px;display:flex;justify-content:center;align-items:center;gap:10px;overflow:hidden;container-type:inline-size}
 .dock-home .qb-live-content{inset:3px 14px 3px 94px}
 .qb-live-name,.qb-live-values b{font-size:clamp(10px,5cqw,29px)}.qb-live-values small{font-size:clamp(9px,4cqw,23px)}
-/* QB51: match the 233.8â€“245s reference, superseding the full-color housing. */
+/* QB51: match the 233.8Ã¢â‚¬â€œ245s reference, superseding the full-color housing. */
 .qb-live-bar,.dock-home .qb-live-bar{width:min(770px,calc(880px / var(--bug-scale) - 370px));height:48px;bottom:6px!important;padding:0;border:0;background:rgba(5,12,9,.76);box-shadow:none;filter:none}
 .qb-live-bar{clip-path:polygon(12px 0,100% 0,100% 100%,0 100%)}
 .dock-home .qb-live-bar{clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%)}
@@ -689,7 +689,7 @@
 .lineup-names .lineup-player-panel strong{font-size:clamp(18px,calc(170cqw / var(--surname-length,8)),42px);font-weight:700;line-height:1.04;letter-spacing:.1px;padding-inline:3px;text-shadow:1px 1px #0008}
 .qb-sidebar-name small{font:italic 34px/1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:1px}
 .qb-sidebar-name strong{font:italic 700 62px/1.05 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:0}
-/* Mini sequence measured at 34.82â€“37.60s: rail, upward build, badge hold, score resolve. */
+/* Mini sequence measured at 34.82Ã¢â‚¬â€œ37.60s: rail, upward build, badge hold, score resolve. */
 .commercial-mini{transform-origin:50% 100%;isolation:isolate}
 .mini-content{position:relative;z-index:1}.mini-intro{display:none;position:absolute;inset:5px 5px 10px;background:linear-gradient(115deg,#242626,#101413);align-items:center;justify-content:center;z-index:2}
 .mini-badge{width:220px;min-height:260px;padding:15px 8px 25px;text-align:center;background:linear-gradient(#f0f3f4,#adbcc4);clip-path:polygon(0 0,100% 0,100% 85%,50% 100%,0 85%);position:relative;isolation:isolate;color:#f1f5f4}
@@ -734,7 +734,7 @@
 .commercial-mini{padding:3px 3px 9px 5px}.mini-content{clip-path:polygon(0 0,100% 0,100% 100%,24px 100%,0 calc(100% - 24px))}.mini-intro{inset:3px 3px 9px 5px;clip-path:polygon(0 0,100% 0,100% 100%,24px 100%,0 calc(100% - 24px))}
 .qb-sidebar::before{border-right:3px solid #84949c}.reporter-nameplate::before{border-width:3px 3px 6px}
 
-/* Electrical shapes sampled from the supplied 12:32 recording, 39.30â€“40.93s. */
+/* Electrical shapes sampled from the supplied 12:32 recording, 39.30Ã¢â‚¬â€œ40.93s. */
 .bug-enter .bug-electric{left:0;top:0;width:100%;height:100%;filter:none;background-image:url('./assets/scorebug-electric-reference.svg');background-size:100% 5000%;background-repeat:no-repeat;animation:reference-electric-frames 1.667s steps(49,end) both;opacity:1}
 .bug-electric>svg{display:none}
 @keyframes reference-electric-frames{from{background-position:0 0}to{background-position:0 100%}}
@@ -808,7 +808,7 @@
 @keyframes broadcast-shutter{from{clip-path:polygon(0 0,0 0,0 100%,0 100%)}to{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}}@keyframes broadcast-emblem{from{transform:scale(.25) rotateY(-70deg);opacity:0}to{transform:scale(1) rotateY(0);opacity:1}}
 .animate-in>:is(.referee-card,.tiers-card,.standings-card){animation:reference-fade .18s ease-out both}.graphics-layer.leaving:has(>.bevel-card){animation:reference-fade .16s linear reverse both}
 .graphics-layer[data-motion="fade"] :is(.touchdown-ribbon,.broadcast-transition){animation:reference-fade .16s linear both!important}.graphics-layer[data-motion="fade"] :is(.touchdown-ribbon,.broadcast-transition) *{animation:none!important}
-/* Mini box: a 3.5s badge hold before the score faces, measured at 879â€“883s. */
+/* Mini box: a 3.5s badge hold before the score faces, measured at 879Ã¢â‚¬â€œ883s. */
 .mini-badge{background:none;clip-path:none;padding:8px;width:220px;height:280px;min-height:0;display:grid;place-items:center}.mini-badge::before{display:none}.mini-badge .network-mark{transform:scale(1.6)}
 .animate-in>.commercial-mini .mini-intro{animation:mini-badge-resolve 4s linear both}.animate-in>.commercial-mini .mini-content{animation:mini-score-resolve 4s linear both}.animate-in>.commercial-mini .mini-team .team-logo{animation:mini-logo-resolve .28s 3.48s ease-out both}
 /* Shared large break / final banner behavior. */
@@ -906,7 +906,7 @@
 
 @media(prefers-reduced-motion:reduce){.stage .graphics-layer .two-team-bumper .bumper-panels,.stage .graphics-layer .two-team-bumper .bumper-logo{animation:none!important}}
 
-/* Cowboysâ€“Eagles reference, 09:40: folded matchup shutter. */
+/* CowboysÃ¢â‚¬â€œEagles reference, 09:40: folded matchup shutter. */
 .graphics-layer:has(>.two-team-bumper){z-index:100}
 .two-team-bumper .bumper-panels{inset:0;background:transparent;animation:matchup-envelope var(--bumper-time) linear both;isolation:isolate}
 .two-team-bumper .bumper-team{flex:0 0 50%;min-width:0;border:0;background:linear-gradient(90deg,color-mix(in srgb,var(--team) 75%,#07111b),var(--team));animation:matchup-left var(--bumper-time) cubic-bezier(.22,.7,.25,1) both;overflow:visible}
@@ -975,7 +975,7 @@
 /* Individual player-info backplates sit inside the shared FOX-style ribbon. */
 .lineup-names>.lineup-player-panel{isolation:isolate;background:none}
 .lineup-names>.lineup-player-panel::before{content:'';position:absolute;inset:4px 3px 5px;z-index:-1;pointer-events:none;clip-path:polygon(10px 0,100% 0,100% calc(100% - 9px),calc(100% - 12px) 100%,0 100%,0 10px);background:url('./assets/lineup-contours.svg') center/430px 132px,linear-gradient(110deg,color-mix(in srgb,var(--team) 78%,#07101b),color-mix(in srgb,var(--team) 40%,#020912) 85%);box-shadow:inset 0 1px #bad4e044,inset 0 -3px #68849788,inset 1px 0 #bcd0df24}
-/* Reference lineup In/Out: 90.9â€“91.4 and 104.45â€“104.8 in the long recording.
+/* Reference lineup In/Out: 90.9Ã¢â‚¬â€œ91.4 and 104.45Ã¢â‚¬â€œ104.8 in the long recording.
    Deliberately scoped to take/hide; persistent group-update motion is unchanged. */
 .graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon{animation:none;overflow:visible}
 .graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame{transform-origin:50% 100%;animation:lineup-frame-in82 .48s cubic-bezier(.2,.65,.3,1) both}
@@ -1077,7 +1077,7 @@
 .bug-metal{background:linear-gradient(transparent 0 8px,#071015 8px)}
 .bug-possession-rail{top:8px;height:4px}
 
-/* Close-up reference proportions: 920 Ã— 200; no oversized external shell. */
+/* Close-up reference proportions: 920 Ãƒâ€” 200; no oversized external shell. */
 .bug-metal{width:100%;height:100%;left:0;top:0;padding:3px;background:#071015}
 .bug-enter .scorebug{clip-path:var(--bug-outline)}
 .bug-enter .bug-intro-mask{inset:0}
