@@ -1174,3 +1174,19 @@
 .scorebug .information .down-current{line-height:1.15}
 .scorebug .information .down.rolling::before{padding:0 6px}
 .scorebug .information .play-clock{font-family:'DIN Condensed',Impact,'Arial Narrow',sans-serif;font-size:44px;line-height:1.15;padding:0 4px;overflow:visible}
+
+/* Lineup metalwork: outside the face so rails never cover player text. */
+.lineup-ribbon-frame{padding:4px 8px 9px;overflow:visible;clip-path:none;background:none;isolation:isolate}
+.lineup-ribbon-frame::after{content:'';position:absolute;inset:-2px -2px -1px;pointer-events:none;z-index:3;background:url('./lineup-rails.svg?v=107') center/100% 100% no-repeat}
+.lineup-ribbon-face{height:100%}
+.lineup-ribbon::after{content:'';position:absolute;left:20px;right:20px;bottom:0;height:8px;z-index:3;pointer-events:none;background:linear-gradient(#f2f7f8,#c8d7de 28%,#718996 57%,#263e4c 80%,#aec1cc);clip-path:polygon(0 0,24% 0,25% 45%,75% 45%,76% 0,100% 0,calc(100% - 8px) 100%,76% 100%,75% 70%,25% 70%,24% 100%,8px 100%)}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame{animation:lineup-metal-open107 .48s cubic-bezier(.2,.65,.3,1) both;transform:none}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon::after{animation:lineup-base-open107 .48s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame{animation:lineup-metal-close107 .38s ease-in both;transform:none}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon::after{animation:lineup-base-close107 .38s ease-in both}
+@keyframes lineup-metal-open107{0%,40%{clip-path:inset(100% -4px 0)}90%,100%{clip-path:inset(-4px)}}
+@keyframes lineup-base-open107{0%{transform:scaleX(.02)}42%,100%{transform:scaleX(1)}}
+@keyframes lineup-metal-close107{0%,8%{clip-path:inset(-4px)}62%,100%{clip-path:inset(100% -4px 0)}}
+@keyframes lineup-base-close107{0%,58%{transform:scaleX(1);opacity:1}99%{transform:scaleX(.02);opacity:1}100%{transform:scaleX(0);opacity:0}}
+.graphics-layer[data-motion=fade]>.lineup-ribbon::after{animation:none!important}
+@media(prefers-reduced-motion:reduce){.graphics-layer>.lineup-ribbon::after{animation:none!important}}
