@@ -456,6 +456,27 @@ def _update(action,p):
     elif action=='clear':
         STATE['program'].setdefault('qbStats',{})['visible']=False
         STATE['program'].update(bug=False,watermark=False,graphic={'type':'none'},takeId=STATE['program']['takeId']+1)
+    elif action=='playlist_save':
+        rows=p.get('items',[])
+        if not isinstance(rows,list) or len(rows)>100: raise ValueError('Use up to 100 playlist items.')
+        selected=copy.deepcopy(STATE['preview']);clean=[];ids=set()
+        try:
+            for row in rows:
+                if not isinstance(row,dict) or not isinstance(row.get('cue'),dict): raise ValueError('Invalid playlist item.')
+                key=bounded_text(row.get('id',''),80)
+                if not key or key in ids: raise ValueError('Playlist items need unique IDs.')
+                ids.add(key)
+                seconds=float(row.get('seconds',8))
+                if not math.isfinite(seconds) or seconds<1 or seconds>300: raise ValueError('Hold time must be 1–300 seconds.')
+                _update('preview',row['cue'])
+                clean.append({'id':key,'name':bounded_text(row.get('name','Graphic'),100),'seconds':seconds,'cue':copy.deepcopy(STATE['preview'])})
+        finally: STATE['preview']=selected
+        STATE['program']['playlist']=clean
+    elif action=='playlist_take':
+        item=next((x for x in STATE['program'].get('playlist',[]) if x['id']==p.get('id')),None)
+        if not item: raise ValueError('Playlist item no longer exists.')
+        _update('preview',copy.deepcopy(item['cue']))
+        _update('take',{})
     elif action=='transition_preset':
         presets=STATE['program'].setdefault('transitionPresets',{})
         key=bounded_text(p.get('id',''),80)
@@ -509,6 +530,7 @@ def _update(action,p):
         if saved_qb.get('type')=='qbstats':
             update('preview',{k:v for k,v in saved_qb.items() if k!='visible'})
             STATE['program']['qbStats']={**copy.deepcopy(STATE['preview']),'visible':False}
+        update('playlist_save',{'items':src.get('program',{}).get('playlist',[])})
         update('preview',src['preview'])
         STATE['program'].update(bug=False,watermark=False,graphic={'type':'none'})
     else: raise ValueError('Unknown action.')

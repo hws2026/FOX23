@@ -1,4 +1,4 @@
-import {subscribe} from './bridge.js?v=crew111';
+import {subscribe} from './bridge.js?v=playlist116';
 import {renderGraphics,updateClocks,fitStage} from './graphics.js?v=reporter110';
 const stage=document.querySelector('#stage'),preview=new URLSearchParams(location.search).has('preview');fitStage(stage);let state,revision=-1,offset=0;
 export function accept(s){offset=s.serverTime-Date.now()/1000;state=s;if(s.revision!==revision){renderGraphics(stage,s,preview);revision=s.revision;}}

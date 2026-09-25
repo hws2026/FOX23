@@ -1177,7 +1177,7 @@
 
 /* Lineup metalwork: outside the face so rails never cover player text. */
 .lineup-ribbon-frame{padding:4px 8px 9px;overflow:visible;clip-path:none;background:none;isolation:isolate}
-.lineup-ribbon-frame::after{content:'';position:absolute;inset:-2px -2px -1px;pointer-events:none;z-index:3;background:url('./lineup-rails.svg?v=114') center/100% 100% no-repeat}
+.lineup-ribbon-frame::after{content:'';position:absolute;inset:-2px -2px -1px;pointer-events:none;z-index:3;background:url('./lineup-rails.svg?v=116') center/100% 100% no-repeat}
 .lineup-ribbon-face{height:100%}
 .lineup-ribbon::after{content:'';position:absolute;left:20px;right:20px;bottom:0;height:8px;z-index:3;pointer-events:none;background:linear-gradient(#f2f7f8,#c8d7de 28%,#718996 57%,#263e4c 80%,#aec1cc);clip-path:polygon(0 0,24% 0,25% 45%,75% 45%,76% 0,100% 0,calc(100% - 8px) 100%,76% 100%,75% 70%,25% 70%,24% 100%,8px 100%)}
 .graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame{animation:lineup-metal-open107 .48s cubic-bezier(.2,.65,.3,1) both;transform:none}
@@ -1294,3 +1294,6 @@
 /* Team banners use the scorebug's open upper shoulders, not a closed metal ring. */
 .result-banner:not(.break-banner) .result-metal{padding:0;background:none;isolation:isolate}
 .result-banner:not(.break-banner) .result-metal::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:url('./team-banner-rails.svg?v=112') center/100% 100% no-repeat}
+
+/* One aligned metal assembly owns the lineup base and corner joins. */
+.lineup-ribbon::after{display:none}
