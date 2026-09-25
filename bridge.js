@@ -8,7 +8,7 @@ export async function startController(){
  let acquired;
  await new Promise(resolve=>navigator.locks.request('gridiron-controller:'+base.pathname,{ifAvailable:true},async lock=>{
   acquired=!!lock;resolve();if(!lock)return;
-  worker=new Worker(new URL('runtime-worker.js?v=referee126',base));
+  worker=new Worker(new URL('runtime-worker.js?v=intro138',base));
   worker.onmessage=({data})=>{const p=pending.get(data.id);if(!p)return;pending.delete(data.id);data.error?p.reject(Error(data.error)):p.resolve(data.result);};
   worker.onerror=e=>{for(const p of pending.values())p.reject(Error(e.message));pending.clear();};
   readyResolve();await new Promise(()=>{});
@@ -26,7 +26,7 @@ export async function startController(){
  channel.onmessage=async({data})=>{
   if(data.kind==='hello'&&current)channel.postMessage({kind:'state',state:{...current,serverTime:Date.now()/1000}});
   if(data.kind==='command'){
-   try{const {commands}=await import('./commands.js?v=referee126');const command=commands[data.command];if(!command)throw Error('Unknown button');
+   try{const {commands}=await import('./commands.js?v=intro138');const command=commands[data.command];if(!command)throw Error('Unknown button');
     let result;for(let attempt=0;attempt<3;attempt++){const first=await rpc({endpoint:'state'});result=await rpc({endpoint:'action',body:{action:command[0],payload:command[1],revision:first.data.revision}});if(result.status!==409)break;}
     if(result.status!==200)throw Error(result.data.error);publish(result.data);channel.postMessage({kind:'ack',id:data.id});
    }catch(e){channel.postMessage({kind:'ack',id:data.id,error:e.message});}
