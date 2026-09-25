@@ -1,6 +1,6 @@
 export function createPlaylist({getState,act,stopLineup,esc,graphicNames,render,toast}){
  let selected='',timer=null,deadline=0,remaining=0,running=false,working=false,owned=null,generation=0;
- const items=()=>getState()?.program.playlist||[];
+ const items=()=>(getState()?.program.playlist||[]).filter(x=>!['tiers','upcoming'].includes(x.cue.type));
  const current=()=>items().find(x=>x.id===selected)||items()[0];
  function pause(){if(timer){remaining=Math.max(0,deadline-Date.now());clearTimeout(timer);}timer=null;running=false;generation++;renderStatus();}
  function renderStatus(){const el=document.querySelector('#playlist-status');if(el)el.textContent=running?'Playing automatically':remaining?'Paused — graphic stays on air':'Manual playback';}

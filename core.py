@@ -15,7 +15,7 @@ LIBRARY=TeamLibrary(ROOT,DATA)
 POSITIONS = ['QB','LT','LG','C','RG','RT','WR','WR','TE','RB','WR','DE','DT','DT','DE','LB','LB','LB','CB','CB','FS','SS','K','P']
 NAMES = ['Jordan Ellis','Marcus Reed','Cameron Price','Alex Morgan','Drew Collins','Taylor Brooks','Jalen Carter','Noah Hayes','Mason Cole','Evan Grant','Devin Ross','Cole Bennett','Tyler James','Owen Parker','Blake Foster','Avery Scott','Logan West','Riley Davis','Kai Turner','Miles Ward','Nolan King','Isaiah Bell','Sam Lewis','Jesse Gray']
 FORMATION_LABELS = {'4-3-4': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '3-4-4': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-2-5': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '3-3-5': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '5-2-4': ['DL', 'DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-1-6': ['DL', 'DL', 'DL', 'DL', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB', 'CB']}
-GRAPHICS = {'intro','referee','tiers','standings','transition','scoringdrive','none','qbstats','scorebug','matchup','offense','defense','quarterback','player','coach','lowerthird','stats','teamstats','roster','event','period','final','upcoming','announcers','sponsor','weather','reporter','situation','break'}
+GRAPHICS = {'intro','referee','standings','transition','scoringdrive','none','qbstats','scorebug','matchup','offense','defense','quarterback','player','coach','lowerthird','stats','teamstats','roster','event','period','final','announcers','sponsor','weather','reporter','situation','break'}
 def roster(side):
     return [{'id':f'{side}-{i+1}', 'name':name, 'number':str(([7,72,64,55,68,77,11,18,86,24,13,90,95,98,91,50,54,56,21,23,30,32,3,9][i]+(2 if side=='home' else 0))%100), 'position':pos,'photo':'','stats':{'YDS':'248','TD':'2','CMP':'19/27'}} for i,(name,pos) in enumerate(zip(NAMES,POSITIONS))]
 def default_state():
@@ -412,7 +412,7 @@ def _update(action,p):
             elif k=='stats':
                 if not isinstance(v,list) or len(v)>6: raise ValueError('Use up to six comparison rows.')
                 v=[{f:bounded_text(x.get(f,''),40) for f in ['label','away','home']} for x in v]
-            elif k in ['title','subtitle','event','period','nextAway','nextHome','nextTime','playerId','leftName','leftRole','rightName','rightRole','sponsorTitle','sponsorSubtitle','sponsorNext','weatherTemp','weatherWind','weatherForecast','reporterName','qbValue','qbLabel','qbDetail','qbSeasonLabel','staffId','staffName','staffRole','staffDetail','situationDetail','breakHeadline','breakDetail','driveTime','driveResult','driveNote','kickerId','kickerContext']: v=bounded_text(v,120)
+            elif k in ['title','subtitle','event','period','nextAway','nextHome','nextTime','playerId','leftName','leftRole','rightName','rightRole','sponsorTitle','sponsorSubtitle','sponsorNext','weatherTemp','weatherWind','weatherForecast','reporterName','qbValue','qbLabel','qbDetail','qbSeasonLabel','staffId','staffName','staffRole','staffDetail','spotlightDetail','lowerContext','lowerContextText','situationDetail','breakHeadline','breakDetail','driveTime','driveResult','driveNote','kickerId','kickerContext']: v=bounded_text(v,120)
             else: raise ValueError('Invalid graphic field.')
             cue[k]=v
         if cue.get('type')=='quarterback' and cue.get('qbIntroMode')=='season':

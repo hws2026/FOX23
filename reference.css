@@ -54,7 +54,7 @@
 /* Default family transitions. Section-specific rules reproduce the two supplied clips. */
 @keyframes graphic-enter{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
 .animate-in>.announcer{animation:none}
-.animate-in>.announcer .metal-rail{animation:rails-in .25s linear both}
+.animate-in>.announcer .metal-rail{animation:rails-in-fade154 .25s linear both}
 .animate-in>.announcer .announcer-frame{animation:plate-in .2s .15s cubic-bezier(.25,.6,.2,1) both}
 .animate-in>.announcer .announcer-person{animation:type-in .2s .29s ease-out both}
 .animate-in>.result-banner,.animate-in>.sponsor-promo{animation:reference-fade .3s linear both}
@@ -75,7 +75,7 @@
 /* Operator overrides provide the same transition language to every template. */
 .graphics-layer[data-motion=fade].animate-in>section{animation:reference-fade .3s linear both}
 .graphics-layer[data-motion=fade].animate-in>section *{animation:none}
-.graphics-layer[data-motion=rail].animate-in>section{animation:generic-rail .45s ease-out both}
+.graphics-layer[data-motion=rail].animate-in>section{animation:generic-rail-fade154 .45s ease-out both}
 @keyframes generic-rail{0%{clip-path:inset(49% 45%);opacity:0}20%{clip-path:inset(48% 0);opacity:1}100%{clip-path:inset(0);opacity:1}}
 .graphics-layer[data-motion=cut]>section,.graphics-layer[data-motion=cut]>section *{animation:none!important;transition:none!important}
 .graphics-layer[data-motion=fade].leaving{animation:reference-fade .3s linear reverse both}
@@ -148,7 +148,7 @@
 .lineup-names>div{flex:1;min-width:0;text-align:center}
 .lineup-names small{display:block;font:23px/1 'DIN Condensed','Arial Narrow',sans-serif;color:#ffdc27;margin-bottom:5px}
 .lineup-names strong{display:block;font:29px/1 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.animate-in>.lineup-ribbon{animation:generic-rail .45s ease-out both}
+.animate-in>.lineup-ribbon{animation:generic-rail-fade154 .45s ease-out both}
 
 .lineup-team-tab{text-transform:uppercase}
 
@@ -203,7 +203,7 @@
 .reporter-nameplate{position:absolute;left:620px;right:620px;bottom:104px;height:100px;background:linear-gradient(120deg,#0a334c,#071e32) padding-box,var(--package-metal) border-box;border:4px solid transparent;clip-path:polygon(0 -60px,100% -60px,100% 72%,96% 100%,4% 100%,0 72%);display:grid;place-items:center}
 .reporter-nameplate h1{font:italic 48px/1 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;margin:0;max-width:95%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .reporter-network{position:absolute;left:50%;bottom:calc(100% + 7px);transform:translateX(-50%)}.reporter-network span{font:bold 24px Arial;background:#101820;padding:3px 8px;white-space:nowrap}.reporter-network img{max-width:160px;max-height:38px}
-.animate-in>.reporter-nameplate{animation:generic-rail .35s ease-out both}
+.animate-in>.reporter-nameplate{animation:generic-rail-fade154 .35s ease-out both}
 /* Observed at 65s: short coach identifier attached to the left of the scorebug. */
 .coach-dock{position:absolute;left:50%;width:440px;height:145px;transform:translateX(calc(-100% - 460px * var(--dock-scale)));background:linear-gradient(105deg,var(--team),#071b2c 80%);border-block:3px solid #91a9b8;clip-path:polygon(12px 0,100% 0,100% 100%,12px 100%,0 80%,0 20%);padding:10px 24px;text-align:center}
 .coach-dock small{font:21px 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase}.coach-dock h1{font:italic 34px/1 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;margin:5px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.coach-dock p{font:21px 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;margin:6px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -660,7 +660,7 @@
 .drive-surface{background:var(--package-lines),linear-gradient(110deg,var(--team),color-mix(in srgb,var(--team) 65%,#111));min-height:300px;clip-path:polygon(0 0,100% 0,100% 96%,88% 100%,32px 100%,0 calc(100% - 32px))}
 .drive-card header{height:98px;display:flex;align-items:center;gap:12px;padding:0 14px;background:linear-gradient(#0001,#0004);border-bottom:1px solid #ffffff12}
 .drive-logo{width:140px;height:98px;flex-shrink:0}.drive-logo .team-logo{object-fit:contain;max-width:100%;max-height:100%}.drive-card h1{font:italic 58px/1 'DIN Condensed','Arial Narrow',sans-serif;margin:0;white-space:nowrap;text-shadow:2px 2px #0008}
-.drive-body{text-align:center;padding:17px 18px 24px;font:35px/1.15 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:1px}.drive-body p{margin:0 0 21px}.drive-body strong{display:block;font-weight:500}.drive-body small{display:block;color:#f6ce32;font-size:32px;margin-top:7px}
+.drive-body{text-align:center;padding:17px 18px 24px;font:35px/1.15 'DIN Condensed','Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:1px}.drive-body p{margin:0 0 21px}.drive-body strong{display:block;font-weight:500}.drive-body small{display:block;color:#fff;font-size:32px;margin-top:7px}
 .animate-in>.drive-card{animation:reference-fade .16s linear both}.graphics-layer.leaving:has(>.drive-card){animation:reference-fade .16s linear reverse both}
 /* Mini break is a stacked lower-left score box; the large version remains an overlay. */
 .commercial-mini{position:absolute;left:70px;bottom:76px;width:300px;padding:5px 5px 15px;background:var(--package-metal);clip-path:polygon(0 0,100% 0,100% 96%,85% 100%,30px 100%,0 calc(100% - 30px))}
@@ -801,7 +801,7 @@
 .tiers-logo{position:absolute;top:-50px;bottom:0;width:275px;display:grid;place-items:center}.tiers-logo.away{left:0}.tiers-logo.home{right:0}.tiers-logo .team-logo{width:100%;height:100%;object-fit:contain}.tiers-copy{text-align:center;text-transform:uppercase}.tier{font:44px/1.1 var(--display)}.tier-1{font-weight:700;font-size:58px}.tier.yellow,.tiers-copy footer{color:#f6c625}.tiers-copy footer{font:30px/1.2 var(--display);margin-top:8px}
 .standings-card{left:85px;bottom:85px;width:700px}.standings-face{padding:20px 26px;background:var(--package-lines),linear-gradient(#16334c,#08151e)}.standings-card header{font:italic 700 48px/1 var(--display);padding-bottom:20px}.standings-card table{width:100%;border-collapse:collapse;font:34px/1.3 var(--display)}.standings-card th{text-align:left}.standings-card td{text-align:center}.standings-card thead{color:#f6c625}.standings-card tr{border-bottom:1px solid #778b98}.standings-card td,.standings-card th{padding:9px}
 .touchdown-ribbon{position:absolute;left:0;right:0;bottom:68px;height:330px;isolation:isolate;text-align:center;display:flex;justify-content:center;align-items:flex-end}.td-rails{position:absolute;bottom:0;left:0;right:0;height:112px;background:linear-gradient(180deg,var(--team) 0 7%,#9caeb4 8% 10%,var(--team) 11% 21%,#041115 23% 36%,var(--team) 38% 45%,#a6b1b6 47% 49%,#15191b 51% 65%,#a3afb4 68% 72%,#4a555c 76%,#090c0e 100%);z-index:-1}.touchdown-ribbon h1{margin:0;font:italic 700 160px/.9 var(--display);letter-spacing:-4px;background:linear-gradient(#fff 0 50%,#9ca2a5 65%,#e4e7e9);background-clip:text;color:transparent;z-index:2}.td-identity{position:absolute;bottom:70px;height:245px;width:320px;left:calc(50% - 390px)}.td-identity :is(.portrait,.team-logo){width:100%;height:100%;object-fit:contain}.td-player{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;background:#111a1f;padding:4px 22px;font:italic 40px/1 var(--display);white-space:nowrap}.td-player b{color:#111;background:#f6d326;padding:4px 7px}
-.animate-in>.touchdown-ribbon .td-rails{animation:td-rail-build .42s ease-out both}.animate-in>.touchdown-ribbon h1{animation:td-title-build .55s .1s ease-out both}.animate-in>.touchdown-ribbon .td-identity,.animate-in>.touchdown-ribbon .td-player{animation:reference-fade .24s .45s both}.graphics-layer.leaving:has(.touchdown-ribbon){animation:td-title-build .35s ease-in reverse both}
+.animate-in>.touchdown-ribbon .td-rails{animation:td-rail-build-fade154 .42s ease-out both}.animate-in>.touchdown-ribbon h1{animation:td-title-build .55s .1s ease-out both}.animate-in>.touchdown-ribbon .td-identity,.animate-in>.touchdown-ribbon .td-player{animation:reference-fade .24s .45s both}.graphics-layer.leaving:has(.touchdown-ribbon){animation:td-title-build .35s ease-in reverse both}
 @keyframes td-rail-build{from{transform:scaleX(0)}to{transform:scaleX(1)}}@keyframes td-title-build{from{transform:scaleX(.1) translateY(20px);opacity:0}to{transform:scaleX(1) translateY(0);opacity:1}}
 .broadcast-transition{position:absolute;inset:0;isolation:isolate;display:grid;place-items:center;overflow:hidden}.transition-shutter{position:absolute;inset:0;background:var(--package-lines),linear-gradient(125deg,var(--team),#04101b);border-block:18px solid #a4b5be;z-index:-1}.transition-emblem{width:580px;height:650px;display:grid;place-items:center;filter:drop-shadow(0 10px 5px #0008)}.transition-emblem :is(.team-logo,.secondary-mark){width:100%;height:100%;object-fit:contain}.transition-person{position:absolute;bottom:130px;text-align:center;background:#051019ed;border-bottom:6px solid #9db3c1;padding:20px 80px}.transition-person h1{font:italic 700 85px/1 var(--display);margin:8px}.transition-person :is(p,small){font:35px/1 var(--display);margin:0}
 .animate-in>.broadcast-transition .transition-shutter{animation:broadcast-shutter .6s cubic-bezier(.2,.7,.2,1) both}.animate-in>.broadcast-transition .transition-emblem{animation:broadcast-emblem .7s ease-out both}.graphics-layer.leaving:has(.broadcast-transition){animation:broadcast-shutter .45s ease-in reverse both}
@@ -827,7 +827,7 @@
 .td-fragments{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:4}
 .td-fragments i{position:absolute;left:50%;bottom:calc(45px + var(--y));width:180px;height:90px;background:linear-gradient(135deg,#122328 5%,var(--team) 65%,var(--secondary));clip-path:polygon(0 0,100% 42%,30% 57%,65% 100%);opacity:0}
 .graphics-layer[data-motion="auto"].animate-in>.touchdown-ribbon .td-fragments i{animation:td-fragment-burst .8s calc(var(--i)*.015s) ease-out both}
-.graphics-layer[data-motion="auto"].animate-in>.touchdown-ribbon .td-rails{animation:td-rail-build .46s .15s cubic-bezier(.16,.7,.2,1) both}
+.graphics-layer[data-motion="auto"].animate-in>.touchdown-ribbon .td-rails{animation:td-rail-build-fade154 .46s .15s cubic-bezier(.16,.7,.2,1) both}
 .graphics-layer[data-motion="auto"].animate-in>.touchdown-ribbon h1{animation:none}
 .graphics-layer[data-motion="auto"].animate-in>.touchdown-ribbon h1>span{animation:td-letter-build .55s calc(.18s + var(--i)*.025s) cubic-bezier(.18,.75,.3,1) both}
 .graphics-layer[data-motion="auto"].animate-in>.touchdown-ribbon :is(.td-identity,.td-player){animation:reference-fade .22s .68s both}
@@ -1045,7 +1045,7 @@
 @keyframes bug-electric-reveal{0%,62%{clip-path:var(--bug-outline);mask-size:0% 100%}94%,100%{clip-path:var(--bug-outline);mask-size:100% 100%}}
 /* Large break and final: lower rail expands, face opens, then raised logos and data resolve. */
 .graphics-layer[data-motion="auto"].animate-in>.final-banner{animation:none}
-.graphics-layer[data-motion="auto"].animate-in>.final-banner .result-metal{transform-origin:50% 100%;animation:result-frame-build86 .68s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer[data-motion="auto"].animate-in>.final-banner .result-metal{transform-origin:50% 100%;animation:result-frame-build86-fade154 .68s cubic-bezier(.2,.65,.3,1) both}
 .graphics-layer[data-motion="auto"].animate-in>.final-banner .result-logo{transform-origin:50% 100%;animation:result-logo-build86 .76s cubic-bezier(.2,.65,.3,1) both}
 .graphics-layer[data-motion="auto"].animate-in>.final-banner .result-name{animation:result-copy-build86 .72s ease-out both}
 .graphics-layer[data-motion="auto"].animate-in>.final-banner .result-center{animation:result-copy-build86 .78s ease-out both}
@@ -1196,7 +1196,7 @@
 .weather-card::before{inset:5px 7px 12px 9px;clip-path:polygon(0 0,100% 0,100% 100%,29px 100%,0 calc(100% - 29px))}
 .weather-card::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;background:url('./weather-rails.svg?v=108') center/100% 100% no-repeat}
 .weather-card dl{margin:19px 22px 25px}
-.graphics-layer.animate-in[data-motion=auto]>.weather-card{animation:weather-rail-in108 .48s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer.animate-in[data-motion=auto]>.weather-card{animation:weather-rail-in108-fade154 .48s cubic-bezier(.2,.65,.3,1) both}
 .graphics-layer.animate-in[data-motion=auto]>.weather-card :is(header h1,header p,dl){animation:weather-copy-in108 .18s .27s ease-out both}
 .graphics-layer.leaving[data-motion=auto]:has(>.weather-card){animation:none;opacity:1;transform:none;clip-path:none}
 .graphics-layer.leaving[data-motion=auto]>.weather-card{animation:weather-rail-out108 .36s ease-in both}
@@ -1225,7 +1225,7 @@
 .break-record{position:absolute;left:-2px;bottom:104px;font:italic 26px/1.1 'DIN Condensed',Impact,sans-serif;color:#f1f5f7;text-shadow:1px 2px #000}
 .break-banner .home .break-record{left:auto;right:-2px}
 .graphics-layer[data-motion=auto].animate-in>.break-banner{animation:none!important}
-.graphics-layer[data-motion=auto].animate-in>.break-banner .result-metal{animation:break-metal-in108 .72s cubic-bezier(.2,.65,.3,1) both;transform-origin:50% 100%}
+.graphics-layer[data-motion=auto].animate-in>.break-banner .result-metal{animation:break-metal-in108-fade154 .72s cubic-bezier(.2,.65,.3,1) both;transform-origin:50% 100%}
 .graphics-layer[data-motion=auto].animate-in>.break-banner .result-logo{animation:break-logo-in108 .84s cubic-bezier(.2,.65,.3,1) both!important;transform-origin:center bottom}
 .graphics-layer[data-motion=auto].animate-in>.break-banner :is(.result-name,.break-record){animation:result-copy-build86 .78s ease-out both}
 .graphics-layer[data-motion=auto].animate-in>.break-banner .result-center{animation:result-copy-build86 .86s ease-out both}
@@ -1241,7 +1241,7 @@
 .break-banner .result-surface::after{right:0;transform:scaleX(-1);mask-image:linear-gradient(90deg,#000 75%,transparent)}
 
 /* Refined break timing: continuous rail build, then coordinated logos and data. */
-.graphics-layer[data-motion=auto].animate-in>.break-banner .result-metal{animation:break-metal-in109 .64s cubic-bezier(.22,.65,.3,1) both}
+.graphics-layer[data-motion=auto].animate-in>.break-banner .result-metal{animation:break-metal-in109-fade154 .64s cubic-bezier(.22,.65,.3,1) both}
 .graphics-layer[data-motion=auto].animate-in>.break-banner .result-logo{animation:break-logo-in109 .74s cubic-bezier(.2,.65,.3,1) both!important}
 .graphics-layer[data-motion=auto].animate-in>.break-banner :is(.result-name,.break-record,.result-center){animation:break-copy-in109 .74s ease-out both}
 .graphics-layer[data-motion=auto].animate-in>.break-banner .result-badge{animation:break-badge-in108 .78s ease-out both}
@@ -1276,7 +1276,7 @@
 .reporter-network img{display:block;max-width:190px;max-height:48px;object-fit:contain}
 .reporter-network span{font-size:30px;line-height:1;padding:4px 7px}
 .graphics-layer[data-motion=auto].animate-in>.reporter-nameplate{animation:none}
-.graphics-layer[data-motion=auto].animate-in>.reporter-nameplate::after{animation:reporter-rails-in110 .42s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer[data-motion=auto].animate-in>.reporter-nameplate::after{animation:reporter-rails-in110-fade154 .42s cubic-bezier(.2,.65,.3,1) both}
 .graphics-layer[data-motion=auto].animate-in>.reporter-nameplate::before{animation:reporter-face-in110 .23s .14s ease-out both}
 .graphics-layer[data-motion=auto].animate-in>.reporter-nameplate :is(h1,.reporter-network){animation:type-in .18s .27s ease-out both}
 .graphics-layer[data-motion=auto].leaving:has(>.reporter-nameplate){animation:none;opacity:1}
@@ -1345,7 +1345,7 @@
 .break-banner .result-scores{height:138px;gap:14px}.break-banner .result-scores b{font-size:137px;min-width:130px}
 .break-banner .result-badge{top:134px}
 .break-banner .break-record{bottom:102px}
-.graphics-layer[data-motion=auto].animate-in>.break-banner .result-metal{animation:break-frame124 .68s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer[data-motion=auto].animate-in>.break-banner .result-metal{animation:break-frame124-fade154 .68s cubic-bezier(.2,.65,.3,1) both}
 .graphics-layer[data-motion=auto].animate-in>.break-banner .result-logo{animation:break-logo124 .76s ease-out both!important}
 .graphics-layer.leaving[data-motion=auto]:has(>.break-banner){animation:none;opacity:1;transform:none;clip-path:none}
 .graphics-layer.leaving[data-motion=auto]>.break-banner .result-metal{animation:break-frame124 .48s ease-in reverse both}
@@ -1355,7 +1355,7 @@
 @keyframes break-logo124{0%,40%{opacity:0;transform:translateY(45px)}72%{opacity:1}100%{opacity:1;transform:translateY(0)}}
 .graphics-layer[data-motion=auto].animate-in>.referee-card{animation:none}
 .graphics-layer[data-motion=auto].animate-in>.referee-card .referee-face{animation:referee-face124 .42s ease-out both}
-.graphics-layer[data-motion=auto].animate-in>.referee-card .referee-rails{animation:referee-rail124 .42s ease-out both}
+.graphics-layer[data-motion=auto].animate-in>.referee-card .referee-rails{animation:referee-rail124-fade154 .42s ease-out both}
 .graphics-layer[data-motion=auto].animate-in>.referee-card .referee-mark{animation:reference-fade .2s .2s both}
 .graphics-layer.leaving[data-motion=auto]:has(>.referee-card){animation:none;opacity:1}
 .graphics-layer.leaving[data-motion=auto]>.referee-card .referee-face{animation:referee-face124 .32s ease-in reverse both}
@@ -1383,7 +1383,7 @@
 .referee-card .referee-copy p{font:46px/1.16 'DIN Condensed',Impact,sans-serif;letter-spacing:2.1px;text-align:center;margin:0;white-space:normal}
 .referee-copy em{color:#ffcb22;font-style:normal}.referee-copy em small{font-size:.68em;letter-spacing:0}
 .graphics-layer[data-motion=auto].animate-in>.referee-card{animation:none!important;opacity:1;transform:none}
-.graphics-layer[data-motion=auto].animate-in>.referee-card .referee-shell{animation:referee-shell-in126 .62s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer[data-motion=auto].animate-in>.referee-card .referee-shell{animation:referee-shell-in126-fade154 .62s cubic-bezier(.2,.65,.3,1) both}
 .graphics-layer[data-motion=auto].animate-in>.referee-card :is(.referee-face,.referee-rails){animation:none}
 .graphics-layer[data-motion=auto].animate-in>.referee-card .referee-copy{animation:referee-copy-in126 .62s ease-out both}
 .graphics-layer[data-motion=auto].animate-in>.referee-card .referee-mark{animation:referee-mark-in126 .62s ease-out both}
@@ -1635,9 +1635,9 @@
 .lineup-metal-pieces>i{position:absolute;inset:0;background:url('./lineup-rails.svg?v=139') center/100% 100% no-repeat}
 .lineup-metal-left{clip-path:inset(5px 50% 0 0);transform-origin:center bottom}.lineup-metal-right{clip-path:inset(5px 0 0 50%);transform-origin:center bottom}.lineup-metal-top{clip-path:inset(0 0 calc(100% - 5px));transform-origin:center bottom}
 .graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame{animation:none;clip-path:none;transform:none}
-.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-metal-left{animation:lineup-left139 .64s cubic-bezier(.2,.65,.3,1) both}
-.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-metal-right{animation:lineup-right139 .64s cubic-bezier(.2,.65,.3,1) both}
-.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-metal-top{animation:lineup-top139 .64s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-metal-left{animation:lineup-left139-fade154 .64s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-metal-right{animation:lineup-right139-fade154 .64s cubic-bezier(.2,.65,.3,1) both}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-metal-top{animation:lineup-top139-fade154 .64s cubic-bezier(.2,.65,.3,1) both}
 .graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-ribbon-face{animation:lineup-face139 .64s cubic-bezier(.2,.65,.3,1) both}
 @keyframes lineup-left139{0%{transform:translateX(35%);clip-path:inset(calc(100% - 9px) 76% 0 0)}38%{transform:translateX(0);clip-path:inset(calc(100% - 9px) 50% 0 0)}85%,100%{transform:none;clip-path:inset(5px 50% 0 0)}}
 @keyframes lineup-right139{0%{transform:translateX(-35%);clip-path:inset(calc(100% - 9px) 0 0 76%)}38%{transform:translateX(0);clip-path:inset(calc(100% - 9px) 0 0 50%)}85%,100%{transform:none;clip-path:inset(5px 0 0 50%)}}
@@ -1658,3 +1658,78 @@
 @keyframes lineup-title-out140{to{opacity:0;transform:translateY(8px)}}
 .graphics-layer[data-motion=fade]>.lineup-ribbon h1{animation:none!important}
 @media(prefers-reduced-motion:reduce){.graphics-layer>.lineup-ribbon h1{animation:none!important}}
+
+/* Matchup only: compact wing proportions and a separate, readable center. */
+.venue-banner{height:350px;bottom:64px}
+.venue-banner .result-metal{inset:155px 0 0;overflow:visible}
+.venue-banner .result-team{width:390px}
+.venue-banner .result-team.away{left:30px}.venue-banner .result-team.home{right:30px}
+.venue-banner .result-logo{width:400px;height:340px;max-width:none;bottom:18px;overflow:visible}
+.venue-banner .result-logo .team-logo{position:static;width:100%;height:100%;object-fit:contain;transform:none}
+.venue-banner .result-name{width:385px;max-width:385px;margin-bottom:20px;font-size:48px;padding:7px 12px 9px;background:linear-gradient(90deg,#03152f30,#03152fe0 15% 85%,#03152f30);line-height:1.05}
+.venue-banner .result-center{top:183px;bottom:31px;left:425px;right:425px;gap:12px}
+.venue-banner .result-venue{font-size:49px;line-height:1.05;padding:0;letter-spacing:1px}
+.venue-banner .result-status{font-size:33px;line-height:1.12;letter-spacing:1px}
+.venue-banner .result-badge{top:99px}
+
+/* 152: one shared outline for all three ribbons and all animation states. */
+.player-spotlight{--ribbon-height:150px;--ribbon-outline:polygon(2.6786% 0,97.3214% 0,100% 26.6667%,98.2143% 77.3333%,95.3571% 100%,62.5% 100%,59.8214% 95.3333%,40.3571% 95.3333%,37.5% 100%,4.6429% 100%,1.7857% 77.3333%,0 26.6667%);position:absolute;left:160px;bottom:98px;width:1120px;height:230px;overflow:visible;text-transform:uppercase}
+.player-spotlight:not(.has-detail){--ribbon-height:82px}
+.spotlight-body{position:absolute;inset:auto 0 0;height:var(--ribbon-height);overflow:visible}
+.spotlight-face{position:absolute;inset:0;clip-path:var(--ribbon-outline);transform-origin:50% 100%;background:repeating-linear-gradient(165deg,transparent 0 9px,#ffffff05 10px 12px,transparent 13px 21px),linear-gradient(105deg,color-mix(in srgb,var(--team),#000 30%),color-mix(in srgb,var(--team),#000 20%) 48%,color-mix(in srgb,var(--team),#000 35%))}
+.spotlight-metal,.spotlight-metal i{position:absolute;inset:0;pointer-events:none}
+.spotlight-metal i{background:url('./spotlight-rails.svg?v=153') center/100% 100% no-repeat;transform-origin:50% 100%}
+.spotlight-rail-left{clip-path:inset(5% 50% 0 0)}.spotlight-rail-right{clip-path:inset(5% 0 0 50%)}.spotlight-rail-top{clip-path:inset(0 0 94.5% 0)}
+.spotlight-copy{position:absolute;left:267px;right:42px;top:8px;height:55px;display:flex;align-items:center;gap:15px;color:white}
+.spotlight-copy h1{font:italic 900 49px/1.12 'Arial Narrow',Arial,sans-serif;letter-spacing:.1px;margin:0;padding:0 12px 0 3px;min-width:0;white-space:nowrap;text-shadow:0 2px 2px #0008}
+.spotlight-number{font:italic 700 24px/1 'DIN Condensed','Arial Narrow',sans-serif;color:#e0e6eb;flex-shrink:0}
+.spotlight-detail{position:absolute;left:310px;right:42px;top:78px;margin:0;font:700 41px/1.12 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:2px;color:#fff;white-space:nowrap}
+.spotlight-logo{position:absolute;left:0;bottom:41px;width:246px;height:178px;display:grid;place-items:center;filter:drop-shadow(0 3px 2px #0008)}
+.spotlight-logo .team-logo{position:static;width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;transform:none}
+.player-spotlight:not(.has-detail) .spotlight-logo{bottom:8px;height:145px}
+.spotlight-statistics{--ribbon-height:205px;height:260px}.spotlight-statistics .spotlight-logo{height:220px;width:250px;bottom:40px}
+.spotlight-stat-context{position:absolute;left:310px;right:42px;top:63px;font:700 24px/1.1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:1px;color:#ccd7df;white-space:nowrap}
+.spotlight-stat-grid{position:absolute;left:310px;right:42px;top:99px;bottom:24px;display:grid;grid-template-columns:repeat(var(--stat-count),minmax(0,1fr));gap:15px;color:#fff}
+.spotlight-stat-grid>div{min-width:0;border-right:1px solid #ffffff25;padding-right:8px}.spotlight-stat-grid>div:last-child{border:0}
+.spotlight-stat-grid b{display:block;font:700 43px/1.1 'DIN Condensed','Arial Narrow',sans-serif;white-space:nowrap}.spotlight-stat-grid span{display:block;font:700 24px/1.2 'DIN Condensed','Arial Narrow',sans-serif;white-space:nowrap;letter-spacing:.6px}
+.team-lower-third{--ribbon-height:185px;left:140px;width:1640px;bottom:295px;height:250px}.team-lower-third.has-context{--ribbon-height:240px;height:285px}
+.team-lower-third .spotlight-logo{width:260px;height:215px;bottom:26px}.team-lower-third .spotlight-copy{left:300px;right:75px;top:19px;height:74px}.team-lower-third .spotlight-copy h1{font-size:68px;line-height:1.1}
+.team-lower-third .spotlight-detail{left:303px;right:75px;top:108px;font-size:49px;letter-spacing:1.4px}
+.spotlight-context{position:absolute;left:303px;right:75px;top:172px;margin:0;color:#fff;font:700 31px/1.1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:1.2px;white-space:nowrap}
+.descriptive-number{color:#f4c536!important;font:inherit}
+.graphics-layer.animate-in[data-motion=auto]>.player-spotlight,.graphics-layer.leaving[data-motion=auto]:has(>.player-spotlight){animation:none}
+.animate-in[data-motion=auto] .player-spotlight .spotlight-face{animation:ribbon-face152 .78s both}
+.animate-in[data-motion=auto] .player-spotlight .spotlight-rail-left{animation:ribbon-left152-fade154 .78s cubic-bezier(.3,.05,.25,1) both}
+.animate-in[data-motion=auto] .player-spotlight .spotlight-rail-right{animation:ribbon-right152-fade154 .78s cubic-bezier(.3,.05,.25,1) both}
+.animate-in[data-motion=auto] .player-spotlight .spotlight-rail-top{animation:ribbon-top152 .78s both}
+.animate-in[data-motion=auto] .player-spotlight .spotlight-logo{animation:ribbon-logo152 .3s .47s ease-out both}
+.animate-in[data-motion=auto] .player-spotlight .spotlight-copy{animation:ribbon-copy152 .27s .5s ease-out both}
+.animate-in[data-motion=auto] .player-spotlight :is(.spotlight-detail,.spotlight-stat-grid,.spotlight-stat-context,.spotlight-context){animation:ribbon-copy152 .23s .57s ease-out both}
+@keyframes ribbon-face152{0%,56%{transform:scaleY(.015);opacity:0}57%{transform:scaleY(.015);opacity:1}100%{transform:none;opacity:1}}
+@keyframes ribbon-left152{0%{opacity:0;transform:translateX(32%);clip-path:inset(88% 50% 0 0)}10%,42%{opacity:1;transform:translateX(32%);clip-path:inset(88% 50% 0 0)}65%{transform:none;clip-path:inset(88% 50% 0 0)}100%{opacity:1;transform:none;clip-path:inset(5% 50% 0 0)}}
+@keyframes ribbon-right152{0%{opacity:0;transform:translateX(-32%);clip-path:inset(88% 0 0 50%)}10%,42%{opacity:1;transform:translateX(-32%);clip-path:inset(88% 0 0 50%)}65%{transform:none;clip-path:inset(88% 0 0 50%)}100%{opacity:1;transform:none;clip-path:inset(5% 0 0 50%)}}
+@keyframes ribbon-top152{0%,56%{opacity:0;transform:translateY(calc(var(--ribbon-height) - 5px))}57%{opacity:1;transform:translateY(calc(var(--ribbon-height) - 5px))}100%{opacity:1;transform:none}}
+@keyframes ribbon-copy152{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes ribbon-logo152{from{opacity:0;transform:translateY(55px);clip-path:inset(100% -20% 0)}to{opacity:1;transform:none;clip-path:inset(-20%)}}
+.leaving[data-motion=auto] .player-spotlight .spotlight-face{animation:ribbon-face152 .5s reverse both}.leaving[data-motion=auto] .player-spotlight .spotlight-rail-left{animation:ribbon-left152 .55s reverse both}.leaving[data-motion=auto] .player-spotlight .spotlight-rail-right{animation:ribbon-right152 .55s reverse both}.leaving[data-motion=auto] .player-spotlight .spotlight-rail-top{animation:ribbon-top152 .5s reverse both}
+.leaving[data-motion=auto] .player-spotlight .spotlight-logo{animation:ribbon-logo152 .2s reverse both}.leaving[data-motion=auto] .player-spotlight :is(.spotlight-copy,.spotlight-detail,.spotlight-stat-grid,.spotlight-stat-context,.spotlight-context){animation:ribbon-copy152 .16s reverse both}
+.graphics-layer[data-motion=fade] .player-spotlight *{animation:none!important}
+@media(prefers-reduced-motion:reduce){.player-spotlight,.player-spotlight *{animation:none!important}}
+
+/* 154: fade the gathered center rails before any expansion. Out sequences remain independent. */
+@keyframes rails-in-fade154{0%{scale:.15 1;opacity:0}20%{scale:.15 1;opacity:1}44%{;opacity:1}76%{scale:1 1;opacity:1}100%{scale:1 1;opacity:0}}
+@keyframes generic-rail-fade154{0%{clip-path:inset(49% 45%);opacity:0}20%{clip-path:inset(49% 45%);opacity:1}36%{clip-path:inset(48% 0);opacity:1}100%{clip-path:inset(0);opacity:1}}
+@keyframes td-rail-build-fade154{0%{transform:scaleX(0);opacity:0}20%{transform:scaleX(0);opacity:1}100%{transform:scaleX(1);opacity:1}}
+@keyframes weather-rail-in108-fade154{0%{clip-path:inset(calc(100% - 10px) 49% 0);opacity:0}20%{clip-path:inset(calc(100% - 10px) 49% 0);opacity:1}45.6%{clip-path:inset(calc(100% - 10px) 0 0);opacity:1}100%{clip-path:inset(-2px);opacity:1}}
+@keyframes break-metal-in108-fade154{0%{transform:scale(.03,.03);opacity:0}20%{transform:scale(.03,.03);opacity:1}42.4%,50.4%{transform:scale(1,.03);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes break-metal-in109-fade154{0%{transform:scale(.03,.03);opacity:0}20%{transform:scale(.03,.03);opacity:1}40.8%{transform:scale(1,.03);opacity:1}88.8%,100%{transform:scale(1);opacity:1}}
+@keyframes reporter-rails-in110-fade154{0%{transform:scale(.08,.055);opacity:0}20%{transform:scale(.08,.055);opacity:1}50.4%{transform:scale(1,.055);opacity:1}93.6%,100%{transform:scale(1);opacity:1}}
+@keyframes referee-rail124-fade154{0%{clip-path:inset(0 50%);opacity:0}20%{clip-path:inset(0 50%);opacity:1}100%{clip-path:inset(0);opacity:1}}
+@keyframes referee-shell-in126-fade154{0%{clip-path:inset(94% 44% 0);opacity:0}20%{clip-path:inset(94% 44% 0);opacity:1}44%{clip-path:inset(94% 0 0);opacity:1}53.6%{clip-path:inset(94% 0 0);opacity:1}100%{clip-path:inset(0);opacity:1}}
+@keyframes break-frame124-fade154{0%{clip-path:inset(95% 44% 0);opacity:0}20%{clip-path:inset(95% 44% 0);opacity:1}44%{clip-path:inset(95% 0 0);opacity:1}100%{clip-path:inset(0);opacity:1}}
+@keyframes result-frame-build86-fade154{0%{transform:scale(.03,.015);opacity:0}20%{transform:scale(.03,.015);opacity:1}42.4%{transform:scale(1,.015);opacity:1}56.8%{transform:scale(1,.04);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes lineup-left139-fade154{0%{transform:translateX(35%);clip-path:inset(calc(100% - 9px) 76% 0 0);opacity:0}20%{transform:translateX(35%);clip-path:inset(calc(100% - 9px) 76% 0 0);opacity:1}50.4%{transform:translateX(0);clip-path:inset(calc(100% - 9px) 50% 0 0);opacity:1}88%,100%{transform:none;clip-path:inset(5px 50% 0 0);opacity:1}}
+@keyframes lineup-right139-fade154{0%{transform:translateX(-35%);clip-path:inset(calc(100% - 9px) 0 0 76%);opacity:0}20%{transform:translateX(-35%);clip-path:inset(calc(100% - 9px) 0 0 76%);opacity:1}50.4%{transform:translateX(0);clip-path:inset(calc(100% - 9px) 0 0 50%);opacity:1}88%,100%{transform:none;clip-path:inset(5px 0 0 50%);opacity:1}}
+@keyframes lineup-top139-fade154{0%{translate:0 calc(100% - 5px);scale:.2 1;opacity:0}20%{translate:0 calc(100% - 5px);scale:.2 1;opacity:1}45.6%{translate:0 calc(100% - 5px);scale:.2 1;opacity:1}50.4%{scale:1 1;translate:0 calc(100% - 5px);opacity:1}88%,100%{translate:0 0;scale:1;opacity:1}}
+@keyframes ribbon-left152-fade154{0%{transform:translateX(32%);clip-path:inset(88% 50% 0 0);opacity:0}20%{transform:translateX(32%);clip-path:inset(88% 50% 0 0);opacity:1}28%,53.6%{transform:translateX(32%);clip-path:inset(88% 50% 0 0);opacity:1}72%{transform:none;clip-path:inset(88% 50% 0 0);opacity:1}100%{transform:none;clip-path:inset(5% 50% 0 0);opacity:1}}
+@keyframes ribbon-right152-fade154{0%{transform:translateX(-32%);clip-path:inset(88% 0 0 50%);opacity:0}20%{transform:translateX(-32%);clip-path:inset(88% 0 0 50%);opacity:1}28%,53.6%{transform:translateX(-32%);clip-path:inset(88% 0 0 50%);opacity:1}72%{transform:none;clip-path:inset(88% 0 0 50%);opacity:1}100%{transform:none;clip-path:inset(5% 0 0 50%);opacity:1}}
