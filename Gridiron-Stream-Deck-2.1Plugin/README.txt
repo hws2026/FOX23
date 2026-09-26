@@ -1,0 +1,14 @@
+GRIDIRON STREAM DECK 2.1
+
+1. Upload the files from the combined update ZIP to your existing GitHub Pages repository, preserving folders.
+2. Refresh the control panel and click Download Stream Deck plugin. This builds an installer paired to that panel on that computer.
+3. Double-click the downloaded .streamDeckPlugin and replace the earlier version.
+4. In the panel, click Connect Stream Deck. Keep the panel open on the same PC as Stream Deck.
+5. Drag Configurable control or any named Gridiron action onto a key. Select the key, then use its Control dropdown to assign any of 322 controls. Search by name. Edit team, values, or graphic fields below it. Graphic buttons can select for editing or select and take live.
+6. Build your own profile. Export it as .streamDeckProfile and send it back for packaging. Keep the plugin UUID unchanged so existing keys remain compatible.
+
+Includes game clocks, play clock, scoring, timeouts, possession, down/distance, graphics and variants, in/out selections, lineup playback, playlist transport, editable graphic fields, and all 29 controller API actions under Advanced. File uploads and file-selection dialogs remain in the control panel. Complex roster/setup actions use Advanced JSON and the same validation as the panel.
+
+No browser windows or tabs are opened by commands. Software checks passed; installation and physical device behavior still need testing on your broadcast PC.
+
+Source package uses a placeholder site-config.json. Install the paired build downloaded from your control panel.

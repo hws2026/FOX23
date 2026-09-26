@@ -1,0 +1,4736 @@
+{
+  "Name": "Gridiron Broadcast",
+  "Description": "Direct local broadcast controls. No browser windows or focus changes.",
+  "Author": "Gridiron Studio",
+  "Version": "2.1.0.0",
+  "UUID": "com.gridiron.studio",
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "6.6"
+  },
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.15"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Nodejs": {
+    "Version": "20"
+  },
+  "CodePath": "plugin.js",
+  "Icon": "icon",
+  "Category": "Gridiron Broadcast",
+  "CategoryIcon": "icon",
+  "Actions": [
+    {
+      "UUID": "com.gridiron.studio.control",
+      "Name": "Configurable control",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "CONTROL",
+          "FontSize": 12
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.take",
+      "Name": "TAKE",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "TAKE",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.out",
+      "Name": "OUT",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "OUT",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.bug.in",
+      "Name": "BUG IN",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "BUG\nIN",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.bug.out",
+      "Name": "BUG OUT",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "BUG\nOUT",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.clock.start",
+      "Name": "CLOCK START",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "CLOCK\nSTART",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.clock.pause",
+      "Name": "CLOCK PAUSE",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "CLOCK\nPAUSE",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.play.40",
+      "Name": "PLAY 40",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "PLAY\n40",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.play.25",
+      "Name": "PLAY 25",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "PLAY\n25",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.play.pause",
+      "Name": "PLAY PAUSE",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "PLAY\nPAUSE",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.first.10",
+      "Name": "FIRST 10",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "FIRST\n10",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.flag.on",
+      "Name": "FLAG ON",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "FLAG\nON",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.flag.off",
+      "Name": "FLAG OFF",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "FLAG\nOFF",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.side.out",
+      "Name": "SIDE OUT",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "SIDE\nOUT",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.away.pat",
+      "Name": "AWAY PAT",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AWAY\nPAT",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.away.safety",
+      "Name": "AWAY SAFETY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AWAY\nSAFETY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.away.fg",
+      "Name": "AWAY FG",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AWAY\nFG",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.away.td",
+      "Name": "AWAY TD",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AWAY\nTD",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.away.minus",
+      "Name": "AWAY MINUS",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AWAY\nMINUS",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.away.timeout",
+      "Name": "AWAY TIMEOUT",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AWAY\nTIMEOUT",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.away.possession",
+      "Name": "AWAY POSSESSION",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AWAY\nPOSSESSION",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.home.pat",
+      "Name": "HOME PAT",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "HOME\nPAT",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.home.safety",
+      "Name": "HOME SAFETY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "HOME\nSAFETY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.home.fg",
+      "Name": "HOME FG",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "HOME\nFG",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.home.td",
+      "Name": "HOME TD",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "HOME\nTD",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.home.minus",
+      "Name": "HOME MINUS",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "HOME\nMINUS",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.home.timeout",
+      "Name": "HOME TIMEOUT",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "HOME\nTIMEOUT",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.home.possession",
+      "Name": "HOME POSSESSION",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "HOME\nPOSSESSION",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.toggle.showinfo",
+      "Name": "Bottom data toggle",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Bottom\ndata toggle",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.toggle.showdowndistance",
+      "Name": "Down & distance toggle",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Down\n& distance toggle",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.toggle.showplayclock",
+      "Name": "Play clock visibility toggle",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Play\nclock visibility toggle",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.toggle.showballposition",
+      "Name": "Ball position toggle",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Ball\nposition toggle",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.toggle.flag",
+      "Name": "Flag toggle",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Flag\ntoggle",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.toggle.bug",
+      "Name": "Scorebug toggle",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Scorebug\ntoggle",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.toggle.watermark",
+      "Name": "Network bug toggle",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Network\nbug toggle",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.clock.toggle",
+      "Name": "Game clock start / pause",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Game\nclock start / pause",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.play.toggle",
+      "Name": "Play clock start / pause",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Play\nclock start / pause",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.quarter.1st",
+      "Name": "Quarter 1ST",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Quarter\n1ST",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.quarter.2nd",
+      "Name": "Quarter 2ND",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Quarter\n2ND",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.quarter.3rd",
+      "Name": "Quarter 3RD",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Quarter\n3RD",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.quarter.4th",
+      "Name": "Quarter 4TH",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Quarter\n4TH",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.quarter.ot",
+      "Name": "Quarter OT",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Quarter\nOT",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.down.1st",
+      "Name": "1ST",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "1ST",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.down.2nd",
+      "Name": "2ND",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "2ND",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.down.3rd",
+      "Name": "3RD",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "3RD",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.down.4th",
+      "Name": "4TH",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "4TH",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.down.2nd.down",
+      "Name": "2ND DOWN",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "2ND\nDOWN",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.down.3rd.down",
+      "Name": "3RD DOWN",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "3RD\nDOWN",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.down.4th.down",
+      "Name": "4TH DOWN",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "4TH\nDOWN",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.status.live",
+      "Name": "LIVE",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "LIVE",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.status.halftime",
+      "Name": "HALFTIME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "HALFTIME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.status.final",
+      "Name": "FINAL",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "FINAL",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.status.end.of.regulation",
+      "Name": "END OF REGULATION",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "END\nOF REGULATION",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.away.timeouts.0",
+      "Name": "AWAY timeouts = 0",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AWAY\ntimeouts = 0",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.away.timeouts.1",
+      "Name": "AWAY timeouts = 1",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AWAY\ntimeouts = 1",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.away.timeouts.2",
+      "Name": "AWAY timeouts = 2",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AWAY\ntimeouts = 2",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.away.timeouts.3",
+      "Name": "AWAY timeouts = 3",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AWAY\ntimeouts = 3",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.away.reset.score",
+      "Name": "AWAY reset score",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AWAY\nreset score",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.home.timeouts.0",
+      "Name": "HOME timeouts = 0",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "HOME\ntimeouts = 0",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.home.timeouts.1",
+      "Name": "HOME timeouts = 1",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "HOME\ntimeouts = 1",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.home.timeouts.2",
+      "Name": "HOME timeouts = 2",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "HOME\ntimeouts = 2",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.home.timeouts.3",
+      "Name": "HOME timeouts = 3",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "HOME\ntimeouts = 3",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.home.reset.score",
+      "Name": "HOME reset score",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "HOME\nreset score",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.possession.none",
+      "Name": "Clear possession",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Clear\npossession",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.clear",
+      "Name": "Clear on-air graphics",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Clear\non-air graphics",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.lineup.play",
+      "Name": "Lineup play",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Lineup\nplay",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.lineup.pause",
+      "Name": "Lineup pause",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Lineup\npause",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.lineup.next",
+      "Name": "Lineup next",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Lineup\nnext",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.lineup.reveal",
+      "Name": "Lineup reveal",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Lineup\nreveal",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.apply.live",
+      "Name": "Apply selected edits on air",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Apply\nselected edits on air",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.announcers.away",
+      "Name": "ANNOUNCERS \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "ANNOUNCERS\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.announcers.home",
+      "Name": "ANNOUNCERS \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "ANNOUNCERS\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.break.away",
+      "Name": "BREAK \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "BREAK\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.break.home",
+      "Name": "BREAK \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "BREAK\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.coach.away",
+      "Name": "COACH \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "COACH\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.coach.home",
+      "Name": "COACH \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "COACH\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.defense.away",
+      "Name": "DEFENSE \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "DEFENSE\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.defense.home",
+      "Name": "DEFENSE \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "DEFENSE\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.event.away",
+      "Name": "EVENT \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "EVENT\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.event.home",
+      "Name": "EVENT \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "EVENT\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.final.away",
+      "Name": "FINAL \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "FINAL\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.final.home",
+      "Name": "FINAL \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "FINAL\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.lowerthird.away",
+      "Name": "LOWERTHIRD \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "LOWERTHIRD\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.lowerthird.home",
+      "Name": "LOWERTHIRD \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "LOWERTHIRD\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.matchup.away",
+      "Name": "MATCHUP \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "MATCHUP\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.matchup.home",
+      "Name": "MATCHUP \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "MATCHUP\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.offense.away",
+      "Name": "OFFENSE \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "OFFENSE\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.offense.home",
+      "Name": "OFFENSE \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "OFFENSE\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.period.away",
+      "Name": "PERIOD \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "PERIOD\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.period.home",
+      "Name": "PERIOD \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "PERIOD\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.player.away",
+      "Name": "PLAYER \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "PLAYER\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.player.home",
+      "Name": "PLAYER \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "PLAYER\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.qbstats.away",
+      "Name": "QBSTATS \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "QBSTATS\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.qbstats.home",
+      "Name": "QBSTATS \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "QBSTATS\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.quarterback.away",
+      "Name": "QUARTERBACK \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "QUARTERBACK\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.quarterback.home",
+      "Name": "QUARTERBACK \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "QUARTERBACK\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.referee.away",
+      "Name": "REFEREE \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "REFEREE\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.referee.home",
+      "Name": "REFEREE \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "REFEREE\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.reporter.away",
+      "Name": "REPORTER \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "REPORTER\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.reporter.home",
+      "Name": "REPORTER \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "REPORTER\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.scoringdrive.away",
+      "Name": "SCORINGDRIVE \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "SCORINGDRIVE\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.scoringdrive.home",
+      "Name": "SCORINGDRIVE \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "SCORINGDRIVE\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.situation.away",
+      "Name": "SITUATION \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "SITUATION\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.situation.home",
+      "Name": "SITUATION \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "SITUATION\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.sponsor.away",
+      "Name": "SPONSOR \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "SPONSOR\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.sponsor.home",
+      "Name": "SPONSOR \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "SPONSOR\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.standings.away",
+      "Name": "STANDINGS \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "STANDINGS\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.standings.home",
+      "Name": "STANDINGS \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "STANDINGS\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.stats.away",
+      "Name": "STATS \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "STATS\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.stats.home",
+      "Name": "STATS \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "STATS\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.teamstats.away",
+      "Name": "TEAMSTATS \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "TEAMSTATS\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.teamstats.home",
+      "Name": "TEAMSTATS \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "TEAMSTATS\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.tiers.away",
+      "Name": "TIERS \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "TIERS\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html",
+      "VisibleInActionsList": false
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.tiers.home",
+      "Name": "TIERS \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "TIERS\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html",
+      "VisibleInActionsList": false
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.transition.away",
+      "Name": "TRANSITION \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "TRANSITION\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.transition.home",
+      "Name": "TRANSITION \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "TRANSITION\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.upcoming.away",
+      "Name": "UPCOMING \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "UPCOMING\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html",
+      "VisibleInActionsList": false
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.upcoming.home",
+      "Name": "UPCOMING \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "UPCOMING\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html",
+      "VisibleInActionsList": false
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.weather.away",
+      "Name": "WEATHER \u00b7 AWAY",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "WEATHER\n\u00b7 AWAY",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.weather.home",
+      "Name": "WEATHER \u00b7 HOME",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "WEATHER\n\u00b7 HOME",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.transition.auto",
+      "Name": "IN auto",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "IN\nauto",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.outtransition.auto",
+      "Name": "OUT auto",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "OUT\nauto",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.transition.fade",
+      "Name": "IN fade",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "IN\nfade",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.outtransition.fade",
+      "Name": "OUT fade",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "OUT\nfade",
+          "FontSize": 11,
+          "TitleAlignment": "middle"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.set.away.score",
+      "Name": "Set away score",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Set\naway score",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.set.home.score",
+      "Name": "Set home score",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Set\nhome score",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.set.game.clock",
+      "Name": "Set game clock (seconds)",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Set\ngame clock (seconds)",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.set.play.clock",
+      "Name": "Set & start play clock (seconds)",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Set\n& start play clock (seconds)",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.set.distance",
+      "Name": "Set distance",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Set\ndistance",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.set.ball.on",
+      "Name": "Set ball on",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Set\nball on",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.set.overtime",
+      "Name": "Set overtime number",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Set\novertime number",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.set.weather.temp",
+      "Name": "Weather temperature",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Weather\ntemperature",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.set.weather.wind",
+      "Name": "Weather wind",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Weather\nwind",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.set.weather.forecast",
+      "Name": "Weather forecast",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Weather\nforecast",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.set.title",
+      "Name": "Selected graphic title",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Selected\ngraphic title",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.set.subtitle",
+      "Name": "Selected graphic subtitle",
+      "Icon": "icon",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Selected\ngraphic subtitle",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "PropertyInspectorPath": "inspector.html"
+    },
+    {
+      "UUID": "com.gridiron.studio.playlist.play",
+      "Name": "Playlist \u00b7 Play",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Playlist \u00b7 Play",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.playlist.pause",
+      "Name": "Playlist \u00b7 Pause",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Playlist \u00b7 Pause",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.playlist.next",
+      "Name": "Playlist \u00b7 Next",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Playlist \u00b7 Next",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.playlist.in",
+      "Name": "Playlist \u00b7 In",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Playlist \u00b7 In",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.playlist.out",
+      "Name": "Playlist \u00b7 Out",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Playlist \u00b7 Out",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.playlist.restart",
+      "Name": "Playlist \u00b7 Restart",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Playlist \u00b7 Restart",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.intro.away",
+      "Name": "Game opening intro \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Game opening intro \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.break.small.away",
+      "Name": "Break \u00b7 small \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Break \u00b7 small \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.break.large.away",
+      "Name": "Break \u00b7 large \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Break \u00b7 large \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.break.stinger.away",
+      "Name": "Break \u00b7 stinger \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Break \u00b7 stinger \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.transition.team.away",
+      "Name": "Transition \u00b7 team \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Transition \u00b7 team \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.transition.person.away",
+      "Name": "Transition \u00b7 person \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Transition \u00b7 person \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.transition.matchup.away",
+      "Name": "Transition \u00b7 matchup \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Transition \u00b7 matchup \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.situation.fieldgoal.away",
+      "Name": "Situation \u00b7 fieldgoal \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Situation \u00b7 fieldgoal \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.situation.kicker.away",
+      "Name": "Situation \u00b7 kicker \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Situation \u00b7 kicker \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.situation.punt.away",
+      "Name": "Situation \u00b7 punt \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Situation \u00b7 punt \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.situation.third.away",
+      "Name": "Situation \u00b7 third \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Situation \u00b7 third \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.situation.fourth.away",
+      "Name": "Situation \u00b7 fourth \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Situation \u00b7 fourth \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.qbstats.qb.away",
+      "Name": "Qbstats \u00b7 qb \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Qbstats \u00b7 qb \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.qbstats.rushing.away",
+      "Name": "Qbstats \u00b7 rushing \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Qbstats \u00b7 rushing \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.qbstats.receiving.away",
+      "Name": "Qbstats \u00b7 receiving \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Qbstats \u00b7 receiving \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.qbstats.rushing.qb.away",
+      "Name": "Qbstats \u00b7 rushing-qb \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Qbstats \u00b7 rushing-qb \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.qbstats.receiving.qb.away",
+      "Name": "Qbstats \u00b7 receiving-qb \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Qbstats \u00b7 receiving-qb \u00b7 awa",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.quarterback.feature.away",
+      "Name": "Quarterback \u00b7 feature \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Quarterback \u00b7 feature \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.quarterback.season.away",
+      "Name": "Quarterback \u00b7 season \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Quarterback \u00b7 season \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.touchdown.away",
+      "Name": "Event \u00b7 TOUCHDOWN \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 TOUCHDOWN \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.field.goal.away",
+      "Name": "Event \u00b7 FIELD GOAL \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 FIELD GOAL \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.extra.point.away",
+      "Name": "Event \u00b7 EXTRA POINT \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 EXTRA POINT \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.two.point.conversion.away",
+      "Name": "Event \u00b7 TWO-POINT CONVERSION \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 TWO-POINT CONVERSION",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.safety.away",
+      "Name": "Event \u00b7 SAFETY \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 SAFETY \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.turnover.away",
+      "Name": "Event \u00b7 TURNOVER \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 TURNOVER \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.interception.away",
+      "Name": "Event \u00b7 INTERCEPTION \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 INTERCEPTION \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.timeout.away",
+      "Name": "Event \u00b7 TIMEOUT \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 TIMEOUT \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.under.review.away",
+      "Name": "Event \u00b7 UNDER REVIEW \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 UNDER REVIEW \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.flag.team.away",
+      "Name": "Flag \u00b7 team \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Flag \u00b7 team \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.flag.player.away",
+      "Name": "Flag \u00b7 player \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Flag \u00b7 player \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.flag.generic.away",
+      "Name": "Flag \u00b7 generic \u00b7 away",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Flag \u00b7 generic \u00b7 away",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.graphic.intro.home",
+      "Name": "Game opening intro \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Game opening intro \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.break.small.home",
+      "Name": "Break \u00b7 small \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Break \u00b7 small \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.break.large.home",
+      "Name": "Break \u00b7 large \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Break \u00b7 large \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.break.stinger.home",
+      "Name": "Break \u00b7 stinger \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Break \u00b7 stinger \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.transition.team.home",
+      "Name": "Transition \u00b7 team \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Transition \u00b7 team \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.transition.person.home",
+      "Name": "Transition \u00b7 person \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Transition \u00b7 person \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.transition.matchup.home",
+      "Name": "Transition \u00b7 matchup \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Transition \u00b7 matchup \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.situation.fieldgoal.home",
+      "Name": "Situation \u00b7 fieldgoal \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Situation \u00b7 fieldgoal \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.situation.kicker.home",
+      "Name": "Situation \u00b7 kicker \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Situation \u00b7 kicker \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.situation.punt.home",
+      "Name": "Situation \u00b7 punt \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Situation \u00b7 punt \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.situation.third.home",
+      "Name": "Situation \u00b7 third \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Situation \u00b7 third \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.situation.fourth.home",
+      "Name": "Situation \u00b7 fourth \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Situation \u00b7 fourth \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.qbstats.qb.home",
+      "Name": "Qbstats \u00b7 qb \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Qbstats \u00b7 qb \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.qbstats.rushing.home",
+      "Name": "Qbstats \u00b7 rushing \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Qbstats \u00b7 rushing \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.qbstats.receiving.home",
+      "Name": "Qbstats \u00b7 receiving \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Qbstats \u00b7 receiving \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.qbstats.rushing.qb.home",
+      "Name": "Qbstats \u00b7 rushing-qb \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Qbstats \u00b7 rushing-qb \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.qbstats.receiving.qb.home",
+      "Name": "Qbstats \u00b7 receiving-qb \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Qbstats \u00b7 receiving-qb \u00b7 hom",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.quarterback.feature.home",
+      "Name": "Quarterback \u00b7 feature \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Quarterback \u00b7 feature \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.quarterback.season.home",
+      "Name": "Quarterback \u00b7 season \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Quarterback \u00b7 season \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.touchdown.home",
+      "Name": "Event \u00b7 TOUCHDOWN \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 TOUCHDOWN \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.field.goal.home",
+      "Name": "Event \u00b7 FIELD GOAL \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 FIELD GOAL \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.extra.point.home",
+      "Name": "Event \u00b7 EXTRA POINT \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 EXTRA POINT \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.two.point.conversion.home",
+      "Name": "Event \u00b7 TWO-POINT CONVERSION \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 TWO-POINT CONVERSION",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.safety.home",
+      "Name": "Event \u00b7 SAFETY \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 SAFETY \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.turnover.home",
+      "Name": "Event \u00b7 TURNOVER \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 TURNOVER \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.interception.home",
+      "Name": "Event \u00b7 INTERCEPTION \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 INTERCEPTION \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.timeout.home",
+      "Name": "Event \u00b7 TIMEOUT \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 TIMEOUT \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.event.under.review.home",
+      "Name": "Event \u00b7 UNDER REVIEW \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Event \u00b7 UNDER REVIEW \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.flag.team.home",
+      "Name": "Flag \u00b7 team \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Flag \u00b7 team \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.flag.player.home",
+      "Name": "Flag \u00b7 player \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Flag \u00b7 player \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.flag.generic.home",
+      "Name": "Flag \u00b7 generic \u00b7 home",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Flag \u00b7 generic \u00b7 home",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.division.afc.east",
+      "Name": "AFC EAST standings",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AFC EAST standings",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.division.afc.north",
+      "Name": "AFC NORTH standings",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AFC NORTH standings",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.division.afc.south",
+      "Name": "AFC SOUTH standings",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AFC SOUTH standings",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.division.afc.west",
+      "Name": "AFC WEST standings",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "AFC WEST standings",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.division.nfc.east",
+      "Name": "NFC EAST standings",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "NFC EAST standings",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.division.nfc.north",
+      "Name": "NFC NORTH standings",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "NFC NORTH standings",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.division.nfc.south",
+      "Name": "NFC SOUTH standings",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "NFC SOUTH standings",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.division.nfc.west",
+      "Name": "NFC WEST standings",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "NFC WEST standings",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.attemptdistance",
+      "Name": "Edit graphic \u00b7 attempt Distance",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 attempt Dista",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.attempts",
+      "Name": "Edit graphic \u00b7 attempts",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 attempts",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.breakdetail",
+      "Name": "Edit graphic \u00b7 break Detail",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 break Detail",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.breakheadline",
+      "Name": "Edit graphic \u00b7 break Headline",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 break Headlin",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.conversionlayout",
+      "Name": "Edit graphic \u00b7 conversion Layout",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 conversion La",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.conversions",
+      "Name": "Edit graphic \u00b7 conversions",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 conversions",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.divisiontitle",
+      "Name": "Edit graphic \u00b7 division Title",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 division Titl",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.drivenote",
+      "Name": "Edit graphic \u00b7 drive Note",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 drive Note",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.driveplays",
+      "Name": "Edit graphic \u00b7 drive Plays",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 drive Plays",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.driveresult",
+      "Name": "Edit graphic \u00b7 drive Result",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 drive Result",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.drivetime",
+      "Name": "Edit graphic \u00b7 drive Time",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 drive Time",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.driveyards",
+      "Name": "Edit graphic \u00b7 drive Yards",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 drive Yards",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.event",
+      "Name": "Edit graphic \u00b7 event",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 event",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.flagvariant",
+      "Name": "Edit graphic \u00b7 flag Variant",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 flag Variant",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.kickerattempts",
+      "Name": "Edit graphic \u00b7 kicker Attempts",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 kicker Attemp",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.kickercontext",
+      "Name": "Edit graphic \u00b7 kicker Context",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 kicker Contex",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.kickerid",
+      "Name": "Edit graphic \u00b7 kicker Id",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 kicker Id",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.kickerlong",
+      "Name": "Edit graphic \u00b7 kicker Long",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 kicker Long",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.kickermade",
+      "Name": "Edit graphic \u00b7 kicker Made",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 kicker Made",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.leftname",
+      "Name": "Edit graphic \u00b7 left Name",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 left Name",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.leftrole",
+      "Name": "Edit graphic \u00b7 left Role",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 left Role",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.lowercontext",
+      "Name": "Edit graphic \u00b7 lower Context",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 lower Context",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.lowercontexttext",
+      "Name": "Edit graphic \u00b7 lower Context Text",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 lower Context",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.outtransition",
+      "Name": "Edit graphic \u00b7 out Transition",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 out Transitio",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.penaltydetail",
+      "Name": "Edit graphic \u00b7 penalty Detail",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 penalty Detai",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.penaltyplayer",
+      "Name": "Edit graphic \u00b7 penalty Player",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 penalty Playe",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.penaltytype",
+      "Name": "Edit graphic \u00b7 penalty Type",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 penalty Type",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.period",
+      "Name": "Edit graphic \u00b7 period",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 period",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.playerid",
+      "Name": "Edit graphic \u00b7 player Id",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 player Id",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbatt",
+      "Name": "Edit graphic \u00b7 qb Att",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb Att",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbcomp",
+      "Name": "Edit graphic \u00b7 qb Comp",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb Comp",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbcontextyellow",
+      "Name": "Edit graphic \u00b7 qb Context Yellow",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb Context Ye",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbdetail",
+      "Name": "Edit graphic \u00b7 qb Detail",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb Detail",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbint",
+      "Name": "Edit graphic \u00b7 qb INT",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb INT",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qblabel",
+      "Name": "Edit graphic \u00b7 qb Label",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb Label",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbseasonatt",
+      "Name": "Edit graphic \u00b7 qb Season Att",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb Season Att",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbseasoncomp",
+      "Name": "Edit graphic \u00b7 qb Season Comp",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb Season Com",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbseasonint",
+      "Name": "Edit graphic \u00b7 qb Season INT",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb Season INT",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbseasonlabel",
+      "Name": "Edit graphic \u00b7 qb Season Label",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb Season Lab",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbseasontd",
+      "Name": "Edit graphic \u00b7 qb Season TD",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb Season TD",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbseasonyards",
+      "Name": "Edit graphic \u00b7 qb Season Yards",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb Season Yar",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbtd",
+      "Name": "Edit graphic \u00b7 qb TD",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb TD",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbvalue",
+      "Name": "Edit graphic \u00b7 qb Value",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb Value",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbyards",
+      "Name": "Edit graphic \u00b7 qb Yards",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb Yards",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.refereeexperience",
+      "Name": "Edit graphic \u00b7 referee Experience",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 referee Exper",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.refereename",
+      "Name": "Edit graphic \u00b7 referee Name",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 referee Name",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.refereerole",
+      "Name": "Edit graphic \u00b7 referee Role",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 referee Role",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.reportername",
+      "Name": "Edit graphic \u00b7 reporter Name",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 reporter Name",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.rightname",
+      "Name": "Edit graphic \u00b7 right Name",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 right Name",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.rightrole",
+      "Name": "Edit graphic \u00b7 right Role",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 right Role",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.sidecount",
+      "Name": "Edit graphic \u00b7 side Count",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 side Count",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.sidetd",
+      "Name": "Edit graphic \u00b7 side TD",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 side TD",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.sideyards",
+      "Name": "Edit graphic \u00b7 side Yards",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 side Yards",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.situationdetail",
+      "Name": "Edit graphic \u00b7 situation Detail",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 situation Det",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.sponsornext",
+      "Name": "Edit graphic \u00b7 sponsor Next",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 sponsor Next",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.sponsorsubtitle",
+      "Name": "Edit graphic \u00b7 sponsor Subtitle",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 sponsor Subti",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.sponsortitle",
+      "Name": "Edit graphic \u00b7 sponsor Title",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 sponsor Title",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.spotlightdetail",
+      "Name": "Edit graphic \u00b7 spotlight Detail",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 spotlight Det",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.staffdetail",
+      "Name": "Edit graphic \u00b7 staff Detail",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 staff Detail",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.staffid",
+      "Name": "Edit graphic \u00b7 staff Id",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 staff Id",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.staffname",
+      "Name": "Edit graphic \u00b7 staff Name",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 staff Name",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.staffrole",
+      "Name": "Edit graphic \u00b7 staff Role",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 staff Role",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.subtitle",
+      "Name": "Edit graphic \u00b7 subtitle",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 subtitle",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.title",
+      "Name": "Edit graphic \u00b7 title",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 title",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.transition",
+      "Name": "Edit graphic \u00b7 transition",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 transition",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.transitiondetail",
+      "Name": "Edit graphic \u00b7 transition Detail",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 transition De",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.transitionduration",
+      "Name": "Edit graphic \u00b7 transition Duration",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 transition Du",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.transitionperson",
+      "Name": "Edit graphic \u00b7 transition Person",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 transition Pe",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.transitionstyle",
+      "Name": "Edit graphic \u00b7 transition Style",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 transition St",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.transitiontitle",
+      "Name": "Edit graphic \u00b7 transition Title",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 transition Ti",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.weatherforecast",
+      "Name": "Edit graphic \u00b7 weather Forecast",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 weather Forec",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.weathertemp",
+      "Name": "Edit graphic \u00b7 weather Temp",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 weather Temp",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.weatherwind",
+      "Name": "Edit graphic \u00b7 weather Wind",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 weather Wind",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.branding",
+      "Name": "Advanced \u00b7 branding",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 branding",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.bug",
+      "Name": "Advanced \u00b7 bug",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 bug",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.clear",
+      "Name": "Advanced \u00b7 clear",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 clear",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.clock",
+      "Name": "Advanced \u00b7 clock",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 clock",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.game",
+      "Name": "Advanced \u00b7 game",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 game",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.hide",
+      "Name": "Advanced \u00b7 hide",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 hide",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.library.assign",
+      "Name": "Advanced \u00b7 library assign",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 library assign",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.library.branding",
+      "Name": "Advanced \u00b7 library branding",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 library branding",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.library.capture",
+      "Name": "Advanced \u00b7 library capture",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 library capture",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.library.create",
+      "Name": "Advanced \u00b7 library create",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 library create",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.lineup",
+      "Name": "Advanced \u00b7 lineup",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 lineup",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.lineup.step",
+      "Name": "Advanced \u00b7 lineup step",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 lineup step",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.load.season.stats",
+      "Name": "Advanced \u00b7 load season stats",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 load season stats",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.play.clock.preset",
+      "Name": "Advanced \u00b7 play clock preset",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 play clock preset",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.playlist.save",
+      "Name": "Advanced \u00b7 playlist save",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 playlist save",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.playlist.take",
+      "Name": "Advanced \u00b7 playlist take",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 playlist take",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.preview",
+      "Name": "Advanced \u00b7 preview",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 preview",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.qb.stats.visibility",
+      "Name": "Advanced \u00b7 qb stats visibility",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 qb stats visibili",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.reset.show",
+      "Name": "Advanced \u00b7 reset show",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 reset show",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.restore",
+      "Name": "Advanced \u00b7 restore",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 restore",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.roster",
+      "Name": "Advanced \u00b7 roster",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 roster",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.score",
+      "Name": "Advanced \u00b7 score",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 score",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.staff",
+      "Name": "Advanced \u00b7 staff",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 staff",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.take",
+      "Name": "Advanced \u00b7 take",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 take",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.team",
+      "Name": "Advanced \u00b7 team",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 team",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.timeout",
+      "Name": "Advanced \u00b7 timeout",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 timeout",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.transition.preset",
+      "Name": "Advanced \u00b7 transition preset",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 transition preset",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.update.live",
+      "Name": "Advanced \u00b7 update live",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 update live",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.api.watermark",
+      "Name": "Advanced \u00b7 watermark",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Advanced \u00b7 watermark",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.breaklayout",
+      "Name": "Edit graphic \u00b7 break Layout",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 break Layout",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.conversiondistances",
+      "Name": "Edit graphic \u00b7 conversion Distances",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 conversion Di",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.divisionid",
+      "Name": "Edit graphic \u00b7 division Id",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 division Id",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.lineupgroup",
+      "Name": "Edit graphic \u00b7 lineup Group",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 lineup Group",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.lineupphase",
+      "Name": "Edit graphic \u00b7 lineup Phase",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 lineup Phase",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.qbintromode",
+      "Name": "Edit graphic \u00b7 qb Intro Mode",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 qb Intro Mode",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.sideplayerid",
+      "Name": "Edit graphic \u00b7 side Player Id",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 side Player I",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.sidestatslayout",
+      "Name": "Edit graphic \u00b7 side Stats Layout",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 side Stats La",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.situationkind",
+      "Name": "Edit graphic \u00b7 situation Kind",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 situation Kin",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.standingsrows",
+      "Name": "Edit graphic \u00b7 standings Rows",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 standings Row",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.stats",
+      "Name": "Edit graphic \u00b7 stats",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 stats",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.team",
+      "Name": "Edit graphic \u00b7 team",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 team",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.gridiron.studio.edit.timeoutnumber",
+      "Name": "Edit graphic \u00b7 timeout Number",
+      "Icon": "icon",
+      "PropertyInspectorPath": "inspector.html",
+      "States": [
+        {
+          "Image": "key",
+          "Title": "Edit graphic \u00b7 timeout Numbe",
+          "FontSize": 11
+        }
+      ],
+      "SupportedInMultiActions": true
+    }
+  ],
+  "PropertyInspectorPath": "inspector.html"
+}
