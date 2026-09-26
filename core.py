@@ -2,6 +2,7 @@
 """Local broadcast controller. Python 3.9+, no third-party dependencies."""
 import argparse, copy, json, math, mimetypes, os, threading, time, sys
 from pathlib import Path
+from datetime import datetime, timezone
 from urllib.parse import urlparse, parse_qs
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT))
@@ -15,7 +16,7 @@ LIBRARY=TeamLibrary(ROOT,DATA)
 POSITIONS = ['QB','LT','LG','C','RG','RT','WR','WR','TE','RB','WR','DE','DT','DT','DE','LB','LB','LB','CB','CB','FS','SS','K','P']
 NAMES = ['Jordan Ellis','Marcus Reed','Cameron Price','Alex Morgan','Drew Collins','Taylor Brooks','Jalen Carter','Noah Hayes','Mason Cole','Evan Grant','Devin Ross','Cole Bennett','Tyler James','Owen Parker','Blake Foster','Avery Scott','Logan West','Riley Davis','Kai Turner','Miles Ward','Nolan King','Isaiah Bell','Sam Lewis','Jesse Gray']
 FORMATION_LABELS = {'4-3-4': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '3-4-4': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-2-5': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '3-3-5': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '5-2-4': ['DL', 'DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-1-6': ['DL', 'DL', 'DL', 'DL', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB', 'CB']}
-GRAPHICS = {'intro','referee','standings','transition','scoringdrive','none','qbstats','scorebug','matchup','offense','defense','quarterback','player','coach','lowerthird','stats','teamstats','roster','event','period','final','announcers','sponsor','weather','reporter','situation','break'}
+GRAPHICS = {'breaking','countdown','pregameplayer','intro','referee','standings','transition','scoringdrive','none','qbstats','scorebug','matchup','offense','defense','quarterback','player','coach','lowerthird','stats','teamstats','roster','event','period','final','announcers','sponsor','weather','reporter','situation','break'}
 def roster(side):
     return [{'id':f'{side}-{i+1}', 'name':name, 'number':str(([7,72,64,55,68,77,11,18,86,24,13,90,95,98,91,50,54,56,21,23,30,32,3,9][i]+(2 if side=='home' else 0))%100), 'position':pos,'photo':'','stats':{'YDS':'248','TD':'2','CMP':'19/27'}} for i,(name,pos) in enumerate(zip(NAMES,POSITIONS))]
 def default_state():
@@ -23,14 +24,14 @@ def default_state():
     lineups={side:{'formation':'4-3-4','offense':[f'{side}-{i}' for i in range(2,12)],'defense':[f'{side}-{i}' for i in range(12,23)],'quarterback':f'{side}-1','specialTeams':{'kicker':f'{side}-23','punter':f'{side}-24','holder':'','longSnapper':'','kickReturner':'','puntReturner':''}} for side in teams}
     cue={'type':'matchup','team':'away','playerId':'away-1','title':'FRIDAY NIGHT FOOTBALL','subtitle':'Live from Memorial Stadium','event':'TOUCHDOWN','period':'HALFTIME','nextAway':'NORTH RIDGE','nextHome':'EAST VALLEY','nextTime':'FRIDAY • 7:00 PM','rosterPage':1,'transition':'auto','leftName':'ALEX MORGAN','leftRole':'PLAY-BY-PLAY','rightName':'JORDAN REED','rightRole':'ANALYST','sponsorTitle':'POSTGAME','sponsorSubtitle':'PRESENTED BY OUR PARTNER','sponsorNext':'COMING UP NEXT','weatherTemp':'67°','weatherWind':'NW 6 MPH','weatherForecast':'CLEAR','reporterName':'REPORTER NAME','qbValue':'','qbLabel':'','qbDetail':'SEASON STATS','staffName':'','staffRole':'HEAD COACH','staffDetail':'','stats':[{'label':'PASSING YDS','away':'248','home':'212'},{'label':'RUSHING YDS','away':'126','home':'98'},{'label':'FIRST DOWNS','away':'19','home':'17'}]}
     return {'revision':0,'teams':teams,'lineups':lineups,'game':{'scores':{'away':0,'home':0},'timeouts':{'away':3,'home':3},'possession':'away','quarter':'1ST','down':'1ST','distance':'10','ballOn':'25','flag':False,'clock':{'remaining':900,'running':False,'anchor':time.time()},'playClock':{'remaining':40,'running':False,'anchor':time.time()},'showPlayClock':True,'showDownDistance':True,'bottomStatus':'LIVE','overtimePeriod':1,'showInfo':True,'showBallPosition':False},'branding':{'network':'GRIDIRON','competition':'FRIDAY NIGHT FOOTBALL','venue':'MEMORIAL STADIUM','accent':'#f9cb40','bugScale':1.0,'bugBottom':64,'networkLogo':'','sponsorName':'YOUR SPONSOR','sponsorLogo':'','sponsorColor':'#101349','secondaryLogo':'','introLogo':''},'program':{'qbStats':{'visible':False,'team':'away'},'bug':True,'watermark':False,'graphic':{'type':'none'},'takeId':0},'preview':cue}
-TEAM_CUES={'transition','scoringdrive','offense','defense','quarterback','qbstats','player','stats','coach','roster','event','lowerthird','situation'}
+TEAM_CUES={'breaking','pregameplayer','transition','scoringdrive','offense','defense','quarterback','qbstats','player','stats','coach','roster','event','lowerthird','situation'}
 DIVISION_TEAMS = {'AFC EAST': ['BUFFALO', 'MIAMI', 'NEW ENGLAND', 'NY JETS'], 'AFC SOUTH': ['HOUSTON', 'INDIANAPOLIS', 'JACKSONVILLE', 'TENNESSEE'], 'AFC NORTH': ['BALTIMORE', 'CINCINNATI', 'CLEVELAND', 'PITTSBURGH'], 'AFC WEST': ['DENVER', 'KANSAS CITY', 'LAS VEGAS', 'LA CHARGERS'], 'NFC EAST': ['PHILADELPHIA', 'DALLAS', 'WASHINGTON', 'NY GIANTS'], 'NFC SOUTH': ['ATLANTA', 'CAROLINA', 'NEW ORLEANS', 'TAMPA BAY'], 'NFC NORTH': ['CHICAGO', 'DETROIT', 'GREEN BAY', 'MINNESOTA'], 'NFC WEST': ['ARIZONA', 'LA RAMS', 'SAN FRANCISCO', 'SEATTLE']}
 
 def cue_key(c):
     if c['type']=='standings': return 'standings:'+c.get('divisionId','NFC EAST')
     if c['type']=='transition':
         style=c.get('transitionStyle','team')
-        return 'transition:'+style+(':'+c.get('team','away') if style in ['team','person'] else '')
+        return 'transition:'+style+(':'+c.get('team','away') if style in ['team','person','teamwall','pattern'] else '')
     return c['type']+(':'+c.get('team','away') if c['type'] in TEAM_CUES else '')
 def initial_cue(kind,team='away'):
     cue=copy.deepcopy(default_state()['preview']);cue.update(type=kind,team=team,playerId=STATE['lineups'][team]['quarterback'])
@@ -260,6 +261,13 @@ def _update(action,p):
     elif action=='branding':
         for k,v in p.items():
             if k in ['network','competition','venue','city','sponsorName','refereeName','refereeRole','refereeExperience']: STATE['branding'][k]=bounded_text(v,100)
+            elif k=='gameStart':
+                if v:
+                    try: date=datetime.fromisoformat(str(v).replace('Z','+00:00'))
+                    except ValueError: raise ValueError('Enter a valid game date and time.')
+                    if date.tzinfo is None: raise ValueError('Game time must include its timezone.')
+                    v=date.astimezone(timezone.utc).isoformat()
+                STATE['branding'][k]=v
             elif k=='stateAbbr':
                 value=str(v).strip().upper()
                 if value and (len(value)!=2 or not value.isascii() or not value.isalpha()): raise ValueError('Use a two-letter state abbreviation, such as TX.')
@@ -275,6 +283,7 @@ def _update(action,p):
                     if not member['id'] or member['id'] in ids or not member['name'].strip(): raise ValueError('Crew members need unique IDs and names.')
                     ids.add(member['id']);clean.append(member)
                 STATE['branding']['crew']=clean
+            elif k=='networkBadgeScale': STATE['branding'][k]=max(.5,min(2,float(v)))
             elif k=='bugScale': STATE['branding'][k]=max(.65,min(1.4,float(v)))
             elif k=='bugBottom': STATE['branding'][k]=max(20,min(240,int(v)))
             else: raise ValueError('Invalid branding setting.')
@@ -357,7 +366,14 @@ def _update(action,p):
                 if v not in ['away','home']: raise ValueError('Invalid team.')
             elif k in ['transition','outTransition']:
                 v={'cut':'auto','rail':'auto'}.get(v,v)
-                if v not in ['auto','fade']: raise ValueError('Invalid transition.')
+                if v not in (['auto','fade','pattern','teamwall','networkwall'] if kind=='transition' else ['auto','fade']): raise ValueError('Invalid transition.')
+            elif k in ['newsLabel','newsShowLogo','newsTeamColor']:
+                if isinstance(v,str): v=v=='true'
+                if type(v) is not bool: raise ValueError('Invalid news toggle.')
+            elif k=='newsArt':
+                if v not in ['team','player','duo','network','none']: raise ValueError('Choose news artwork.')
+            elif k=='newsText': v=bounded_text(v,400)
+            elif k in ['newsPlayerId','newsSecondPlayerId','featureContext','featureText','featureFooter','countdownLabel']: v=bounded_text(v,160)
             elif k=='sideStatsLayout':
                 if v not in ['qb','rushing','receiving','rushing-qb','receiving-qb']: raise ValueError('Invalid side stats layout.')
             elif k in ['sideCount','sideYards','sideTD']:
@@ -425,6 +441,10 @@ def _update(action,p):
         STATE['preview']=cue
         library[cue_key(cue)]=copy.deepcopy(cue)
     elif action=='update_live':
+        if STATE['preview']['type']=='countdown':
+            if not STATE['program'].get('countdown',{}).get('visible'): raise ValueError('Show the countdown before updating it on air.')
+            STATE['program']['countdown']={**copy.deepcopy(STATE['preview']),'visible':True}
+            return
         if STATE['preview']['type']=='qbstats':
             if not STATE['program'].get('qbStats',{}).get('visible'): raise ValueError('Show QB stats before updating them on air.')
             STATE['program']['qbStats']={**copy.deepcopy(STATE['preview']),'visible':True}
@@ -446,13 +466,17 @@ def _update(action,p):
         finally:
             STATE['preview']=selected
     elif action=='take':
+        if STATE['preview']['type']=='countdown':
+            if not STATE['branding'].get('gameStart'): raise ValueError('Set the game date and time in Show Setup first.')
+            STATE['program']['countdown']={**copy.deepcopy(STATE['preview']),'visible':True}
+            return
         if STATE['preview']['type']=='qbstats':
             STATE['program']['qbStats']={**copy.deepcopy(STATE['preview']),'visible':True}
             return
         if STATE['preview']['type']=='scorebug': STATE['program']['bug']=True
         STATE['program']['graphic']=copy.deepcopy(STATE['preview']);STATE['program']['takeId']+=1
         STATE['program'].pop('timedGraphic',None)
-        if STATE['preview']['type']=='transition' and STATE['preview'].get('transitionStyle')=='matchup':
+        if STATE['preview']['type']=='transition' and (STATE['preview'].get('transitionStyle') in ['matchup','teamwall','networkwall','pattern'] or STATE['preview'].get('transition') in ['teamwall','networkwall','pattern']):
             duration=float(STATE['preview'].get('transitionDuration') or 2.6)
             if not math.isfinite(duration): raise ValueError('Invalid bumper duration.')
             duration=max(1.2,min(15,duration))
@@ -461,6 +485,10 @@ def _update(action,p):
     elif action=='hide':
         if STATE['program']['graphic']['type']=='scorebug': STATE['program']['bug']=False
         STATE['program']['graphic']={'type':'none'};STATE['program']['takeId']+=1
+    elif action=='countdown_visibility':
+        if type(p.get('visible')) is not bool: raise ValueError('Invalid countdown visibility.')
+        if p['visible'] and not STATE['branding'].get('gameStart'): raise ValueError('Set the game date and time in Show Setup first.')
+        STATE['program'].setdefault('countdown',{})['visible']=p['visible']
     elif action=='qb_stats_visibility':
         if type(p.get('visible')) is not bool: raise ValueError('Invalid QB visibility.')
         STATE['program'].setdefault('qbStats',{'team':'away'})['visible']=p['visible']
@@ -469,6 +497,7 @@ def _update(action,p):
         STATE['program']['bug']=bool(p['visible'])
         if not p['visible'] and STATE['program']['graphic']['type']=='scorebug': STATE['program']['graphic']={'type':'none'}
     elif action=='clear':
+        STATE['program'].setdefault('countdown',{})['visible']=False
         STATE['program'].setdefault('qbStats',{})['visible']=False
         STATE['program'].update(bug=False,watermark=False,graphic={'type':'none'},takeId=STATE['program']['takeId']+1)
     elif action=='playlist_save':

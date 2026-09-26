@@ -1,3 +1,4 @@
+@import url("./pregame.css?v=tunnel159");
 /* Reference-driven revisions. Dimensions use the 1920 Ãƒâ€” 1080 broadcast canvas. */
 /* Timeout bars restored to their original lower team-panel position and weight. */
 .team-wing::after{height:26px;border-top:1px solid #7893a855}
