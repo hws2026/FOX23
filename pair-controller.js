@@ -1,5 +1,5 @@
-import {connection,gather,encode,decode,stateSender} from './peer.js?v=rails154';
-import {latest,base} from './bridge.js?v=rails154';
+import {connection,gather,encode,decode,stateSender} from './peer.js?v=deck155';
+import {latest,base} from './bridge.js?v=deck155';
 const button=document.createElement('button');button.textContent='Pair OBS (experimental)';button.className='button subtle';document.querySelector('.topbar-right').prepend(button);
 const dialog=document.createElement('dialog');dialog.innerHTML='<h2>Pair OBS output · experimental</h2><p>Direct pairing may be blocked by browser or network policy. Output &amp; files provides a browser-window capture alternative.</p><p>Use the output URL below in an OBS Browser Source, then click Interact. Keep this control tab open.</p><input id="pair-url" readonly style="width:100%"><p>1. Create an offer and copy it into the OBS pairing form.</p><button id="offer">Create offer</button><textarea id="offer-code" readonly aria-label="Offer code"></textarea><p>2. Copy the answer from OBS, paste it here, then Connect.</p><textarea id="answer-code" aria-label="Answer code"></textarea><button id="connect">Connect</button><p id="pair-status">Not paired</p><button id="close-pair">Close</button>';
 dialog.style.cssText='width:min(650px,90vw);background:#152230;color:white;border:1px solid #899ba8';document.body.append(dialog);dialog.querySelectorAll('textarea').forEach(e=>e.style.cssText='display:block;width:100%;height:80px');dialog.querySelector('#pair-url').value=new URL('overlay.html?pair=1',base).href;

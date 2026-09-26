@@ -2,54 +2,62 @@
   "take": {
     "label": "TAKE",
     "action": "take",
-    "payload": {}
+    "payload": {},
+    "group": "Game controls"
   },
   "out": {
     "label": "OUT",
     "action": "hide",
-    "payload": {}
+    "payload": {},
+    "group": "Game controls"
   },
   "bug-in": {
     "label": "BUG IN",
     "action": "bug",
     "payload": {
       "visible": true
-    }
+    },
+    "group": "Game controls"
   },
   "bug-out": {
     "label": "BUG OUT",
     "action": "bug",
     "payload": {
       "visible": false
-    }
+    },
+    "group": "Game controls"
   },
   "clock-start": {
     "label": "CLOCK START",
     "action": "clock",
     "payload": {
       "running": true
-    }
+    },
+    "group": "Game controls"
   },
   "clock-pause": {
     "label": "CLOCK PAUSE",
     "action": "clock",
     "payload": {
       "running": false
-    }
+    },
+    "group": "Game controls"
   },
   "play-40": {
     "label": "PLAY 40",
     "action": "play_clock_preset",
     "payload": {
       "seconds": 40
-    }
+    },
+    "group": "Game controls"
   },
   "play-25": {
     "label": "PLAY 25",
     "action": "play_clock_preset",
     "payload": {
       "seconds": 25
-    }
+    },
+    "group": "Game controls"
   },
   "play-pause": {
     "label": "PLAY PAUSE",
@@ -57,7 +65,8 @@
     "payload": {
       "key": "playClock",
       "running": false
-    }
+    },
+    "group": "Game controls"
   },
   "first-10": {
     "label": "FIRST 10",
@@ -67,28 +76,32 @@
       "distance": "10",
       "showDownDistance": true,
       "bottomStatus": "LIVE"
-    }
+    },
+    "group": "Game controls"
   },
   "flag-on": {
     "label": "FLAG ON",
     "action": "game",
     "payload": {
       "flag": true
-    }
+    },
+    "group": "Game controls"
   },
   "flag-off": {
     "label": "FLAG OFF",
     "action": "game",
     "payload": {
       "flag": false
-    }
+    },
+    "group": "Game controls"
   },
   "side-out": {
     "label": "SIDE OUT",
     "action": "qb_stats_visibility",
     "payload": {
       "visible": false
-    }
+    },
+    "group": "Game controls"
   },
   "away-pat": {
     "label": "AWAY PAT",
@@ -96,7 +109,8 @@
     "payload": {
       "team": "away",
       "delta": 1
-    }
+    },
+    "group": "Game controls"
   },
   "away-safety": {
     "label": "AWAY SAFETY",
@@ -104,7 +118,8 @@
     "payload": {
       "team": "away",
       "delta": 2
-    }
+    },
+    "group": "Game controls"
   },
   "away-fg": {
     "label": "AWAY FG",
@@ -112,7 +127,8 @@
     "payload": {
       "team": "away",
       "delta": 3
-    }
+    },
+    "group": "Game controls"
   },
   "away-td": {
     "label": "AWAY TD",
@@ -120,7 +136,8 @@
     "payload": {
       "team": "away",
       "delta": 6
-    }
+    },
+    "group": "Game controls"
   },
   "away-minus": {
     "label": "AWAY MINUS",
@@ -128,7 +145,8 @@
     "payload": {
       "team": "away",
       "delta": -1
-    }
+    },
+    "group": "Game controls"
   },
   "away-timeout": {
     "label": "AWAY TIMEOUT",
@@ -136,14 +154,16 @@
     "payload": {
       "team": "away",
       "delta": -1
-    }
+    },
+    "group": "Game controls"
   },
   "away-possession": {
     "label": "AWAY POSSESSION",
     "action": "game",
     "payload": {
       "possession": "away"
-    }
+    },
+    "group": "Game controls"
   },
   "home-pat": {
     "label": "HOME PAT",
@@ -151,7 +171,8 @@
     "payload": {
       "team": "home",
       "delta": 1
-    }
+    },
+    "group": "Game controls"
   },
   "home-safety": {
     "label": "HOME SAFETY",
@@ -159,7 +180,8 @@
     "payload": {
       "team": "home",
       "delta": 2
-    }
+    },
+    "group": "Game controls"
   },
   "home-fg": {
     "label": "HOME FG",
@@ -167,7 +189,8 @@
     "payload": {
       "team": "home",
       "delta": 3
-    }
+    },
+    "group": "Game controls"
   },
   "home-td": {
     "label": "HOME TD",
@@ -175,7 +198,8 @@
     "payload": {
       "team": "home",
       "delta": 6
-    }
+    },
+    "group": "Game controls"
   },
   "home-minus": {
     "label": "HOME MINUS",
@@ -183,7 +207,8 @@
     "payload": {
       "team": "home",
       "delta": -1
-    }
+    },
+    "group": "Game controls"
   },
   "home-timeout": {
     "label": "HOME TIMEOUT",
@@ -191,14 +216,16 @@
     "payload": {
       "team": "home",
       "delta": -1
-    }
+    },
+    "group": "Game controls"
   },
   "home-possession": {
     "label": "HOME POSSESSION",
     "action": "game",
     "payload": {
       "possession": "home"
-    }
+    },
+    "group": "Game controls"
   },
   "toggle-showInfo": {
     "label": "Bottom data toggle",
@@ -206,7 +233,8 @@
     "section": "game",
     "field": "showInfo",
     "action": "game",
-    "payloadKey": "showInfo"
+    "payloadKey": "showInfo",
+    "group": "Game controls"
   },
   "toggle-showDownDistance": {
     "label": "Down & distance toggle",
@@ -214,7 +242,8 @@
     "section": "game",
     "field": "showDownDistance",
     "action": "game",
-    "payloadKey": "showDownDistance"
+    "payloadKey": "showDownDistance",
+    "group": "Game controls"
   },
   "toggle-showPlayClock": {
     "label": "Play clock visibility toggle",
@@ -222,7 +251,8 @@
     "section": "game",
     "field": "showPlayClock",
     "action": "game",
-    "payloadKey": "showPlayClock"
+    "payloadKey": "showPlayClock",
+    "group": "Game controls"
   },
   "toggle-showBallPosition": {
     "label": "Ball position toggle",
@@ -230,7 +260,8 @@
     "section": "game",
     "field": "showBallPosition",
     "action": "game",
-    "payloadKey": "showBallPosition"
+    "payloadKey": "showBallPosition",
+    "group": "Game controls"
   },
   "toggle-flag": {
     "label": "Flag toggle",
@@ -238,7 +269,8 @@
     "section": "game",
     "field": "flag",
     "action": "game",
-    "payloadKey": "flag"
+    "payloadKey": "flag",
+    "group": "Game controls"
   },
   "toggle-bug": {
     "label": "Scorebug toggle",
@@ -246,7 +278,8 @@
     "section": "program",
     "field": "bug",
     "action": "bug",
-    "payloadKey": "visible"
+    "payloadKey": "visible",
+    "group": "Game controls"
   },
   "toggle-watermark": {
     "label": "Network bug toggle",
@@ -254,7 +287,8 @@
     "section": "program",
     "field": "watermark",
     "action": "watermark",
-    "payloadKey": "visible"
+    "payloadKey": "visible",
+    "group": "Game controls"
   },
   "clock-toggle": {
     "label": "Game clock start / pause",
@@ -262,7 +296,8 @@
     "section": "clock",
     "field": "running",
     "action": "clock",
-    "payloadKey": "running"
+    "payloadKey": "running",
+    "group": "Game controls"
   },
   "play-toggle": {
     "label": "Play clock start / pause",
@@ -273,42 +308,48 @@
     "payloadKey": "running",
     "payload": {
       "key": "playClock"
-    }
+    },
+    "group": "Game controls"
   },
   "quarter-1st": {
     "label": "Quarter 1ST",
     "action": "game",
     "payload": {
       "quarter": "1ST"
-    }
+    },
+    "group": "Game controls"
   },
   "quarter-2nd": {
     "label": "Quarter 2ND",
     "action": "game",
     "payload": {
       "quarter": "2ND"
-    }
+    },
+    "group": "Game controls"
   },
   "quarter-3rd": {
     "label": "Quarter 3RD",
     "action": "game",
     "payload": {
       "quarter": "3RD"
-    }
+    },
+    "group": "Game controls"
   },
   "quarter-4th": {
     "label": "Quarter 4TH",
     "action": "game",
     "payload": {
       "quarter": "4TH"
-    }
+    },
+    "group": "Game controls"
   },
   "quarter-ot": {
     "label": "Quarter OT",
     "action": "game",
     "payload": {
       "quarter": "OT"
-    }
+    },
+    "group": "Game controls"
   },
   "down-1st": {
     "label": "1ST",
@@ -316,7 +357,8 @@
     "payload": {
       "down": "1ST",
       "showDownDistance": true
-    }
+    },
+    "group": "Game controls"
   },
   "down-2nd": {
     "label": "2ND",
@@ -324,7 +366,8 @@
     "payload": {
       "down": "2ND",
       "showDownDistance": true
-    }
+    },
+    "group": "Game controls"
   },
   "down-3rd": {
     "label": "3RD",
@@ -332,7 +375,8 @@
     "payload": {
       "down": "3RD",
       "showDownDistance": true
-    }
+    },
+    "group": "Game controls"
   },
   "down-4th": {
     "label": "4TH",
@@ -340,7 +384,8 @@
     "payload": {
       "down": "4TH",
       "showDownDistance": true
-    }
+    },
+    "group": "Game controls"
   },
   "down-2nd-down": {
     "label": "2ND DOWN",
@@ -348,7 +393,8 @@
     "payload": {
       "down": "2ND DOWN",
       "showDownDistance": true
-    }
+    },
+    "group": "Game controls"
   },
   "down-3rd-down": {
     "label": "3RD DOWN",
@@ -356,7 +402,8 @@
     "payload": {
       "down": "3RD DOWN",
       "showDownDistance": true
-    }
+    },
+    "group": "Game controls"
   },
   "down-4th-down": {
     "label": "4TH DOWN",
@@ -364,35 +411,40 @@
     "payload": {
       "down": "4TH DOWN",
       "showDownDistance": true
-    }
+    },
+    "group": "Game controls"
   },
   "status-live": {
     "label": "LIVE",
     "action": "game",
     "payload": {
       "bottomStatus": "LIVE"
-    }
+    },
+    "group": "Game controls"
   },
   "status-halftime": {
     "label": "HALFTIME",
     "action": "game",
     "payload": {
       "bottomStatus": "HALFTIME"
-    }
+    },
+    "group": "Game controls"
   },
   "status-final": {
     "label": "FINAL",
     "action": "game",
     "payload": {
       "bottomStatus": "FINAL"
-    }
+    },
+    "group": "Game controls"
   },
   "status-end-of-regulation": {
     "label": "END OF REGULATION",
     "action": "game",
     "payload": {
       "bottomStatus": "END OF REGULATION"
-    }
+    },
+    "group": "Game controls"
   },
   "away-timeouts-0": {
     "label": "AWAY timeouts = 0",
@@ -400,7 +452,8 @@
     "payload": {
       "team": "away",
       "value": 0
-    }
+    },
+    "group": "Game controls"
   },
   "away-timeouts-1": {
     "label": "AWAY timeouts = 1",
@@ -408,7 +461,8 @@
     "payload": {
       "team": "away",
       "value": 1
-    }
+    },
+    "group": "Game controls"
   },
   "away-timeouts-2": {
     "label": "AWAY timeouts = 2",
@@ -416,7 +470,8 @@
     "payload": {
       "team": "away",
       "value": 2
-    }
+    },
+    "group": "Game controls"
   },
   "away-timeouts-3": {
     "label": "AWAY timeouts = 3",
@@ -424,7 +479,8 @@
     "payload": {
       "team": "away",
       "value": 3
-    }
+    },
+    "group": "Game controls"
   },
   "away-reset-score": {
     "label": "AWAY reset score",
@@ -432,7 +488,8 @@
     "payload": {
       "team": "away",
       "value": 0
-    }
+    },
+    "group": "Game controls"
   },
   "home-timeouts-0": {
     "label": "HOME timeouts = 0",
@@ -440,7 +497,8 @@
     "payload": {
       "team": "home",
       "value": 0
-    }
+    },
+    "group": "Game controls"
   },
   "home-timeouts-1": {
     "label": "HOME timeouts = 1",
@@ -448,7 +506,8 @@
     "payload": {
       "team": "home",
       "value": 1
-    }
+    },
+    "group": "Game controls"
   },
   "home-timeouts-2": {
     "label": "HOME timeouts = 2",
@@ -456,7 +515,8 @@
     "payload": {
       "team": "home",
       "value": 2
-    }
+    },
+    "group": "Game controls"
   },
   "home-timeouts-3": {
     "label": "HOME timeouts = 3",
@@ -464,7 +524,8 @@
     "payload": {
       "team": "home",
       "value": 3
-    }
+    },
+    "group": "Game controls"
   },
   "home-reset-score": {
     "label": "HOME reset score",
@@ -472,43 +533,51 @@
     "payload": {
       "team": "home",
       "value": 0
-    }
+    },
+    "group": "Game controls"
   },
   "possession-none": {
     "label": "Clear possession",
     "action": "game",
     "payload": {
       "possession": "none"
-    }
+    },
+    "group": "Game controls"
   },
   "clear": {
     "label": "Clear on-air graphics",
     "action": "clear",
-    "payload": {}
+    "payload": {},
+    "group": "Game controls"
   },
   "lineup-play": {
     "label": "Lineup play",
     "mode": "lineup",
-    "step": "play"
+    "step": "play",
+    "group": "Game controls"
   },
   "lineup-pause": {
     "label": "Lineup pause",
     "mode": "lineup",
-    "step": "pause"
+    "step": "pause",
+    "group": "Game controls"
   },
   "lineup-next": {
     "label": "Lineup next",
     "mode": "lineup",
-    "step": "next"
+    "step": "next",
+    "group": "Game controls"
   },
   "lineup-reveal": {
     "label": "Lineup reveal",
     "mode": "lineup",
-    "step": "reveal"
+    "step": "reveal",
+    "group": "Game controls"
   },
   "apply-live": {
     "label": "Apply selected edits on air",
-    "mode": "apply"
+    "mode": "apply",
+    "group": "Game controls"
   },
   "graphic-announcers-away": {
     "label": "ANNOUNCERS \u00b7 AWAY",
@@ -516,7 +585,8 @@
     "cue": {
       "type": "announcers",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-announcers-home": {
     "label": "ANNOUNCERS \u00b7 HOME",
@@ -524,7 +594,8 @@
     "cue": {
       "type": "announcers",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-break-away": {
     "label": "BREAK \u00b7 AWAY",
@@ -532,7 +603,8 @@
     "cue": {
       "type": "break",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-break-home": {
     "label": "BREAK \u00b7 HOME",
@@ -540,7 +612,8 @@
     "cue": {
       "type": "break",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-coach-away": {
     "label": "COACH \u00b7 AWAY",
@@ -548,7 +621,8 @@
     "cue": {
       "type": "coach",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-coach-home": {
     "label": "COACH \u00b7 HOME",
@@ -556,7 +630,8 @@
     "cue": {
       "type": "coach",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-defense-away": {
     "label": "DEFENSE \u00b7 AWAY",
@@ -564,7 +639,8 @@
     "cue": {
       "type": "defense",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-defense-home": {
     "label": "DEFENSE \u00b7 HOME",
@@ -572,7 +648,8 @@
     "cue": {
       "type": "defense",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-event-away": {
     "label": "EVENT \u00b7 AWAY",
@@ -580,7 +657,8 @@
     "cue": {
       "type": "event",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-event-home": {
     "label": "EVENT \u00b7 HOME",
@@ -588,7 +666,8 @@
     "cue": {
       "type": "event",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-final-away": {
     "label": "FINAL \u00b7 AWAY",
@@ -596,7 +675,8 @@
     "cue": {
       "type": "final",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-final-home": {
     "label": "FINAL \u00b7 HOME",
@@ -604,7 +684,8 @@
     "cue": {
       "type": "final",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-lowerthird-away": {
     "label": "LOWERTHIRD \u00b7 AWAY",
@@ -612,7 +693,8 @@
     "cue": {
       "type": "lowerthird",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-lowerthird-home": {
     "label": "LOWERTHIRD \u00b7 HOME",
@@ -620,7 +702,8 @@
     "cue": {
       "type": "lowerthird",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-matchup-away": {
     "label": "MATCHUP \u00b7 AWAY",
@@ -628,7 +711,8 @@
     "cue": {
       "type": "matchup",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-matchup-home": {
     "label": "MATCHUP \u00b7 HOME",
@@ -636,7 +720,8 @@
     "cue": {
       "type": "matchup",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-offense-away": {
     "label": "OFFENSE \u00b7 AWAY",
@@ -644,7 +729,8 @@
     "cue": {
       "type": "offense",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-offense-home": {
     "label": "OFFENSE \u00b7 HOME",
@@ -652,7 +738,8 @@
     "cue": {
       "type": "offense",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-period-away": {
     "label": "PERIOD \u00b7 AWAY",
@@ -660,7 +747,8 @@
     "cue": {
       "type": "period",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-period-home": {
     "label": "PERIOD \u00b7 HOME",
@@ -668,7 +756,8 @@
     "cue": {
       "type": "period",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-player-away": {
     "label": "PLAYER \u00b7 AWAY",
@@ -676,7 +765,8 @@
     "cue": {
       "type": "player",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-player-home": {
     "label": "PLAYER \u00b7 HOME",
@@ -684,7 +774,8 @@
     "cue": {
       "type": "player",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-qbstats-away": {
     "label": "QBSTATS \u00b7 AWAY",
@@ -692,7 +783,8 @@
     "cue": {
       "type": "qbstats",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-qbstats-home": {
     "label": "QBSTATS \u00b7 HOME",
@@ -700,7 +792,8 @@
     "cue": {
       "type": "qbstats",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-quarterback-away": {
     "label": "QUARTERBACK \u00b7 AWAY",
@@ -708,7 +801,8 @@
     "cue": {
       "type": "quarterback",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-quarterback-home": {
     "label": "QUARTERBACK \u00b7 HOME",
@@ -716,7 +810,8 @@
     "cue": {
       "type": "quarterback",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-referee-away": {
     "label": "REFEREE \u00b7 AWAY",
@@ -724,7 +819,8 @@
     "cue": {
       "type": "referee",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-referee-home": {
     "label": "REFEREE \u00b7 HOME",
@@ -732,7 +828,8 @@
     "cue": {
       "type": "referee",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-reporter-away": {
     "label": "REPORTER \u00b7 AWAY",
@@ -740,7 +837,8 @@
     "cue": {
       "type": "reporter",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-reporter-home": {
     "label": "REPORTER \u00b7 HOME",
@@ -748,7 +846,8 @@
     "cue": {
       "type": "reporter",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-scoringdrive-away": {
     "label": "SCORINGDRIVE \u00b7 AWAY",
@@ -756,7 +855,8 @@
     "cue": {
       "type": "scoringdrive",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-scoringdrive-home": {
     "label": "SCORINGDRIVE \u00b7 HOME",
@@ -764,7 +864,8 @@
     "cue": {
       "type": "scoringdrive",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-situation-away": {
     "label": "SITUATION \u00b7 AWAY",
@@ -772,7 +873,8 @@
     "cue": {
       "type": "situation",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-situation-home": {
     "label": "SITUATION \u00b7 HOME",
@@ -780,7 +882,8 @@
     "cue": {
       "type": "situation",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-sponsor-away": {
     "label": "SPONSOR \u00b7 AWAY",
@@ -788,7 +891,8 @@
     "cue": {
       "type": "sponsor",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-sponsor-home": {
     "label": "SPONSOR \u00b7 HOME",
@@ -796,7 +900,8 @@
     "cue": {
       "type": "sponsor",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-standings-away": {
     "label": "STANDINGS \u00b7 AWAY",
@@ -804,7 +909,8 @@
     "cue": {
       "type": "standings",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-standings-home": {
     "label": "STANDINGS \u00b7 HOME",
@@ -812,7 +918,8 @@
     "cue": {
       "type": "standings",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-stats-away": {
     "label": "STATS \u00b7 AWAY",
@@ -820,7 +927,8 @@
     "cue": {
       "type": "stats",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-stats-home": {
     "label": "STATS \u00b7 HOME",
@@ -828,7 +936,8 @@
     "cue": {
       "type": "stats",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-teamstats-away": {
     "label": "TEAMSTATS \u00b7 AWAY",
@@ -836,7 +945,8 @@
     "cue": {
       "type": "teamstats",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-teamstats-home": {
     "label": "TEAMSTATS \u00b7 HOME",
@@ -844,23 +954,8 @@
     "cue": {
       "type": "teamstats",
       "team": "home"
-    }
-  },
-  "graphic-tiers-away": {
-    "label": "TIERS \u00b7 AWAY",
-    "mode": "graphic",
-    "cue": {
-      "type": "tiers",
-      "team": "away"
-    }
-  },
-  "graphic-tiers-home": {
-    "label": "TIERS \u00b7 HOME",
-    "mode": "graphic",
-    "cue": {
-      "type": "tiers",
-      "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-transition-away": {
     "label": "TRANSITION \u00b7 AWAY",
@@ -868,7 +963,8 @@
     "cue": {
       "type": "transition",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-transition-home": {
     "label": "TRANSITION \u00b7 HOME",
@@ -876,23 +972,8 @@
     "cue": {
       "type": "transition",
       "team": "home"
-    }
-  },
-  "graphic-upcoming-away": {
-    "label": "UPCOMING \u00b7 AWAY",
-    "mode": "graphic",
-    "cue": {
-      "type": "upcoming",
-      "team": "away"
-    }
-  },
-  "graphic-upcoming-home": {
-    "label": "UPCOMING \u00b7 HOME",
-    "mode": "graphic",
-    "cue": {
-      "type": "upcoming",
-      "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-weather-away": {
     "label": "WEATHER \u00b7 AWAY",
@@ -900,7 +981,8 @@
     "cue": {
       "type": "weather",
       "team": "away"
-    }
+    },
+    "group": "Graphics"
   },
   "graphic-weather-home": {
     "label": "WEATHER \u00b7 HOME",
@@ -908,35 +990,40 @@
     "cue": {
       "type": "weather",
       "team": "home"
-    }
+    },
+    "group": "Graphics"
   },
   "transition-auto": {
     "label": "IN auto",
     "action": "preview",
     "payload": {
       "transition": "auto"
-    }
+    },
+    "group": "Game controls"
   },
   "outTransition-auto": {
     "label": "OUT auto",
     "action": "preview",
     "payload": {
       "outTransition": "auto"
-    }
+    },
+    "group": "Game controls"
   },
   "transition-fade": {
     "label": "IN fade",
     "action": "preview",
     "payload": {
       "transition": "fade"
-    }
+    },
+    "group": "Game controls"
   },
   "outTransition-fade": {
     "label": "OUT fade",
     "action": "preview",
     "payload": {
       "outTransition": "fade"
-    }
+    },
+    "group": "Game controls"
   },
   "set-away-score": {
     "label": "Set away score",
@@ -948,7 +1035,8 @@
       "field": "value",
       "type": "number",
       "default": 0
-    }
+    },
+    "group": "Game controls"
   },
   "set-home-score": {
     "label": "Set home score",
@@ -960,7 +1048,8 @@
       "field": "value",
       "type": "number",
       "default": 0
-    }
+    },
+    "group": "Game controls"
   },
   "set-game-clock": {
     "label": "Set game clock (seconds)",
@@ -972,7 +1061,8 @@
       "field": "seconds",
       "type": "number",
       "default": 900
-    }
+    },
+    "group": "Game controls"
   },
   "set-play-clock": {
     "label": "Set & start play clock (seconds)",
@@ -982,7 +1072,8 @@
       "field": "seconds",
       "type": "number",
       "default": 40
-    }
+    },
+    "group": "Game controls"
   },
   "set-distance": {
     "label": "Set distance",
@@ -992,7 +1083,8 @@
       "field": "distance",
       "type": "text",
       "default": "10"
-    }
+    },
+    "group": "Game controls"
   },
   "set-ball-on": {
     "label": "Set ball on",
@@ -1002,7 +1094,8 @@
       "field": "ballOn",
       "type": "text",
       "default": "25"
-    }
+    },
+    "group": "Game controls"
   },
   "set-overtime": {
     "label": "Set overtime number",
@@ -1012,7 +1105,8 @@
       "field": "overtimePeriod",
       "type": "number",
       "default": 2
-    }
+    },
+    "group": "Game controls"
   },
   "set-weather-temp": {
     "label": "Weather temperature",
@@ -1024,7 +1118,8 @@
       "field": "weatherTemp",
       "type": "text",
       "default": "67\u00b0"
-    }
+    },
+    "group": "Game controls"
   },
   "set-weather-wind": {
     "label": "Weather wind",
@@ -1036,7 +1131,8 @@
       "field": "weatherWind",
       "type": "text",
       "default": "NW 6 MPH"
-    }
+    },
+    "group": "Game controls"
   },
   "set-weather-forecast": {
     "label": "Weather forecast",
@@ -1048,7 +1144,8 @@
       "field": "weatherForecast",
       "type": "text",
       "default": "CLEAR"
-    }
+    },
+    "group": "Game controls"
   },
   "set-title": {
     "label": "Selected graphic title",
@@ -1058,7 +1155,8 @@
       "field": "title",
       "type": "text",
       "default": ""
-    }
+    },
+    "group": "Game controls"
   },
   "set-subtitle": {
     "label": "Selected graphic subtitle",
@@ -1068,6 +1166,2026 @@
       "field": "subtitle",
       "type": "text",
       "default": ""
-    }
+    },
+    "group": "Game controls"
+  },
+  "playlist-play": {
+    "label": "Playlist \u00b7 Play",
+    "mode": "playlist",
+    "step": "play",
+    "group": "Playlist"
+  },
+  "playlist-pause": {
+    "label": "Playlist \u00b7 Pause",
+    "mode": "playlist",
+    "step": "pause",
+    "group": "Playlist"
+  },
+  "playlist-next": {
+    "label": "Playlist \u00b7 Next",
+    "mode": "playlist",
+    "step": "next",
+    "group": "Playlist"
+  },
+  "playlist-in": {
+    "label": "Playlist \u00b7 In",
+    "mode": "playlist",
+    "step": "in",
+    "group": "Playlist"
+  },
+  "playlist-out": {
+    "label": "Playlist \u00b7 Out",
+    "mode": "playlist",
+    "step": "out",
+    "group": "Playlist"
+  },
+  "playlist-restart": {
+    "label": "Playlist \u00b7 Restart",
+    "mode": "playlist",
+    "step": "restart",
+    "group": "Playlist"
+  },
+  "graphic-intro-away": {
+    "label": "Game opening intro \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "intro",
+      "team": "away"
+    },
+    "group": "Graphics"
+  },
+  "break-small-away": {
+    "label": "Break \u00b7 small \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "break",
+      "team": "away",
+      "breakLayout": "small"
+    },
+    "group": "Graphics"
+  },
+  "break-large-away": {
+    "label": "Break \u00b7 large \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "break",
+      "team": "away",
+      "breakLayout": "large"
+    },
+    "group": "Graphics"
+  },
+  "break-stinger-away": {
+    "label": "Break \u00b7 stinger \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "break",
+      "team": "away",
+      "breakLayout": "stinger"
+    },
+    "group": "Graphics"
+  },
+  "transition-team-away": {
+    "label": "Transition \u00b7 team \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "transition",
+      "team": "away",
+      "transitionStyle": "team"
+    },
+    "group": "Graphics"
+  },
+  "transition-person-away": {
+    "label": "Transition \u00b7 person \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "transition",
+      "team": "away",
+      "transitionStyle": "person"
+    },
+    "group": "Graphics"
+  },
+  "transition-matchup-away": {
+    "label": "Transition \u00b7 matchup \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "transition",
+      "team": "away",
+      "transitionStyle": "matchup"
+    },
+    "group": "Graphics"
+  },
+  "situation-fieldgoal-away": {
+    "label": "Situation \u00b7 fieldgoal \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "situation",
+      "team": "away",
+      "situationKind": "fieldgoal"
+    },
+    "group": "Graphics"
+  },
+  "situation-kicker-away": {
+    "label": "Situation \u00b7 kicker \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "situation",
+      "team": "away",
+      "situationKind": "kicker"
+    },
+    "group": "Graphics"
+  },
+  "situation-punt-away": {
+    "label": "Situation \u00b7 punt \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "situation",
+      "team": "away",
+      "situationKind": "punt"
+    },
+    "group": "Graphics"
+  },
+  "situation-third-away": {
+    "label": "Situation \u00b7 third \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "situation",
+      "team": "away",
+      "situationKind": "third"
+    },
+    "group": "Graphics"
+  },
+  "situation-fourth-away": {
+    "label": "Situation \u00b7 fourth \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "situation",
+      "team": "away",
+      "situationKind": "fourth"
+    },
+    "group": "Graphics"
+  },
+  "qbstats-qb-away": {
+    "label": "Qbstats \u00b7 qb \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "qbstats",
+      "team": "away",
+      "sideStatsLayout": "qb"
+    },
+    "group": "Graphics"
+  },
+  "qbstats-rushing-away": {
+    "label": "Qbstats \u00b7 rushing \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "qbstats",
+      "team": "away",
+      "sideStatsLayout": "rushing"
+    },
+    "group": "Graphics"
+  },
+  "qbstats-receiving-away": {
+    "label": "Qbstats \u00b7 receiving \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "qbstats",
+      "team": "away",
+      "sideStatsLayout": "receiving"
+    },
+    "group": "Graphics"
+  },
+  "qbstats-rushing-qb-away": {
+    "label": "Qbstats \u00b7 rushing-qb \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "qbstats",
+      "team": "away",
+      "sideStatsLayout": "rushing-qb"
+    },
+    "group": "Graphics"
+  },
+  "qbstats-receiving-qb-away": {
+    "label": "Qbstats \u00b7 receiving-qb \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "qbstats",
+      "team": "away",
+      "sideStatsLayout": "receiving-qb"
+    },
+    "group": "Graphics"
+  },
+  "quarterback-feature-away": {
+    "label": "Quarterback \u00b7 feature \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "quarterback",
+      "team": "away",
+      "qbIntroMode": "feature"
+    },
+    "group": "Graphics"
+  },
+  "quarterback-season-away": {
+    "label": "Quarterback \u00b7 season \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "quarterback",
+      "team": "away",
+      "qbIntroMode": "season"
+    },
+    "group": "Graphics"
+  },
+  "event-touchdown-away": {
+    "label": "Event \u00b7 TOUCHDOWN \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "away",
+      "event": "TOUCHDOWN"
+    },
+    "group": "Graphics"
+  },
+  "event-field-goal-away": {
+    "label": "Event \u00b7 FIELD GOAL \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "away",
+      "event": "FIELD GOAL"
+    },
+    "group": "Graphics"
+  },
+  "event-extra-point-away": {
+    "label": "Event \u00b7 EXTRA POINT \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "away",
+      "event": "EXTRA POINT"
+    },
+    "group": "Graphics"
+  },
+  "event-two-point-conversion-away": {
+    "label": "Event \u00b7 TWO-POINT CONVERSION \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "away",
+      "event": "TWO-POINT CONVERSION"
+    },
+    "group": "Graphics"
+  },
+  "event-safety-away": {
+    "label": "Event \u00b7 SAFETY \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "away",
+      "event": "SAFETY"
+    },
+    "group": "Graphics"
+  },
+  "event-turnover-away": {
+    "label": "Event \u00b7 TURNOVER \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "away",
+      "event": "TURNOVER"
+    },
+    "group": "Graphics"
+  },
+  "event-interception-away": {
+    "label": "Event \u00b7 INTERCEPTION \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "away",
+      "event": "INTERCEPTION"
+    },
+    "group": "Graphics"
+  },
+  "event-timeout-away": {
+    "label": "Event \u00b7 TIMEOUT \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "away",
+      "event": "TIMEOUT"
+    },
+    "group": "Graphics"
+  },
+  "event-under-review-away": {
+    "label": "Event \u00b7 UNDER REVIEW \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "away",
+      "event": "UNDER REVIEW"
+    },
+    "group": "Graphics"
+  },
+  "flag-team-away": {
+    "label": "Flag \u00b7 team \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "event": "FLAG",
+      "flagVariant": "team",
+      "team": "away"
+    },
+    "group": "Graphics"
+  },
+  "flag-player-away": {
+    "label": "Flag \u00b7 player \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "event": "FLAG",
+      "flagVariant": "player",
+      "team": "away"
+    },
+    "group": "Graphics"
+  },
+  "flag-generic-away": {
+    "label": "Flag \u00b7 generic \u00b7 away",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "event": "FLAG",
+      "flagVariant": "generic",
+      "team": "away"
+    },
+    "group": "Graphics"
+  },
+  "graphic-intro-home": {
+    "label": "Game opening intro \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "intro",
+      "team": "home"
+    },
+    "group": "Graphics"
+  },
+  "break-small-home": {
+    "label": "Break \u00b7 small \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "break",
+      "team": "home",
+      "breakLayout": "small"
+    },
+    "group": "Graphics"
+  },
+  "break-large-home": {
+    "label": "Break \u00b7 large \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "break",
+      "team": "home",
+      "breakLayout": "large"
+    },
+    "group": "Graphics"
+  },
+  "break-stinger-home": {
+    "label": "Break \u00b7 stinger \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "break",
+      "team": "home",
+      "breakLayout": "stinger"
+    },
+    "group": "Graphics"
+  },
+  "transition-team-home": {
+    "label": "Transition \u00b7 team \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "transition",
+      "team": "home",
+      "transitionStyle": "team"
+    },
+    "group": "Graphics"
+  },
+  "transition-person-home": {
+    "label": "Transition \u00b7 person \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "transition",
+      "team": "home",
+      "transitionStyle": "person"
+    },
+    "group": "Graphics"
+  },
+  "transition-matchup-home": {
+    "label": "Transition \u00b7 matchup \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "transition",
+      "team": "home",
+      "transitionStyle": "matchup"
+    },
+    "group": "Graphics"
+  },
+  "situation-fieldgoal-home": {
+    "label": "Situation \u00b7 fieldgoal \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "situation",
+      "team": "home",
+      "situationKind": "fieldgoal"
+    },
+    "group": "Graphics"
+  },
+  "situation-kicker-home": {
+    "label": "Situation \u00b7 kicker \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "situation",
+      "team": "home",
+      "situationKind": "kicker"
+    },
+    "group": "Graphics"
+  },
+  "situation-punt-home": {
+    "label": "Situation \u00b7 punt \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "situation",
+      "team": "home",
+      "situationKind": "punt"
+    },
+    "group": "Graphics"
+  },
+  "situation-third-home": {
+    "label": "Situation \u00b7 third \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "situation",
+      "team": "home",
+      "situationKind": "third"
+    },
+    "group": "Graphics"
+  },
+  "situation-fourth-home": {
+    "label": "Situation \u00b7 fourth \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "situation",
+      "team": "home",
+      "situationKind": "fourth"
+    },
+    "group": "Graphics"
+  },
+  "qbstats-qb-home": {
+    "label": "Qbstats \u00b7 qb \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "qbstats",
+      "team": "home",
+      "sideStatsLayout": "qb"
+    },
+    "group": "Graphics"
+  },
+  "qbstats-rushing-home": {
+    "label": "Qbstats \u00b7 rushing \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "qbstats",
+      "team": "home",
+      "sideStatsLayout": "rushing"
+    },
+    "group": "Graphics"
+  },
+  "qbstats-receiving-home": {
+    "label": "Qbstats \u00b7 receiving \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "qbstats",
+      "team": "home",
+      "sideStatsLayout": "receiving"
+    },
+    "group": "Graphics"
+  },
+  "qbstats-rushing-qb-home": {
+    "label": "Qbstats \u00b7 rushing-qb \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "qbstats",
+      "team": "home",
+      "sideStatsLayout": "rushing-qb"
+    },
+    "group": "Graphics"
+  },
+  "qbstats-receiving-qb-home": {
+    "label": "Qbstats \u00b7 receiving-qb \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "qbstats",
+      "team": "home",
+      "sideStatsLayout": "receiving-qb"
+    },
+    "group": "Graphics"
+  },
+  "quarterback-feature-home": {
+    "label": "Quarterback \u00b7 feature \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "quarterback",
+      "team": "home",
+      "qbIntroMode": "feature"
+    },
+    "group": "Graphics"
+  },
+  "quarterback-season-home": {
+    "label": "Quarterback \u00b7 season \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "quarterback",
+      "team": "home",
+      "qbIntroMode": "season"
+    },
+    "group": "Graphics"
+  },
+  "event-touchdown-home": {
+    "label": "Event \u00b7 TOUCHDOWN \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "home",
+      "event": "TOUCHDOWN"
+    },
+    "group": "Graphics"
+  },
+  "event-field-goal-home": {
+    "label": "Event \u00b7 FIELD GOAL \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "home",
+      "event": "FIELD GOAL"
+    },
+    "group": "Graphics"
+  },
+  "event-extra-point-home": {
+    "label": "Event \u00b7 EXTRA POINT \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "home",
+      "event": "EXTRA POINT"
+    },
+    "group": "Graphics"
+  },
+  "event-two-point-conversion-home": {
+    "label": "Event \u00b7 TWO-POINT CONVERSION \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "home",
+      "event": "TWO-POINT CONVERSION"
+    },
+    "group": "Graphics"
+  },
+  "event-safety-home": {
+    "label": "Event \u00b7 SAFETY \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "home",
+      "event": "SAFETY"
+    },
+    "group": "Graphics"
+  },
+  "event-turnover-home": {
+    "label": "Event \u00b7 TURNOVER \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "home",
+      "event": "TURNOVER"
+    },
+    "group": "Graphics"
+  },
+  "event-interception-home": {
+    "label": "Event \u00b7 INTERCEPTION \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "home",
+      "event": "INTERCEPTION"
+    },
+    "group": "Graphics"
+  },
+  "event-timeout-home": {
+    "label": "Event \u00b7 TIMEOUT \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "home",
+      "event": "TIMEOUT"
+    },
+    "group": "Graphics"
+  },
+  "event-under-review-home": {
+    "label": "Event \u00b7 UNDER REVIEW \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "team": "home",
+      "event": "UNDER REVIEW"
+    },
+    "group": "Graphics"
+  },
+  "flag-team-home": {
+    "label": "Flag \u00b7 team \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "event": "FLAG",
+      "flagVariant": "team",
+      "team": "home"
+    },
+    "group": "Graphics"
+  },
+  "flag-player-home": {
+    "label": "Flag \u00b7 player \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "event": "FLAG",
+      "flagVariant": "player",
+      "team": "home"
+    },
+    "group": "Graphics"
+  },
+  "flag-generic-home": {
+    "label": "Flag \u00b7 generic \u00b7 home",
+    "mode": "graphic",
+    "cue": {
+      "type": "event",
+      "event": "FLAG",
+      "flagVariant": "generic",
+      "team": "home"
+    },
+    "group": "Graphics"
+  },
+  "division-AFC-EAST": {
+    "label": "AFC EAST standings",
+    "mode": "graphic",
+    "cue": {
+      "type": "standings",
+      "divisionId": "AFC EAST"
+    },
+    "group": "Graphics"
+  },
+  "division-AFC-NORTH": {
+    "label": "AFC NORTH standings",
+    "mode": "graphic",
+    "cue": {
+      "type": "standings",
+      "divisionId": "AFC NORTH"
+    },
+    "group": "Graphics"
+  },
+  "division-AFC-SOUTH": {
+    "label": "AFC SOUTH standings",
+    "mode": "graphic",
+    "cue": {
+      "type": "standings",
+      "divisionId": "AFC SOUTH"
+    },
+    "group": "Graphics"
+  },
+  "division-AFC-WEST": {
+    "label": "AFC WEST standings",
+    "mode": "graphic",
+    "cue": {
+      "type": "standings",
+      "divisionId": "AFC WEST"
+    },
+    "group": "Graphics"
+  },
+  "division-NFC-EAST": {
+    "label": "NFC EAST standings",
+    "mode": "graphic",
+    "cue": {
+      "type": "standings",
+      "divisionId": "NFC EAST"
+    },
+    "group": "Graphics"
+  },
+  "division-NFC-NORTH": {
+    "label": "NFC NORTH standings",
+    "mode": "graphic",
+    "cue": {
+      "type": "standings",
+      "divisionId": "NFC NORTH"
+    },
+    "group": "Graphics"
+  },
+  "division-NFC-SOUTH": {
+    "label": "NFC SOUTH standings",
+    "mode": "graphic",
+    "cue": {
+      "type": "standings",
+      "divisionId": "NFC SOUTH"
+    },
+    "group": "Graphics"
+  },
+  "division-NFC-WEST": {
+    "label": "NFC WEST standings",
+    "mode": "graphic",
+    "cue": {
+      "type": "standings",
+      "divisionId": "NFC WEST"
+    },
+    "group": "Graphics"
+  },
+  "edit-attemptDistance": {
+    "label": "Edit graphic \u00b7 attempt Distance",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "attemptDistance",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-attempts": {
+    "label": "Edit graphic \u00b7 attempts",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "attempts",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-breakDetail": {
+    "label": "Edit graphic \u00b7 break Detail",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "breakDetail",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-breakHeadline": {
+    "label": "Edit graphic \u00b7 break Headline",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "breakHeadline",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-conversionLayout": {
+    "label": "Edit graphic \u00b7 conversion Layout",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "conversionLayout",
+      "type": "text",
+      "default": "all",
+      "options": [
+        "all",
+        "count",
+        "percentage"
+      ]
+    },
+    "group": "Graphic fields"
+  },
+  "edit-conversions": {
+    "label": "Edit graphic \u00b7 conversions",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "conversions",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-divisionTitle": {
+    "label": "Edit graphic \u00b7 division Title",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "divisionTitle",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-driveNote": {
+    "label": "Edit graphic \u00b7 drive Note",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "driveNote",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-drivePlays": {
+    "label": "Edit graphic \u00b7 drive Plays",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "drivePlays",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-driveResult": {
+    "label": "Edit graphic \u00b7 drive Result",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "driveResult",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-driveTime": {
+    "label": "Edit graphic \u00b7 drive Time",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "driveTime",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-driveYards": {
+    "label": "Edit graphic \u00b7 drive Yards",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "driveYards",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-event": {
+    "label": "Edit graphic \u00b7 event",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "event",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-flagVariant": {
+    "label": "Edit graphic \u00b7 flag Variant",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "flagVariant",
+      "type": "text",
+      "default": "team",
+      "options": [
+        "team",
+        "player",
+        "generic"
+      ]
+    },
+    "group": "Graphic fields"
+  },
+  "edit-kickerAttempts": {
+    "label": "Edit graphic \u00b7 kicker Attempts",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "kickerAttempts",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-kickerContext": {
+    "label": "Edit graphic \u00b7 kicker Context",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "kickerContext",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-kickerId": {
+    "label": "Edit graphic \u00b7 kicker Id",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "kickerId",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-kickerLong": {
+    "label": "Edit graphic \u00b7 kicker Long",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "kickerLong",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-kickerMade": {
+    "label": "Edit graphic \u00b7 kicker Made",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "kickerMade",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-leftName": {
+    "label": "Edit graphic \u00b7 left Name",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "leftName",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-leftRole": {
+    "label": "Edit graphic \u00b7 left Role",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "leftRole",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-lowerContext": {
+    "label": "Edit graphic \u00b7 lower Context",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "lowerContext",
+      "type": "text",
+      "default": "",
+      "options": [
+        "",
+        "TODAY",
+        "THIS SEASON",
+        "LAST SEASON",
+        "LAST WEEK VS",
+        "THIS WEEK VS",
+        "CAREER",
+        "CUSTOM"
+      ]
+    },
+    "group": "Graphic fields"
+  },
+  "edit-lowerContextText": {
+    "label": "Edit graphic \u00b7 lower Context Text",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "lowerContextText",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-outTransition": {
+    "label": "Edit graphic \u00b7 out Transition",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "outTransition",
+      "type": "text",
+      "default": "auto",
+      "options": [
+        "auto",
+        "fade"
+      ]
+    },
+    "group": "Graphic fields"
+  },
+  "edit-penaltyDetail": {
+    "label": "Edit graphic \u00b7 penalty Detail",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "penaltyDetail",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-penaltyPlayer": {
+    "label": "Edit graphic \u00b7 penalty Player",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "penaltyPlayer",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-penaltyType": {
+    "label": "Edit graphic \u00b7 penalty Type",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "penaltyType",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-period": {
+    "label": "Edit graphic \u00b7 period",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "period",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-playerId": {
+    "label": "Edit graphic \u00b7 player Id",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "playerId",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbAtt": {
+    "label": "Edit graphic \u00b7 qb Att",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbAtt",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbComp": {
+    "label": "Edit graphic \u00b7 qb Comp",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbComp",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbContextYellow": {
+    "label": "Edit graphic \u00b7 qb Context Yellow",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbContextYellow",
+      "type": "boolean",
+      "default": false,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbDetail": {
+    "label": "Edit graphic \u00b7 qb Detail",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbDetail",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbINT": {
+    "label": "Edit graphic \u00b7 qb INT",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbINT",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbLabel": {
+    "label": "Edit graphic \u00b7 qb Label",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbLabel",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbSeasonAtt": {
+    "label": "Edit graphic \u00b7 qb Season Att",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbSeasonAtt",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbSeasonComp": {
+    "label": "Edit graphic \u00b7 qb Season Comp",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbSeasonComp",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbSeasonINT": {
+    "label": "Edit graphic \u00b7 qb Season INT",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbSeasonINT",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbSeasonLabel": {
+    "label": "Edit graphic \u00b7 qb Season Label",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbSeasonLabel",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbSeasonTD": {
+    "label": "Edit graphic \u00b7 qb Season TD",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbSeasonTD",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbSeasonYards": {
+    "label": "Edit graphic \u00b7 qb Season Yards",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbSeasonYards",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbTD": {
+    "label": "Edit graphic \u00b7 qb TD",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbTD",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbValue": {
+    "label": "Edit graphic \u00b7 qb Value",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbValue",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbYards": {
+    "label": "Edit graphic \u00b7 qb Yards",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbYards",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-refereeExperience": {
+    "label": "Edit graphic \u00b7 referee Experience",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "refereeExperience",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-refereeName": {
+    "label": "Edit graphic \u00b7 referee Name",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "refereeName",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-refereeRole": {
+    "label": "Edit graphic \u00b7 referee Role",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "refereeRole",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-reporterName": {
+    "label": "Edit graphic \u00b7 reporter Name",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "reporterName",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-rightName": {
+    "label": "Edit graphic \u00b7 right Name",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "rightName",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-rightRole": {
+    "label": "Edit graphic \u00b7 right Role",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "rightRole",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-sideCount": {
+    "label": "Edit graphic \u00b7 side Count",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "sideCount",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-sideTD": {
+    "label": "Edit graphic \u00b7 side TD",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "sideTD",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-sideYards": {
+    "label": "Edit graphic \u00b7 side Yards",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "sideYards",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-situationDetail": {
+    "label": "Edit graphic \u00b7 situation Detail",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "situationDetail",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-sponsorNext": {
+    "label": "Edit graphic \u00b7 sponsor Next",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "sponsorNext",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-sponsorSubtitle": {
+    "label": "Edit graphic \u00b7 sponsor Subtitle",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "sponsorSubtitle",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-sponsorTitle": {
+    "label": "Edit graphic \u00b7 sponsor Title",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "sponsorTitle",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-spotlightDetail": {
+    "label": "Edit graphic \u00b7 spotlight Detail",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "spotlightDetail",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-staffDetail": {
+    "label": "Edit graphic \u00b7 staff Detail",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "staffDetail",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-staffId": {
+    "label": "Edit graphic \u00b7 staff Id",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "staffId",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-staffName": {
+    "label": "Edit graphic \u00b7 staff Name",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "staffName",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-staffRole": {
+    "label": "Edit graphic \u00b7 staff Role",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "staffRole",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-subtitle": {
+    "label": "Edit graphic \u00b7 subtitle",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "subtitle",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-title": {
+    "label": "Edit graphic \u00b7 title",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "title",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-transition": {
+    "label": "Edit graphic \u00b7 transition",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "transition",
+      "type": "text",
+      "default": "auto",
+      "options": [
+        "auto",
+        "fade"
+      ]
+    },
+    "group": "Graphic fields"
+  },
+  "edit-transitionDetail": {
+    "label": "Edit graphic \u00b7 transition Detail",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "transitionDetail",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-transitionDuration": {
+    "label": "Edit graphic \u00b7 transition Duration",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "transitionDuration",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-transitionPerson": {
+    "label": "Edit graphic \u00b7 transition Person",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "transitionPerson",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-transitionStyle": {
+    "label": "Edit graphic \u00b7 transition Style",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "transitionStyle",
+      "type": "text",
+      "default": "team",
+      "options": [
+        "team",
+        "person",
+        "matchup"
+      ]
+    },
+    "group": "Graphic fields"
+  },
+  "edit-transitionTitle": {
+    "label": "Edit graphic \u00b7 transition Title",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "transitionTitle",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-weatherForecast": {
+    "label": "Edit graphic \u00b7 weather Forecast",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "weatherForecast",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-weatherTemp": {
+    "label": "Edit graphic \u00b7 weather Temp",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "weatherTemp",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-weatherWind": {
+    "label": "Edit graphic \u00b7 weather Wind",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "weatherWind",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "api-branding": {
+    "label": "Advanced \u00b7 branding",
+    "action": "branding",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-bug": {
+    "label": "Advanced \u00b7 bug",
+    "action": "bug",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-clear": {
+    "label": "Advanced \u00b7 clear",
+    "action": "clear",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-clock": {
+    "label": "Advanced \u00b7 clock",
+    "action": "clock",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-game": {
+    "label": "Advanced \u00b7 game",
+    "action": "game",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-hide": {
+    "label": "Advanced \u00b7 hide",
+    "action": "hide",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-library_assign": {
+    "label": "Advanced \u00b7 library assign",
+    "action": "library_assign",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-library_branding": {
+    "label": "Advanced \u00b7 library branding",
+    "action": "library_branding",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-library_capture": {
+    "label": "Advanced \u00b7 library capture",
+    "action": "library_capture",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-library_create": {
+    "label": "Advanced \u00b7 library create",
+    "action": "library_create",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-lineup": {
+    "label": "Advanced \u00b7 lineup",
+    "action": "lineup",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-lineup_step": {
+    "label": "Advanced \u00b7 lineup step",
+    "action": "lineup_step",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-load_season_stats": {
+    "label": "Advanced \u00b7 load season stats",
+    "action": "load_season_stats",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-play_clock_preset": {
+    "label": "Advanced \u00b7 play clock preset",
+    "action": "play_clock_preset",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-playlist_save": {
+    "label": "Advanced \u00b7 playlist save",
+    "action": "playlist_save",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-playlist_take": {
+    "label": "Advanced \u00b7 playlist take",
+    "action": "playlist_take",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-preview": {
+    "label": "Advanced \u00b7 preview",
+    "action": "preview",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-qb_stats_visibility": {
+    "label": "Advanced \u00b7 qb stats visibility",
+    "action": "qb_stats_visibility",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-reset_show": {
+    "label": "Advanced \u00b7 reset show",
+    "action": "reset_show",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-restore": {
+    "label": "Advanced \u00b7 restore",
+    "action": "restore",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-roster": {
+    "label": "Advanced \u00b7 roster",
+    "action": "roster",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-score": {
+    "label": "Advanced \u00b7 score",
+    "action": "score",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-staff": {
+    "label": "Advanced \u00b7 staff",
+    "action": "staff",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-take": {
+    "label": "Advanced \u00b7 take",
+    "action": "take",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-team": {
+    "label": "Advanced \u00b7 team",
+    "action": "team",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-timeout": {
+    "label": "Advanced \u00b7 timeout",
+    "action": "timeout",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-transition_preset": {
+    "label": "Advanced \u00b7 transition preset",
+    "action": "transition_preset",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-update_live": {
+    "label": "Advanced \u00b7 update live",
+    "action": "update_live",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "api-watermark": {
+    "label": "Advanced \u00b7 watermark",
+    "action": "watermark",
+    "payload": {},
+    "advanced": true,
+    "group": "Advanced"
+  },
+  "edit-breakLayout": {
+    "label": "Edit graphic \u00b7 break Layout",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "breakLayout",
+      "type": "text",
+      "default": "small",
+      "options": [
+        "small",
+        "large",
+        "stinger"
+      ]
+    },
+    "group": "Graphic fields"
+  },
+  "edit-conversionDistances": {
+    "label": "Edit graphic \u00b7 conversion Distances",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "conversionDistances",
+      "type": "json",
+      "default": [],
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-divisionId": {
+    "label": "Edit graphic \u00b7 division Id",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "divisionId",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-lineupGroup": {
+    "label": "Edit graphic \u00b7 lineup Group",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "lineupGroup",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-lineupPhase": {
+    "label": "Edit graphic \u00b7 lineup Phase",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "lineupPhase",
+      "type": "text",
+      "default": "title",
+      "options": [
+        "title",
+        "players"
+      ]
+    },
+    "group": "Graphic fields"
+  },
+  "edit-qbIntroMode": {
+    "label": "Edit graphic \u00b7 qb Intro Mode",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "qbIntroMode",
+      "type": "text",
+      "default": "feature",
+      "options": [
+        "feature",
+        "season"
+      ]
+    },
+    "group": "Graphic fields"
+  },
+  "edit-sidePlayerId": {
+    "label": "Edit graphic \u00b7 side Player Id",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "sidePlayerId",
+      "type": "text",
+      "default": "",
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-sideStatsLayout": {
+    "label": "Edit graphic \u00b7 side Stats Layout",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "sideStatsLayout",
+      "type": "text",
+      "default": "qb",
+      "options": [
+        "qb",
+        "rushing",
+        "receiving",
+        "rushing-qb",
+        "receiving-qb"
+      ]
+    },
+    "group": "Graphic fields"
+  },
+  "edit-situationKind": {
+    "label": "Edit graphic \u00b7 situation Kind",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "situationKind",
+      "type": "text",
+      "default": "fieldgoal",
+      "options": [
+        "fieldgoal",
+        "kicker",
+        "punt",
+        "third",
+        "fourth"
+      ]
+    },
+    "group": "Graphic fields"
+  },
+  "edit-standingsRows": {
+    "label": "Edit graphic \u00b7 standings Rows",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "standingsRows",
+      "type": "json",
+      "default": [],
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-stats": {
+    "label": "Edit graphic \u00b7 stats",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "stats",
+      "type": "json",
+      "default": [],
+      "options": null
+    },
+    "group": "Graphic fields"
+  },
+  "edit-team": {
+    "label": "Edit graphic \u00b7 team",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "team",
+      "type": "text",
+      "default": "away",
+      "options": [
+        "away",
+        "home"
+      ]
+    },
+    "group": "Graphic fields"
+  },
+  "edit-timeoutNumber": {
+    "label": "Edit graphic \u00b7 timeout Number",
+    "action": "preview",
+    "payload": {},
+    "parameter": {
+      "field": "timeoutNumber",
+      "type": "number",
+      "default": 0,
+      "options": null
+    },
+    "group": "Graphic fields"
   }
 }

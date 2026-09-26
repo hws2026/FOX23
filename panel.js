@@ -1,6 +1,6 @@
 import{createPlaylist}from'./playlist.js?v=116';
-import{libraryView,bindLibrary}from'./team-library.js?v=rails154';
-import{passerRating,esc,qbLiveStats,matchupVenue,formations,defensePositions,offensePositions,graphicNames,clockText,clockSeconds}from'./graphics.js?v=rails154';
+import{libraryView,bindLibrary}from'./team-library.js?v=deck155';
+import{passerRating,esc,qbLiveStats,matchupVenue,formations,defensePositions,offensePositions,graphicNames,clockText,clockSeconds}from'./graphics.js?v=deck155';
 const $=s=>document.querySelector(s);let state,tab='live',lineupTeam='away',lineupType='defense',rosterTeam='away',playerId='away-1',offset=0,busy=0,queue=Promise.resolve(),lastRevision=-1,toastTimer;
 const titles={playlist:'Playlist',teams:'Team library',transitions:'Broadcast transitions',live:'Game day control',graphics:'Graphics library',lineups:'Team builder',rosters:'Player stats & personnel',branding:'Set the stage',output:'Broadcast output'};
 const option=(value,label,selected)=>`<option value="${esc(value)}" ${value===selected?'selected':''}>${esc(label)}</option>`;
@@ -134,6 +134,8 @@ let deckQueue=Promise.resolve();
 export function deckControl(spec){
  const run=deckQueue.then(async()=>{
   if(!state)throw Error('Control panel is still loading');
+  if(spec.mode==='playlist'){await playlist.control(spec.step);return;}
+  if(spec.mode==='select'){await saveCue();await act('preview',spec.cue);render();return;}
   if(spec.mode==='graphic'){await saveCue();await act('preview',spec.cue);render();await autoTake();return;}
   if(spec.mode==='lineup'){if(spec.step==='pause'){stopLineup();return;}const cue=['offense','defense'].includes(state.program.graphic.type)?state.program.graphic:state.preview;if(!['offense','defense'].includes(cue.type))throw Error('Select a lineup first');await runLineup(spec.step,cue);return;}
   if(spec.mode==='apply'){await saveCue();await act('update_live');return;}

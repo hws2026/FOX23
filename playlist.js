@@ -29,5 +29,5 @@ export function createPlaylist({getState,act,stopLineup,esc,graphicNames,render,
    el.querySelector('[data-pl-delete]').onclick=run(()=>save(items().filter(r=>r.id!==id)));
   });renderStatus();
  }
- return {view,bind,observe,pause};
+ return {view,bind,observe,pause,async control(step){if(working)throw Error('Playlist is busy');if(step==='pause'){pause();return;}if(step==='out'){pause();await out();return;}if(step==='restart'){pause();remaining=0;selected=items()[0]?.id;return;}if(!current())throw Error('Add graphics to the playlist first');if(step==='next'){pause();await advance();}else if(step==='in'){pause();await take();}else if(step==='play'){if(running)return;stopLineup();if(remaining&&owned){running=true;schedule(remaining);}else await take(true);}else throw Error('Unknown playlist control');}};
 }
