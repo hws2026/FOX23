@@ -1,0 +1,4 @@
+PHOTO LIBRARY UPDATE 163
+2,485 player photos and 960 coach photos saved. ESPN plus official team websites. Existing custom images preserved.
+No verified photo found for Jack Strand, Maceo Beard-Aigret, Trayvon Rudolph. Their entries remain blank.
+Upload assets/headshots along with code. Refresh controller after updating. Photos matched by exact identity and saved under each profile.
