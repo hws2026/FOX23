@@ -488,12 +488,14 @@ def _update(action,p):
         if STATE['preview']['type']=='scorebug': STATE['program']['bug']=True
         STATE['program']['graphic']=copy.deepcopy(STATE['preview']);STATE['program']['takeId']+=1
         STATE['program'].pop('timedGraphic',None)
-        if STATE['preview']['type']=='transition' and (STATE['preview'].get('transitionStyle') in ['matchup','teamwall','networkwall','pattern'] or STATE['preview'].get('transition') in ['teamwall','networkwall','pattern']):
-            duration=float(STATE['preview'].get('transitionDuration') or 2.6)
-            if not math.isfinite(duration): raise ValueError('Invalid bumper duration.')
-            duration=max(1.2,min(15,duration))
+        if STATE['preview']['type']=='transition':
+            cue=STATE['program']['graphic']
+            if cue.get('transition')=='fade': cue['transition']='auto'
+            if cue.get('outTransition')=='fade': cue['outTransition']='auto'
+            style=cue.get('transition') if cue.get('transition') in ['pattern','teamwall','networkwall'] else cue.get('transitionStyle','team')
+            duration={'matchup':1.2,'pattern':0.85,'teamwall':1.05,'networkwall':1.05,'team':1.15,'network':1.15,'person':5.0}.get(style,1.15)
             STATE['program']['timedGraphic']={'takeId':STATE['program']['takeId'],'until':time.time()+duration}
-            STATE['program']['graphic']['transitionDuration']=str(duration)
+            cue['transitionDuration']=str(duration)
     elif action=='hide':
         if STATE['program']['graphic']['type']=='scorebug': STATE['program']['bug']=False
         STATE['program']['graphic']={'type':'none'};STATE['program']['takeId']+=1

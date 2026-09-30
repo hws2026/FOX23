@@ -1770,3 +1770,129 @@
 .bug-wrap.penalty-away{--flag-away:#ffdc16}
 .bug-wrap.penalty-home{--flag-home:#ffdc16}
 .bug-wrap.penalty-away .team-wing.away,.bug-wrap.penalty-home .team-wing.home{background:transparent}
+
+/* 181: context precedes descriptive copy; second line has its own editable field. */
+.team-lower-third.has-context{--ribbon-height:250px;height:295px}
+.team-lower-third.has-body{--ribbon-height:255px;height:295px}
+.team-lower-third.has-context.has-body{--ribbon-height:292px;height:332px}
+.team-lower-third .spotlight-context{top:100px;font-size:29px;line-height:1.1;color:#d5dee5}
+.team-lower-third.has-context .spotlight-detail{top:141px;font-size:44px;line-height:1.15}
+.team-lower-third .spotlight-detail.lower-body{top:168px;font-size:44px;line-height:1.15}
+.team-lower-third.has-context .spotlight-detail.lower-body{top:202px}
+/* Keep metal thickness intact: reveal rather than squeezing the bevels. */
+@keyframes td-rail-build-fade154{0%{transform:none;clip-path:inset(0 47%);opacity:0}15%{transform:none;clip-path:inset(0 47%);opacity:1}100%{transform:none;clip-path:inset(0);opacity:1}}
+@keyframes break-metal-in108-fade154{0%{transform:none;clip-path:inset(94% 47% 0);opacity:0}15%{transform:none;clip-path:inset(94% 47% 0);opacity:1}55%{transform:none;clip-path:inset(94% 0 0);opacity:1}100%{transform:none;clip-path:inset(0);opacity:1}}
+@keyframes break-metal-in109-fade154{0%{transform:none;clip-path:inset(94% 47% 0);opacity:0}15%{transform:none;clip-path:inset(94% 47% 0);opacity:1}55%{transform:none;clip-path:inset(94% 0 0);opacity:1}100%{transform:none;clip-path:inset(0);opacity:1}}
+@keyframes reporter-rails-in110-fade154{0%{transform:none;clip-path:inset(94% 47% 0);opacity:0}15%{transform:none;clip-path:inset(94% 47% 0);opacity:1}55%{transform:none;clip-path:inset(94% 0 0);opacity:1}100%{transform:none;clip-path:inset(0);opacity:1}}
+@keyframes result-frame-build86-fade154{0%{transform:none;clip-path:inset(94% 47% 0);opacity:0}15%{transform:none;clip-path:inset(94% 47% 0);opacity:1}55%{transform:none;clip-path:inset(94% 0 0);opacity:1}100%{transform:none;clip-path:inset(0);opacity:1}}
+
+@keyframes ribbon-left152-fade154{0%{transform:translateX(32%);clip-path:inset(88% 50% 0 0);opacity:0}15%{transform:translateX(32%);clip-path:inset(88% 50% 0 0);opacity:1}55%{transform:translateX(0);clip-path:inset(88% 50% 0 0);opacity:1}100%{transform:translateX(0);clip-path:inset(5% 50% 0 0);opacity:1}}
+@keyframes ribbon-right152-fade154{0%{transform:translateX(-32%);clip-path:inset(88% 0 0 50%);opacity:0}15%{transform:translateX(-32%);clip-path:inset(88% 0 0 50%);opacity:1}55%{transform:translateX(0);clip-path:inset(88% 0 0 50%);opacity:1}100%{transform:translateX(0);clip-path:inset(5% 0 0 50%);opacity:1}}
+@keyframes lineup-left139-fade154{0%{transform:translateX(35%);clip-path:inset(calc(100% - 9px) 50% 0 0);opacity:0}15%{transform:translateX(35%);clip-path:inset(calc(100% - 9px) 50% 0 0);opacity:1}55%{transform:translateX(0);clip-path:inset(calc(100% - 9px) 50% 0 0);opacity:1}100%{transform:translateX(0);clip-path:inset(5px 50% 0 0);opacity:1}}
+@keyframes lineup-right139-fade154{0%{transform:translateX(-35%);clip-path:inset(calc(100% - 9px) 0 0 50%);opacity:0}15%{transform:translateX(-35%);clip-path:inset(calc(100% - 9px) 0 0 50%);opacity:1}55%{transform:translateX(0);clip-path:inset(calc(100% - 9px) 0 0 50%);opacity:1}100%{transform:translateX(0);clip-path:inset(5px 0 0 50%);opacity:1}}
+@keyframes lineup-top139-fade154{0%{translate:0 calc(100% - 5px);scale:1;clip-path:inset(0 47%);opacity:0}15%{translate:0 calc(100% - 5px);scale:1;clip-path:inset(0 47%);opacity:1}55%{translate:0 calc(100% - 5px);scale:1;clip-path:inset(0);opacity:1}100%{translate:0 0;scale:1;clip-path:inset(0);opacity:1}}
+/* 181: QB intro uses explicit photo, identity and stat rows without flex overflow. */
+.qb-sidebar{display:grid;grid-template-rows:390px 136px minmax(0,1fr);height:910px;width:430px;overflow:visible}
+.qb-cutout{height:390px;min-height:0;width:100%;padding:0 16px;overflow:hidden}
+.qb-top-logo{width:340px;height:285px;left:45px;pointer-events:none}
+.qb-sidebar-name{box-sizing:border-box;width:100%;min-width:0;height:136px;padding:12px 20px;gap:5px;overflow:hidden}
+.qb-sidebar-name small{display:block;font-size:36px;line-height:1.1;white-space:nowrap}
+.qb-sidebar-name strong{display:block;font-size:64px;line-height:1.12;text-overflow:clip}
+.qb-feature,.qb-feature.qb-season{box-sizing:border-box;width:100%;height:100%;min-height:0;padding:18px 24px;overflow:hidden}
+.qb-feature:not(.qb-season){display:flex;flex-direction:column;justify-content:center;gap:12px}
+.qb-feature:not(.qb-season) b{font-size:82px;line-height:1.05}
+.qb-feature:not(.qb-season) strong{font-size:48px;line-height:1.08;margin:0;overflow-wrap:anywhere}
+.qb-feature:not(.qb-season) p{font-size:34px;line-height:1.15;margin:0;overflow-wrap:anywhere}
+.qb-season header{font-size:30px;line-height:1.2;margin-bottom:12px}
+.qb-season dl>div{min-height:48px;padding:6px 0;gap:12px}
+.qb-season dt{font-size:30px;line-height:1.1}.qb-season dd{font-size:38px;line-height:1.1;flex-shrink:0}
+
+/* Context belongs in the upper-right corner, separate from the copy block. */
+.team-lower-third.has-context .spotlight-copy{right:420px}
+.team-lower-third .spotlight-context{left:auto;right:75px;top:36px;width:330px;text-align:right;font-size:29px}
+.team-lower-third.has-context .spotlight-detail{top:108px}
+.team-lower-third.has-context .spotlight-detail.lower-body{top:168px}
+.team-lower-third.has-context.has-body{--ribbon-height:255px;height:295px}
+.intro-exit-etch{position:absolute;inset:0;left:25%;width:50%;height:100%;z-index:3;pointer-events:none;opacity:0;fill:none;stroke:#fff;stroke-width:1.6;vector-effect:non-scaling-stroke}
+.graphics-layer.leaving[data-motion=auto] .intro-exit-etch{animation:intro-etch-out181 .68s linear both}
+@keyframes intro-etch-out181{0%{opacity:0;clip-path:inset(0)}12%,35%{opacity:.46;clip-path:inset(0)}70%{opacity:.2;clip-path:inset(0 35%)}100%{opacity:0;clip-path:inset(0 50%)}}
+/* QB reference: continuous player cutout behind overlaid identity/stat plates. */
+.qb-sidebar{display:block;width:410px;height:910px;overflow:hidden}
+.qb-cutout{position:absolute;inset:35px 0 0;height:auto;width:100%;padding:0;display:block;overflow:hidden}
+.qb-cutout .portrait{height:100%;width:100%;object-fit:cover;object-position:50% 0}
+.qb-top-logo{left:35px;width:330px;height:300px}
+.qb-sidebar-name{position:absolute;top:390px;left:0;right:0;height:122px;padding:8px 18px;gap:3px;background:#050a10de}
+.qb-sidebar-name small{font-size:32px}.qb-sidebar-name strong{font-size:56px}
+.qb-feature,.qb-feature.qb-season{position:absolute;top:512px;left:0;right:0;height:auto;min-height:0;padding:12px 22px 16px;background:linear-gradient(#182127ed,#0b1119e8)}
+.qb-feature:not(.qb-season){gap:5px;display:flex;min-height:215px}
+.qb-feature:not(.qb-season) b{font-size:72px}.qb-feature:not(.qb-season) strong{font-size:43px}.qb-feature:not(.qb-season) p{font-size:29px}
+.qb-season header{font-size:29px;margin-bottom:5px}.qb-season dl>div{min-height:43px;padding:4px 0}.qb-season dt{font-size:29px}.qb-season dd{font-size:35px}
+
+/* QB redesign: one beveled plate over the continuous player portrait. */
+.qb-redesign181{left:60px;bottom:54px;width:400px;height:930px;isolation:isolate}
+.qb-redesign181::before{inset:22px 0 0;background:repeating-linear-gradient(145deg,transparent 0 28px,#ffffff08 29px 30px),linear-gradient(105deg,color-mix(in srgb,var(--team),#05090d 35%),#0b1116 80%);clip-path:polygon(0 0,100% 28px,100% 100%,0 100%);border:0}
+.qb-redesign181 .qb-top-logo{left:10px;top:5px;width:380px;height:285px;opacity:.85}
+.qb-redesign181 .qb-cutout{inset:60px 0 0}.qb-redesign181 .qb-cutout .portrait{object-fit:cover;object-position:50% 0}
+.qb-info-plate{position:absolute;top:365px;left:0;right:0;z-index:3;background:linear-gradient(100deg,#04090df5,#101820f0);padding:0 5px 12px;box-shadow:inset -3px 0 #71858f,inset -5px 0 #121e26,inset 0 -3px #a1b1ba}
+.qb-team-header{height:31px;display:flex;align-items:center;justify-content:center;padding:0 14px;background:linear-gradient(#eef2f4,#9eacb4 45%,#627681 52%,#b9c6ce);color:#111b23;font:700 21px/1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:1.6px;white-space:nowrap;overflow:hidden}
+.qb-redesign181 .qb-sidebar-name{position:relative;inset:auto;width:100%;height:117px;padding:9px 18px 7px;background:transparent;gap:0}
+.qb-redesign181 .qb-sidebar-name small{font:italic 700 32px/1.05 var(--display);letter-spacing:.6px}
+.qb-redesign181 .qb-sidebar-name strong{font:italic 700 60px/1.05 var(--display);letter-spacing:0}
+.qb-redesign181 .qb-feature{position:relative;inset:auto;width:100%;height:auto;padding:5px 22px 14px;background:transparent;min-height:0}
+.qb-redesign181 .qb-feature:not(.qb-season){gap:3px}
+.qb-redesign181 .qb-feature:not(.qb-season) b{font-size:75px;color:#ffce28;line-height:1}
+.qb-redesign181 .qb-feature:not(.qb-season) strong{font-size:42px;line-height:1.1}
+.qb-redesign181 .qb-feature:not(.qb-season) p{font-size:25px;line-height:1.15;color:#d9e0e5;margin-top:5px}
+.qb-redesign181 .qb-feature p.qb-context-yellow{color:#ffce28}
+.qb-redesign181 .qb-season header{font-size:27px}.qb-redesign181 .qb-season dt{font-size:26px}.qb-redesign181 .qb-season dd{font-size:33px}.qb-redesign181 .qb-season dl>div{min-height:39px;padding:4px 0}
+
+/* 182: QB panel has a recessed face, mitered bevels and extruded side/bottom edges. */
+.qb-redesign181{overflow:visible;filter:drop-shadow(5px 6px 3px #0007)}
+.qb-redesign181 .qb-info-plate{background:none;box-shadow:none;padding:10px 11px 16px;isolation:isolate}
+.qb-info-plate::before{content:'';position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(130deg,transparent 0 18px,#ffffff04 19px 20px),linear-gradient(105deg,#071016f5,#15212af5 60%,#050b10fa);clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0 calc(100% - 12px),0 12px)}
+.qb-plate-depth{position:absolute;inset:0 -13px -12px 0;z-index:-2;background:linear-gradient(115deg,#435a69,#1a2b37 42%,#071018 70%);clip-path:polygon(calc(100% - 25px) 0,100% 18px,100% calc(100% - 12px),calc(100% - 13px) 100%,22px 100%,0 calc(100% - 24px),calc(100% - 25px) calc(100% - 24px));box-shadow:inset -3px -3px #718795}
+.qb-plate-bevel{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;overflow:visible}
+.qb-redesign181 .qb-team-header{position:relative;height:32px;box-shadow:inset 0 1px #fff9,inset 0 -2px #111d28;clip-path:polygon(4px 0,calc(100% - 4px) 0,100% 4px,100% 100%,0 100%,0 4px)}
+.qb-redesign181 .qb-sidebar-name{border-bottom:1px solid #8295a344;box-shadow:0 2px 0 #0007}
+.qb-redesign181 .qb-feature{padding-top:10px}
+
+/* 183: bevels belong to the full slanted shell, not a separate floating card. */
+.qb-outer-shell{position:absolute;left:0;top:0;width:414px;height:942px;max-width:none;z-index:5;pointer-events:none}
+.qb-redesign181 .qb-info-plate{left:9px;right:10px;padding:0 0 12px;background:linear-gradient(100deg,#04090df5,#101820f0);box-shadow:none}
+.qb-redesign181 .qb-info-plate::before{display:none}
+.qb-redesign181 .qb-team-header{clip-path:none}
+.qb-redesign181 .qb-cutout{left:9px;right:10px;width:auto;bottom:10px}
+/* 184: logo sits above the slanted shell; metal must not slice across its face. */
+.qb-redesign181 .qb-outer-shell{z-index:1}
+.qb-redesign181 .qb-top-logo{left:0;top:-18px;width:400px;height:310px;display:grid;place-items:center;overflow:visible;opacity:1;z-index:2;filter:drop-shadow(1px 3px 2px #0008)}
+.qb-redesign181 .qb-top-logo .team-logo{display:block;position:static;inset:auto;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center;transform:none}
+.qb-redesign181 .qb-top-logo .team-monogram{position:static;inset:auto;font-size:120px;letter-spacing:-2px;line-height:1;transform:none;text-align:center}
+.qb-redesign181 .qb-cutout{z-index:3}
+.qb-redesign181 .qb-info-plate{z-index:4}
+/* 185: match the supplied QB reference: deep left spine, steep shoulder, transparent plates. */
+.qb-redesign181{width:420px;height:930px;left:35px;bottom:40px;filter:drop-shadow(3px 3px 3px #0008)}
+.qb-redesign181::before{inset:0;background:repeating-linear-gradient(145deg,transparent 0 32px,#ffffff03 33px 34px),linear-gradient(115deg,#263039,#10191fe0);clip-path:polygon(54px 40px,397px 192px,397px 100%,54px 100%)}
+.qb-redesign181 .qb-outer-shell{width:414px;height:942px;z-index:5}
+.qb-redesign181 .qb-top-logo{left:75px;top:0;width:322px;height:300px;z-index:1;opacity:1}
+.qb-redesign181 .qb-cutout{inset:55px 23px 0 55px;width:auto;z-index:2;overflow:hidden}
+.qb-redesign181 .qb-cutout .portrait{width:100%;height:100%;object-fit:cover;object-position:50% 0;filter:none}
+.qb-redesign181 .qb-info-plate{top:408px;left:55px;right:23px;padding:0 0 12px;background:#03090d99;z-index:3}
+.qb-redesign181 .qb-team-header{display:none}
+.qb-redesign181 .qb-sidebar-name{height:100px;padding:5px 5px 9px;gap:0;background:#030609a6;border-bottom:0;box-shadow:none}
+.qb-redesign181 .qb-sidebar-name small{font:italic 900 32px/1 'Arial Black',Arial,sans-serif}
+.qb-redesign181 .qb-sidebar-name strong{font:italic 900 48px/1.1 'Arial Black',Arial,sans-serif}
+.qb-redesign181 .qb-feature{padding:7px 10px 10px;background:transparent}
+.qb-redesign181 .qb-feature:not(.qb-season) b{font-size:76px;line-height:1.05}
+.qb-redesign181 .qb-feature:not(.qb-season) strong{font-size:49px;line-height:1.05}
+.qb-redesign181 .qb-feature:not(.qb-season) p{font-size:31px;line-height:1.12;color:#f2f3f3}
+.qb-redesign181 .qb-season dt{font-size:24px}.qb-redesign181 .qb-season dd{font-size:31px}
+
+/* 186: the slanted backing sits BEHIND both artwork layers. */
+.qb-redesign181 .qb-outer-shell{z-index:0}
+.qb-redesign181 .qb-top-logo{left:73px;top:-15px;width:324px;height:310px;z-index:1;opacity:1}
+.qb-redesign181 .qb-cutout{left:55px;right:23px;top:70px;bottom:0;z-index:2}
+.qb-redesign181 .qb-cutout .portrait{object-fit:contain;object-position:50% 0;width:100%;height:100%}
+.qb-redesign181 .qb-info-plate{top:408px;z-index:3}
+.qb-redesign181 .qb-sidebar-name strong{font-size:51px}
+.qb-redesign181 .qb-feature:not(.qb-season) p{font-size:32px;line-height:1.15}
+.qb-redesign181 .qb-feature:not(.qb-season) p{font-size:38px;line-height:1.12;white-space:normal;text-wrap:balance}
