@@ -1,13 +1,92 @@
-import {gameFields} from './main-sync.js';
-import {calibrate,project,position,broadcast,demoPoints,WIDTH} from './math.js';
-import {publish} from './bus.js';
+(()=>{'use strict';const base=new URL('.',document.currentScript.src);const modules={'math.js':function(exports,require,__url){
+const WIDTH=160/3;
+function project(h,x,y){const w=h[2][0]*x+h[2][1]*y+h[2][2];if(Math.abs(w)<1e-9)throw Error('Projection crosses horizon');return [(h[0][0]*x+h[0][1]*y+h[0][2])/w,(h[1][0]*x+h[1][1]*y+h[1][2])/w];}
+function solve(a,b){a=a.map((r,i)=>[...r,b[i]]);const n=b.length;for(let i=0;i<n;i++){let best=i;for(let j=i+1;j<n;j++)if(Math.abs(a[j][i])>Math.abs(a[best][i]))best=j;[a[i],a[best]]=[a[best],a[i]];if(Math.abs(a[i][i])<1e-10)throw Error('Points are collinear or too close together');const d=a[i][i];for(let k=i;k<=n;k++)a[i][k]/=d;for(let j=0;j<n;j++)if(j!==i){const f=a[j][i];for(let k=i;k<=n;k++)a[j][k]-=f*a[i][k];}}return a.map(r=>r[n]);}
+function calibrate(points){if(points.length<4)throw Error('Select at least four field intersections');const a=[],b=[];for(const p of points){const [x,y]=[p.field[0]/120,p.field[1]/WIDTH],[u,v]=[p.image[0]/1920,p.image[1]/1080];if(![x,y,u,v].every(Number.isFinite))throw Error('Invalid coordinate');a.push([x,y,1,0,0,0,-u*x,-u*y],[0,0,0,x,y,1,-v*x,-v*y]);b.push(u,v);}const ata=Array.from({length:8},(_,i)=>Array.from({length:8},(_,j)=>a.reduce((s,r)=>s+r[i]*r[j],0))),atb=Array.from({length:8},(_,i)=>a.reduce((s,r,j)=>s+r[i]*b[j],0));const z=solve(ata,atb),h=[[z[0]*1920/120,z[1]*1920/WIDTH,z[2]*1920],[z[3]*1080/120,z[4]*1080/WIDTH,z[5]*1080],[z[6]/120,z[7]/WIDTH,1]];const corners=[[0,0],[120,0],[120,WIDTH],[0,WIDTH]],ws=corners.map(([x,y])=>h[2][0]*x+h[2][1]*y+1);if(ws.some(w=>w<=.01))throw Error('Invalid field plane / horizon');const error=Math.sqrt(points.reduce((sum,p)=>{const q=project(h,...p.field);return sum+(q[0]-p.image[0])**2+(q[1]-p.image[1])**2;},0)/points.length);if(error>8)throw Error(`Points disagree (${error.toFixed(1)} px). Check the selected landmarks.`);return {h,error};}
+function position(value,direction){const t=value.trim().toUpperCase();if(t==='50')return 60;const m=t.match(/^(OWN|OPP|OPPONENT)\s+(\d+(?:\.\d+)?)$/);if(!m||+m[2]>50)throw Error('Use OWN 35, OPP 20 or 50');const x=m[1]==='OWN'?10+ +m[2]:110- +m[2];return direction==='RIGHT'?x:120-x;}
+function broadcast(s){const sign=s.directionOfPlay==='RIGHT'?1:-1;return {...s,lineOfScrimmage:s.ballPosition,firstDownPosition:Math.max(10,Math.min(110,s.ballPosition+sign*s.distance)),goalToGo:s.distance>=(sign>0?110-s.ballPosition:s.ballPosition-10)};}
+const demoPoints=[{field:[0,0],image:[96,950.4]},{field:[120,0],image:[1843.2,950.4]},{field:[120,WIDTH],image:[1593.6,172.8]},{field:[0,WIDTH],image:[345.6,172.8]}];
+
+Object.assign(exports,{WIDTH,project,calibrate,position,broadcast,demoPoints});
+},
+'projection.js':function(exports,require,__url){
+function project(h,x,y){const w=h[2][0]*x+h[2][1]*y+h[2][2];return [(h[0][0]*x+h[0][1]*y+h[0][2])/w,(h[1][0]*x+h[1][1]*y+h[1][2])/w];}
+// WebGL receives homogeneous field coordinates: division by W gives correct perspective,
+// including perspective-correct text/texture interpolation. No fixed screen anchors.
+function matrixForGL(h){return new Float32Array([h[0][0],h[1][0],h[2][0],h[0][1],h[1][1],h[2][1],h[0][2],h[1][2],h[2][2]]);}
+
+function polygonPoints(shape){return shape.points?.length>=3?shape.points:null;}
+
+Object.assign(exports,{project,matrixForGL,polygonPoints});
+},
+'graphics.js':function(exports,require,__url){
+const W=160/3;
+function fieldGraphics(s){const v=s.graphicsVisibility,sign=s.directionOfPlay==='RIGHT'?1:-1,x=s.lineOfScrimmage;const team=s[s.possession+'Team'];const shapes=[];
+const poly=(points,color,opacity)=>shapes.push({points,color,opacity});
+const line=(x,style)=>poly([[x-style.width/2,0],[x+style.width/2,0],[x+style.width/2,W],[x-style.width/2,W]],style.color,style.opacity);
+const label=(x,y,text,w=12,h=3.5,color='#ffffff',plate='#122c36')=>shapes.push({text,fieldX:x,fieldY:y,width:w,height:h,color,plate,opacity:.9,direction:s.directionOfPlay});
+if(v.redZone){const a=sign>0?90:10,b=sign>0?110:30;if(v.redZoneMode==='tint')poly([[a,0],[b,0],[b,W],[a,W]],'#de4a48',.18);else if(v.redZoneMode==='line')line(sign>0?90:30,{width:.2,color:'#f16e63',opacity:.8});else label((a+b)/2,38,'RED ZONE',14,4,'#ffb3a7');}
+if(v.los.visible)line(x,{...v.los,color:'#294fae'});if(v.firstDown.visible)line(s.firstDownPosition,{...v.firstDown,color:'#e5e300'});
+if(v.downDistance){const down=['','1ST','2ND','3RD','4TH'][s.down];shapes.push({text:`${down} & ${s.goalToGo?'GOAL':s.distance}`,fieldX:Math.max(13,Math.min(107,x-sign*3)),fieldY:10,width:26,height:5,color:team.color,style:'turf',opacity:.48,direction:s.directionOfPlay});}
+if(v.distanceMarkers)for(const distance of [5,10,15,20]){const p=x+sign*distance;if(p>=10&&p<=110)label(p,43,`${distance} YDS`,6,2,'#eef5f9','#1c343e');}
+if(v.fieldGoal.visible&&s.fieldGoalRange!==null){line(s.fieldGoalRange,v.fieldGoal);label(s.fieldGoalRange,34,s.fieldGoalLabel,12,3,v.fieldGoal.color);}
+if(v.possession)label(x,20,`${sign>0?'▶':'◀'}`,4,3,'#ffffff',team.color);
+if(v.custom)for(const c of s.customGraphics){if(c.type==='line'){const [a,b]=c.points,dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy)||1,n=[-dy/l*c.height/2,dx/l*c.height/2];poly([[a[0]+n[0],a[1]+n[1]],[b[0]+n[0],b[1]+n[1]],[b[0]-n[0],b[1]-n[1]],[a[0]-n[0],a[1]-n[1]]],c.color,c.opacity);}else if(c.type==='polygon')poly(c.points,c.color,c.opacity);else shapes.push({...c,plate:'#102a33',reverse:false});}
+return shapes;}
+
+Object.assign(exports,{fieldGraphics});
+},
+'bus.js':function(exports,require,__url){
+const name='wld-ar-local:'+new URL('.',__url).pathname;
+const channel=new BroadcastChannel(name);let last=null;const listeners=new Set();
+channel.onmessage=e=>{if(e.data?.request){if(last)channel.postMessage(last);return;}if(e.data?.cameras){last=e.data;for(const fn of listeners)fn(last);}};
+function publish(value){last=value;for(const fn of listeners)fn(value);channel.postMessage(value);}
+function connect(fn){listeners.add(fn);if(last)fn(last);channel.postMessage({request:true});return {close(){listeners.delete(fn);}};}
+
+Object.assign(exports,{publish,connect});
+},
+'main-sync.js':function(exports,require,__url){
+const {position}=require('math.js');
+function gameFields(packet){
+ const g=packet.game,t=packet.teams;if(!g||!t?.home||!t?.away)throw Error('Waiting for main panel game data');
+ const direction=g.arDirection==='LEFT'?'LEFT':'RIGHT';
+ let ball=String(g.ballOn??'').trim().toUpperCase();if(/^\d+(\.\d+)?$/.test(ball)&&ball!=='50')ball=(g.arTerritory==='OPP'?'OPP':'OWN')+' '+ball;
+ const ballPosition=position(ball,direction),down=parseInt(g.down),distance=String(g.distance).toUpperCase()==='GOAL'?(direction==='RIGHT'?110-ballPosition:ballPosition-10):Number(g.distance);
+ if(!Number.isFinite(distance)||distance<0||distance>100)throw Error('Set a valid distance in the main panel');
+ return {possession:g.possession,directionOfPlay:direction,down:Number.isFinite(down)?down:1,distance,ballPosition,homeTeam:{...t.home},awayTeam:{...t.away},fieldGoalRange:g.arFieldGoal?position(g.arFieldGoal,direction):null,gameDataValid:['home','away'].includes(g.possession)&&down>=1&&down<=4};
+}
+
+Object.assign(exports,{gameFields});
+},
+'renderer.js':function(exports,require,__url){
+const {connect}=require('bus.js');const {matrixForGL,polygonPoints}=require('projection.js');const {fieldGraphics}=require('graphics.js');
+const canvas=document.querySelector('#ar'),gl=canvas.getContext('webgl',{alpha:true,premultipliedAlpha:true,antialias:true});let state,lastMessage=0,fps=0,renderMs=0,frames=0,then=performance.now();
+if(!gl){const note=document.querySelector('#cal-status');if(note)note.textContent='AR rendering unavailable: WebGL is disabled. Video playback is still available.';}else{
+const shader=(type,source)=>{const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s;};
+const program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,'attribute vec2 a; attribute vec2 uv; uniform mat3 H; uniform vec2 resolution; varying vec2 tex; void main(){vec3 p=H*vec3(a,1.0);gl_Position=vec4(2.0*p.x/resolution.x-p.z,p.z-2.0*p.y/resolution.y,0.0,p.z);tex=uv;}'));gl.attachShader(program,shader(gl.FRAGMENT_SHADER,'precision mediump float; uniform sampler2D image; uniform vec4 color; varying vec2 tex;void main(){gl_FragColor=texture2D(image,tex)*color;}'));gl.linkProgram(program);gl.useProgram(program);gl.enable(gl.BLEND);gl.blendFuncSeparate(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
+const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);for(const [name,offset]of[['a',0],['uv',8]]){const l=gl.getAttribLocation(program,name);gl.enableVertexAttribArray(l);gl.vertexAttribPointer(l,2,gl.FLOAT,false,16,offset);}
+const cache=new Map();function texture(source){const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,source);return t;}
+const white=document.createElement('canvas');white.width=white.height=1;white.getContext('2d').fillStyle='white';white.getContext('2d').fillRect(0,0,1,1);const solid=texture(white);
+function artwork(s){const key=s.image||JSON.stringify([s.text,s.color,s.plate,s.direction,s.style]);if(cache.has(key))return cache.get(key);if(cache.size>150){for(const t of cache.values())if(t)gl.deleteTexture(t);cache.clear();}if(s.image){cache.set(key,null);const img=new Image();img.onload=()=>cache.set(key,texture(img));img.src=s.image;return null;}const c=document.createElement('canvas');c.width=1024;c.height=256;const ctx=c.getContext('2d');if(s.style==='turf'){const left=s.direction==='LEFT';ctx.textAlign='center';ctx.textBaseline='middle';const text=String(s.text).toUpperCase();ctx.font='900 180px Arial';const size=Math.min(180,180*720/ctx.measureText(text).width);ctx.font=`900 ${size}px Arial`;ctx.lineJoin='round';ctx.lineWidth=5;ctx.strokeStyle='rgba(220,226,210,.52)';ctx.fillStyle=s.color;ctx.globalAlpha=.35;ctx.fillText(text,left?635:389,139);ctx.globalAlpha=1;ctx.strokeText(text,left?635:389,139);for(let i=0;i<2;i++){const x=left?150-i*78:850+i*78;ctx.beginPath();ctx.moveTo(x,48);ctx.lineTo(x+(left?-82:82),128);ctx.lineTo(x,208);ctx.lineTo(x+(left?30:-30),208);ctx.lineTo(x+(left?-48:48),128);ctx.lineTo(x+(left?30:-30),48);ctx.closePath();ctx.stroke();}const t=texture(c);cache.set(key,t);return t;}ctx.fillStyle=s.plate||'#122c36';ctx.beginPath();if(s.direction==='LEFT'){ctx.moveTo(1024,30);ctx.lineTo(64,30);ctx.lineTo(0,128);ctx.lineTo(64,226);ctx.lineTo(1024,226);}else{ctx.moveTo(0,30);ctx.lineTo(960,30);ctx.lineTo(1024,128);ctx.lineTo(960,226);ctx.lineTo(0,226);}ctx.closePath();ctx.fill();ctx.fillStyle=s.color||'#ffffff';ctx.font='900 104px Arial';ctx.textAlign='center';ctx.textBaseline='middle';const text=String(s.text||'').toUpperCase();const width=ctx.measureText(text).width;if(width>890)ctx.font=`900 ${104*890/width}px Arial`;ctx.fillText(text,s.direction==='LEFT'?529:495,135);const t=texture(c);cache.set(key,t);return t;}
+function draw(s){let points=polygonPoints(s),tex=solid,color=s.color||'#ffffff';if(!points){const x=s.fieldX,y=s.fieldY,w=s.width/2,h=s.height/2;points=[[x-w,y-h],[x+w,y-h],[x+w,y+h],[x-w,y+h]];tex=artwork(s);color='#ffffff';if(!tex)return;}const uv=[[0,1],[1,1],[1,0],[0,0]];const verts=[];for(let i=1;i<points.length-1;i++)for(const k of[0,i,i+1])verts.push(...points[k],...(uv[k]||[0,0]));gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(verts),gl.DYNAMIC_DRAW);gl.bindTexture(gl.TEXTURE_2D,tex);const rgb=color.match(/\w\w/g).map(x=>parseInt(x,16)/255);gl.uniform4f(gl.getUniformLocation(program,'color'),...rgb,s.opacity??1);gl.drawArrays(gl.TRIANGLES,0,verts.length/4);}
+const params=new URLSearchParams(location.search);connect(s=>{state=s;lastMessage=performance.now();});
+function loop(){const start=performance.now();const width=state?.output.width||1920,height=state?.output.height||1080;if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}gl.viewport(0,0,width,height);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);if(state&&start-lastMessage<2000){const cam=state.cameras.find(c=>c.id===(params.get('camera')||state.activeCamera));if(cam?.calibrationValid&&cam.status==='ONLINE'&&(cam.paused||cam.frameAgeMs<2000)&&cam.homography){gl.uniformMatrix3fv(gl.getUniformLocation(program,'H'),false,matrixForGL(cam.homography));gl.uniform2f(gl.getUniformLocation(program,'resolution'),width,height);for(const s of fieldGraphics((document.querySelector('#view')?.value==='preview'||params.has('preview'))?state.preview:state.program))draw(s);}}frames++;if(start-then>=1000){fps=Math.round(frames*1000/(start-then));frames=0;then=start;}renderMs=Math.round((performance.now()-start)*100)/100;requestAnimationFrame(loop);}if(gl)loop();
+
+}
+
+Object.assign(exports,{});
+},
+'app.js':function(exports,require,__url){
+const {gameFields}=require('main-sync.js');
+const {calibrate,project,position,broadcast,demoPoints,WIDTH}=require('math.js');
+const {publish}=require('bus.js');
 
 const $=s=>document.querySelector(s),video=$('#video'),synthetic=$('#synthetic'),stage=$('#stage'),pickCanvas=$('#picks'),ctx=synthetic.getContext('2d'),pickCtx=pickCanvas.getContext('2d');
 const defaults=()=>({possession:'away',directionOfPlay:'RIGHT',down:1,distance:10,ballPosition:45,awayTeam:{color:'#266bb1'},homeTeam:{color:'#176b64'},fieldGoalRange:null,fieldGoalLabel:'FG RANGE',customGraphics:[],graphicsVisibility:{los:{visible:true,color:'#294fae',opacity:.9,width:.30},firstDown:{visible:true,color:'#e5e300',opacity:.9,width:.30},downDistance:true,distanceMarkers:false,redZone:false,redZoneMode:'line',possession:false,custom:true,fieldGoal:{visible:false,color:'#f1a752',opacity:.8,width:.18}}});
 let preview=defaults(),program=structuredClone(preview),active='CAM1',points=[],picking=false,logo='',epoch=0,sourceReady=true;
 const demoH=calibrate(demoPoints).h,cameras=Object.fromEntries(['CAM1','CAM2','CAM3'].map(id=>[id,{id,kind:'synthetic',h:demoH,points:[],name:'Test field',url:null,stream:null,time:0}]));
 let mainFields=null,lastMain=0,syncError='Open the graphics control panel to connect.';
-const mainChannel=new BroadcastChannel('wld-ar-game:'+new URL('../',import.meta.url).pathname);
+const mainChannel=new BroadcastChannel('wld-ar-game:'+new URL('../',__url).pathname);
 mainChannel.onmessage=event=>{if(event.data?.kind!=='game')return;try{mainFields=gameFields(event.data);lastMain=Date.now();syncError='';Object.assign(preview,mainFields);Object.assign(program,mainFields);fill();send();}catch(e){lastMain=0;syncError=e.message;send();}};
 mainChannel.postMessage({kind:'request'});
 setInterval(()=>mainChannel.postMessage({kind:'request'}),1500);
@@ -45,7 +124,7 @@ $('#game').onsubmit=e=>{e.preventDefault();update();};$('#game').onchange=update
 function list(){const box=$('#items');box.replaceChildren();for(const g of preview.customGraphics){const row=document.createElement('div');row.className='row';const text=document.createElement('span');text.textContent=`${g.type.toUpperCase()} · ${g.text} · X ${g.fieldX}, Y ${g.fieldY}`;const b=document.createElement('button');b.textContent='Remove';b.onclick=()=>{preview.customGraphics=preview.customGraphics.filter(x=>x.id!==g.id);if($('#auto').checked)program=structuredClone(preview);list();send();};row.append(text,b);box.append(row);}}
 $('#logo').onchange=async()=>{const f=$('#logo').files[0];if(!f)return;if(f.size>8*1024*1024)return message('Use an image smaller than 8 MB.',true);try{const img=await createImageBitmap(f),c=document.createElement('canvas'),r=Math.min(1,1200/Math.max(img.width,img.height));c.width=Math.round(img.width*r);c.height=Math.round(img.height*r);c.getContext('2d').drawImage(img,0,0,c.width,c.height);logo=c.toDataURL('image/png');img.close();message('Image ready — press Add graphic.');}catch(e){message('Image could not be decoded.',true);}};
 $('#custom').onsubmit=e=>{e.preventDefault();try{const d=Object.fromEntries(new FormData(e.target));if(d.type==='logo'&&!logo)throw Error('Choose an image first');const g={id:crypto.randomUUID(),type:d.type,text:d.text.toUpperCase(),fieldX:+d.fieldX,fieldY:+d.fieldY,width:+d.width,height:+d.height,color:d.color,opacity:.9,points:['line','polygon'].includes(d.type)?JSON.parse(d.points):[],image:d.type==='logo'?logo:''};if(g.points.some(p=>!Array.isArray(p)||p.length!==2||!p.every(Number.isFinite)||p[0]<0||p[0]>120||p[1]<0||p[1]>WIDTH))throw Error('Invalid field points');if(g.type==='line'&&g.points.length!==2)throw Error('Line needs two points');if(g.type==='polygon'&&g.points.length<3)throw Error('Polygon needs at least three points');if(g.type==='polygon'){let sign=0;for(let i=0;i<g.points.length;i++){const a=g.points[i],b=g.points[(i+1)%g.points.length],c=g.points[(i+2)%g.points.length],z=(b[0]-a[0])*(c[1]-b[1])-(b[1]-a[1])*(c[0]-b[0]);if(z&&sign&&Math.sign(z)!==sign)throw Error('Use a convex polygon');if(z)sign=Math.sign(z);}if(!sign)throw Error('Polygon has no area');}preview.customGraphics.push(g);preview.graphicsVisibility.custom=true;$('#game').elements.custom.checked=true;if($('#auto').checked)program=structuredClone(preview);list();send();message('Custom graphic added');}catch(e){message(e.message,true);}};
-const saveKey='wld-local-show:'+new URL('.',import.meta.url).pathname;
+const saveKey='wld-local-show:'+new URL('.',__url).pathname;
 $('#save').onclick=()=>{try{localStorage.setItem(saveKey,JSON.stringify({preview,program}));message('Show saved in this browser. Video files and camera permissions must be reselected after reload.');}catch(e){message('Could not save: browser storage is full. Use smaller images.',true);}};
 $('#load').onclick=()=>{try{const raw=JSON.parse(localStorage.getItem(saveKey));if(!raw?.preview?.graphicsVisibility||!raw?.program?.graphicsVisibility)throw Error('No saved show');preview=raw.preview;program=raw.program;fill();list();send();message('Show restored. Reconnect and recalibrate your camera if needed.');}catch(e){message(e.message,true);}};
 function fill(){const f=$('#game').elements,s=preview;for(const k of ['possession','directionOfPlay','down','distance'])f[k].value=s[k];const own=s.directionOfPlay==='RIGHT'?s.ballPosition-10:110-s.ballPosition;f.footballPosition.value=own===50?'50':own<50?'OWN '+own:'OPP '+(100-own);f.awayColor.value=s.awayTeam.color;f.homeColor.value=s.homeTeam.color;for(const k of ['los','firstDown','fieldGoal'])f[k].checked=s.graphicsVisibility[k].visible;for(const k of ['downDistance','distanceMarkers','redZone','custom'])f[k].checked=s.graphicsVisibility[k];f.redZoneMode.value=s.graphicsVisibility.redZoneMode;const fg=s.fieldGoalRange;if(fg===null)f.fgPosition.value='';else{const own=s.directionOfPlay==='RIGHT'?fg-10:110-fg;f.fgPosition.value=own===50?'50':own<50?'OWN '+own:'OPP '+(100-own);}}
@@ -58,3 +137,9 @@ const calKey=()=>saveKey+':cal:'+active;
 const sourceIdentity=()=>[current().kind,current().name,video.videoWidth,video.videoHeight].join('|');
 $('#save-cal').onclick=()=>{try{if(!current().h)throw Error('Align this view first');localStorage.setItem(calKey(),JSON.stringify({identity:sourceIdentity(),h:current().h,points:current().points}));message('Calibration saved for this source. Reload only at the same camera view.');}catch(e){message(e.message,true);}};
 $('#load-cal').onclick=()=>{try{const c=JSON.parse(localStorage.getItem(calKey()));if(!c||c.identity!==sourceIdentity())throw Error('No saved calibration matching this source and resolution');current().h=c.h;points=c.points;current().points=points;showPoints();send();message('Calibration loaded — verify alignment with the current frame before using it.');}catch(e){message(e.message,true);}};
+
+Object.assign(exports,{});
+}};
+const cache={};function require(name){if(cache[name])return cache[name];const out=cache[name]={};modules[name](out,require,new URL(name,base).href);return out;}
+function fail(e){const message=document.querySelector('#message');if(message){message.textContent='AR startup failed: '+e.message+'. Reload after replacing the full ar folder.';message.className='error';}console.error(e);}
+try{require('app.js');}catch(e){fail(e);}requestAnimationFrame(()=>{try{require('renderer.js');}catch(e){const n=document.querySelector('#cal-status');if(n)n.textContent='AR renderer could not start: '+e.message+'. Video controls remain available.';console.error(e);}});})();

@@ -1,0 +1,3 @@
+Replace your existing ar folder with this complete ar folder. Keep it inside the main graphics folder. Open the main index.html with Live Server, then open AR from the main panel. Reload the AR tab; the header should say build 177. Local video playback requires no camera, calibration, main-panel connection, or Python. Main-panel sync is required only for game markers. AR field positioning still needs manual alignment.
+
+Verified with ScreenRecording_09-21-2026 02-02-07_1.mp4 (3.2 GB, 1720 seconds) in the local browser: playback advancing, decoded frames, no browser errors.
