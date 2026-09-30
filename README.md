@@ -24,4 +24,3 @@ Commands now travel over an authenticated loopback connection on port 18765. No 
 The plugin shares the panel's Take/lineup automation. Advanced reset/import actions still require their normal confirmation fields. No hardware key layout is overwritten.
 
 Tested: direct browser score update and acknowledgement with no new tabs, lineup Take, token/origin rejection, and Elgato CLI package validation. Physical Stream Deck and HTTPS localhost permission behavior must be checked on your PC. If the connection is blocked, allow this site's local-network access; do not disable browser security. There is no window-opening fallback.
-# FOX23

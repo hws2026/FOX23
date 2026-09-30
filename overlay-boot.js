@@ -1,5 +1,5 @@
 import {subscribe} from './bridge.js?v=tunnel159';
-import {renderGraphics,updateClocks,fitStage} from './graphics.js?v=tunnel159';
+import {renderGraphics,updateClocks,fitStage} from './graphics.js?v=score175';
 const stage=document.querySelector('#stage'),preview=new URLSearchParams(location.search).has('preview');fitStage(stage);let state,revision=-1,offset=0;
 export function accept(s){offset=s.serverTime-Date.now()/1000;state=s;if(s.revision!==revision){renderGraphics(stage,s,preview);revision=s.revision;}}
 if(!new URLSearchParams(location.search).has('pair'))subscribe(accept);setInterval(()=>state&&updateClocks(stage,state,Date.now()/1000+offset),100);

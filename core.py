@@ -208,6 +208,11 @@ def _update(action,p):
                 if type(v) is not bool: raise ValueError('Invalid toggle.')
             elif k=='possession':
                 if v not in ['away','home','none']: raise ValueError('Invalid possession.')
+            elif k=='arDirection':
+                if v not in ['LEFT','RIGHT']: raise ValueError('Invalid AR direction.')
+            elif k=='arTerritory':
+                if v not in ['OWN','OPP']: raise ValueError('Invalid field territory.')
+            elif k=='arFieldGoal': v=bounded_text(v,20)
             elif k=='overtimePeriod':
                 v=int(v)
                 if not 1<=v<=99: raise ValueError('Overtime number must be between 1 and 99.')

@@ -736,10 +736,10 @@
 .qb-sidebar::before{border-right:3px solid #84949c}.reporter-nameplate::before{border-width:3px 3px 6px}
 
 /* Electrical shapes sampled from the supplied 12:32 recording, 39.30Ã¢â‚¬â€œ40.93s. */
-.bug-enter .bug-electric{left:0;top:0;width:100%;height:100%;filter:none;background-image:url('./assets/scorebug-electric-reference.svg');background-size:100% 5000%;background-repeat:no-repeat;animation:reference-electric-frames 1.667s steps(49,end) both;opacity:1}
+.bug-enter .bug-electric{left:0;top:0;width:100%;height:100%;filter:none;background-image:url('./assets/scorebug-electric-reference.svg?v=restore172');background-size:100% 5000%;background-repeat:no-repeat;animation:reference-electric-frames 1.667s steps(49,end) both;opacity:1}
 .bug-electric>svg{display:none}
 @keyframes reference-electric-frames{from{background-position:0 0}to{background-position:0 100%}}
-.bug-enter .bug-intro-mask{background:url('./assets/scorebug-mask-reference.svg') center/100% 100% no-repeat;animation:helmet-unfold 1.667s linear both}
+.bug-enter .bug-intro-mask{background:url('./assets/scorebug-mask-reference.svg?v=restore172') center/100% 100% no-repeat;animation:helmet-unfold 1.667s linear both}
 .bug-intro-mask>svg{visibility:hidden}.bug-wrap.bug-enter:not([data-motion="fade"]) .bug-metal{animation:bug-electric-reveal 1.667s linear both}
 @keyframes helmet-unfold{0%{transform:scale(.72,.012);opacity:1;clip-path:inset(0)}5%{transform:scale(1,.025)}30%,62%{transform:scale(1);clip-path:inset(0)}94%,100%{transform:scale(1);clip-path:inset(0 0 0 100%);opacity:1}}
 @keyframes bug-electric-reveal{0%,62%{clip-path:inset(0 100% 0 0)}94%,100%{clip-path:inset(0)}}
@@ -954,9 +954,9 @@
 /* Lineup lower third: reference lettering, continuous team surface and fine bevel. */
 .lineup-ribbon{left:104px;right:104px;bottom:64px;height:150px}
 .lineup-ribbon-frame{inset:40px 0 0;padding:2px 3px 6px;background:linear-gradient(165deg,#e3edf0 0%,#738c9c 17%,#243b49 47%,#bdcdd5 78%,#d8e1e5 86%,#4c687b 100%);clip-path:polygon(17px 0,calc(100% - 17px) 0,100% 15px,100% calc(100% - 14px),calc(100% - 22px) 100%,22px 100%,0 calc(100% - 14px),0 15px)}
-.lineup-ribbon-face{background:url('./assets/lineup-contours.svg') center/520px 160px repeat,linear-gradient(100deg,color-mix(in srgb,var(--team) 80%,#020c17),color-mix(in srgb,var(--team) 56%,#030e19) 52%,color-mix(in srgb,var(--team) 80%,#020c17));clip-path:polygon(15px 0,calc(100% - 15px) 0,100% 13px,100% calc(100% - 11px),calc(100% - 19px) 100%,19px 100%,0 calc(100% - 11px),0 13px)}
+.lineup-ribbon-face{background:url('./assets/lineup-contours.svg?v=restore172') center/520px 160px repeat,linear-gradient(100deg,color-mix(in srgb,var(--team) 80%,#020c17),color-mix(in srgb,var(--team) 56%,#030e19) 52%,color-mix(in srgb,var(--team) 80%,#020c17));clip-path:polygon(15px 0,calc(100% - 15px) 0,100% 13px,100% calc(100% - 11px),calc(100% - 19px) 100%,19px 100%,0 calc(100% - 11px),0 13px)}
 .lineup-ribbon-face h1{font:700 64px/1 var(--display);font-style:normal;letter-spacing:1px;color:#ffdc27;text-shadow:0 2px 1px #74620f;margin:0}
-.lineup-team-tab{bottom:116px;padding:3px 22px 2px;font:italic 700 31px/1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:.5px;border:0;background:url('./assets/lineup-contours.svg') center/400px 130px,linear-gradient(100deg,color-mix(in srgb,var(--team) 85%,#071321),color-mix(in srgb,var(--team) 62%,#030a12));clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,8px 100%,0 50%)}
+.lineup-team-tab{bottom:116px;padding:3px 22px 2px;font:italic 700 31px/1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:.5px;border:0;background:url('./assets/lineup-contours.svg?v=restore172') center/400px 130px,linear-gradient(100deg,color-mix(in srgb,var(--team) 85%,#071321),color-mix(in srgb,var(--team) 62%,#030a12));clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,8px 100%,0 50%)}
 .lineup-ribbon-logo{left:-12px;bottom:-2px;width:204px;height:182px;z-index:4}
 .lineup-names{padding:0 14px 0 186px;gap:0}
 .lineup-names>.lineup-player-panel{padding:10px 8px 8px;background:linear-gradient(110deg,#0000000d,transparent 60%,#00000015);border:0;clip-path:none;overflow:hidden}
@@ -975,7 +975,7 @@
 .lineup-first{overflow:visible;text-overflow:clip}.lineup-position{margin-right:6px}
 /* Individual player-info backplates sit inside the shared FOX-style ribbon. */
 .lineup-names>.lineup-player-panel{isolation:isolate;background:none}
-.lineup-names>.lineup-player-panel::before{content:'';position:absolute;inset:4px 3px 5px;z-index:-1;pointer-events:none;clip-path:polygon(10px 0,100% 0,100% calc(100% - 9px),calc(100% - 12px) 100%,0 100%,0 10px);background:url('./assets/lineup-contours.svg') center/430px 132px,linear-gradient(110deg,color-mix(in srgb,var(--team) 78%,#07101b),color-mix(in srgb,var(--team) 40%,#020912) 85%);box-shadow:inset 0 1px #bad4e044,inset 0 -3px #68849788,inset 1px 0 #bcd0df24}
+.lineup-names>.lineup-player-panel::before{content:'';position:absolute;inset:4px 3px 5px;z-index:-1;pointer-events:none;clip-path:polygon(10px 0,100% 0,100% calc(100% - 9px),calc(100% - 12px) 100%,0 100%,0 10px);background:url('./assets/lineup-contours.svg?v=restore172') center/430px 132px,linear-gradient(110deg,color-mix(in srgb,var(--team) 78%,#07101b),color-mix(in srgb,var(--team) 40%,#020912) 85%);box-shadow:inset 0 1px #bad4e044,inset 0 -3px #68849788,inset 1px 0 #bcd0df24}
 /* Reference lineup In/Out: 90.9Ã¢â‚¬â€œ91.4 and 104.45Ã¢â‚¬â€œ104.8 in the long recording.
    Deliberately scoped to take/hide; persistent group-update motion is unchanged. */
 .graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon{animation:none;overflow:visible}
@@ -1104,7 +1104,7 @@
 /* Reference face design: contour texture and team-tinted, angled score shading. */
 .scorebug .team-wing{background-image:linear-gradient(110deg,color-mix(in srgb,var(--team) 88%,#031018),color-mix(in srgb,var(--team) 48%,#07141c))}
 .scorebug .team-wing.home{background-image:linear-gradient(250deg,color-mix(in srgb,var(--team) 88%,#031018),color-mix(in srgb,var(--team) 48%,#07141c))}
-.scorebug .team-wing::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:url('./assets/scorebug-contours.svg') center/100% 100% no-repeat;opacity:.16}
+.scorebug .team-wing::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:url('./assets/scorebug-contours.svg?v=restore172') center/100% 100% no-repeat;opacity:.16}
 .scorebug .team-wing.home::before{transform:scaleX(-1)}
 .scorebug .score-center{background:linear-gradient(100deg,color-mix(in srgb,var(--away-color) 38%,#030a0e),#050c0f 49%,color-mix(in srgb,var(--home-color) 38%,#030a0e))}
 .scorebug .score-center::before{content:'';position:absolute;left:50%;top:0;width:2px;height:111px;background:#02070980;transform:skewX(-8deg);pointer-events:none}
@@ -1237,7 +1237,7 @@
 .graphics-layer[data-motion=fade].animate-in>.break-banner .result-logo{animation:none!important}
 @media(prefers-reduced-motion:reduce){.graphics-layer[data-motion=auto].animate-in>.break-banner *{animation:none!important}}
 
-.break-banner .result-surface::before,.break-banner .result-surface::after{content:'';position:absolute;top:0;bottom:0;width:34%;background:url('./assets/scorebug-contours.svg') center/100% 100%;opacity:.13;pointer-events:none}
+.break-banner .result-surface::before,.break-banner .result-surface::after{content:'';position:absolute;top:0;bottom:0;width:34%;background:url('./assets/scorebug-contours.svg?v=restore172') center/100% 100%;opacity:.13;pointer-events:none}
 .break-banner .result-surface::before{left:0;mask-image:linear-gradient(90deg,#000 75%,transparent)}
 .break-banner .result-surface::after{right:0;transform:scaleX(-1);mask-image:linear-gradient(90deg,#000 75%,transparent)}
 
@@ -1253,7 +1253,7 @@
 .announcer-frame{padding:5px 10px 12px;background:none;clip-path:none;isolation:isolate}
 .announcer-frame::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;background:url('./announcer-rails.svg?v=109') center/100% 100% no-repeat}
 .announcer-panel{position:relative;isolation:isolate;clip-path:polygon(14px 0,calc(100% - 14px) 0,100% 20px,100% calc(100% - 22px),calc(100% - 22px) 100%,22px 100%,0 calc(100% - 22px),0 20px);background:linear-gradient(110deg,#082039,#103958 48%,#071c34)}
-.announcer-panel::before{content:'';position:absolute;inset:0;z-index:-1;background:url('./assets/lineup-contours.svg') center/600px 160px repeat;opacity:.14;pointer-events:none}
+.announcer-panel::before{content:'';position:absolute;inset:0;z-index:-1;background:url('./assets/lineup-contours.svg?v=restore172') center/600px 160px repeat;opacity:.14;pointer-events:none}
 .announcer-person{padding:12px 22px 9px}
 .announcer-person h1{font-size:54px;line-height:1.12;margin-bottom:5px}
 .announcer-person p{font-size:23px;line-height:1.15;letter-spacing:1px}
@@ -1270,7 +1270,7 @@
 
 /* Sideline reporter: compact blue plate with raised silver corners and flush badge. */
 .reporter-nameplate{left:595px;right:595px;bottom:58px;height:120px;padding:8px 28px 13px;isolation:isolate}
-.reporter-nameplate::before{inset:4px 7px 10px;border:0;z-index:-1;background:linear-gradient(110deg,#092b45eb,#0d3651eb 50%,#07243beb),url('./assets/lineup-contours.svg') center/600px 160px;clip-path:polygon(0 0,100% 0,100% 70%,calc(100% - 27px) 100%,27px 100%,0 70%);transform-origin:center bottom}
+.reporter-nameplate::before{inset:4px 7px 10px;border:0;z-index:-1;background:linear-gradient(110deg,#092b45eb,#0d3651eb 50%,#07243beb),url('./assets/lineup-contours.svg?v=restore172') center/600px 160px;clip-path:polygon(0 0,100% 0,100% 70%,calc(100% - 27px) 100%,27px 100%,0 70%);transform-origin:center bottom}
 .reporter-nameplate::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;background:url('./reporter-rails.svg?v=110') center/100% 100% no-repeat;transform-origin:center bottom}
 .reporter-nameplate h1{font:italic 700 64px/1.14 var(--display);letter-spacing:.5px;max-width:100%;width:100%;text-align:center;padding:0 6px;text-overflow:clip;text-shadow:2px 3px 1px #020b13;z-index:1}
 .reporter-network{bottom:100%;height:48px;display:flex;align-items:flex-end;justify-content:center}
@@ -1318,7 +1318,7 @@
 /* Compact division panel: reference header, alternating charcoal records, metal foot. */
 .standings-card{position:absolute;left:70px;right:auto;bottom:64px;width:500px;padding:0;background:none;clip-path:none;overflow:visible}
 .standings-face{padding:0 0 26px;background:repeating-linear-gradient(48deg,transparent 0 8px,#ffffff05 8px 10px),#282b2e;clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 29px) 100%,32px 100%,0 calc(100% - 30px))}
-.standings-card header{position:relative;height:84px;padding:0 18px 0 175px;display:flex;align-items:center;background:url('./assets/lineup-contours.svg') center/430px 130px,linear-gradient(#185c91,#063052);border-top:3px solid #d6e4eb}
+.standings-card header{position:relative;height:84px;padding:0 18px 0 175px;display:flex;align-items:center;background:url('./assets/lineup-contours.svg?v=restore172') center/430px 130px,linear-gradient(#185c91,#063052);border-top:3px solid #d6e4eb}
 .standings-card header h1{margin:0;white-space:nowrap;font:italic 700 58px/1 'DIN Condensed',Impact,sans-serif;color:#f5f7f9;text-shadow:2px 3px #07101b}
 .conference-letter{position:absolute;left:-14px;bottom:-5px;font:900 140px/.85 Georgia,serif;color:#125a93;-webkit-text-stroke:3px #e3edf4;filter:drop-shadow(3px 4px 0 #071622)}
 .conference-letter small{position:absolute;left:25px;top:27px;width:55px;font:20px/1 sans-serif;color:#fff;-webkit-text-stroke:0;transform:rotate(36deg)}
@@ -1330,7 +1330,7 @@
 .standings-rail{position:absolute;left:0;right:0;bottom:-3px;height:34px;background:url('./standings-rails.svg?v=124') center/100% 100% no-repeat;pointer-events:none}
 /* Referee: raised mark, compact two-line face, independent faceted metal frame. */
 .referee-card{left:245px;right:245px;bottom:74px;isolation:isolate}
-.referee-face{height:178px;border:0;padding:14px 36px 18px 265px;background:url('./assets/lineup-contours.svg') center/520px 160px,linear-gradient(105deg,#06284c,#092f53 65%,#061e36);clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 50px,calc(100% - 20px) calc(100% - 24px),calc(100% - 46px) 100%,36px 100%,0 calc(100% - 33px),0 30px)}
+.referee-face{height:178px;border:0;padding:14px 36px 18px 265px;background:url('./assets/lineup-contours.svg?v=restore172') center/520px 160px,linear-gradient(105deg,#06284c,#092f53 65%,#061e36);clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 50px,calc(100% - 20px) calc(100% - 24px),calc(100% - 46px) 100%,36px 100%,0 calc(100% - 33px),0 30px)}
 .referee-card h1{font:italic 700 62px/1.12 var(--display);margin:0 0 13px;letter-spacing:1px}
 .referee-card p{font:39px/1.18 'DIN Condensed',Impact,sans-serif;letter-spacing:2px;white-space:normal}
 .referee-mark{left:16px;bottom:11px;width:218px;height:245px;z-index:3}
@@ -1376,7 +1376,7 @@
 /* Referee reference, 554.6–555.2 in / 564.2–564.6 out: rail, face, then copy/shield. */
 .referee-card{left:200px;right:200px;bottom:62px;height:210px;padding:0;background:none;border:0;clip-path:none;overflow:visible;isolation:isolate}
 .referee-shell{position:absolute;inset:0;transform-origin:50% 100%;z-index:0}
-.referee-card .referee-face{position:absolute;inset:4px 6px 10px;height:auto;padding:0;border:0;background:url('./assets/lineup-contours.svg') center/500px 160px,linear-gradient(110deg,#052545,#082d50 55%,#062746);clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 55px,calc(100% - 22px) calc(100% - 30px),calc(100% - 57px) 100%,57px 100%,22px calc(100% - 30px),0 55px)}
+.referee-card .referee-face{position:absolute;inset:4px 6px 10px;height:auto;padding:0;border:0;background:url('./assets/lineup-contours.svg?v=restore172') center/500px 160px,linear-gradient(110deg,#052545,#082d50 55%,#062746);clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 55px,calc(100% - 22px) calc(100% - 30px),calc(100% - 57px) 100%,57px 100%,22px calc(100% - 30px),0 55px)}
 .referee-card .referee-rails{position:absolute;inset:0;background:url('./referee-rails.svg?v=126') center/100% 100% no-repeat;z-index:2}
 .referee-card .referee-mark{left:28px;bottom:14px;width:267px;height:305px;z-index:3;transform-origin:center bottom}
 .referee-copy{position:absolute;left:360px;right:60px;top:7px;bottom:19px;z-index:2;display:flex;flex-direction:column;justify-content:space-around}
@@ -1425,7 +1425,7 @@
 /* Opening matchup: full-width team panels with raised angled fins. */
 .opening-intro{position:absolute;left:12px;right:12px;bottom:32px;height:540px;isolation:isolate}
 .intro-band{position:absolute;inset:auto 0 58px;height:250px;display:flex;overflow:hidden}
-.intro-half{width:50%;position:relative;background:url('./assets/lineup-contours.svg') center/600px 220px,linear-gradient(135deg,color-mix(in srgb,var(--team) 90%,#164676),var(--team));overflow:hidden}
+.intro-half{width:50%;position:relative;background:url('./assets/lineup-contours.svg?v=restore172') center/600px 220px,linear-gradient(135deg,color-mix(in srgb,var(--team) 90%,#164676),var(--team));overflow:hidden}
 .intro-logo{position:absolute;left:-22px;top:-26px;width:465px;height:305px;display:grid;place-items:center}.intro-logo .team-logo{width:100%;height:100%;object-fit:contain}.intro-half.home .intro-logo{left:auto;right:-22px}
 .intro-copy{position:absolute;left:440px;right:18px;top:12px;text-align:center;color:#f5f5f5}.intro-half.home .intro-copy{left:18px;right:440px}
 .intro-copy>span{display:block;font:36px/1 'DIN Condensed',Impact,sans-serif;letter-spacing:2px}.intro-copy strong{display:block;position:relative;font:112px/1.15 'DIN Condensed',Impact,sans-serif;white-space:nowrap;letter-spacing:-1px}.intro-copy>b{font:43px/1 'DIN Condensed',Impact,sans-serif;background:#111820;padding:3px 12px;display:inline-block}
@@ -1449,7 +1449,7 @@
 /* 130: reference intro. Fin accents move separately from the team face. */
 .opening-intro{left:0;right:0;bottom:40px;height:500px}
 .intro-band{bottom:54px;height:246px}
-.intro-half{background:url('./assets/lineup-contours.svg') center/720px 240px,linear-gradient(100deg,color-mix(in srgb,var(--team) 96%,#182434),color-mix(in srgb,var(--team) 80%,#03070a))}
+.intro-half{background:url('./assets/lineup-contours.svg?v=restore172') center/720px 240px,linear-gradient(100deg,color-mix(in srgb,var(--team) 96%,#182434),color-mix(in srgb,var(--team) 80%,#03070a))}
 .intro-logo{left:0;top:0;width:425px;height:246px;overflow:hidden}.intro-half.home .intro-logo{right:0}
 .intro-logo .team-logo{display:block;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain;object-position:center;transform:none!important;filter:drop-shadow(0 2px 2px #0008)}
 .intro-copy{left:430px;right:12px;top:17px}.intro-half.home .intro-copy{left:12px;right:430px}.intro-copy>span{font-size:35px;letter-spacing:2px}.intro-copy strong{font-size:116px;line-height:1.12;letter-spacing:-1px;transform:scaleX(.96)}.intro-copy>b{font-size:35px;padding:2px 10px}
@@ -1485,8 +1485,8 @@
 .intro-fin{background:none;perspective:1100px}.intro-fin-metal{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}.intro-fin-metal path:first-of-type{fill:color-mix(in srgb,var(--team) 82%,#01050a)}
 .intro-accent{inset:-12%;z-index:3;opacity:.95;box-shadow:inset 10px 0 10px #ffffff36,inset -9px 0 9px #000a;clip-path:polygon(0 0,24% 0,89% 100%,65% 100%)}
 .intro-fin i{z-index:4;opacity:.85}
-.intro-half{background:linear-gradient(180deg,#ffffff09,transparent 22%,#00000026),url('./assets/lineup-contours.svg') center/870px 270px,linear-gradient(105deg,var(--team),color-mix(in srgb,var(--team) 78%,#01060a));box-shadow:inset 0 2px #ffffff0b,inset 0 -7px 12px #0002}
-.intro-half.home{background:linear-gradient(180deg,#ffffff09,transparent 22%,#00000026),url('./assets/lineup-contours.svg') center/870px 270px,linear-gradient(255deg,var(--team),color-mix(in srgb,var(--team) 78%,#01060a))}
+.intro-half{background:linear-gradient(180deg,#ffffff09,transparent 22%,#00000026),url('./assets/lineup-contours.svg?v=restore172') center/870px 270px,linear-gradient(105deg,var(--team),color-mix(in srgb,var(--team) 78%,#01060a));box-shadow:inset 0 2px #ffffff0b,inset 0 -7px 12px #0002}
+.intro-half.home{background:linear-gradient(180deg,#ffffff09,transparent 22%,#00000026),url('./assets/lineup-contours.svg?v=restore172') center/870px 270px,linear-gradient(255deg,var(--team),color-mix(in srgb,var(--team) 78%,#01060a))}
 .intro-copy strong{font-size:112px;text-shadow:0 2px 2px #0006}.intro-copy>span{font-size:34px;letter-spacing:2px;color:#e9eef0}.intro-copy>b{font-size:35px;line-height:1.05}.intro-location{background:linear-gradient(#17191b,#0e1012);box-shadow:inset 0 1px #ffffff08}
 @keyframes intro-fin130{0%,17%{translate:0 210px;opacity:0;rotate:y -48deg}32%{opacity:1;rotate:y -24deg}70%{translate:0 0;rotate:y 4deg}100%{translate:0 0;opacity:1;rotate:y 0deg}}
 @keyframes intro-accent130{0%,8%{translate:-110% 0}32%,42%{translate:4% 0}58%,69%{translate:27% 0}94%,100%{translate:120% 0}}
@@ -1606,7 +1606,7 @@
 .intro-fin{width:460px;height:470px;left:0;bottom:54px;filter:drop-shadow(2px 3px 2px #0008);isolation:isolate}
 .intro-fin.home{left:auto;right:0;transform:scaleX(-1)}
 .intro-side-solid{position:absolute;inset:0;clip-path:polygon(0 0,5.5% 2%,31% 24.25%,68% 24.25%,100% 75.5%,100% 100%,0 100%);isolation:isolate;overflow:hidden}
-.intro-solid-face{position:absolute;inset:0;background:linear-gradient(125deg,#ffffff16 0%,transparent 22%,#00000055 100%),url('./assets/lineup-contours.svg') 30% 0/650px 380px,linear-gradient(105deg,var(--team),color-mix(in srgb,var(--team) 78%,#01060a));box-shadow:inset -12px 0 18px #0009}
+.intro-solid-face{position:absolute;inset:0;background:linear-gradient(125deg,#ffffff16 0%,transparent 22%,#00000055 100%),url('./assets/lineup-contours.svg?v=restore172') 30% 0/650px 380px,linear-gradient(105deg,var(--team),color-mix(in srgb,var(--team) 78%,#01060a));box-shadow:inset -12px 0 18px #0009}
 .intro-solid-face::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(112deg,transparent 0 3px,#ffffff06 3px 4px);opacity:.65}
 .intro-solid-accent{position:absolute;inset:4px 0;background:linear-gradient(115deg,#ffffff25,transparent 18%,#0005),var(--secondary);clip-path:polygon(0 0,34% 0,100% 100%,65% 100%);animation:intro-solid-accent136 7.2s ease-in-out .85s infinite both}
 .intro-solid-bevel{position:absolute;inset:0;width:100%;height:100%;z-index:2}
@@ -1734,3 +1734,39 @@
 @keyframes lineup-top139-fade154{0%{translate:0 calc(100% - 5px);scale:.2 1;opacity:0}20%{translate:0 calc(100% - 5px);scale:.2 1;opacity:1}45.6%{translate:0 calc(100% - 5px);scale:.2 1;opacity:1}50.4%{scale:1 1;translate:0 calc(100% - 5px);opacity:1}88%,100%{translate:0 0;scale:1;opacity:1}}
 @keyframes ribbon-left152-fade154{0%{transform:translateX(32%);clip-path:inset(88% 50% 0 0);opacity:0}20%{transform:translateX(32%);clip-path:inset(88% 50% 0 0);opacity:1}28%,53.6%{transform:translateX(32%);clip-path:inset(88% 50% 0 0);opacity:1}72%{transform:none;clip-path:inset(88% 50% 0 0);opacity:1}100%{transform:none;clip-path:inset(5% 50% 0 0);opacity:1}}
 @keyframes ribbon-right152-fade154{0%{transform:translateX(-32%);clip-path:inset(88% 0 0 50%);opacity:0}20%{transform:translateX(-32%);clip-path:inset(88% 0 0 50%);opacity:1}28%,53.6%{transform:translateX(-32%);clip-path:inset(88% 0 0 50%);opacity:1}72%{transform:none;clip-path:inset(88% 0 0 50%);opacity:1}100%{transform:none;clip-path:inset(5% 0 0 50%);opacity:1}}
+
+/* 171: score changes are per-cell; +delta shares the score's anchor. */
+.score-row b{position:relative}
+.score-row b .score-value,.score-row b .score-old{display:block;background:linear-gradient(#fff,#d4dde1);background-clip:text;-webkit-background-clip:text;color:transparent}
+.score-row b .score-old{position:absolute;inset:0}
+.score-row b .score-add{position:absolute;top:-38px;left:50%;width:auto;margin-left:-25px;font-size:40px;line-height:1;color:white;background:none;animation:none;letter-spacing:0;white-space:nowrap}
+@keyframes intro-left-out135{from{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}to{clip-path:polygon(0 0,0 0,-30% 100%,0 100%)}}
+@keyframes intro-right-out135{from{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}to{clip-path:polygon(100% 0,100% 0,100% 100%,130% 100%)}}
+.graphics-layer.leaving[data-motion=auto] .intro-fin{animation:intro-fin-left-out171 .4s ease-in both!important}
+.graphics-layer.leaving[data-motion=auto] .intro-fin.home{animation-name:intro-fin-right-out171!important}
+@keyframes intro-fin-left-out171{from{translate:0 0}to{translate:-480px 0}}
+@keyframes intro-fin-right-out171{from{translate:0 0}to{translate:480px 0}}
+.graphics-layer.animate-in[data-motion=auto] .lineup-ribbon-face h1{animation:lineup-title-in140 .24s .16s both}
+
+/* One continuous surface prevents seams between logo wings and score cells. */
+.scorebug .bug-body{background:linear-gradient(90deg,color-mix(in srgb,var(--flag-away,var(--away-color)) 90%,#03090c) 0%,color-mix(in srgb,var(--flag-away,var(--away-color)) 76%,#03090c) 23%,color-mix(in srgb,var(--flag-away,var(--away-color)) 25%,#070c0f) 41%,#070c0f 49%,#070c0f 51%,color-mix(in srgb,var(--flag-home,var(--home-color)) 25%,#070c0f) 59%,color-mix(in srgb,var(--flag-home,var(--home-color)) 76%,#03090c) 77%,color-mix(in srgb,var(--flag-home,var(--home-color)) 90%,#03090c) 100%)}
+.scorebug .team-wing,.scorebug .team-wing.home,.scorebug .score-center{background:transparent}
+.bug-wrap.penalty-away .team-wing.away,.bug-wrap.penalty-home .team-wing.home{background:linear-gradient(100deg,#f0bf08,#ffdf25)}
+.scorebug .team-wing::before{mask-image:linear-gradient(to right,#000 35%,transparent 100%)}
+
+/* Score digits roll inside their own window; added points sit above the shell. */
+.scorebug .score-row b{height:111px;overflow:hidden}
+.bug-wrap>.score-add{animation:none!important;top:-35px;width:110px;margin:0;text-align:center;font-size:40px;letter-spacing:0;transform:none}
+.bug-wrap>.score-add.away{left:305px}
+.bug-wrap>.score-add.home{left:465px}
+
+.score-row b .score-value,.score-row b .score-old{height:100%;width:100%}
+/* Gradient belongs to each moving digit, not its stationary parent. */
+.scorebug .score-row b{background:none;-webkit-background-clip:border-box;background-clip:border-box}
+
+/* Only the record plate becomes translucent; the record text stays solid. */
+.scorebug .record::before{opacity:.72}
+/* Team penalty uses the same shared surface and fade as its normal team color. */
+.bug-wrap.penalty-away{--flag-away:#ffdc16}
+.bug-wrap.penalty-home{--flag-home:#ffdc16}
+.bug-wrap.penalty-away .team-wing.away,.bug-wrap.penalty-home .team-wing.home{background:transparent}

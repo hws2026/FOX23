@@ -1,0 +1,19 @@
+Old score slides upward out while the new score slides upward from below, without fading. Fixes clipped +points and contains the score roll; +points is positioned above the actual changed score. Restores the original scorebug picture intro, lightning sweep and missing scorebug/lineup textures. Includes update 171 changes.
+
+UPDATE 174 — replace files in your existing graphics pack, keeping these folder paths.
+
+- Independent score roll and short +points sequence; unchanged teams do not animate.
+- Continuous team-color-to-black scorebug background.
+- Aspect-ratio-preserving output fit; team lower third at the scorebug baseline.
+- Intro OUT begins immediately; side objects exit sideways.
+- Lineup update text has no extra stagger; exit cleanup waits for rail animations.
+- Main panel owns AR game data. Open its AR output section, then Open synced AR control.
+  Keep both pages on the same host/port in the same browser. No Python backend required.
+  AR video and manual field alignment remain in AR. Game markers hide on lost sync.
+
+The AR sync uses a browser channel: it does not sync separate devices or browsers.
+The AR still requires manual field alignment for changes in camera view.
+Use animation-review171.html for an isolated preview; it does not modify your show.
+Browser verification covered score interruption, independent teams, intro/lineup cleanup,
+portrait and wide canvas fitting, main-panel AR direction and disconnect behavior.
+No claim of a frame-for-frame audit of every historical broadcast reference.
