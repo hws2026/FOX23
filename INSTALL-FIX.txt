@@ -1,0 +1,1 @@
+Replace runtime-worker.js beside index.html in your existing graphics package. Hard-refresh the control panel (Cmd+Shift+R on Mac, Ctrl+Shift+R on Windows). Do not clear site data. Fixes the incorrect internal core.py filename. No graphic or animation changes.
