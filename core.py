@@ -16,7 +16,7 @@ LIBRARY=TeamLibrary(ROOT,DATA)
 POSITIONS = ['QB','LT','LG','C','RG','RT','WR','WR','TE','RB','WR','DE','DT','DT','DE','LB','LB','LB','CB','CB','FS','SS','K','P']
 NAMES = ['Jordan Ellis','Marcus Reed','Cameron Price','Alex Morgan','Drew Collins','Taylor Brooks','Jalen Carter','Noah Hayes','Mason Cole','Evan Grant','Devin Ross','Cole Bennett','Tyler James','Owen Parker','Blake Foster','Avery Scott','Logan West','Riley Davis','Kai Turner','Miles Ward','Nolan King','Isaiah Bell','Sam Lewis','Jesse Gray']
 FORMATION_LABELS = {'4-3-4': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '3-4-4': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-2-5': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '3-3-5': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '5-2-4': ['DL', 'DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-1-6': ['DL', 'DL', 'DL', 'DL', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB', 'CB']}
-GRAPHICS = {'breaking','countdown','pregameplayer','intro','referee','standings','transition','scoringdrive','none','qbstats','scorebug','matchup','offense','defense','quarterback','player','coach','lowerthird','stats','teamstats','roster','event','period','final','announcers','sponsor','weather','reporter','situation','break'}
+GRAPHICS = {'talent','storytease','breaking','countdown','pregameplayer','intro','referee','standings','transition','scoringdrive','none','qbstats','scorebug','matchup','offense','defense','quarterback','player','coach','lowerthird','stats','teamstats','roster','event','period','final','announcers','sponsor','weather','reporter','situation','break'}
 def roster(side):
     return [{'id':f'{side}-{i+1}', 'name':name, 'number':str(([7,72,64,55,68,77,11,18,86,24,13,90,95,98,91,50,54,56,21,23,30,32,3,9][i]+(2 if side=='home' else 0))%100), 'position':pos,'photo':'','stats':{'YDS':'248','TD':'2','CMP':'19/27'}} for i,(name,pos) in enumerate(zip(NAMES,POSITIONS))]
 def default_state():
@@ -35,6 +35,8 @@ def cue_key(c):
     return c['type']+(':'+c.get('team','away') if c['type'] in TEAM_CUES else '')
 def initial_cue(kind,team='away'):
     cue=copy.deepcopy(default_state()['preview']);cue.update(type=kind,team=team,playerId=STATE['lineups'][team]['quarterback'])
+    if kind=='talent':cue.update(leftName='',leftRole='',subtitle='',title='')
+    if kind=='storytease':cue.update(title='',subtitle='',featureText='',featureFooter='')
     if kind in ['event','lowerthird','matchup']:cue.update(title='',subtitle='')
     if STATE.get('program',{}).get('emptyShow'):
         for key,value in list(cue.items()):
@@ -385,6 +387,9 @@ def _update(action,p):
             elif k=='newsArt':
                 if v not in ['team','player','duo','network','none']: raise ValueError('Choose news artwork.')
             elif k=='newsText': v=bounded_text(v,400)
+            elif k=='storyLabelMode':
+                if v not in ['NEXT','COMING UP','LATER','CUSTOM']: raise ValueError('Choose a teaser label.')
+            elif k=='storyLabelCustom': v=bounded_text(v,80)
             elif k in ['newsPlayerId','newsSecondPlayerId','featureContext','featureText','featureFooter','countdownLabel']: v=bounded_text(v,160)
             elif k=='sideStatsLayout':
                 if v not in ['qb','rushing','receiving','rushing-qb','receiving-qb']: raise ValueError('Invalid side stats layout.')

@@ -1,0 +1,9 @@
+AR 189 — Live Server size and placement
+
+Replace the matching files in your existing ar folder. Reload ar/index.html. No backend required.
+
+Under Size & placement, choose a graphic. Width controls blue/yellow line thickness; Height controls line length. For text/images these control width and height. Enable Drag selected graphic in preview, then drag anywhere on the video to move that selection. Center in preview recovers an off-screen selection. Reset restores its original size and offset.
+
+Changes follow Auto take; with it off, press TAKE to send preview to output. Save AR settings stores layout with the show; Load AR settings restores it. Video and alignment are separate.
+
+Tracking is off by default. Manual placement is fixed for a fixed camera view, not automatic camera tracking. Pan/zoom/cut requires realignment or optional tracking. Game data continues to come from the main graphics panel.

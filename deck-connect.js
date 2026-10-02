@@ -1,4 +1,4 @@
-import{base}from'./bridge.js?v=depth188';
+import{base}from'./bridge.js?v=add190';
 import{deckControl}from'./panel.js?v=score175';
 const storageKey='gridiron-deck-key:'+base.pathname;
 const button=document.createElement('button');button.className='button subtle';button.textContent='Connect Stream Deck';document.querySelector('.topbar-right').prepend(button);

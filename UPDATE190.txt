@@ -1,0 +1,11 @@
+GRAPHICS UPDATE 190
+Replace the matching files in your existing graphics pack, preserving folders. This is a patch, not a standalone install.
+
+New in Graphics library: Studio talent credentials and Story teaser.
+Studio: name, credentials, additional detail, and Show Setup network logo.
+Story teaser: headline/supporting copy; Next, Coming Up, Later, or Custom label. Custom reveals a separate text box. Update preview saves edits; Take Live airs the graphic.
+
+Reference: pregame recording at about 5:34 (studio credentials) and 8:00–8:22 (story teasers, including Caleb & KP). Layouts follow these references; motion is recreated, not frame-exact.
+
+Studio frame now follows the card edges and retains its angled shape during animation. Includes the earlier graphics patch 188. AR is separate and unchanged.
+Review: additions-review190.html (isolated demo data).

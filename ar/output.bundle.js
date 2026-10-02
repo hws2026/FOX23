@@ -43,20 +43,34 @@ Object.assign(exports,{project,matrixForGL,polygonPoints});
 },
 'graphics.js':function(exports,require,__url){
 const W=160/3;
-function fieldGraphics(s){const v=s.graphicsVisibility,sign=s.directionOfPlay==='RIGHT'?1:-1,x=s.lineOfScrimmage;const team=s[s.possession+'Team'];const shapes=[];
-const poly=(points,color,opacity)=>shapes.push({points,color,opacity});
+function fieldGraphics(s){const v=s.graphicsVisibility,sign=s.directionOfPlay==='RIGHT'?1:-1,x=s.lineOfScrimmage;const team=s[s.possession+'Team'];const shapes=[];let group="redZone";
+const poly=(points,color,opacity)=>shapes.push({id:group,points,color,opacity});
 const line=(x,style)=>poly([[x-style.width/2,0],[x+style.width/2,0],[x+style.width/2,W],[x-style.width/2,W]],style.color,style.opacity);
-const label=(x,y,text,w=12,h=3.5,color='#ffffff',plate='#122c36')=>shapes.push({text,fieldX:x,fieldY:y,width:w,height:h,color,plate,opacity:.9,direction:s.directionOfPlay});
+const label=(x,y,text,w=12,h=3.5,color='#ffffff',plate='#122c36')=>shapes.push({id:group,text,fieldX:x,fieldY:y,width:w,height:h,color,plate,opacity:.9,direction:s.directionOfPlay});
 if(v.redZone){const a=sign>0?90:10,b=sign>0?110:30;if(v.redZoneMode==='tint')poly([[a,0],[b,0],[b,W],[a,W]],'#de4a48',.18);else if(v.redZoneMode==='line')line(sign>0?90:30,{width:.2,color:'#f16e63',opacity:.8});else label((a+b)/2,38,'RED ZONE',14,4,'#ffb3a7');}
-if(v.los.visible)line(x,{...v.los,color:'#294fae'});if(v.firstDown.visible)line(s.firstDownPosition,{...v.firstDown,color:'#e5e300'});
-if(v.downDistance){const down=['','1ST','2ND','3RD','4TH'][s.down];shapes.push({text:`${down} & ${s.goalToGo?'GOAL':s.distance}`,fieldX:Math.max(13,Math.min(107,x-sign*3)),fieldY:10,width:26,height:5,color:team.color,style:'turf',opacity:.48,direction:s.directionOfPlay});}
-if(v.distanceMarkers)for(const distance of [5,10,15,20]){const p=x+sign*distance;if(p>=10&&p<=110)label(p,43,`${distance} YDS`,6,2,'#eef5f9','#1c343e');}
-if(v.fieldGoal.visible&&s.fieldGoalRange!==null){line(s.fieldGoalRange,v.fieldGoal);label(s.fieldGoalRange,34,s.fieldGoalLabel,12,3,v.fieldGoal.color);}
-if(v.possession)label(x,20,`${sign>0?'▶':'◀'}`,4,3,'#ffffff',team.color);
-if(v.custom)for(const c of s.customGraphics){if(c.type==='line'){const [a,b]=c.points,dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy)||1,n=[-dy/l*c.height/2,dx/l*c.height/2];poly([[a[0]+n[0],a[1]+n[1]],[b[0]+n[0],b[1]+n[1]],[b[0]-n[0],b[1]-n[1]],[a[0]-n[0],a[1]-n[1]]],c.color,c.opacity);}else if(c.type==='polygon')poly(c.points,c.color,c.opacity);else shapes.push({...c,plate:'#102a33',reverse:false});}
-return shapes;}
+group="los";if(v.los.visible)line(x,{...v.los,color:'#294fae'});group="firstDown";if(v.firstDown.visible)line(s.firstDownPosition,{...v.firstDown,color:'#e5e300'});
+group="downDistance";if(v.downDistance){const down=['','1ST','2ND','3RD','4TH'][s.down];shapes.push({id:group,text:`${down} & ${s.goalToGo?'GOAL':s.distance}`,fieldX:Math.max(13,Math.min(107,x-sign*3)),fieldY:10,width:26,height:5,color:team.color,style:'turf',opacity:.48,direction:s.directionOfPlay});}
+group="distanceMarkers";if(v.distanceMarkers)for(const distance of [5,10,15,20]){const p=x+sign*distance;if(p>=10&&p<=110)label(p,43,`${distance} YDS`,6,2,'#eef5f9','#1c343e');}
+group="fieldGoal";if(v.fieldGoal.visible&&s.fieldGoalRange!==null){line(s.fieldGoalRange,v.fieldGoal);label(s.fieldGoalRange,34,s.fieldGoalLabel,12,3,v.fieldGoal.color);}
+group="possession";if(v.possession)label(x,20,`${sign>0?'▶':'◀'}`,4,3,'#ffffff',team.color);
+if(v.custom)for(const c of s.customGraphics){group=c.id;if(c.type==='line'){const [a,b]=c.points,dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy)||1,n=[-dy/l*c.height/2,dx/l*c.height/2];poly([[a[0]+n[0],a[1]+n[1]],[b[0]+n[0],b[1]+n[1]],[b[0]-n[0],b[1]-n[1]],[a[0]-n[0],a[1]-n[1]]],c.color,c.opacity);}else if(c.type==='polygon')poly(c.points,c.color,c.opacity);else shapes.push({...c,plate:'#102a33',reverse:false});}
+return shapes.map(shape=>adjustShape(shape,s.layout?.[shape.id]));}
 
-Object.assign(exports,{fieldGraphics});
+// Field-space edits remain separate from synchronized game data.
+function adjustShape(shape,edit={}){
+ const sx=Math.max(.05,Math.min(4,Number(edit.sx)||1)),sy=Math.max(.05,Math.min(4,Number(edit.sy)||1));
+ const dx=Number.isFinite(edit.dx)?edit.dx:0,dy=Number.isFinite(edit.dy)?edit.dy:0;
+ if(shape.points?.length){const cx=shape.points.reduce((n,p)=>n+p[0],0)/shape.points.length,cy=shape.points.reduce((n,p)=>n+p[1],0)/shape.points.length;
+ return {...shape,points:shape.points.map(([x,y])=>[cx+(x-cx)*sx+dx,cy+(y-cy)*sy+dy])};}
+ return {...shape,fieldX:shape.fieldX+dx,fieldY:shape.fieldY+dy,width:shape.width*sx,height:shape.height*sy};
+}
+function unproject(h,u,v){
+ const a=h[0][0]-u*h[2][0],b=h[0][1]-u*h[2][1],c=u*h[2][2]-h[0][2],d=h[1][0]-v*h[2][0],e=h[1][1]-v*h[2][1],f=v*h[2][2]-h[1][2],det=a*e-b*d;
+ if(Math.abs(det)<1e-8)throw Error('Cannot drag at the field horizon.');
+ return [(c*e-b*f)/det,(a*f-c*d)/det];
+}
+
+Object.assign(exports,{fieldGraphics,adjustShape,unproject});
 },
 'bus.js':function(exports,require,__url){
 const name='wld-ar-local:'+new URL('.',__url).pathname;
@@ -101,6 +115,7 @@ frames++;if(start-then>=1000){fps=Math.round(frames*1000/(start-then));frames=0;
 Object.assign(exports,{});
 },
 'app.js':function(exports,require,__url){
+const {fieldGraphics,unproject}=require('graphics.js');
 const {loadTrackingCV,FieldTracker}=require('tracker.js');
 const {gameFields}=require('main-sync.js');
 const {calibrate,project,position,broadcast,demoPoints,WIDTH}=require('math.js');
@@ -156,12 +171,12 @@ function readGame(){const f=new FormData($('#game')),d=Object.fromEntries(f),nex
 
 function update(){try{preview=readGame();if($('#auto').checked)program=structuredClone(preview);send();message($('#auto').checked?'Updated on program':'Preview updated — press TAKE for program');return true;}catch(e){message(e.message,true);return false;}}
 $('#game').onsubmit=e=>{e.preventDefault();update();};$('#game').onchange=update;$('#take').onclick=()=>{if(update()){program=structuredClone(preview);send();message('Taken to program');}};$('#clear').onclick=()=>{for(const [k,v]of Object.entries(program.graphicsVisibility)){if(typeof v==='boolean')program.graphicsVisibility[k]=false;else if(typeof v==='object')v.visible=false;}send();message('Program cleared. Preview retained.');};$('#auto').onchange=()=>{if($('#auto').checked)update();};$('#view').onchange=send;
-function list(){const box=$('#items');box.replaceChildren();for(const g of preview.customGraphics){const row=document.createElement('div');row.className='row';const text=document.createElement('span');text.textContent=`${g.type.toUpperCase()} · ${g.text} · X ${g.fieldX}, Y ${g.fieldY}`;const b=document.createElement('button');b.textContent='Remove';b.onclick=()=>{preview.customGraphics=preview.customGraphics.filter(x=>x.id!==g.id);if($('#auto').checked)program=structuredClone(preview);list();send();};row.append(text,b);box.append(row);}}
+function list(){refreshEditTargets();const box=$('#items');box.replaceChildren();for(const g of preview.customGraphics){const row=document.createElement('div');row.className='row';const text=document.createElement('span');text.textContent=`${g.type.toUpperCase()} · ${g.text} · X ${g.fieldX}, Y ${g.fieldY}`;const b=document.createElement('button');b.textContent='Remove';b.onclick=()=>{preview.customGraphics=preview.customGraphics.filter(x=>x.id!==g.id);if($('#auto').checked)program=structuredClone(preview);list();send();};row.append(text,b);box.append(row);}}
 $('#logo').onchange=async()=>{const f=$('#logo').files[0];if(!f)return;if(f.size>8*1024*1024)return message('Use an image smaller than 8 MB.',true);try{const img=await createImageBitmap(f),c=document.createElement('canvas'),r=Math.min(1,1200/Math.max(img.width,img.height));c.width=Math.round(img.width*r);c.height=Math.round(img.height*r);c.getContext('2d').drawImage(img,0,0,c.width,c.height);logo=c.toDataURL('image/png');img.close();message('Image ready — press Add graphic.');}catch(e){message('Image could not be decoded.',true);}};
 $('#custom').onsubmit=e=>{e.preventDefault();try{const d=Object.fromEntries(new FormData(e.target));if(d.type==='logo'&&!logo)throw Error('Choose an image first');const g={id:crypto.randomUUID(),type:d.type,text:d.text.toUpperCase(),fieldX:+d.fieldX,fieldY:+d.fieldY,width:+d.width,height:+d.height,color:d.color,opacity:.9,points:['line','polygon'].includes(d.type)?JSON.parse(d.points):[],image:d.type==='logo'?logo:''};if(g.points.some(p=>!Array.isArray(p)||p.length!==2||!p.every(Number.isFinite)||p[0]<0||p[0]>120||p[1]<0||p[1]>WIDTH))throw Error('Invalid field points');if(g.type==='line'&&g.points.length!==2)throw Error('Line needs two points');if(g.type==='polygon'&&g.points.length<3)throw Error('Polygon needs at least three points');if(g.type==='polygon'){let sign=0;for(let i=0;i<g.points.length;i++){const a=g.points[i],b=g.points[(i+1)%g.points.length],c=g.points[(i+2)%g.points.length],z=(b[0]-a[0])*(c[1]-b[1])-(b[1]-a[1])*(c[0]-b[0]);if(z&&sign&&Math.sign(z)!==sign)throw Error('Use a convex polygon');if(z)sign=Math.sign(z);}if(!sign)throw Error('Polygon has no area');}preview.customGraphics.push(g);preview.graphicsVisibility.custom=true;$('#game').elements.custom.checked=true;if($('#auto').checked)program=structuredClone(preview);list();send();message('Custom graphic added');}catch(e){message(e.message,true);}};
 const saveKey='wld-local-show:'+new URL('.',__url).pathname;
 $('#save').onclick=()=>{try{localStorage.setItem(saveKey,JSON.stringify({preview,program}));message('Show saved in this browser. Video files and camera permissions must be reselected after reload.');}catch(e){message('Could not save: browser storage is full. Use smaller images.',true);}};
-$('#load').onclick=()=>{try{const raw=JSON.parse(localStorage.getItem(saveKey));if(!raw?.preview?.graphicsVisibility||!raw?.program?.graphicsVisibility)throw Error('No saved show');preview=raw.preview;program=raw.program;fill();list();send();message('Show restored. Reconnect and recalibrate your camera if needed.');}catch(e){message(e.message,true);}};
+$('#load').onclick=()=>{try{const raw=JSON.parse(localStorage.getItem(saveKey));if(!raw?.preview?.graphicsVisibility||!raw?.program?.graphicsVisibility)throw Error('No saved show');preview=raw.preview;program=raw.program;fill();list();readEditControls();send();message('Show restored. Reconnect and recalibrate your camera if needed.');}catch(e){message(e.message,true);}};
 function fill(){const f=$('#game').elements,s=preview;for(const k of ['possession','directionOfPlay','down','distance'])f[k].value=s[k];const own=s.directionOfPlay==='RIGHT'?s.ballPosition-10:110-s.ballPosition;f.footballPosition.value=own===50?'50':own<50?'OWN '+own:'OPP '+(100-own);f.awayColor.value=s.awayTeam.color;f.homeColor.value=s.homeTeam.color;for(const k of ['los','firstDown','fieldGoal'])f[k].checked=s.graphicsVisibility[k].visible;for(const k of ['downDistance','distanceMarkers','redZone','custom'])f[k].checked=s.graphicsVisibility[k];f.redZoneMode.value=s.graphicsVisibility.redZoneMode;const fg=s.fieldGoalRange;if(fg===null)f.fgPosition.value='';else{const own=s.directionOfPlay==='RIGHT'?fg-10:110-fg;f.fgPosition.value=own===50?'50':own<50?'OWN '+own:'OPP '+(100-own);}}
 window.addEventListener('beforeunload',()=>Object.values(cameras).forEach(release));
 if(location.protocol==='file:')message('Video playback is available. Open through Live Server for main-panel synchronization.');
@@ -180,7 +195,50 @@ async function prepareTracking(){if(trackingLoading||tracker)return;trackingLoad
 $('#track-camera').onchange=()=>{if($('#track-camera').checked){prepareTracking();if(current().h)startTracking();}else{stopTracking();trackingNote('Tracking off · graphics stay fixed to the screen.');}send();};
 video.addEventListener('seeking',()=>{if(current().kind!=='synthetic')clearCalibration('Video seeked. Align this new view to restart tracking.');});
 function trackFrame(){if(trackingActive&&!picking&&!video.seeking&&video.readyState>=2&&video.currentTime!==trackingTime){try{if(trackingTime>=0&&Math.abs(video.currentTime-trackingTime)>.35)throw Error('Frames skipped or camera cut');const result=tracker.update(video);current().h=result.h;trackingTime=video.currentTime;trackingNote(`Tracking locked · ${result.count} features · ${Math.round(result.ratio*100)}% agreement`);send();}catch(e){trackingActive=false;trackingLost=true;current().h=null;tracker.reset();trackingNote(e.message+' — AR hidden. Pause and align the field again.');send();}}if(video.requestVideoFrameCallback)video.requestVideoFrameCallback(trackFrame);else requestAnimationFrame(trackFrame);}
-prepareTracking();trackFrame();
+if($('#track-camera').checked)prepareTracking();else trackingNote('Tracking off · manual placement for a fixed view.');trackFrame();
+
+function refreshEditTargets(){
+ const select=$('#edit-target'),selected=select.value;
+ const entries=[['los','Line of scrimmage'],['firstDown','First-down line'],['downDistance','Down & distance'],['distanceMarkers','Distance markers'],['redZone','Red zone'],['fieldGoal','Field-goal range'],...preview.customGraphics.map(g=>[g.id,g.type.toUpperCase()+' · '+(g.text||'Image')])];
+ select.replaceChildren(...entries.map(([id,label])=>new Option(label,id)));
+ if(entries.some(([id])=>id===selected))select.value=selected;
+ readEditControls();
+}
+function editValue(){return preview.layout?.[$('#edit-target').value]||{sx:1,sy:1,dx:0,dy:0};}
+function readEditControls(){const e=editValue();$('#edit-position').textContent=`Offset: ${(e.dx||0).toFixed(2)}, ${(e.dy||0).toFixed(2)} yards`;for(const axis of ['x','y']){$('#size-'+axis).value=Math.round((e['s'+axis]||1)*100);$('#size-'+axis+'-value').textContent=$('#size-'+axis).value+'%';}}
+function commitEdit(edit){
+ preview.layout??={};preview.layout[$('#edit-target').value]={...editValue(),...edit};
+ if($('#auto').checked)program=structuredClone(preview);send();
+ $('#edit-position').textContent=`Offset: ${(editValue().dx||0).toFixed(2)}, ${(editValue().dy||0).toFixed(2)} yards`;
+}
+$('#edit-target').onchange=readEditControls;
+for(const axis of ['x','y'])$('#size-'+axis).oninput=()=>{commitEdit({['s'+axis]:+$('#size-'+axis).value/100});readEditControls();};
+$('#reset-graphic').onclick=()=>{commitEdit({sx:1,sy:1,dx:0,dy:0});readEditControls();};
+$('#drag-graphic').onchange=()=>{
+ if($('#drag-graphic').checked){picking=false;stage.classList.remove('calibrating');guidePrompt();pickCtx.clearRect(0,0,1920,1080);$('#view').value='preview';}
+ stage.classList.toggle('dragging-graphic',$('#drag-graphic').checked);send();
+};
+function selectedShape(){return fieldGraphics(broadcast(preview)).find(s=>s.id===$('#edit-target').value);}
+$('#center-graphic').onclick=()=>{try{
+ if(!current().h)throw Error('Align the field first.');const s=selectedShape();if(!s)throw Error('Enable this graphic first.');
+ const target=unproject(current().h,960,540),center=s.points?.length?s.points.reduce((a,p)=>[a[0]+p[0]/s.points.length,a[1]+p[1]/s.points.length],[0,0]):[s.fieldX,s.fieldY],e=editValue();
+ commitEdit({dx:(e.dx||0)+target[0]-center[0],dy:(e.dy||0)+target[1]-center[1]});
+ }catch(e){message(e.message,true);}};
+let dragEdit=null;
+function pointerField(e){const r=pickCanvas.getBoundingClientRect(),scale=Math.min(r.width/1920,r.height/1080),left=r.left+(r.width-1920*scale)/2,top=r.top+(r.height-1080*scale)/2;return unproject(current().h,(e.clientX-left)/scale,(e.clientY-top)/scale);}
+function beginDrag(e){
+ if(!$('#drag-graphic').checked||picking||dragEdit)return;
+ try{if(!current().h)throw Error('Align the field first.');if(!selectedShape())throw Error('Enable the selected graphic first.');
+ message('Dragging selected graphic');video.pause();dragEdit={start:pointerField(e),edit:{...editValue()}};if(e.pointerId!==undefined)pickCanvas.setPointerCapture(e.pointerId);e.preventDefault();
+ }catch(error){message(error.message,true);}
+}
+pickCanvas.addEventListener('pointerdown',beginDrag);pickCanvas.addEventListener('mousedown',beginDrag);
+function moveDrag(e){if(!dragEdit)return;try{const p=pointerField(e);commitEdit({dx:(dragEdit.edit.dx||0)+p[0]-dragEdit.start[0],dy:(dragEdit.edit.dy||0)+p[1]-dragEdit.start[1]});}catch(error){dragEdit=null;message(error.message,true);}}
+pickCanvas.addEventListener('pointermove',moveDrag);window.addEventListener('mousemove',moveDrag);
+function endDrag(){if(dragEdit)message('Placement updated. Save AR settings to keep it.');dragEdit=null;}
+for(const event of ['pointerup','pointercancel','lostpointercapture'])pickCanvas.addEventListener(event,endDrag);
+
+window.addEventListener('mouseup',endDrag);
 
 Object.assign(exports,{});
 }};
