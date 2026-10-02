@@ -16,7 +16,7 @@ LIBRARY=TeamLibrary(ROOT,DATA)
 POSITIONS = ['QB','LT','LG','C','RG','RT','WR','WR','TE','RB','WR','DE','DT','DT','DE','LB','LB','LB','CB','CB','FS','SS','K','P']
 NAMES = ['Jordan Ellis','Marcus Reed','Cameron Price','Alex Morgan','Drew Collins','Taylor Brooks','Jalen Carter','Noah Hayes','Mason Cole','Evan Grant','Devin Ross','Cole Bennett','Tyler James','Owen Parker','Blake Foster','Avery Scott','Logan West','Riley Davis','Kai Turner','Miles Ward','Nolan King','Isaiah Bell','Sam Lewis','Jesse Gray']
 FORMATION_LABELS = {'4-3-4': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '3-4-4': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-2-5': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '3-3-5': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '5-2-4': ['DL', 'DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-1-6': ['DL', 'DL', 'DL', 'DL', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB', 'CB']}
-GRAPHICS = {'talent','storytease','breaking','countdown','pregameplayer','intro','referee','standings','transition','scoringdrive','none','qbstats','scorebug','matchup','offense','defense','quarterback','player','coach','lowerthird','stats','teamstats','roster','event','period','final','announcers','sponsor','weather','reporter','situation','break'}
+GRAPHICS = {'weatherdetail','matchupclean','matchupbadge','comingupmatchup','reporterbadge','languagepromo','splitview','crewfour','playertease','serieshistory','talent','storytease','breaking','countdown','pregameplayer','intro','referee','standings','transition','scoringdrive','none','qbstats','scorebug','matchup','offense','defense','quarterback','player','coach','lowerthird','stats','teamstats','roster','event','period','final','announcers','sponsor','weather','reporter','situation','break'}
 def roster(side):
     return [{'id':f'{side}-{i+1}', 'name':name, 'number':str(([7,72,64,55,68,77,11,18,86,24,13,90,95,98,91,50,54,56,21,23,30,32,3,9][i]+(2 if side=='home' else 0))%100), 'position':pos,'photo':'','stats':{'YDS':'248','TD':'2','CMP':'19/27'}} for i,(name,pos) in enumerate(zip(NAMES,POSITIONS))]
 def default_state():
@@ -35,6 +35,9 @@ def cue_key(c):
     return c['type']+(':'+c.get('team','away') if c['type'] in TEAM_CUES else '')
 def initial_cue(kind,team='away'):
     cue=copy.deepcopy(default_state()['preview']);cue.update(type=kind,team=team,playerId=STATE['lineups'][team]['quarterback'])
+    if kind in ['splitview','playertease','serieshistory']:cue.update(title='',subtitle='',featureText='',featureFooter='')
+    if kind in ['weatherdetail','matchupclean','matchupbadge','comingupmatchup','reporterbadge','languagepromo']:cue.update(title='',subtitle='',reporterName='',weatherWind='SE 8',weatherTemp='52°',weatherForecast='CLOUDY',weatherHumidity='54%',weatherIcon='CLOUDY',extraBadge='')
+    if kind=='crewfour':cue.update(leftName='',rightName='',reporterName='',staffName='')
     if kind=='talent':cue.update(leftName='',leftRole='',subtitle='',title='')
     if kind=='storytease':cue.update(title='',subtitle='',featureText='',featureFooter='')
     if kind in ['event','lowerthird','matchup']:cue.update(title='',subtitle='')
@@ -280,8 +283,11 @@ def _update(action,p):
                 value=str(v).strip().upper()
                 if value and (len(value)!=2 or not value.isascii() or not value.isalpha()): raise ValueError('Use a two-letter state abbreviation, such as TX.')
                 STATE['branding'][k]=value
-            elif k in ['networkLogo','sponsorLogo','secondaryLogo','introLogo'] and valid_image(v): STATE['branding'][k]=v
-            elif k in ['accent','sponsorColor']: STATE['branding'][k]=color(v)
+            elif k in ['networkLogo','sponsorLogo','secondaryLogo','introLogo','conferenceLogo'] and valid_image(v): STATE['branding'][k]=v
+            elif k=='conferenceColorMode':
+                if v not in ['auto','manual']: raise ValueError('Choose automatic or manual logo color.')
+                STATE['branding'][k]=v
+            elif k in ['accent','sponsorColor','conferenceColor','conferenceAutoColor']: STATE['branding'][k]=color(v)
             elif k=='crew':
                 if not isinstance(v,list) or len(v)>50: raise ValueError('Use up to 50 crew members.')
                 clean=[];ids=set()
@@ -387,6 +393,17 @@ def _update(action,p):
             elif k=='newsArt':
                 if v not in ['team','player','duo','network','none']: raise ValueError('Choose news artwork.')
             elif k=='newsText': v=bounded_text(v,400)
+            elif k in ['splitSource1','splitSource2']:
+                if v not in ['none','camera','video']:raise ValueError('Choose a split-view source.')
+            elif k in ['splitCamera1','splitCamera2','splitVideo1','splitVideo2','splitLabel1','splitLabel2']:v=bounded_text(v,200)
+            elif k=='teaserPlayback':
+                if v not in ['hold','timed']: raise ValueError('Choose Hold or Timed.')
+            elif k=='teaserSeconds':
+                v=float(v)
+                if not math.isfinite(v) or not 1<=v<=120: raise ValueError('Use 1–120 seconds.')
+            elif k in ['teaserTeam','teaserPosition']:
+                if isinstance(v,str):v=v=='true'
+                if type(v) is not bool:raise ValueError('Invalid teaser option.')
             elif k=='storyLabelMode':
                 if v not in ['NEXT','COMING UP','LATER','CUSTOM']: raise ValueError('Choose a teaser label.')
             elif k=='storyLabelCustom': v=bounded_text(v,80)
@@ -445,7 +462,7 @@ def _update(action,p):
             elif k=='stats':
                 if not isinstance(v,list) or len(v)>6: raise ValueError('Use up to six comparison rows.')
                 v=[{f:bounded_text(x.get(f,''),40) for f in ['label','away','home']} for x in v]
-            elif k in ['title','subtitle','event','period','nextAway','nextHome','nextTime','playerId','leftName','leftRole','rightName','rightRole','sponsorTitle','sponsorSubtitle','sponsorNext','weatherTemp','weatherWind','weatherForecast','reporterName','qbValue','qbLabel','qbDetail','qbSeasonLabel','staffId','staffName','staffRole','staffDetail','spotlightDetail','lowerContext','lowerContextText','situationDetail','breakHeadline','breakDetail','driveTime','driveResult','driveNote','kickerId','kickerContext']: v=bounded_text(v,120)
+            elif k in ['weatherHumidity','weatherIcon','extraBadge','title','subtitle','event','period','nextAway','nextHome','nextTime','playerId','leftName','leftRole','rightName','rightRole','sponsorTitle','sponsorSubtitle','sponsorNext','weatherTemp','weatherWind','weatherForecast','reporterName','qbValue','qbLabel','qbDetail','qbSeasonLabel','staffId','staffName','staffRole','staffDetail','spotlightDetail','lowerContext','lowerContextText','situationDetail','breakHeadline','breakDetail','driveTime','driveResult','driveNote','kickerId','kickerContext']: v=bounded_text(v,120)
             else: raise ValueError('Invalid graphic field.')
             cue[k]=v
         if cue.get('type')=='quarterback' and cue.get('qbIntroMode')=='season':
@@ -498,7 +515,7 @@ def _update(action,p):
             if cue.get('transition')=='fade': cue['transition']='auto'
             if cue.get('outTransition')=='fade': cue['outTransition']='auto'
             style=cue.get('transition') if cue.get('transition') in ['pattern','teamwall','networkwall'] else cue.get('transitionStyle','team')
-            duration={'matchup':1.2,'pattern':0.85,'teamwall':1.05,'networkwall':1.05,'team':1.15,'network':1.15,'person':5.0}.get(style,1.15)
+            duration={'conference':1.05,'matchup':1.2,'pattern':0.85,'teamwall':1.05,'networkwall':1.05,'team':1.15,'network':1.15,'person':5.0}.get(style,1.15)
             STATE['program']['timedGraphic']={'takeId':STATE['program']['takeId'],'until':time.time()+duration}
             cue['transitionDuration']=str(duration)
     elif action=='hide':

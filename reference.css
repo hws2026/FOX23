@@ -1,3 +1,6 @@
+@import url('./extras194.css?v=added194');
+@import url('./custom192.css?v=audit193');
+@import url('./rail-motion192.css?v=nfc192');
 @import url("./pregame.css?v=tunnel159");
 /* Reference-driven revisions. Dimensions use the 1920 Ãƒâ€” 1080 broadcast canvas. */
 /* Timeout bars restored to their original lower team-panel position and weight. */
@@ -1950,3 +1953,29 @@
 @keyframes talent190-out{to{opacity:0;clip-path:inset(-70px 49% 0)}}
 .talent190 h1{font:italic 900 52px/1 Arial,sans-serif;letter-spacing:-1.5px}
 .talent190 p{font-size:37px;letter-spacing:2px}
+
+/* Custom teaser label shares the headline left edge. Motion is unchanged. */
+.story190-custom .story190-outline{left:190px;right:190px;text-align:left}
+
+/* Audit 193: preserve full roster names and a readable fallback network mark. */
+.roster-columns{grid-template-columns:repeat(3,minmax(0,1fr))}
+.roster-name{min-width:0}
+.roster-name b,.roster-name>span{flex-shrink:0}
+.roster-name strong{min-width:0;flex:1;text-overflow:clip}
+.transition-emblem>span{display:block;font:900 120px/1 Arial,sans-serif;text-align:center;max-width:100%;overflow-wrap:anywhere}
+.transition-emblem>img{width:100%;height:100%;object-fit:contain}
+
+/* Audit 193: let each exit finish; the legacy 140ms layer fade was hiding it. */
+.graphics-layer.leaving[data-motion=auto]:has(> :is(.crew192,.series192,.talent190,.story190,.playertease192,.split192,.news-ribbon,.pregame-player,.break-banner)){
+ animation:none!important;opacity:1;transform:none;
+}
+.graphics-layer.leaving[data-motion=auto] :is(.crew192,.playertease192,.split192) *{animation:none!important}
+/* The parent now owns the unfolding rail. Do not run the former nested exits too. */
+.graphics-layer.leaving[data-motion=auto]>.announcer :is(.announcer-frame,.announcer-person,.metal-rail){animation:none!important}
+.graphics-layer[data-motion=auto]>.reporter-nameplate::before,
+.graphics-layer[data-motion=auto]>.reporter-nameplate::after{animation:none!important}
+.graphics-layer.leaving[data-motion=auto]>.break-banner .result-metal{animation:break-frame124 .48s ease-in reverse both!important}
+.playertease192 h1{box-sizing:border-box;max-width:100%}
+/* Audit 193: keep headshots intact; full-body artwork also fits without distortion. */
+.pregame-player-photo img{object-fit:contain;object-position:center top}
+.kickoff-top{height:46px;line-height:1.2;padding:3px 10px 2px}

@@ -1,0 +1,7 @@
+UPDATE 194 — NEW GRAPHICS ONLY
+Install: extract this ZIP, then copy all its contents into the ROOT of your existing graphics package, replacing matching files. Keep existing assets and data. Open index.html through Live Server and hard-refresh the controller and overlay.
+New presets: Weather — detailed conditions; Matchup — clean venue ribbon; Matchup — event badge; Matchup — coming up; Reporter — event badge; Language / broadcast availability.
+Event badge styles are general purpose, not championship specific. Badge wording is editable; logos use Show Setup branding.
+Preview: additions-review194.html. Uses isolated demonstration data.
+Checks: six new presets inspected; entrance/exit animation bindings, image loading, and save/take/hide verified. Existing scorebug animation/style rules were not changed. Other dependency-file changes refresh browser caches.
+The prerecorded robot ident and sponsor commercial in the reference are not recreated. Motion not visible in a reference uses a complementary exit; no claim of frame-exact recreation.
