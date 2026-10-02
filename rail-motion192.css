@@ -1,0 +1,12 @@
+/* Authorized center-expanding lower thirds only. No scorebug selectors or keyframe changes. */
+.graphics-layer.animate-in[data-motion=auto] :is(.player-spotlight,.announcer,.reporter-nameplate,.referee-card,.talent190,.series192){animation:rail192-open .6s ease-out both!important}
+.graphics-layer.animate-in[data-motion=auto] :is(.player-spotlight,.announcer,.reporter-nameplate,.referee-card,.talent190,.series192) :is(.spotlight-face,.spotlight-rail-left,.spotlight-rail-right,.spotlight-rail-top,.announcer-frame,.announcer-panel,.referee-rails,.talent190-rail,.talent190-body){animation:none!important;transform:none}
+.graphics-layer.animate-in[data-motion=auto] :is(.player-spotlight,.announcer,.reporter-nameplate,.referee-card,.talent190,.series192) :is(.spotlight-copy,.spotlight-detail,.spotlight-stat-grid,.spotlight-context,.announcer-person,.referee-copy,.series192-copy){animation:rail192-copy .2s .42s both!important}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame{animation:rail192-open .6s ease-out both!important}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon :is(.lineup-metal-left,.lineup-metal-right,.lineup-metal-top,.lineup-ribbon-face){animation:none!important;transform:none}
+.graphics-layer.animate-in[data-motion=auto]>.lineup-ribbon :is(.lineup-ribbon-face h1,.lineup-names){animation:rail192-copy .2s .42s both!important}
+.graphics-layer.leaving[data-motion=auto] :is(.player-spotlight,.announcer,.reporter-nameplate,.referee-card,.talent190,.series192){animation:rail192-open .4s ease-in reverse both!important}
+.graphics-layer.leaving[data-motion=auto] :is(.player-spotlight,.announcer,.reporter-nameplate,.referee-card,.talent190,.series192) *{animation:none!important}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame{animation:rail192-open .4s ease-in reverse both!important}
+.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame *{animation:none!important}
+@media(prefers-reduced-motion:reduce){.graphics-layer.animate-in[data-motion=auto] :is(.player-spotlight,.announcer,.reporter-nameplate,.referee-card,.talent190,.series192,.lineup-ribbon) *,.graphics-layer.animate-in[data-motion=auto] :is(.player-spotlight,.announcer,.reporter-nameplate,.referee-card,.talent190,.series192),.graphics-layer.leaving[data-motion=auto] :is(.player-spotlight,.announcer,.reporter-nameplate,.referee-card,.talent190,.series192){animation:none!important}}

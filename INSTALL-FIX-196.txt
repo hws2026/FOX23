@@ -1,0 +1,1 @@
+Extract into your existing graphics folder beside index.html, preserving the assets subfolder. Replace runtime-worker.js when asked. Hard refresh the controller with Cmd+Shift+R (Mac) or Ctrl+Shift+R (Windows). Do not clear browser site data. Contains missing dependency files and the startup fix; no new animation changes.
