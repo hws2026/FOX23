@@ -149,18 +149,20 @@ def _update(action,p):
         c=STATE.setdefault('bottomScores',{'league':'NFL','visible':False,'auto':True,'games':[]})
         for k,v in p.items():
             if k=='league':
-                if v not in ['NFL','MLB','NBA','MLS','ALL']:raise ValueError('Unknown score league')
+                if v not in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW','ALL']:raise ValueError('Unknown score league')
                 c[k]=v
+            elif k=='leagues':c[k]=list(dict.fromkeys(a for a in v if a in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW']))
             elif k in ['visible','auto','playerStats']:c[k]=bool(v)
             elif k in ['anchor','holdAt','updatedAt']:c[k]=max(0,float(v))
             elif k in ['date','error']:c[k]=bounded_text(v,150)
-            elif k=='sources':c[k]={str(a)[:8]:str(b)[:40] for a,b in v.items() if a in ['NFL','MLB','NBA','MLS']}
+            elif k=='sources':c[k]={str(a)[:8]:str(b)[:40] for a,b in v.items() if a in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW']}
             elif k=='games':
-                if not isinstance(v,list) or len(v)>200:raise ValueError('Invalid score feed')
+                if not isinstance(v,list) or len(v)>1000:raise ValueError('Invalid score feed')
                 cleaned=[]
                 for item in v:
-                    if item.get('league') not in ['NFL','MLB','NBA','MLS']:continue
-                    game={key:bounded_text(item.get(key,''),160) for key in ['id','league','start','status','state','possession','ball','down','detail']}
+                    if item.get('league') not in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW']:continue
+                    game={key:bounded_text(item.get(key,''),160) for key in ['id','league','start','status','state','possession','ball','down','provider','espnId']}
+                    game['detail']=str(item.get('detail',''))[:1000]
                     game['players']=[{key:bounded_text(row.get(key,''),160) for key in ['name','team','position','text']} for row in item.get('players',[])[:8]]
                     game['playersUpdatedAt']=max(0,float(item.get('playersUpdatedAt',0)))
                     game['updatedAt']=max(0,float(item.get('updatedAt',0)))
@@ -556,7 +558,9 @@ def _update(action,p):
     elif action=='qb_stats_visibility':
         if type(p.get('visible')) is not bool: raise ValueError('Invalid QB visibility.')
         STATE['program'].setdefault('qbStats',{'team':'away'})['visible']=p['visible']
-    elif action=='watermark': STATE['program']['watermark']=bool(p['visible'])
+    elif action=='watermark':
+        if 'visible' in p:STATE['program']['watermark']=bool(p['visible'])
+        if 'motion' in p:STATE['program']['watermarkMotion']='fade' if p['motion']=='fade' else 'auto'
     elif action=='bug':
         STATE['program']['bug']=bool(p['visible'])
         if not p['visible'] and STATE['program']['graphic']['type']=='scorebug': STATE['program']['graphic']={'type':'none'}
@@ -626,7 +630,7 @@ def _update(action,p):
             update('roster',{'team':side,'players':t['roster']})
             update('lineup',dict(team=side,**src['lineups'][side]))
         if isinstance(src.get('bottomScores'),dict):
-            update('bottom_scores',{k:v for k,v in src['bottomScores'].items() if k in ['league','date','auto']})
+            update('bottom_scores',{k:v for k,v in src['bottomScores'].items() if k in ['league','leagues','date','auto']})
             STATE['bottomScores'].update(visible=False,games=[],holdAt=0,updatedAt=0)
         update('branding',src['branding']);gg=src['game']
         update('game',{k:v for k,v in gg.items() if k not in ['scores','timeouts','clock','playClock']})

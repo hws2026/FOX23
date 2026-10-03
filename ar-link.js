@@ -1,4 +1,4 @@
-import{latest,base}from'./bridge.js?v=ui209';
+import{latest,base}from'./bridge.js?v=leagues211';
 const channel=new BroadcastChannel('wld-ar-game:'+base.pathname);let s=latest(),dirty=false;
 function publish(){if(s)channel.postMessage({kind:'game',game:s.game,teams:Object.fromEntries(['home','away'].map(k=>[k,{name:s.teams[k].name,color:s.teams[k].color}])),sent:Date.now(),revision:s.revision});}
 channel.onmessage=e=>{if(e.data?.kind==='request')publish();};addEventListener('gridiron-state',e=>{s=e.detail;publish();refresh();});setInterval(publish,750);

@@ -1,5 +1,5 @@
-import{base}from'./bridge.js?v=ui209';
-import{deckControl}from'./panel.js?v=ticker210';
+import{base}from'./bridge.js?v=leagues211';
+import{deckControl}from'./panel.js?v=leagues211';
 import{zip}from'./zip.js?v=tunnel159';
 const storage='wld-stream-playlist:'+base.pathname;
 let key=localStorage.getItem(storage);if(!key){key=Array.from(crypto.getRandomValues(new Uint8Array(32)),v=>v.toString(16).padStart(2,'0')).join('');localStorage.setItem(storage,key);}

@@ -1,15 +1,16 @@
 import{tickerFrame,gameDetails}from'./scores-timing209.js?v=ticker210';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const sessions=new WeakMap();
-function orderedGames(games,league){
+function orderedGames(games,league,selected){
+ if(selected?.length)games=games.filter(g=>selected.includes(g.league));
  if(league!=='ALL')return games.filter(g=>g.league===(league||'NFL'));
- const groups=['NFL','MLB','NBA','MLS'].map(l=>games.filter(g=>g.league===l)),out=[];
+ const groups=['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW'].map(l=>games.filter(g=>g.league===l)),out=[];
  for(let i=0;i<Math.max(0,...groups.map(g=>g.length));i++)for(const group of groups)if(group[i])out.push(group[i]);
  return out;
 }
 
 function draw(root,s){const cfg=s.bottomScores||{};let el=root.querySelector('.bottom-scores203');if(!cfg.visible){if(el&&!el._exit){el._exit=el.animate([{opacity:1},{opacity:0}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?0:180,fill:'both'});el._exit.onfinish=()=>el.remove();}return;}if(el?._exit){el._exit.cancel();el._exit=null;}if(!el){el=document.createElement('aside');el.className='bottom-scores203';root.append(el);}
- const games=orderedGames(cfg.games||[],cfg.league),elapsed=Math.max(0,(cfg.holdAt||Date.now())-(cfg.anchor||0)),rotationKey=`${cfg.league}:${cfg.gameId}:${!!cfg.playerStats}`;
+ const games=orderedGames(cfg.games||[],cfg.league,cfg.leagues),elapsed=Math.max(0,(cfg.holdAt||Date.now())-(cfg.anchor||0)),rotationKey=`${cfg.league}:${(cfg.leagues||[]).join(',')}:${cfg.gameId}:${!!cfg.playerStats}`;
  if(!el._rotation||el._rotation.key!==rotationKey||elapsed<el._rotation.start||elapsed>=el._rotation.end){
   const plan=games.map(g=>({...g,_tickerDetails:gameDetails(g,cfg.playerStats)}));
   const duration=cfg.gameId?(tickerFrame(plan,0,cfg.gameId,cfg.playerStats)?.duration||30000):plan.reduce((n,g)=>n+(tickerFrame([g],0,null,cfg.playerStats)?.duration||30000),0);

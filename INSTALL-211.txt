@@ -1,0 +1,9 @@
+WLD update 211 - cumulative update over 207 or newer
+
+Extract this ZIP. Replace matching files and merge the assets folder into your existing graphics pack. Upload the extracted files to the same GitHub repository paths. Do not upload the ZIP itself. Keep your existing team photos and other assets.
+
+Reload the control panel and refresh the OBS browser source. Open Bottom scores > Choose leagues to select a mix of NFL, MLB, NBA, MLS, college football (FBS), and men's/women's college basketball. Feed availability varies; unknown records stay blank.
+
+Includes the previous 209/210 buttons, both named Stream Deck downloaders, readable ticker timings, winning-team yellow, and player teaser overrides.
+
+Network motion is beside Show network bug: Normal reveal or Fast Fade. Scorebug entrance and score-update animations are unchanged. Its normal exit uses the same 51 frames and timing, now rendered as individual SVG frames to avoid the tall sprite texture.
