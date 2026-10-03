@@ -1,0 +1,4 @@
+Replace these files in your existing graphics package (203/204). Keep all other files. Reload the controller and output tabs.
+Ticker: top-to-bottom game roll, interleaved leagues, available game details.
+Scorebug: existing entrance SVG artwork embedded in CSS; entrance motion, out animation and Fast fade unchanged.
+No games reported by a league for the selected date means no entry for that league. No invented live data.

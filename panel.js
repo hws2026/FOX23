@@ -1,4 +1,4 @@
-import{createScores}from'./scores-panel203.js';
+import{createScores}from'./scores-panel203.js?v=fix205';
 import{saveSplitVideo}from'./split192.js?v=nfc192';
 let splitDevices=[];
 const splitStatusChannel=new BroadcastChannel('gridiron-split-status');splitStatusChannel.onmessage=e=>toast('Feed '+e.data.slot+': '+e.data.error,true);
@@ -187,3 +187,5 @@ export function deckControl(spec){
   await act(action,payload);
  });deckQueue=run.catch(()=>{});return run;
 }
+
+addEventListener('gridiron-state',e=>{if(!busy&&state&&e.detail.revision>state.revision)accept(e.detail);});

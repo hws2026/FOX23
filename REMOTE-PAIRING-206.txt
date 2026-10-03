@@ -1,0 +1,17 @@
+WLD REMOTE PAIRING · UPDATE 206
+
+Replace the supplied files in your existing package, then reload all controller and OBS Browser Source pages.
+
+1. Open the normal GitHub Pages control panel on the broadcast/host computer. Keep it open.
+2. Choose Pair devices. Select OBS output or Remote control panel.
+3. Open the displayed URL on that device. In OBS, paste it into a Browser Source and use Interact.
+4. Create a new offer on the host. Paste it on the device and create an answer. Paste that answer back on the host and Connect.
+5. Repeat with a NEW offer for each additional computer. Existing connected devices remain connected. Use Disconnect to revoke a device.
+
+Remote controllers operate the HOST show, not their own independent saved copy. Do not open a normal controller on each computer and expect them to synchronize. Use the ?remote=1 link.
+
+Internet: STUN discovery is enabled. Some networks require TURN. Enter your TURN provider URL, username and temporary credential under Internet relay settings on BOTH devices BEFORE creating the offer. Settings stay in that tab’s session storage; they are not included in exported shows. GitHub Pages does not supply a TURN server. A working relay account is required for reliable use across restrictive networks. No internet/TURN deployment has been verified for this installation.
+
+Pairing codes grant access to your show; share them only with your operators. Re-pair after refreshing either paired page. The host must remain open and awake.
+
+Latency: commands return before local persistence completes, state updates push immediately, and unchanged state is not retransmitted. Internet latency depends on the network/relay. Graphics animation timings were not changed.

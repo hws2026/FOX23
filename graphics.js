@@ -1,4 +1,4 @@
-import{renderBottomScores}from'./scores-render203.js?v=motion203';
+import{renderBottomScores}from'./scores-render203.js?v=fix205';
 // Warm the exit artwork before the first operator OUT command.
 const scorebugExitArtwork = new Image();scorebugExitArtwork.src=new URL('./assets/scorebug-out-reference202.svg',import.meta.url).href;
 import{extraGraphic,extraNames}from'./extras194.js?v=added194';

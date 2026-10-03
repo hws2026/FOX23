@@ -17,8 +17,8 @@ const ready=init();let queue=Promise.resolve();
 onmessage=({data})=>{queue=queue.then(async()=>{try{
  await ready;py.globals.set('request_json',JSON.stringify(data.request));
  const result=JSON.parse(py.runPython('core.pages_request(request_json)'));
+ postMessage({id:data.id,result});
  const snapshot=JSON.parse(py.runPython('core.pages_snapshot()'));
  const encoded=JSON.stringify(snapshot);
  if(encoded!==lastSaved){await write(snapshot);lastSaved=encoded;}
- postMessage({id:data.id,result});
  }catch(e){postMessage({id:data.id,error:String(e.message||e)});}});};
