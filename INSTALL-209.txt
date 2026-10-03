@@ -1,0 +1,11 @@
+Update existing 207 package: extract and replace all included files at the site root, alongside index.html. Reload controller and OBS output after upload/deployment.
+
+Download NFL - Stream Deck and Download MCRP - Stream Deck are separate buttons in the controller. Download on the computer/browser/site you will control, double-click the resulting installer, then use its matching Connect button. The plugin installers contain site-specific pairing settings. MCRP has nine fixed actions: Playlist In, Out, Next, Play/Resume, Pause, Select First, Bottom Scores In, Bottom Scores Out, Player Stats toggle.
+
+Hold graphic and Hide graphic now sit beside Take Live. Hold pauses local timed playback/playlist; self-completing broadcast transitions remain timed and disable Hold.
+
+Bottom Scores includes optional player statistics, minimum six-second data holds, minimum eighteen-second game holds, yellow winner name/score for finals, and smooth 58px output lift. Player stats are feed-dependent; ambiguous starting QBs and unavailable stats are skipped. No live league/physical Stream Deck hardware validation was possible for every sport.
+
+Player-name Teaser has optional team/position text overrides. Blank uses normal data.
+
+Scorebug rendering and animation functions are unchanged. The requested ticker lift is applied to a separate output container.

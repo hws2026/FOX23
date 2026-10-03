@@ -3,3 +3,14 @@
 .bs-score-window{position:relative;display:grid;place-items:center;width:100%;height:100%;overflow:hidden}.bs-score-value{display:block}.bs-score-old{position:absolute;inset:0;display:grid;place-items:center}
 
 .bs-game-window{position:relative;width:1390px;overflow:hidden}.bs-game-row{display:flex;height:100%;width:100%}.bs-row-old{position:absolute;inset:0}.bs-status{flex-shrink:0;gap:20px}.bs-status i{height:24px;width:2px;background:#45484b;flex-shrink:0}.bs-team{flex-shrink:0}
+
+/* Readable ticker details use the previously empty right-hand space. */
+.bottom-scores203 .bs-game-window{width:auto;flex:1;min-width:0}
+.bottom-scores203 .bs-status{width:auto;flex:1;min-width:0;white-space:normal;font-size:26px;line-height:1.12;padding:0 18px}
+.bottom-scores203 .bs-status>span{display:block;overflow-wrap:anywhere}
+.bottom-scores203 .bs-status i{display:inline-block;vertical-align:middle;margin:0 14px}
+.bottom-scores203 .bs-team small{color:#c3c8cf}
+
+.bottom-scores203 .bs-winner strong,.bottom-scores203 .bs-winner>b{color:#ffd32d}
+
+@media(prefers-reduced-motion:reduce){.broadcast-content209{transition:none!important}}

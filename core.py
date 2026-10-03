@@ -151,7 +151,7 @@ def _update(action,p):
             if k=='league':
                 if v not in ['NFL','MLB','NBA','MLS','ALL']:raise ValueError('Unknown score league')
                 c[k]=v
-            elif k in ['visible','auto']:c[k]=bool(v)
+            elif k in ['visible','auto','playerStats']:c[k]=bool(v)
             elif k in ['anchor','holdAt','updatedAt']:c[k]=max(0,float(v))
             elif k in ['date','error']:c[k]=bounded_text(v,150)
             elif k=='sources':c[k]={str(a)[:8]:str(b)[:40] for a,b in v.items() if a in ['NFL','MLB','NBA','MLS']}
@@ -161,6 +161,8 @@ def _update(action,p):
                 for item in v:
                     if item.get('league') not in ['NFL','MLB','NBA','MLS']:continue
                     game={key:bounded_text(item.get(key,''),160) for key in ['id','league','start','status','state','possession','ball','down','detail']}
+                    game['players']=[{key:bounded_text(row.get(key,''),160) for key in ['name','team','position','text']} for row in item.get('players',[])[:8]]
+                    game['playersUpdatedAt']=max(0,float(item.get('playersUpdatedAt',0)))
                     game['updatedAt']=max(0,float(item.get('updatedAt',0)))
                     for side in ['away','home']:
                         team=item.get(side,{})
@@ -421,6 +423,7 @@ def _update(action,p):
             elif k in ['splitSource1','splitSource2']:
                 if v not in ['none','camera','video']:raise ValueError('Choose a split-view source.')
             elif k in ['splitCamera1','splitCamera2','splitVideo1','splitVideo2','splitLabel1','splitLabel2']:v=bounded_text(v,200)
+            elif k in ['teaserTeamText','teaserPositionText']:v=bounded_text(v,100)
             elif k=='teaserPlayback':
                 if v not in ['hold','timed']: raise ValueError('Choose Hold or Timed.')
             elif k=='teaserSeconds':

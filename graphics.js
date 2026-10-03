@@ -1,9 +1,9 @@
-import{renderBottomScores}from'./scores-render203.js?v=fix205';
+import{renderBottomScores}from'./scores-render203.js?v=ticker210';
 // Warm the exit artwork before the first operator OUT command.
 const scorebugExitArtwork = new Image();scorebugExitArtwork.src=new URL('./assets/scorebug-out-reference202.svg',import.meta.url).href;
 import{extraGraphic,extraNames}from'./extras194.js?v=added194';
 import{splitGraphic,syncSplitMedia}from'./split192.js?v=nfc192';
-import{conferenceTransition,playerTeaser,seriesHistory,crewLowerThird}from'./custom192.js?v=audit193';
+import{conferenceTransition,playerTeaser,seriesHistory,crewLowerThird}from'./custom192.js?v=teaser209';
 import {newsGraphic,pregamePlayer,studioTransition,countdownMarkup,updateKickoff} from './pregame.js?v=tunnel159';
 export function gameStatusText(g){if(['FINAL','FINAL/OT'].includes(g.bottomStatus))return g.quarter==='OT'?'FINAL/OT'+(Number(g.overtimePeriod)>1?g.overtimePeriod:''):'FINAL';return g.bottomStatus&&g.bottomStatus!=='LIVE'?g.bottomStatus:'';}
 export const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

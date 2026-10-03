@@ -1,0 +1,3 @@
+Apply over update 209. Replace included files at site root. Reload controller and OBS Browser Source after deployment.
+Data items hold at least 10 seconds; games hold at least 30 seconds. Feed refreshes no longer recalculate the active game rotation. Final games show FINAL and winning name/score yellow; ties and unfinished games stay white.
+Scorebug rendering and animation functions are unchanged.
