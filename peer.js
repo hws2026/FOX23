@@ -7,14 +7,21 @@ export function connection(){
  if(/^turns?:/.test(relay.url))iceServers.push({urls:relay.url,username:relay.username,credential:relay.credential});
  return new RTCPeerConnection({iceServers});
 }
-export async function applyAnswer(pc,answer){
- if(answer.type!=='answer')throw Error('Paste the answer code, not the offer.');
- if(pc.signalingState==='stable'){
-  if(pc.remoteDescription?.sdp===answer.sdp)return;
-  throw Error('This connection already has an answer. Create a new pairing for a different device.');
- }
- if(pc.signalingState!=='have-local-offer')throw Error('Create a new offer before connecting.');
- await pc.setRemoteDescription(answer);
+const answerJobs=new WeakMap();
+export function applyAnswer(pc,answer){
+ const previous=answerJobs.get(pc)||Promise.resolve();
+ const job=previous.catch(()=>{}).then(async()=>{
+  if(answer.type!=='answer')throw Error('Paste the answer code, not the offer.');
+  if(pc.remoteDescription?.type==='answer'&&pc.remoteDescription.sdp===answer.sdp)return;
+  if(pc.signalingState==='stable')throw Error('This pairing already accepted an answer. Create a new offer for a different device.');
+  if(pc.signalingState!=='have-local-offer')throw Error('Create a new offer before connecting.');
+  try{await pc.setRemoteDescription(answer);}catch(error){
+   if(pc.remoteDescription?.type==='answer'&&pc.remoteDescription.sdp===answer.sdp)return;
+   if(pc.signalingState==='stable')throw Error('An answer was already accepted for this pairing. Create a new offer to pair again.');
+   throw error;
+  }
+ });
+ answerJobs.set(pc,job);return job;
 }
 export function relayFields(container){
  const box=document.createElement('details');box.innerHTML='<summary>Internet relay settings (TURN)</summary><p>Needed when a network blocks direct connections. Enter your relay provider’s temporary credentials on both devices. Kept for this tab only.</p><label>TURN URL<input data-relay="url" placeholder="turns:relay.example.com:443"></label><label>Username<input data-relay="username"></label><label>Credential<input data-relay="credential" type="password"></label>';

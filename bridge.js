@@ -6,12 +6,12 @@ export function rpc(request){if(remoteRPC)return remoteRPC(request);return new P
 export function publish(state){current=state;channel.postMessage({kind:'state',state});dispatchEvent(new CustomEvent('gridiron-state',{detail:state}));}
 export async function startController(){
  const remote=new URLSearchParams(location.search).has('remote');
- if(remote){const {connectRemote}=await import('./remote-controller206.js');remoteRPC=await connectRemote(publish);readyResolve();}
+ if(remote){const {connectRemote}=await import('./remote-controller206.js?v=remote207');remoteRPC=await connectRemote(publish);readyResolve();}
  let acquired;
  if(!remote){
  await new Promise(resolve=>navigator.locks.request('gridiron-controller:'+base.pathname,{ifAvailable:true},async lock=>{
   acquired=!!lock;resolve();if(!lock)return;
-  worker=new Worker(new URL('runtime-worker.js?v=remote206',base));
+  worker=new Worker(new URL('runtime-worker.js?v=remote207',base));
   worker.onmessage=({data})=>{const p=pending.get(data.id);if(!p)return;pending.delete(data.id);data.error?p.reject(Error(data.error)):p.resolve(data.result);};
   worker.onerror=e=>{for(const p of pending.values())p.reject(Error(e.message));pending.clear();};
   readyResolve();await new Promise(()=>{});
