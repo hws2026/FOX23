@@ -1,0 +1,1 @@
+Extract into the graphics package root beside index.html. Preserve the ar subfolder and replace matching files. Hard refresh the main controller and AR page. CSS-only visual restyling plus stylesheet links; no AR tracking, playback or graphics logic changes. Includes the current library controller stylesheet from update 197.
