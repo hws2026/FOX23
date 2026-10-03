@@ -1,0 +1,4 @@
+Merge these files into your existing graphics pack, replacing matching files. Reload the controller and OBS/browser output.
+Open Bottom scores in the left sidebar. Choose NFL, MLB, NBA, MLS, or All four leagues. Click Show bottom scores. Automatic feeds refresh every 30 seconds while this controller is open, and games rotate every 10 seconds. Hold freezes game rotation but still allows score updates. Refresh scores works while off air. Clear all graphics also hides the strip.
+MLB uses the league Stats API; NBA tries league live data then ESPN; NFL/MLS use ESPN. Source is shown in the panel. No credentials or Python server required. Possession and ball location are displayed only where reported. No live soccer ball tracking is inferred. Public feeds may be delayed; stale games get an UPDATES DELAYED label.
+The strip has independent game reveals, score rolls, and status animations. Existing scorebug animation code was not changed by this update.

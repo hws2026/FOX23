@@ -145,7 +145,32 @@ def update(action,p):
 def _update(action,p):
     g=STATE['game'];side=p.get('team','away')
     if side not in ['away','home']: raise ValueError('Select a team.')
-    if action=='library_create':
+    if action=='bottom_scores':
+        c=STATE.setdefault('bottomScores',{'league':'NFL','visible':False,'auto':True,'games':[]})
+        for k,v in p.items():
+            if k=='league':
+                if v not in ['NFL','MLB','NBA','MLS','ALL']:raise ValueError('Unknown score league')
+                c[k]=v
+            elif k in ['visible','auto']:c[k]=bool(v)
+            elif k in ['anchor','holdAt','updatedAt']:c[k]=max(0,float(v))
+            elif k in ['date','error']:c[k]=bounded_text(v,150)
+            elif k=='sources':c[k]={str(a)[:8]:str(b)[:40] for a,b in v.items() if a in ['NFL','MLB','NBA','MLS']}
+            elif k=='games':
+                if not isinstance(v,list) or len(v)>200:raise ValueError('Invalid score feed')
+                cleaned=[]
+                for item in v:
+                    if item.get('league') not in ['NFL','MLB','NBA','MLS']:continue
+                    game={key:bounded_text(item.get(key,''),160) for key in ['id','league','start','status','state','possession','ball','down','detail']}
+                    game['updatedAt']=max(0,float(item.get('updatedAt',0)))
+                    for side in ['away','home']:
+                        team=item.get(side,{})
+                        game[side]={key:bounded_text(team.get(key,''),100) for key in ['id','name','abbr','score','record']}
+                        url=str(team.get('logo',''))
+                        game[side]['logo']=url[:500] if url.startswith('https://') else ''
+                    cleaned.append(game)
+                c[k]=cleaned
+            else:raise ValueError('Unknown score setting')
+    elif action=='library_create':
         name=bounded_text(p.get('name',''),50)
         if not name:raise ValueError('Enter a team name.')
         key=LIBRARY.put({'name':name,'shortName':name.split()[-1],'abbr':bounded_text(p.get('abbr',''),5),'color':color(p.get('color','#163d68')),'secondary':color(p.get('secondary','#ffffff')),'logo':'','heroLogo':'','coach':'','record':'','roster':[],'staff':[]})
@@ -533,6 +558,7 @@ def _update(action,p):
         STATE['program']['bug']=bool(p['visible'])
         if not p['visible'] and STATE['program']['graphic']['type']=='scorebug': STATE['program']['graphic']={'type':'none'}
     elif action=='clear':
+        STATE.setdefault('bottomScores',{})['visible']=False
         STATE['program'].setdefault('countdown',{})['visible']=False
         STATE['program'].setdefault('qbStats',{})['visible']=False
         STATE['program'].update(bug=False,watermark=False,graphic={'type':'none'},takeId=STATE['program']['takeId']+1)
@@ -596,6 +622,9 @@ def _update(action,p):
             STATE['lineups'][side]=copy.deepcopy(src['lineups'][side])
             update('roster',{'team':side,'players':t['roster']})
             update('lineup',dict(team=side,**src['lineups'][side]))
+        if isinstance(src.get('bottomScores'),dict):
+            update('bottom_scores',{k:v for k,v in src['bottomScores'].items() if k in ['league','date','auto']})
+            STATE['bottomScores'].update(visible=False,games=[],holdAt=0,updatedAt=0)
         update('branding',src['branding']);gg=src['game']
         update('game',{k:v for k,v in gg.items() if k not in ['scores','timeouts','clock','playClock']})
         for side in ['away','home']:

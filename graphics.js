@@ -1,3 +1,6 @@
+import{renderBottomScores}from'./scores-render203.js?v=motion203';
+// Warm the exit artwork before the first operator OUT command.
+const scorebugExitArtwork = new Image();scorebugExitArtwork.src=new URL('./assets/scorebug-out-reference202.svg',import.meta.url).href;
 import{extraGraphic,extraNames}from'./extras194.js?v=added194';
 import{splitGraphic,syncSplitMedia}from'./split192.js?v=nfc192';
 import{conferenceTransition,playerTeaser,seriesHistory,crewLowerThird}from'./custom192.js?v=audit193';
@@ -87,7 +90,8 @@ export function selectedGraphicMotion(s,c){
  const saved=selected&&motionKey(selected)===key?selected:s.program.cueLibrary?.[key];
  const motion=saved?.outTransition||saved?.transition||c.outTransition||c.transition;return motion==='fade'?'fade':c.type==='transition'&&['pattern','teamwall','networkwall'].includes(motion)?motion:'auto';
 }
-export function renderGraphics(root,s,preview=false){root.classList.toggle('is-preview',preview);const c=preview?s.preview:s.program.graphic;let graphic=extraGraphic(s,c);if(c.type==='splitview')graphic=splitGraphic(s,c);if(c.type==='crewfour')graphic=crewLowerThird(s,c);if(c.type==='playertease')graphic=playerTeaser(s,c);if(c.type==='serieshistory')graphic=seriesHistory(s,c);if(c.type==='talent')graphic=talentCredentials(s,c);if(c.type==='storytease')graphic=storyTeaser(s,c);if(c.type==='breaking')graphic=newsGraphic(s,c);if(c.type==='pregameplayer')graphic=pregamePlayer(s,c);if(preview&&c.type==='countdown')graphic=countdownMarkup(s,c);if(c.type==='intro')graphic=openingIntro(s,c);if(c.type==='referee')graphic=referee(s,c);if(c.type==='standings')graphic=standings(s,c);if(c.type==='transition')graphic=broadcastTransition(s,['pattern','teamwall','networkwall'].includes(c.transition)?{...c,transitionStyle:c.transition}:c);if(c.type==='period')graphic=matchup(s,c);if(['matchup','final'].includes(c.type))graphic=resultBanner(s,c);if(c.type==='announcers')graphic=announcers(s,c);if(c.type==='sponsor')graphic=sponsor(s,c);if(['offense','defense'].includes(c.type))graphic=lineup(s,c);if(c.type==='quarterback')graphic=quarterback(s,c);if(c.type==='weather')graphic=weather(s,c);if(c.type==='scoringdrive')graphic=scoringDrive(s,c);if(c.type==='reporter')graphic=reporter(s,c);if(c.type==='player')graphic=playerSpotlight(s,c);if(c.type==='stats')graphic=playerStatistics(s,c);if(c.type==='coach')graphic=coachDock(s,c);if(c.type==='situation')graphic=situation(s,c);if(c.type==='break')graphic=commercial(s,c);if(c.type==='lowerthird')graphic=lower(s,c);if(c.type==='teamstats')graphic=compare(s,c);if(c.type==='roster')graphic=rosterGraphic(s,c);if(c.type==='event')graphic=event(s,c);
+export function renderGraphics(root,s,preview=false){
+renderBottomScores(root,s);root.classList.toggle('is-preview',preview);const c=preview?s.preview:s.program.graphic;let graphic=extraGraphic(s,c);if(c.type==='splitview')graphic=splitGraphic(s,c);if(c.type==='crewfour')graphic=crewLowerThird(s,c);if(c.type==='playertease')graphic=playerTeaser(s,c);if(c.type==='serieshistory')graphic=seriesHistory(s,c);if(c.type==='talent')graphic=talentCredentials(s,c);if(c.type==='storytease')graphic=storyTeaser(s,c);if(c.type==='breaking')graphic=newsGraphic(s,c);if(c.type==='pregameplayer')graphic=pregamePlayer(s,c);if(preview&&c.type==='countdown')graphic=countdownMarkup(s,c);if(c.type==='intro')graphic=openingIntro(s,c);if(c.type==='referee')graphic=referee(s,c);if(c.type==='standings')graphic=standings(s,c);if(c.type==='transition')graphic=broadcastTransition(s,['pattern','teamwall','networkwall'].includes(c.transition)?{...c,transitionStyle:c.transition}:c);if(c.type==='period')graphic=matchup(s,c);if(['matchup','final'].includes(c.type))graphic=resultBanner(s,c);if(c.type==='announcers')graphic=announcers(s,c);if(c.type==='sponsor')graphic=sponsor(s,c);if(['offense','defense'].includes(c.type))graphic=lineup(s,c);if(c.type==='quarterback')graphic=quarterback(s,c);if(c.type==='weather')graphic=weather(s,c);if(c.type==='scoringdrive')graphic=scoringDrive(s,c);if(c.type==='reporter')graphic=reporter(s,c);if(c.type==='player')graphic=playerSpotlight(s,c);if(c.type==='stats')graphic=playerStatistics(s,c);if(c.type==='coach')graphic=coachDock(s,c);if(c.type==='situation')graphic=situation(s,c);if(c.type==='break')graphic=commercial(s,c);if(c.type==='lowerthird')graphic=lower(s,c);if(c.type==='teamstats')graphic=compare(s,c);if(c.type==='roster')graphic=rosterGraphic(s,c);if(c.type==='event')graphic=event(s,c);
 const hidesBug=suppressBug.includes(c.type)&&!(c.type==='transition'&&c.transitionStyle==='matchup');
 const animateKey=preview?`preview-${c.type}`:`${s.program.takeId}`;
 const animate=root.dataset.key!==animateKey;root.dataset.key=animateKey;root.style.setProperty('--network-badge-scale',s.branding.networkBadgeScale||1.25);root.style.setProperty('--accent',s.branding.accent);root.style.setProperty('--away-color',s.teams.away.color);root.style.setProperty('--home-color',s.teams.home.color);
@@ -117,7 +121,7 @@ if(layer.dataset.html!==graphic||animate){
   const elapsed=Math.max(0,Math.min(duration,(s.serverTime||Date.now()/1000)-(s.program.timedGraphic.until-duration)))*1000;
   for(const a of layer.getAnimations({subtree:true}))a.currentTime=elapsed;
  }
- if(!sameLineup&&animate&&hidesBug&&root.querySelector('.bug-wrap'))delayGraphicMotion(layer,bugMotion==='fade'?180:540);
+ if(!sameLineup&&animate&&hidesBug&&root.querySelector('.bug-wrap'))delayGraphicMotion(layer,bugMotion==='fade'?180:1690);
 }
 
 const visible=(preview||s.program.bug||['coach','situation'].includes(c.type))&&!hidesBug;
@@ -225,18 +229,27 @@ function retireGraphic(layer){requestAnimationFrame(()=>{const times=layer.getAn
 function delayGraphicMotion(el,ms){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;for(const a of el.getAnimations({subtree:true})){const timing=a.effect.getTiming();a.effect.updateTiming({delay:(timing.delay||0)+ms});}el.animate([{visibility:'hidden'},{visibility:'visible'}],{duration:ms,easing:'steps(1,end)'});if(el.classList.contains('bug-enter')||el.classList.contains('bug-return'))finishBugEntrance(el);}
 function animateScorebugOut(bug,motion){
  clearTimeout(bug._motionTimer);
- const currentOpacity=getComputedStyle(bug).opacity,currentTransform=getComputedStyle(bug.querySelector('.scorebug')).transform;
- // Stop entry effects and legacy CSS exits; the selected exit owns this timeline.
+ const surface=bug.querySelector('.scorebug');
+ const currentOpacity=getComputedStyle(bug).opacity,currentTransform=getComputedStyle(surface).transform;
  bug.getAnimations({subtree:true}).forEach(a=>a.cancel());
  bug.dataset.motion=motion;bug.classList.remove('bug-enter','bug-return');bug.classList.add('bug-exit','managed-exit');
  const fade=motion==='fade',reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
- const target=fade?bug:bug.querySelector('.scorebug');
- if(fade)bug._exitPose=bug.querySelector('.scorebug').animate([{transform:currentTransform},{transform:currentTransform}],{duration:160,fill:'both'});
- const frames=fade?[{opacity:currentOpacity},{opacity:0}]:[{transform:currentTransform,offset:0},{transform:'scale(1,.025)',offset:.7},{transform:'scale(0,.025)',offset:1}];
- bug._exitMotion=target.animate(frames,{duration:reduced?0:fade?160:520,easing:fade?'linear':'cubic-bezier(.55,.05,.8,.45)',fill:'both'});
+ if(fade||reduced){
+  bug._exitPose=surface.animate([{transform:currentTransform},{transform:currentTransform}],{duration:160,fill:'both'});
+  bug._exitMotion=bug.animate([{opacity:currentOpacity},{opacity:0}],{duration:reduced?0:160,easing:'linear',fill:'both'});
+ }else{
+  // Sampled exit artwork stays registered to the face; no tiled scatter or squash.
+  const cover=document.createElement('div');cover.className='bug-exit-cover';
+  cover.style.cssText="position:absolute;left:0;top:-15%;width:100%;height:135%;z-index:30;pointer-events:none;background-image:url('./assets/scorebug-out-reference202.svg');background-size:100% 5100%;background-repeat:no-repeat";
+  surface.append(cover);
+  cover.animate([{backgroundPosition:'0 0'},{backgroundPosition:'0 100%'}],{duration:1667,easing:'steps(50,end)',fill:'both'});
+  // The electrical cover replaces the score first; the reference then clears its own silhouette.
+  for(const part of surface.querySelectorAll('.bug-metal,.bug-top-rail-reveal'))part.animate([{opacity:1,offset:0},{opacity:1,offset:.16},{opacity:0,offset:.32},{opacity:0,offset:1}],{duration:1667,fill:'both'});
+  bug._exitMotion=surface.animate([{transform:currentTransform,opacity:1},{transform:currentTransform,opacity:1}],{duration:1667,fill:'both'});
+ }
  bug._exitMotion.onfinish=()=>{if(bug.classList.contains('bug-exit'))bug.remove();};
 }
-function bugExitDuration(bug){return bug?.dataset.motion==='fade'||matchMedia('(prefers-reduced-motion: reduce)').matches?180:540;}
+function bugExitDuration(bug){return bug?.dataset.motion==='fade'||matchMedia('(prefers-reduced-motion: reduce)').matches?180:1690;}
 function finishBugEntrance(bug){
  clearTimeout(bug._motionTimer);
  // Include queued entrance delays so returning from a lineup cannot cut off the wipe.
