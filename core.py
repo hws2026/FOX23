@@ -148,7 +148,9 @@ def _update(action,p):
     g=STATE['game'];side=p.get('team','away')
     if side not in ['away','home']: raise ValueError('Select a team.')
     if action=='bottom_scores':
-        c=STATE.setdefault('bottomScores',{'league':'NFL','visible':False,'auto':True,'games':[]})
+        c=STATE.setdefault('bottomScores',{'league':'NFL','visible':False,'auto':True,'games':[],'feedBugVisible':False,'feedBugGameId':''})
+        c.setdefault('feedBugVisible',False)
+        c.setdefault('feedBugGameId','')
         for k,v in p.items():
             if k=='league':
                 if v not in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW','ALL']:raise ValueError('Unknown score league')
@@ -169,6 +171,10 @@ def _update(action,p):
             elif k=='titleCards':
                 if not isinstance(v,list) or len(v)>6:raise ValueError('Use up to six title cards')
                 c[k]=[bounded_text(a,40) for a in v if str(a).strip()]
+            elif k=='feedBugVisible':
+                if not isinstance(v,bool):raise ValueError('Feed scorebug visibility must be on or off')
+                c[k]=v
+            elif k=='feedBugGameId':c[k]=bounded_text(v,160)
             elif k in ['visible','auto','playerStats','titlesEnabled']:c[k]=bool(v)
             elif k in ['anchor','holdAt','updatedAt']:c[k]=max(0,float(v))
             elif k in ['date','error']:c[k]=bounded_text(v,150)
@@ -178,7 +184,7 @@ def _update(action,p):
                 cleaned=[]
                 for item in v:
                     if item.get('league') not in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW']:continue
-                    game={key:bounded_text(item.get(key,''),160) for key in ['id','league','start','status','state','possession','ball','down','provider','espnId']}
+                    game={key:bounded_text(item.get(key,''),160) for key in ['id','league','start','status','state','possession','ball','down','provider','espnId','quarter','period','clock','distance']}
                     game['detail']=str(item.get('detail',''))[:1000]
                     game['players']=[{key:bounded_text(row.get(key,''),160) for key in ['name','team','position','text']} for row in item.get('players',[])[:8]]
                     game['playersUpdatedAt']=max(0,float(item.get('playersUpdatedAt',0)))
@@ -584,7 +590,7 @@ def _update(action,p):
         STATE['program']['bug']=bool(p['visible'])
         if not p['visible'] and STATE['program']['graphic']['type']=='scorebug': STATE['program']['graphic']={'type':'none'}
     elif action=='clear':
-        STATE.setdefault('bottomScores',{})['visible']=False
+        STATE.setdefault('bottomScores',{}).update(visible=False,feedBugVisible=False)
         STATE['program'].setdefault('countdown',{})['visible']=False
         STATE['program'].setdefault('qbStats',{})['visible']=False
         STATE['program'].update(bug=False,watermark=False,graphic={'type':'none'},takeId=STATE['program']['takeId']+1)
@@ -649,8 +655,8 @@ def _update(action,p):
             update('roster',{'team':side,'players':t['roster']})
             update('lineup',dict(team=side,**src['lineups'][side]))
         if isinstance(src.get('bottomScores'),dict):
-            update('bottom_scores',{k:v for k,v in src['bottomScores'].items() if k in ['league','leagues','date','auto','titleCards','titlesEnabled','leagueTitleCards','leagueNetworks']})
-            STATE['bottomScores'].update(visible=False,games=[],holdAt=0,updatedAt=0)
+            update('bottom_scores',{k:v for k,v in src['bottomScores'].items() if k in ['league','leagues','date','auto','playerStats','titleCards','titlesEnabled','leagueTitleCards','leagueNetworks','feedBugGameId']})
+            STATE['bottomScores'].update(visible=False,feedBugVisible=False,games=[],holdAt=0,updatedAt=0)
         update('branding',src['branding']);gg=src['game']
         update('game',{k:v for k,v in gg.items() if k not in ['scores','timeouts','clock','playClock']})
         for side in ['away','home']:

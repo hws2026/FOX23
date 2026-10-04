@@ -1,0 +1,23 @@
+WLD Bottom Scores update 224 — UPDATE ONLY
+
+Copy these files into your existing complete FOX23 application folder, replacing matching files. Keep every other file and folder. This ZIP is not a standalone replacement. No SQL changes are needed. No GitHub upload has been performed.
+
+Bottom Scores:
+- Select leagues before Show bottom scores. Selected order follows the picker.
+- The full selected-league card deck opens, every game in the first league plays, then the full deck returns and the completed card slides away before the next league. It repeats after the last league.
+- Leagues without games display an explicit notice rather than made-up games.
+- Existing reading times remain: at least 30 seconds per game and 10 seconds per data item.
+- Network/custom title text stays league-specific.
+
+Feed scorebug:
+- Open Bottom Scores > Feed scorebug.
+- Choose Follow the current bottom-scores game, or pin one loaded game.
+- Use Show feed scorebug. It appears at the upper-left, independently of the ticker and main scorebug.
+- Shows provider logos, team abbreviations, records, score, status, and reported clock/quarter, down/distance, ball position and possession where available.
+- Final winner is yellow. Stale live data hides possession/down data and says UPDATES DELAYED. No clock is invented between provider updates.
+- User-provided logos can be integrated after they are supplied; this update uses provider logos with team text fallback.
+- Keep controller open for automatic feed refresh. Cloud OBS receives the same bottomScores state.
+
+Reload controller and output after you update the files. Cache versions are included.
+Main scorebug renderer/animations and existing graphic CSS/assets were preserved; graphics.js changes only its Bottom Scores module import.
+Validation: sequence and repeat-cycle tests; feed field, final/stale/missing data tests; isolated controller toggles/persistence tests; local rendered preview checked. Live provider completeness varies by league; no guarantee is made for unreported possession/down data.

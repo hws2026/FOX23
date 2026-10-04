@@ -1,4 +1,4 @@
-import{createScores}from'./scores-panel203.js?v=ref219';
+import{createScores}from'./scores-panel203.js?v=scores224';
 import{saveSplitVideo}from'./split192.js?v=nfc192';
 let splitDevices=[];
 const splitStatusChannel=new BroadcastChannel('gridiron-split-status');splitStatusChannel.onmessage=e=>toast('Feed '+e.data.slot+': '+e.data.error,true);
@@ -8,7 +8,7 @@ import{createRecording}from'./recording.js?v=record161';
 function localGameStart(v){const d=new Date(v);return Number.isNaN(+d)?'':new Date(+d-d.getTimezoneOffset()*60000).toISOString().slice(0,16);}
 import{createPlaylist}from'./playlist.js?v=116';
 import{libraryView,bindLibrary}from'./team-library.js?v=added194';
-import{passerRating,esc,qbLiveStats,matchupVenue,formations,defensePositions,offensePositions,graphicNames,clockText,clockSeconds}from'./graphics.js?v=ref219';
+import{passerRating,esc,qbLiveStats,matchupVenue,formations,defensePositions,offensePositions,graphicNames,clockText,clockSeconds}from'./graphics.js?v=scores224';
 const $=s=>document.querySelector(s);let state,tab='live',lineupTeam='away',lineupType='defense',rosterTeam='away',playerId='away-1',offset=0,busy=0,queue=Promise.resolve(),lastRevision=-1,toastTimer;
 const titles={bottomscores:'Bottom score updates',recording:'Recording',playlist:'Playlist',teams:'Team library',transitions:'Broadcast transitions',live:'Game day control',graphics:'Graphics library',lineups:'Team builder',rosters:'Player stats & personnel',branding:'Set the stage',output:'Broadcast output'};
 const option=(value,label,selected)=>`<option value="${esc(value)}" ${value===selected?'selected':''}>${esc(label)}</option>`;
