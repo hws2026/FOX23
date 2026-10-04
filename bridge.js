@@ -1,9 +1,10 @@
-import {cloudEnabled,connectCloud} from './cloud/sync.js?v=cloud226';
+import {cloudEnabled,connectCloud} from './cloud/sync.js?v=cloud227';
 export const base=new URL('.',import.meta.url);
 export const channel=new BroadcastChannel('gridiron-pages:'+base.pathname);
 const originalFetch=globalThis.fetch.bind(globalThis);let remoteRPC,cloudRPC,worker,workerFailure,sequence=0,pending=new Map(),current,readyResolve;
 export const ready=new Promise(r=>readyResolve=r);
 function localRPC(request){if(workerFailure)return Promise.reject(workerFailure);return new Promise((resolve,reject)=>{const id=++sequence;pending.set(id,{resolve,reject});worker.postMessage({id,request});});}
+export const canControl=()=>cloudRPC?.hasControl!==false;
 export function rpc(request){if(remoteRPC)return remoteRPC(request);if(cloudRPC)return cloudRPC(request);return localRPC(request);}
 export function publish(state){current=state;channel.postMessage({kind:'state',state});dispatchEvent(new CustomEvent('gridiron-state',{detail:state}));}
 export async function startController(){

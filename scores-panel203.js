@@ -1,7 +1,7 @@
 import{leagueLabels as cardLabels,leagueNetwork}from'./scores-titles219.js';
 import{enrichPlayers}from'./scores-players208.js?v=league215';
 import{leagues,leagueLabels,fetchLeague}from'./scores-data203.js?v=logos226';
-export function createScores({getState,act,esc,toast}){
+export function createScores({getState,act,esc,toast,canControl=()=>true}){
  let busy=false,last=0,queued=false,statsEnabled=false;
  const cfg=()=>getState()?.bottomScores||{league:'NFL',games:[]};
  const selected=c=>c.leagues?.length?c.leagues:c.league==='ALL'?leagues:[c.league||'NFL'];
@@ -12,14 +12,15 @@ export function createScores({getState,act,esc,toast}){
   return `<option value="">Follow the current bottom-scores game</option>${chosen&&!games.some(g=>g.id===chosen)?`<option value="${esc(chosen)}">Selected game unavailable · ${esc(chosen)}</option>`:''}${games.map(g=>`<option value="${esc(g.id)}">${esc(leagueLabels[g.league]||g.league)} · ${esc(g.away.name)} at ${esc(g.home.name)} · ${esc(g.status)}</option>`).join('')}`;
  };
  async function refresh(){
+  if(!canControl())return;
   if(busy){queued=true;return;}busy=true;last=Date.now();status('Updating feeds…');
   const before=cfg(),wanted=selected(before);
   try{
-   const results=await Promise.allSettled(wanted.map(l=>fetchLeague(l,before.date||'')));if(key(before)!==key(cfg()))return;
+   const results=await Promise.allSettled(wanted.map(l=>fetchLeague(l,before.date||'')));if(!canControl()||key(before)!==key(cfg()))return;
    let games=[],sources={},errors=[];
    results.forEach((r,i)=>{const league=wanted[i];if(r.status==='fulfilled'){games.push(...r.value.games.map(g=>({...g,updatedAt:Date.now()})));sources[league]=r.value.source;}else{games.push(...(before.games||[]).filter(g=>g.league===league));errors.push(league+' unavailable');sources[league]=before.sources?.[league]||'';}});
    await act('bottom_scores',{games,sources,error:errors.join(' · '),updatedAt:Date.now()});
-   if(cfg().playerStats){await enrichPlayers(games);if(key(before)===key(cfg()))await act('bottom_scores',{games});}
+   if(cfg().playerStats){await enrichPlayers(games);if(canControl()&&key(before)===key(cfg()))await act('bottom_scores',{games});}
   }catch(e){status(e.message);}finally{busy=false;sync();if(queued){queued=false;refresh();}}
  }
  function status(message){const el=document.querySelector('#scores203-status');if(el)el.textContent=message;}
@@ -34,6 +35,7 @@ export function createScores({getState,act,esc,toast}){
   const note=document.querySelector('#scores224-feed-status');if(note)note.textContent=c.feedBugGameId?(feedGames(c).some(g=>g.id===c.feedBugGameId)?'Pinned to the selected feed game. Scores update with each refresh.':'The selected game is unavailable in the loaded schedule. Choose another game or follow the rotation.'):'Follows the same game rotation, including while the bottom ticker is hidden. League title decks do not replace the feed scorebug.';
  }
  setInterval(()=>{
+  if(!canControl()){sync();return;}
   const c=cfg();if(c.playerStats&&!statsEnabled){statsEnabled=true;refresh();}else statsEnabled=!!c.playerStats;
   if((c.visible||c.feedBugVisible)&&c.auto!==false&&Date.now()-last>=30000)refresh();sync();
  },1000);

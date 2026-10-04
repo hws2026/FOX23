@@ -1,0 +1,38 @@
+WLD SPORTS UPDATE 227 — CONTROLLER CONFLICT FIX
+
+UPDATE ONLY. Apply over Update226. Your226 logos stay installed.
+
+1. Extract this ZIP outside FOX23.
+2. Copy the included root files into FOX23, replacing matching files.
+3. Copy the COMPLETE included cloud folder, including config.js and delta.js.
+4. Keep all other files, assets and the broadcast-logos226 folder.
+5. Publish the files yourself. Close ALL previously opened controller tabs on
+   every device, then reopen/hard-refresh the updated GitHub page. Refresh the
+   OBS output source once as well. This one-time close/reload matters: an old
+   page already running older code cannot honor the new handoff rules.
+
+Nothing was deployed or pushed. No SQL needs to run. Included SQL/config files
+are unchanged; this update uses the existing version-checked save functions.
+
+WHAT CHANGED
+- Removed duplicate panel module loads. Stream Deck connections and startup now
+  import the same panel instance, with one keyboard handler and automation set.
+- Cloud actions reconcile the current revision inside the request queue. Timer
+  expiry and feed updates no longer cause the false 'Another control changed
+  the show' failure. Only confirmed rejections are retried; uncertain network
+  results are never replayed, so a score increment cannot be duplicated.
+- Signing in or choosing Continue saved session makes that controller active.
+  The prior UPDATED controller switches to Watching, pauses playlist/lineup
+  automation and stops feed writes. It can keep displaying the shared show.
+- Choose Take control on a watching controller to hand control back explicitly.
+  A background poll never takes control back. OBS outputs remain read-only.
+
+CHECKED LOCALLY
+Actual Python show-engine timer conflict reproduced and fixed. Eight adversarial
+ownership/race tests passed, including in-flight handoff, passive polling,
+uncertain write responses, state reset, and read-only output restrictions.
+Two browser sessions verified handoff and rejection of the previous controller's
+write. Feed-control and existing cloud recovery checks passed.
+
+Main graphics, animation code, show-engine data rules and all226 logos are
+unchanged. No production account, saved show, playlist or SQL was modified.
