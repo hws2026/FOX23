@@ -1,0 +1,3 @@
+Apply over 211 or 212. Replace these matching files, then reload the controller and refresh OBS.
+Bottom scores > Title cards: enter one label per line (up to six), reorder lines, use {league}/{network}, or disable title cards. Click Save title cards.
+Includes correction 212. Scorebug animation code is unchanged.

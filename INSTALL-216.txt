@@ -1,0 +1,2 @@
+Apply over update 215. Replace panel.css and index.html, and merge the assets folder. Reload the control panel.
+WLD SPORTS controller palette: #2020b7, #000000, #222222, #444444. Team controls retain their team colors. No broadcast renderer or animation files are included.

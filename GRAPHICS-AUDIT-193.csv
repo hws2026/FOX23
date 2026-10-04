@@ -1,0 +1,95 @@
+ID,Graphic,Reference basis,Held inspected,Entrance sampled,Exit sampled,Notes
+1,Game opening intro,Cached intro129/intro130 sequences; original videos missing,yes,yes,yes,Original video missing; cached motion frames only.
+2,Scorebug,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+3,Scorebug · halftime,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+4,Scorebug · final,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+5,Flag tab,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+6,Quarterback passing side stats,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+7,Rushing side stats,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+8,Receiving side stats,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+9,Rushing + quarterback side stats,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+10,Receiving + quarterback side stats,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+11,Offensive line · title,"Long DAL–PHI, lineup82scan entrance/update/exit",yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+12,Offensive line · players,"Long DAL–PHI, lineup82scan entrance/update/exit",yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+13,Backs and receivers · title,"Long DAL–PHI, lineup82scan entrance/update/exit",yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+14,Backs and receivers · players,"Long DAL–PHI, lineup82scan entrance/update/exit",yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+15,Defensive line · title,"Long DAL–PHI, lineup82scan entrance/update/exit",yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+16,Defensive line · players,"Long DAL–PHI, lineup82scan entrance/update/exit",yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+17,Linebackers · title,"Long DAL–PHI, lineup82scan entrance/update/exit",yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+18,Linebackers · players,"Long DAL–PHI, lineup82scan entrance/update/exit",yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+19,Secondary · title,"Long DAL–PHI, lineup82scan entrance/update/exit",yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+20,Secondary · players,"Long DAL–PHI, lineup82scan entrance/update/exit",yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+21,QB introduction · feature,Cached reference47/frame87 and QB detail; original missing,yes,yes,yes,Reference uses full-body illustration; available ESPN portrait is a headshot.
+22,QB introduction · season,Cached reference47/frame87 and QB detail; original missing,yes,yes,yes,Reference uses full-body illustration; available ESPN portrait is a headshot.
+23,Player spotlight,Cached player144 ribbon; statistics/team variants intentionally adapted,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+24,Player statistics,Cached player144 ribbon; statistics/team variants intentionally adapted,yes,yes,yes,Custom statistics adaptation of player ribbon.
+25,Coaching staff,Package component reviewed; no exact one-to-one shot identified in available references,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+26,Team lower third,Cached player144 ribbon; statistics/team variants intentionally adapted,yes,yes,yes,Custom team adaptation; user context placement retained.
+27,Matchup · venue,Long DAL–PHI; 09-20 02-38-04 final; cached matchup screenshots,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+28,Final score,Long DAL–PHI; 09-20 02-38-04 final; cached matchup screenshots,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+29,Commercial break · big,Long DAL–PHI; 09-20 02-38-04 final; cached matchup screenshots,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+30,Commercial break · mini,Long DAL–PHI; 09-20 02-38-04 final; cached matchup screenshots,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+31,Team comparison,Package component reviewed; no exact one-to-one shot identified in available references,yes,yes,yes,No exact reference shot identified; layout retained.
+32,Period summary,Package component reviewed; no exact one-to-one shot identified in available references,yes,yes,yes,No exact reference shot identified; layout retained.
+33,AFC EAST,NFC East screenshot; other divisions intentionally adapted,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+34,AFC SOUTH,NFC East screenshot; other divisions intentionally adapted,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+35,AFC NORTH,NFC East screenshot; other divisions intentionally adapted,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+36,AFC WEST,NFC East screenshot; other divisions intentionally adapted,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+37,NFC EAST,NFC East screenshot; other divisions intentionally adapted,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+38,NFC SOUTH,NFC East screenshot; other divisions intentionally adapted,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+39,NFC NORTH,NFC East screenshot; other divisions intentionally adapted,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+40,NFC WEST,NFC East screenshot; other divisions intentionally adapted,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+41,TOUCHDOWN,Long DAL–PHI touchdown at 758–763.75s,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+42,FIELD GOAL,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+43,EXTRA POINT,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+44,TWO-POINT CONVERSION,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+45,SAFETY,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+46,TURNOVER,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+47,INTERCEPTION,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+48,TIMEOUT,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+49,UNDER REVIEW,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+50,Flag · team,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+51,Flag · player,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+52,Flag · generic,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+53,Scoring drive,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+54,Field-goal attempt,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+55,Kicker stats,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+56,Punter and returner,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+57,3rd down · all,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+58,3rd down · count,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+59,3rd down · percentage,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+60,4th down · all,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+61,4th down · count,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+62,4th down · percentage,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+63,Single-team bumper,Package component reviewed; no exact one-to-one shot identified in available references,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+64,Team / coach bumper,Package component reviewed; no exact one-to-one shot identified in available references,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+65,Two-team bumper,Package component reviewed; no exact one-to-one shot identified in available references,yes,yes,yes,Self-clearing transition: held/end frame is intentionally transparent.
+66,Weather · location,Cached reference47/frame2 weather,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+67,Referee,Long DAL–PHI referee at 550–572s,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+68,Transition network,Package component reviewed; no exact one-to-one shot identified in available references,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+69,Transition pattern,09-25 17-18-47; cached new156 / graphics190 detail,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+70,Transition teamwall,09-25 17-18-47; cached new156 / graphics190 detail,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+71,Transition networkwall,09-25 17-18-47; cached new156 / graphics190 detail,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+72,Transition conference,10-02 06.12.16 at 12.4–13.4s,yes,yes,yes,"Segmented exit restored; texture is a CSS reconstruction, not original production artwork."
+73,Two-feed split view,10-02 06.12.16 split shell; editable information intentionally adapted,yes,yes,yes,Layout inspected with empty feed slots. Physical camera devices not tested.
+74,Four-person crew lower third,10-02 06.14.35; cached nfc192 rail detail,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+75,Player-name teaser,"10-02 06.09.17 at 2–12.5s; clip cuts away, no complete exit visible",yes,yes,yes,Entrance scale/color timing corrected; exit cannot be matched exactly because clip cuts.
+76,Series history,10-02 06.12.16 at 8–12.4s,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+77,Studio talent credentials,09-25 17-18-47; cached new156 / graphics190 detail,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+78,Story teaser,09-25 17-18-47; cached new156 / graphics190 detail,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+79,News ribbon,09-25 17-18-47; cached new156 / graphics190 detail,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+80,Kickoff countdown,09-25 17-18-47; cached new156 / graphics190 detail,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+81,Pregame player feature,09-25 17-18-47; cached new156 / graphics190 detail,yes,yes,yes,Headshot no longer stretched/cropped as full-body art.
+82,Commentators,09-20 09-50-54 two-person lower third,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+83,Sponsor promo,09-20 02-38-04 sponsor at 3–8s,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+84,Reporter nameplate,Cached reference47/frame49 reporter,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+85,Roster,Package component reviewed; no exact one-to-one shot identified in available references,yes,yes,yes,Repaired wrong touchdown identity wrapper and fitted roster names.
+86,News artwork none,09-25 17-18-47; cached new156 / graphics190 detail,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+87,News artwork network,09-25 17-18-47; cached new156 / graphics190 detail,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+88,News artwork player,09-25 17-18-47; cached new156 / graphics190 detail,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+89,News artwork duo,09-25 17-18-47; cached new156 / graphics190 detail,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+90,News label off,09-25 17-18-47; cached new156 / graphics190 detail,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+91,Touchdown player,Long DAL–PHI touchdown at 758–763.75s,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+92,Touchdown generic,Long DAL–PHI touchdown at 758–763.75s,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+93,Scorebug OT2,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.
+94,Scorebug long down,09-20 12.38.07; 09-17 01-34-13; long DAL–PHI reference66,yes,yes,yes,Reviewed; exact font/asset equivalence not certified.

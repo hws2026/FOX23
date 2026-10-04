@@ -1,0 +1,9 @@
+WLD SPORTS — COMPLETE PACKAGE 217
+
+This is the full graphics system through update 217; no earlier update folders are required.
+
+Extract the ZIP, open the WLD-SPORTS-217 folder in VS Code, and open index.html with Live Server. Keep the entire folder together, including assets and ar. No Python installation is required. The first controller launch needs internet to load its browser runtime; live scores also need internet.
+
+Download NFL - Stream Deck and MCRP - Stream Deck from the controller for your site.
+
+Your saved show belongs to the browser and site address, not this ZIP. Keep your existing browser/site address or import your exported show under Output & files.

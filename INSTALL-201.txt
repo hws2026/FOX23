@@ -1,0 +1,1 @@
+Replace matching files in the existing graphics pack and merge assets. Reload the controller and OBS browser source. Replaces update 200. Corrects default scorebug exit to use diagonal breakup. Fast Fade and entrance unchanged.

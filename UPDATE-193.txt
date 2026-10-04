@@ -1,0 +1,28 @@
+GRAPHICS AUDIT 193 — 2026-10-02
+
+Scope reviewed
+94 individual variants: held layouts, sampled entrances and exits. 12 live-update cases (scores, correction, down/distance, flag, timeouts, possession, urgent play clock, overtime/final, lineup title/group changes). Six responsive cases preserve the 16:9 stage inside small, portrait, square and wide containers. Static dependency scan found no missing literal imports/assets; all root JavaScript syntax checks passed.
+
+Verified fixes
+- Restored missing announcer-rails.svg and weather-rails.svg.
+- Removed the generic 140ms exit fade that prematurely hid several newer graphics.
+- Stopped nested entrance/exit animations from replaying during crew/reporter/announcer exits.
+- Preserved the large commercial banner rail throughout its exit.
+- Corrected roster names accidentally wrapped in touchdown-specific markup; shrink long names to fit.
+- Adjusted scorebug base scale to approximately 35.5% of the 1920px field frame; attached panels scale together. Scorebug entrance keyframes were not changed.
+- Verified score roll: old number slides upward and new number enters from below; unrelated clock updates preserve animation nodes.
+- Enlarged series-history panel and name stacks; retained rail stroke thickness at the new height; yellow descriptive numbers only.
+- Increased player-name teaser typography, restored default team/position context, corrected entrance growth, prevented color texture from flashing back on exit.
+- Conference transition now separates into six vertical faces on exit, with a separate central logo, rather than swinging its entrance doors back out.
+- Pregame headshot uses contain rather than stretching/cropping a headshot across a full-body panel; copy fitting added.
+- Countdown top row has enough height for its text.
+- Versioned modified module/style dependencies to avoid mixed cached versions on Live Server and Pages.
+
+Limits — not a pixel-perfect certification
+System fonts remain in use (DIN Condensed, Impact and Arial fallbacks); font shape/weight can differ between Mac and Windows. Original broadcast fonts and production 3D artwork were not provided. Six original source videos are missing locally; cached extracted frames were used, which cannot establish every intervening motion frame. Some user-requested custom variants have no one-to-one reference shot. ESPN headshots cannot reproduce full-body illustrated reference artwork. Hardware camera inputs, actual Stream Deck hardware and OBS capture were not exercised in this visual audit. AR was not modified; ar-link.js only received an import cache-version update.
+
+Review
+Open graphics-review193.html with Live Server. It uses isolated demo data and does not overwrite the controller's show. The dropdown contains all 94 variants. IN/replay restarts the selected graphic; OUT removes it. GRAPHICS-AUDIT-193.csv lists every inspected variant and reference basis.
+
+Install
+Extract the UPDATE ZIP and replace the corresponding files in your existing package, preserving folders. This is a changed-files update, not a standalone full installation. Open index.html with Live Server, or upload the extracted files together to your existing GitHub Pages repository. No Python is required to run the graphics.

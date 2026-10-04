@@ -1,0 +1,1 @@
+Copy the contents into your existing graphics pack, replacing matching files and merging assets. Reload the controller and OBS browser source. Default scorebug OUT now includes the texture hold and electrical cover. Fast Fade stays 160ms. Existing entrance, score roll, team layout and other graphic animations have not been redesigned.

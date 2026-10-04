@@ -1,0 +1,13 @@
+GRAPHICS UPDATE 192 — replace matching files in your existing pack, preserving folders.
+
+New: Custom logo / NFC-style folding-panel transition, Player-name teaser, Series history, Four-person crew lower third, Two-feed split view.
+Show Setup: upload the custom transition logo. Automatic color favors prominent colored areas over neutral edges; Manual override selects your color. Transparent padding is trimmed for consistent visible-logo size. Transition timing is fixed.
+Player-name teaser: choose team/player, optional name override, optional team and position, Hold or Timed (1–120 seconds).
+Crew ribbon: names from Show Setup crew, four selectable positions.
+Split view: select camera or local video for each feed, then Update preview and Take Live. Videos stay in this browser on this computer. Camera access requires permission and an available device. Physical cameras have not been tested in this update. Video compatibility depends on the browser codec.
+
+Authorized motion update: center-expanding player/team lower thirds, player statistics, lineups, announcers, reporter, referee, and new reference cards. Bottom rail widens, panel opens upward, then copy appears. Scorebug animation code and timing are unchanged.
+
+Reference preview: reference-review192.html. Compare crew reference uses equal 16:9 frames. The reconstruction follows the supplied clips; it is not a frame-exact 3D reproduction.
+
+This patch includes 190/191 graphics changes and the existing scorebug entrance assets to avoid missing files. It does not include AR changes.

@@ -1,0 +1,1 @@
+Apply over your existing version 216 folder. Copy these files into the same folder, replacing index.html and panel.css. Keep the assets folder. Refresh the control panel. This update changes the system sidebar logo and browser icon only.

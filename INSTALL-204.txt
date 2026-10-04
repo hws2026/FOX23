@@ -1,0 +1,1 @@
+Apply over update 203. Replace matching files, then reload the controller and output. Fixes bottom-strip spacing, logo sizing, refresh logo flicker, and pending league-selection requests. Adds a short strip exit fade. Main scorebug layout and animation code unchanged.
