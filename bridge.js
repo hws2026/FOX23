@@ -1,8 +1,10 @@
+import {cloudEnabled,connectCloud} from './cloud/sync.js';
 export const base=new URL('.',import.meta.url);
 export const channel=new BroadcastChannel('gridiron-pages:'+base.pathname);
-const originalFetch=globalThis.fetch.bind(globalThis);let remoteRPC,worker,sequence=0,pending=new Map(),current,readyResolve;
+const originalFetch=globalThis.fetch.bind(globalThis);let remoteRPC,cloudRPC,worker,sequence=0,pending=new Map(),current,readyResolve;
 export const ready=new Promise(r=>readyResolve=r);
-export function rpc(request){if(remoteRPC)return remoteRPC(request);return new Promise((resolve,reject)=>{const id=++sequence;pending.set(id,{resolve,reject});worker.postMessage({id,request});});}
+function localRPC(request){return new Promise((resolve,reject)=>{const id=++sequence;pending.set(id,{resolve,reject});worker.postMessage({id,request});});}
+export function rpc(request){if(remoteRPC)return remoteRPC(request);if(cloudRPC)return cloudRPC(request);return localRPC(request);}
 export function publish(state){current=state;channel.postMessage({kind:'state',state});dispatchEvent(new CustomEvent('gridiron-state',{detail:state}));}
 export async function startController(){
  const remote=new URLSearchParams(location.search).has('remote');
@@ -11,7 +13,7 @@ export async function startController(){
  if(!remote){
  await new Promise(resolve=>navigator.locks.request('gridiron-controller:'+base.pathname,{ifAvailable:true},async lock=>{
   acquired=!!lock;resolve();if(!lock)return;
-  worker=new Worker(new URL('runtime-worker.js?v=ref219',base));
+  worker=new Worker(new URL('runtime-worker.js?v=cloud221'+(cloudEnabled?'&cloud=1':''),base));
   worker.onmessage=({data})=>{const p=pending.get(data.id);if(!p)return;pending.delete(data.id);data.error?p.reject(Error(data.error)):p.resolve(data.result);};
   worker.onerror=e=>{for(const p of pending.values())p.reject(Error(e.message));pending.clear();};
   readyResolve();await new Promise(()=>{});
@@ -19,6 +21,7 @@ export async function startController(){
  if(!acquired)throw Error('A control panel is already open for this site. Use that tab, or close it before opening another.');
  }
  await ready;
+ if(!remote&&cloudEnabled)cloudRPC=await connectCloud(localRPC);
  globalThis.fetch=async(input,options={})=>{
   const u=new URL(typeof input==='string'?input:input.url,location.href);
   const endpoint=u.pathname.match(/\/api\/(state|action|export|teams)$/)?.[1];

@@ -1,5 +1,5 @@
 import{zip}from'./zip.js?v=tunnel159';
-import{base}from'./bridge.js?v=league215';
+import{base}from'./bridge.js?v=cloud221';
 import{pairingKey}from'./deck-connect.js?v=league215';
 const button=document.createElement('button');button.textContent='Download NFL - Stream Deck';button.className='button subtle';document.querySelector('.topbar-right').prepend(button);
 button.onclick=async()=>{button.disabled=true;const old=button.textContent;button.textContent='Building installer…';try{

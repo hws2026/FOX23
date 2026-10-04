@@ -1,4 +1,4 @@
-import{base}from'./bridge.js?v=league215';
+import{base}from'./bridge.js?v=cloud221';
 import{deckControl}from'./panel.js?v=league215';
 const storageKey='gridiron-deck-key:'+base.pathname;
 const button=document.createElement('button');button.className='button subtle';button.textContent='Connect NFL - Stream Deck';document.querySelector('.topbar-right').prepend(button);
