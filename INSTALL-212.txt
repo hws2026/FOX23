@@ -1,0 +1,4 @@
+Apply over update 211. Replace these six files in your existing graphics folder, then refresh the controller and OBS browser source.
+Network Normal reveal: opening emblem hold followed by badge turn/build. Fast Fade remains 160ms. Uses your secondary logo for the opening emblem, falling back to your network logo.
+Ticker now shows alternating league/network title cards before a league change. Existing score/data reading times remain intact.
+Scorebug animations are unchanged from 211.

@@ -1,4 +1,4 @@
-import{renderBottomScores}from'./scores-render203.js?v=leagues211';
+import{renderBottomScores}from'./scores-render203.js?v=league215';
 // Warm the exit artwork before the first operator OUT command.
 const scorebugExitFrames211=Array.from({length:51},(_,i)=>{const img=new Image();img.src=new URL('./assets/scorebug-out211/'+String(i).padStart(2,'0')+'.svg',import.meta.url).href;return img;});
 import{extraGraphic,extraNames}from'./extras194.js?v=added194';
@@ -184,7 +184,7 @@ syncSplitMedia(root);syncKickoff(root,s,preview);updateKickoff(root);
 fitGraphicLabels(layer);
 for(const el of layer.querySelectorAll('.news-body p')){el.style.fontSize='43px';while(el.scrollHeight>el.clientHeight&&parseFloat(el.style.fontSize)>25)el.style.fontSize=(parseFloat(el.style.fontSize)-1)+'px';}
 let wm=root.querySelector('.network-watermark');
-if(s.program.watermark){const content=networkMark(s);const fresh=!wm;if(!wm){wm=document.createElement('div');wm.className='network-watermark';root.append(wm);}const reversing=wm._leaving;if(reversing){wm._motion?.cancel();wm._leaving=false;}if(wm.innerHTML!==content)wm.innerHTML=content;if(fresh||reversing)animateNetwork211(wm,false,s.program.watermarkMotion);}else if(wm&&!wm._leaving)animateNetwork211(wm,true,s.program.watermarkMotion);
+if(s.program.watermark){const content=`<div class="network-final212" style="display:flex;align-items:center;justify-content:center">${networkMark(s)}</div><div class="network-emblem212" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;visibility:hidden">${secondaryMark(s)}</div>`;const fresh=!wm;if(!wm){wm=document.createElement('div');wm.className='network-watermark';root.append(wm);}const reversing=wm._leaving;if(reversing){wm._motion?.cancel();wm._leaving=false;}if(wm.innerHTML!==content)wm.innerHTML=content;if(fresh||reversing)animateNetwork212(wm,false,s.program.watermarkMotion);}else if(wm&&!wm._leaving)animateNetwork212(wm,true,s.program.watermarkMotion);
 const fitIntro=()=>root.querySelectorAll(".intro-copy strong>span").forEach(el=>{el.style.transform="none";const width=el.getBoundingClientRect().width,available=el.parentElement.getBoundingClientRect().width;el.style.transform=`scaleX(${width?Math.min(1,available/width):1})`;});fitIntro();document.fonts?.ready.then(fitIntro);
 
 }
@@ -311,11 +311,39 @@ function syncKickoff(root,s,preview){
 function talentCredentials(s,c){return `<section class="talent190"><div class="talent190-badge">${networkMark(s)}</div><div class="talent190-body"><h1>${esc(c.leftName||'NAME')}</h1><p>${esc(c.leftRole||'ROLE / CREDENTIAL')}</p>${c.subtitle?`<p>${esc(c.subtitle)}</p>`:''}${c.title?`<small>${esc(c.title)}</small>`:''}</div><svg class="talent190-rail" viewBox="0 0 640 250" preserveAspectRatio="none" aria-hidden="true"><path d="M7 7H180M460 7H633M3 145V207L26 241H225L252 232H388L415 241H614L637 207V145" fill="none" stroke="#21323d" stroke-width="10"/><path d="M7 4H180M460 4H633M3 145V205L26 238H225L252 229H388L415 238H614L637 205V145" fill="none" stroke="#aabfc8" stroke-width="5"/><path d="M8 2H179M461 2H632M5 145V203L28 235H224L251 226H389L416 235H612L635 203V145" fill="none" stroke="#edf4f7" stroke-width="1.5"/></svg></section>`;}
 function storyTeaser(s,c){return `<section class="story190${c.storyLabelMode==='CUSTOM'?' story190-custom':''}"><div class="story190-shade"></div><div class="story190-outline" aria-hidden="true">${esc(c.storyLabelMode==='CUSTOM'?(c.storyLabelCustom||''):c.storyLabelMode||c.featureText||'COMING UP')}</div><div class="story190-copy">${c.subtitle?`<span>${esc(c.subtitle)}</span>`:''}<h1>${esc(c.title||'STORY HEADLINE')}</h1>${c.featureFooter?`<p>${esc(c.featureFooter)}</p>`:''}</div></section>`;}
 
-function animateNetwork211(el,out,motion){
+function animateNetwork212(el,out,motion){
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,fade=motion==='fade';
- const initial={opacity:getComputedStyle(el).opacity,clipPath:getComputedStyle(el).clipPath};
- el._motion?.cancel();el._leaving=out;
- const visible={opacity:1,clipPath:'inset(0 0 0 0)'},hidden=fade?{opacity:0,clipPath:'inset(0 0 0 0)'}:{opacity:0,clipPath:'inset(0 100% 0 0)'};
- el._motion=el.animate(out?[initial,hidden]:[hidden,visible],{duration:reduced?0:fade?160:300,easing:fade?'linear':'cubic-bezier(.22,.61,.36,1)',fill:'both'});
- el._motion.onfinish=()=>{if(el._leaving)el.remove();};
+ const opacity=getComputedStyle(el).opacity;
+ // Freeze an interrupted entrance before fading out; do not jump to its final pose.
+ if(out){el.getAnimations({subtree:true}).forEach(a=>a.pause());el._leaving=true;el._motion=el.animate([{opacity},{opacity:0}],{duration:reduced?0:160,easing:'linear',fill:'both'});el._motion.onfinish=()=>{if(el._leaving)el.remove();};return;}
+ el.getAnimations({subtree:true}).forEach(a=>a.cancel());el.querySelectorAll('.network-fold214').forEach(n=>n.remove());el._leaving=false;
+ const emblem=el.querySelector('.network-emblem212'),badge=el.querySelector('.network-final212');
+ emblem.style.visibility='hidden';
+ const img=emblem.querySelector('img');if(img)img.style.cssText='width:58px;height:58px;object-fit:contain;max-width:58px';
+ if(fade||reduced){el._motion=el.animate([{opacity:0},{opacity:1}],{duration:reduced?0:160,easing:'linear',fill:'both'});return;}
+ // Reference 07.20.46: emblem at 2.3s, hold to 5.1s, badge built by 5.8s.
+ emblem.style.visibility='visible';
+ emblem.animate([
+  {opacity:0,transform:'perspective(600px) rotateY(0deg)',offset:0},
+  {opacity:1,transform:'perspective(600px) rotateY(0deg)',offset:.086},
+  {opacity:1,transform:'perspective(600px) rotateY(0deg)',offset:.77},
+  {opacity:0,transform:'perspective(600px) rotateY(90deg)',offset:.84},
+  {opacity:0,transform:'perspective(600px) rotateY(90deg)',offset:1}
+ ],{duration:3500,easing:'linear',fill:'both'});
+ // The reference badge is two hinged faces, not a wipe across a flat image.
+ badge.animate([{opacity:0,offset:0},{opacity:0,offset:.999},{opacity:1,offset:1}],{duration:3500,fill:'both'});
+ for(const side of ['left','right']){
+  const fold=document.createElement('div');fold.className='network-fold214';
+  fold.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transform-style:preserve-3d;backface-visibility:hidden;transform-origin:50% 50%;pointer-events:none';
+  const face=badge.cloneNode(true);face.removeAttribute('class');face.style.cssText='width:100%;height:100%;display:flex;align-items:center;justify-content:center;clip-path:inset(0 '+(side==='left'?'50% 0 0':'0 0 50%')+')';fold.append(face);el.append(fold);
+  const sign=side==='left'?1:-1,start=side==='left'?.79:.83,end=side==='left'?.94:1;
+  const motion=fold.animate([
+   {opacity:0,transform:`perspective(550px) rotateY(${sign*90}deg)`,offset:0},
+   {opacity:0,transform:`perspective(550px) rotateY(${sign*90}deg)`,offset:start},
+   {opacity:1,transform:`perspective(550px) rotateY(${sign*78}deg)`,offset:start+.015},
+   {opacity:1,transform:'perspective(550px) rotateY(0deg)',offset:end},
+   {opacity:1,transform:'perspective(550px) rotateY(0deg)',offset:1}
+  ],{duration:3500,easing:'linear',fill:'both'});
+  motion.onfinish=()=>fold.remove();
+ }
 }

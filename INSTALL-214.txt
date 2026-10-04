@@ -1,0 +1,3 @@
+Apply over 211, 212, or 213. Replace matching files. Refresh the controller and OBS browser source.
+Includes editable title cards (Bottom scores > Title cards), the revised network intro and Fast Fade, and full team-control-card primary/accent gradients with cover logos.
+Team logos and colors come from your existing team setup. Teams without uploaded logos show only their gradients. Controls and scorebug animations are unchanged.

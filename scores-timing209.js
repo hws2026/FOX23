@@ -9,7 +9,7 @@ export function gameDetails(game,includePlayers=false){
 export const readingTime=text=>Math.max(10000,Math.min(18000,4000+String(text).length*120));
 export function tickerFrame(games,elapsed,fixedId,includePlayers=false){
  if(!games.length)return null;
- const schedule=games.map(game=>{const details=gameDetails(game,includePlayers),holds=details.map(readingTime);if(!holds.length){details.push('');holds.push(30000);}const duration=Math.max(30000,holds.reduce((a,b)=>a+b,0));holds[holds.length-1]+=duration-holds.reduce((a,b)=>a+b,0);return{game,details,holds,duration};});
+ const schedule=games.map(game=>{if(game._titleCard)return{game,details:[''],holds:[4000],duration:4000};const details=gameDetails(game,includePlayers),holds=details.map(readingTime);if(!holds.length){details.push('');holds.push(30000);}const duration=Math.max(30000,holds.reduce((a,b)=>a+b,0));holds[holds.length-1]+=duration-holds.reduce((a,b)=>a+b,0);return{game,details,holds,duration};});
  const fixed=schedule.find(x=>x.game.id===fixedId),total=fixed?.duration||schedule.reduce((n,x)=>n+x.duration,0);let time=Math.max(0,elapsed)%total;
  for(const row of fixed?[fixed]:schedule){if(time>=row.duration){time-=row.duration;continue;}for(let i=0;i<row.holds.length;i++){if(time<row.holds[i])return{game:row.game,detail:row.details[i],slot:i,duration:row.duration};time-=row.holds[i];}}
  return{game:games[0],detail:gameDetails(games[0])[0]||''};

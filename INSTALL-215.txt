@@ -1,0 +1,2 @@
+Apply over 211 or newer. Replace these matching files, then refresh your controller and OBS.
+Bottom scores > Title cards > choose a league: edit that league's labels, then Save title cards. Each league saves independently. Existing global labels are kept as the starting values. {league} and {network} still work. Includes updates 212-214.

@@ -152,7 +152,19 @@ def _update(action,p):
                 if v not in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW','ALL']:raise ValueError('Unknown score league')
                 c[k]=v
             elif k=='leagues':c[k]=list(dict.fromkeys(a for a in v if a in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW']))
-            elif k in ['visible','auto','playerStats']:c[k]=bool(v)
+            elif k=='leagueTitleCards':
+                if not isinstance(v,dict):raise ValueError('Invalid league title cards')
+                cards={}
+                for league,labels in v.items():
+                    if league not in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW']:raise ValueError('Unknown title league')
+                    if not isinstance(labels,list) or not 1<=len(labels)<=6:raise ValueError('Use one to six labels per league')
+                    cards[league]=[bounded_text(a,40) for a in labels if str(a).strip()]
+                    if not cards[league]:raise ValueError('Enter a title label')
+                c[k]={**c.get(k,{}),**cards}
+            elif k=='titleCards':
+                if not isinstance(v,list) or len(v)>6:raise ValueError('Use up to six title cards')
+                c[k]=[bounded_text(a,40) for a in v if str(a).strip()]
+            elif k in ['visible','auto','playerStats','titlesEnabled']:c[k]=bool(v)
             elif k in ['anchor','holdAt','updatedAt']:c[k]=max(0,float(v))
             elif k in ['date','error']:c[k]=bounded_text(v,150)
             elif k=='sources':c[k]={str(a)[:8]:str(b)[:40] for a,b in v.items() if a in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW']}
@@ -630,7 +642,7 @@ def _update(action,p):
             update('roster',{'team':side,'players':t['roster']})
             update('lineup',dict(team=side,**src['lineups'][side]))
         if isinstance(src.get('bottomScores'),dict):
-            update('bottom_scores',{k:v for k,v in src['bottomScores'].items() if k in ['league','leagues','date','auto']})
+            update('bottom_scores',{k:v for k,v in src['bottomScores'].items() if k in ['league','leagues','date','auto','titleCards','titlesEnabled','leagueTitleCards']})
             STATE['bottomScores'].update(visible=False,games=[],holdAt=0,updatedAt=0)
         update('branding',src['branding']);gg=src['game']
         update('game',{k:v for k,v in gg.items() if k not in ['scores','timeouts','clock','playClock']})
