@@ -1,5 +1,5 @@
-import config from './config.js?v=cloud222';
-import {changes,applyChanges} from './delta.js?v=cloud222';
+import config from './config.js?v=cloud226';
+import {changes,applyChanges} from './delta.js?v=cloud226';
 export const cloudEnabled = config.enabled && location.origin === config.origin &&
   new URL('../', import.meta.url).pathname === config.path;
 

@@ -1,0 +1,43 @@
+WLD SPORTS UPDATE 226 — NFL LOGOS + STARTUP REPAIR
+
+UPDATE ONLY. Apply to the existing complete FOX23 project (223 or later).
+Includes the code from update225, the complete cloud folder, and all39 supplied PNGs.
+
+1. Extract this ZIP outside your FOX23 project.
+2. Copy the included root files into FOX23, replacing matching files.
+3. Copy the COMPLETE included cloud folder. It contains config.js, delta.js,
+   sync.js, output.js and the existing setup/reference files. Do not copy only
+   sync.js and output.js. The public cloud configuration has not changed.
+4. Add the complete broadcast-logos226 folder alongside index.html.
+5. Keep every other existing project folder and file, especially assets.
+6. Publish the update yourself, then hard-refresh the controller and refresh
+   the OBS Browser Source cache. This ZIP has not been deployed for you.
+
+No SQL needs to be run. The SQL files are unchanged reference files included
+so the cloud folder is complete. No account, playlist or cloud data was edited.
+
+LOGOS
+All32 NFL teams use your supplied logos in BOTH Bottom scores and Feed scorebug.
+Denver is assigned DEN-1.png. A suffix such as -1 means an alternate; the original
+filename and image bytes are retained. Future variants can be added separately.
+Assignments are documented in broadcast-logos226/assignments.json and selected
+in nfl-logos226.js. Other leagues keep their existing feed logos.
+
+Show setup > Transition logo preset / Intro logo preset / Secondary broadcast
+logo preset offers: NFL, AFC, NFC, AFC Championship, NFC Championship,
+NFL Divisional and NFL Wild Card. Choose a preset, then Save show identity.
+Keep current leaves that logo unchanged. An uploaded image takes precedence
+for the same slot. Existing show branding is not changed automatically.
+
+STARTUP REPAIR
+The deployed controller was missing cloud/config.js and cloud/delta.js.
+Both are now included. Startup reports missing dependencies and worker/lock
+failures instead of leaving Connecting / Loading show indefinitely.
+
+CHECKS
+All39 PNGs match the originals byte-for-byte and decode successfully.
+NFL mapping, aliases, alternate filenames, preset saves, auto transition color,
+feed controls, local startup, sign-in display and cloud recovery checks passed.
+The original main scorebug renderer changes only its module cache reference;
+its animation helpers, CSS, rails and exit frames are unchanged.
+Testing used isolated local shows and mocks, not the production cloud account.

@@ -1,3 +1,4 @@
+import {nflBroadcastLogo226} from './nfl-logos226.js';
 import {scorebug,animateScorebugOut,finishBugEntrance,animateScoreChange,morph} from './feed-scorebug225.js';
 export function feedGame(games,cfg,frame){
  if(cfg.feedBugGameId)return games.find(g=>g.id===cfg.feedBugGameId)||null;
@@ -17,7 +18,7 @@ export function feedBugState(game,cfg={},now=Date.now()){
  const period=Number(game.period||String(game.quarter||'').replace(/^Q/,''));
  const quarter=game.quarter==='OT'||period>4?'OT':['','1ST','2ND','3RD','4TH'][period]||'';
  const active=live&&!stale;
- const teams=Object.fromEntries(['away','home'].map(side=>{const t=game[side]||{};return[side,{name:t.name||t.abbr||'',abbr:t.abbr||'',record:t.record||'',logo:safeLogo(t.logo),color:color(t.color,'#243545'),secondary:color(t.secondary,'#c8d4dd')}];}));
+ const teams=Object.fromEntries(['away','home'].map(side=>{const t=game[side]||{};return[side,{name:t.name||t.abbr||'',abbr:t.abbr||'',record:t.record||'',logo:nflBroadcastLogo226(game.league,t)||safeLogo(t.logo),color:color(t.color,'#243545'),secondary:color(t.secondary,'#c8d4dd')}];}));
  let status=stale?'UPDATES DELAYED':final?'FINAL':active&&clock&&quarter?'LIVE':game.status||'SCHEDULED';
  if(active&&/half|end|intermission/i.test(game.status||''))status=game.status.toUpperCase();
  const scores=Object.fromEntries(['away','home'].map(side=>[side,/^\d{1,3}$/.test(String(game[side]?.score))?String(game[side].score):'—']));

@@ -1,6 +1,7 @@
+import {nflBroadcastLogo226} from './nfl-logos226.js';
 import{titleLabels,leagueNetwork}from'./scores-titles219.js';
 import{buildScorePlan,selectedScoreLeagues}from'./scores-sequence224.js';
-import{feedGame,renderFeedBug}from'./scores-bug224.js?v=225';
+import{feedGame,renderFeedBug}from'./scores-bug224.js?v=226';
 const sheet224=document.createElement('link');sheet224.rel='stylesheet';sheet224.href=new URL('./scores224.css?v=225',import.meta.url).href;document.head.append(sheet224);
 import{tickerFrame,gameDetails}from'./scores-timing209.js?v=league215';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -32,7 +33,7 @@ function draw(root,s){
  const final=game.state==='post'&&!/postpon|cancel|suspend|abandon|delay/i.test(game.status);
  const stale=!final&&Date.now()-Number(game.updatedAt||cfg.updatedAt)>90000;
  const winner=final&&game.away.score!==''&&game.home.score!==''&&Number(game.away.score)!==Number(game.home.score)?(Number(game.away.score)>Number(game.home.score)?game.away.id:game.home.id):null;
- const team=t=>`<div class="bs-team ${winner===t.id?'bs-winner':''}"><img src="${esc(/^https:\/\//.test(t.logo)?t.logo:'data:,')}" alt=""><strong>${esc(t.name||t.abbr)}</strong><small>${esc(t.record)}</small><b class="${!stale&&game.possession===t.id?'bs-possession':''}"><span class="bs-score-window"><span class="bs-score-value">${esc(t.score)}</span></span></b></div>`;
+ const team=t=>`<div class="bs-team ${winner===t.id?'bs-winner':''}"><img src="${esc(nflBroadcastLogo226(game.league,t)||(/^https:\/\//.test(t.logo)?t.logo:'data:,'))}" alt=""><strong>${esc(t.name||t.abbr)}</strong><small>${esc(t.record)}</small><b class="${!stale&&game.possession===t.id?'bs-possession':''}"><span class="bs-score-window"><span class="bs-score-value">${esc(t.score)}</span></span></b></div>`;
  let detail=final?(frame.slot===0?'FINAL':`FINAL  |  ${frame.detail}`):frame.detail;
  if(stale)detail='UPDATES DELAYED';
  const playerDetail=cfg.playerStats&&(game.players||[]).some(r=>detail.includes(r.name)&&detail.includes(r.text));

@@ -72,7 +72,7 @@ def remaining(c):
 def save():
     tmp=STATE_FILE.with_suffix('.tmp'); tmp.write_text(json.dumps(STATE,ensure_ascii=False)); tmp.replace(STATE_FILE)
 def valid_image(v):
-    return isinstance(v,str) and (bool(__import__('re').fullmatch(r'assets/headshots/(?:nfl-[0-9]+|coach-[a-f0-9]+)\.(?:png|jpg|webp|gif)',v)) or v=='' or (len(v)<3500000 and any(v.startswith('data:image/'+x+';base64,') for x in ['png','jpeg','webp'])))
+    return isinstance(v,str) and (v in {f'broadcast-logos226/marks/{name}.png' for name in ['nfl','afc','nfc','afc-championship','nfc-championship','divisional','wild-card']} or bool(__import__('re').fullmatch(r'assets/headshots/(?:nfl-[0-9]+|coach-[a-f0-9]+)\.(?:png|jpg|webp|gif)',v)) or v=='' or (len(v)<3500000 and any(v.startswith('data:image/'+x+';base64,') for x in ['png','jpeg','webp'])))
 def bounded_text(v,n=120):
     if not isinstance(v,str) or len(v)>n: raise ValueError('Text is too long or invalid.')
     return v.strip()
