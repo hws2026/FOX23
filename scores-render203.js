@@ -1,7 +1,7 @@
 import{titleLabels,leagueNetwork}from'./scores-titles219.js';
 import{buildScorePlan,selectedScoreLeagues}from'./scores-sequence224.js';
-import{feedGame,renderFeedBug}from'./scores-bug224.js';
-const sheet224=document.createElement('link');sheet224.rel='stylesheet';sheet224.href=new URL('./scores224.css?v=224',import.meta.url).href;document.head.append(sheet224);
+import{feedGame,renderFeedBug}from'./scores-bug224.js?v=225';
+const sheet224=document.createElement('link');sheet224.rel='stylesheet';sheet224.href=new URL('./scores224.css?v=225',import.meta.url).href;document.head.append(sheet224);
 import{tickerFrame,gameDetails}from'./scores-timing209.js?v=league215';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const sessions=new WeakMap();
@@ -22,7 +22,7 @@ function scoreFrame(session,cfg){
 }
 function draw(root,s){
  const cfg=s.bottomScores||{},session=sessions.get(root),{games,frame,game}=scoreFrame(session,cfg);
- renderFeedBug(root,cfg,feedGame(games,cfg,frame));
+ renderFeedBug(root,cfg,feedGame(games,cfg,frame),s.branding);
  let el=root.querySelector('.bottom-scores203');
  if(!cfg.visible){if(el&&!el._exit){el._exit=el.animate([{opacity:1},{opacity:0}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?0:180,fill:'both'});el._exit.onfinish=()=>el.remove();}return;}
  if(el?._exit){el._exit.cancel();el._exit=null;}

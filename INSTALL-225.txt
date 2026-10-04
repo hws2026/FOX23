@@ -1,0 +1,26 @@
+WLD SPORTS UPDATE 225 — apply over the complete 223 package (224 optional)
+
+This is an UPDATE ONLY ZIP. It includes the previous bottom-scores update.
+
+1. Extract the ZIP outside your FOX23 folder.
+2. Copy its files into your existing complete FOX23 folder, replacing matching files.
+3. MERGE the cloud folder: replace only sync.js and output.js. Keep cloud/config.js,
+   delta.js, your other folders and all assets. Do not delete the existing project.
+4. Reload the controller and refresh the OBS Browser Source cache after YOU publish
+   your update. Nothing has been deployed or pushed by this update.
+
+Bottom scores > Feed scorebug > choose a game or follow the rotation > Show.
+The feed now duplicates the approved scorebug shape, rails, team gradient, score
+roll and entrance/exit. It sits at bottom center and lifts above the ticker.
+The regular scorebug remains separate. Hide it when showing the feed duplicate
+in that same position. Unknown feed timeouts are omitted; clock values are
+reported API values. Custom logo uploads remain for your later logo update.
+
+Cloud fixes: version-only idle polling, cached-state recovery after network
+failures, one token refresh shared by requests, one retry after HTTP 401, and
+explicit sign-in recovery in the OBS cloud output when the session is rejected.
+OBS cloud output remains read-only. No SQL, playlist, account or cloud config
+changes. Local mocked outage/auth tests passed; Shadow PC itself was not tested.
+
+Main scorebug animation code and its CSS/SVG assets are preserved. Existing
+animation helpers are duplicated for the feed version rather than redesigned.

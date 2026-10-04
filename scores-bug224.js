@@ -1,37 +1,65 @@
-const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+import {scorebug,animateScorebugOut,finishBugEntrance,animateScoreChange,morph} from './feed-scorebug225.js';
 export function feedGame(games,cfg,frame){
  if(cfg.feedBugGameId)return games.find(g=>g.id===cfg.feedBugGameId)||null;
  if(frame?.game&&!frame.game._titleCard)return games.find(g=>g.id===frame.game.id)||null;
  const league=frame?.game?._activeLeague;
  return games.find(g=>!league||g.league===league)||null;
 }
-export function feedBugMarkup(game,cfg,now=Date.now()){
- if(!game)return '<div class="fbu224-empty">FEED SCOREBUG · Waiting for selected game</div>';
- const final=game.state==='post'&&!/postpon|cancel|suspend|abandon|delay/i.test(game.status||''),live=game.state==='in';
- const stale=live&&now-Number(game.updatedAt||cfg.updatedAt||0)>90000;
- const winner=final&&game.away.score!==''&&game.home.score!==''&&Number(game.away.score)!==Number(game.home.score)?(Number(game.away.score)>Number(game.home.score)?'away':'home'):'';
- const team=(side)=>{const t=game[side],logo=/^(https:\/\/|data:image\/(?:png|jpeg|webp);base64,)/.test(t.logo||'')?t.logo:'';return `<div class="fbu224-team ${winner===side?'fbu224-winner':''}">${logo?`<img src="${esc(logo)}" alt="">`:'<span class="fbu224-logo-placeholder"></span>'}<div class="fbu224-name"><strong>${esc(t.abbr||t.name)}</strong>${t.record?`<small>${esc(t.record)}</small>`:''}</div><b class="fbu224-score" data-side="${side}"><span>${esc(t.score===''?'—':t.score)}</span></b>${live&&!stale&&game.possession===t.id?'<span class="fbu224-possession" aria-label="Possession">◆</span>':''}</div>`;};
- // Feed clocks are reported values. Do not invent a running clock between API updates.
- const period=game.quarter||(game.period?( ['NFL','NCAAF','NBA'].includes(game.league)?'Q'+game.period:'PERIOD '+game.period):'');
- let status=stale?'UPDATES DELAYED':final?'FINAL':live&&game.clock&&period?period+' · '+game.clock:game.status||'SCHEDULED';
- // Preserve overtime/halftime descriptors supplied by the league.
- if(live&&!stale&&/half|end|OT|overtime/i.test(game.status||''))status=game.status;
- const facts=live&&!stale?[game.down,game.ball?'BALL ON '+game.ball:''].filter(Boolean).join(' · '):'';
- return `<div class="fbu224-header"><b>${esc(game.league)}</b><span>${esc(status)}</span></div><div class="fbu224-teams">${team('away')}${team('home')}</div>${facts?`<div class="fbu224-facts">${esc(facts)}</div>`:''}`;
+const color=(value,fallback)=>/^#?[0-9a-f]{6}$/i.test(value||'')?'#'+value.replace(/^#/,''):fallback;
+const safeLogo=value=>/^https:\/\/|^data:image\/(?:png|jpeg|webp);base64,/.test(value||'')?value:'';
+export function feedBugState(game,cfg={},now=Date.now()){
+ if(!game)return null;
+ const live=game.state==='in',stale=live&&now-Number(game.updatedAt||cfg.updatedAt||0)>90000;
+ const final=game.state==='post'&&!/postpon|cancel|suspend|abandon|delay/i.test(game.status||'');
+ const football=['NFL','NCAAF'].includes(game.league);
+ const down=football&&String(game.down||'').match(/^([1-4])(?:st|nd|rd|th)?\s*(?:&|and)\s*(.+)$/i);
+ const rawClock=String(game.clock||''),clock=rawClock.match(/^(\d+):(\d{2})(?:\.\d+)?$/);
+ const period=Number(game.period||String(game.quarter||'').replace(/^Q/,''));
+ const quarter=game.quarter==='OT'||period>4?'OT':['','1ST','2ND','3RD','4TH'][period]||'';
+ const active=live&&!stale;
+ const teams=Object.fromEntries(['away','home'].map(side=>{const t=game[side]||{};return[side,{name:t.name||t.abbr||'',abbr:t.abbr||'',record:t.record||'',logo:safeLogo(t.logo),color:color(t.color,'#243545'),secondary:color(t.secondary,'#c8d4dd')}];}));
+ let status=stale?'UPDATES DELAYED':final?'FINAL':active&&clock&&quarter?'LIVE':game.status||'SCHEDULED';
+ if(active&&/half|end|intermission/i.test(game.status||''))status=game.status.toUpperCase();
+ const scores=Object.fromEntries(['away','home'].map(side=>[side,/^\d{1,3}$/.test(String(game[side]?.score))?String(game[side].score):'—']));
+ return {teams,branding:{bugBottom:0,bugScale:Number(cfg.bugScale)||1},program:{graphic:{type:'scorebug'}},game:{scores,quarter,clock:{remaining:clock?Number(clock[1])*60+Number(clock[2]):0,running:false,anchor:0},playClock:{remaining:0,running:false,anchor:0},showInfo:true,showPlayClock:false,showDownDistance:active&&!!down,down:down?['','1ST','2ND','3RD','4TH'][Number(down[1])]:'',distance:down?down[2].toUpperCase():'',showBallPosition:active&&football&&!!game.ball,ballOn:game.ball||'',bottomStatus:status,flag:false,possession:active&&game.possession?['away','home'].find(side=>String(game[side]?.id)===String(game.possession))||'none':'none',timeouts:{away:0,home:0}}};
 }
-export function renderFeedBug(root,cfg,game){
- let el=root.querySelector('.feed-scorebug224');
- if(!cfg.feedBugVisible){el?.remove();return;}
- if(!el){el=document.createElement('aside');el.className='feed-scorebug224';root.append(el);}
- const html=feedBugMarkup(game,cfg);if(html===el._html)return;
- const old=el._game;el._html=html;el.innerHTML=html;
- for(const img of el.querySelectorAll('img'))img.onerror=()=>{img.style.visibility='hidden';};
- const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
- if(!reduced&&game&&old?.id===game.id)for(const side of ['away','home']){
-  const next=String(game[side].score),prev=old[side];if(next===prev||!/^\d+$/.test(next)||!/^\d+$/.test(prev))continue;
-  const slot=el.querySelector('[data-side="'+side+'"]'),value=slot.firstElementChild,leaving=document.createElement('span');leaving.className='fbu224-old';leaving.textContent=prev;slot.append(leaving);
-  value.animate([{transform:'translateY(110%)'},{transform:'translateY(0)'}],{duration:320,easing:'ease-out'});
-  leaving.animate([{transform:'translateY(0)'},{transform:'translateY(-110%)'}],{duration:320,easing:'ease-out'}).onfinish=()=>leaving.remove();
+export function feedBugMarkup(game,cfg,now=Date.now()){
+ const state=feedBugState(game,cfg,now);return state?scorebug(state):'';
+}
+const shadowCSS=`:host{--display:Impact,'Arial Narrow',sans-serif;--accent:#f9cb40;color:#f6f9fc;font-family:'Arial Narrow',Arial,sans-serif} .feed-root225{position:absolute;inset:0;visibility:hidden} .feed-root225 .bug-wrap{bottom:var(--feed-bottom225,64px)!important} .timeout-bars{visibility:hidden} .feed-root225 .information.status-mode .game-status{font-size:36px} .feed-root225 .record:empty{display:none}`;
+function makeHost(root){
+ const host=document.createElement('aside');host.className='feed-scorebug224';host.setAttribute('aria-label','Feed scorebug');
+ // Separate DOM prevents the main game clock, main renderer, and SVG IDs from
+ // overwriting or removing the independent feed scorebug.
+ const shadow=host.attachShadow({mode:'open'}),surface=document.createElement('div');surface.className='feed-root225';
+ const sheets=['graphics.css?v=20260923-controls105','reference.css?v=ref219'];
+ const ready=sheets.map(path=>new Promise(resolve=>{const link=document.createElement('link');link.rel='stylesheet';link.href=new URL(path,import.meta.url).href;link.onload=()=>resolve(true);link.onerror=()=>resolve(false);shadow.append(link);}));
+ const style=document.createElement('style');style.textContent=shadowCSS;shadow.append(style,surface);host._surface=surface;root.append(host);
+ Promise.all(ready).then(result=>{if(!host.isConnected)return;if(result.some(ok=>!ok)){host.dataset.error='Scorebug styles failed to load; reload output.';return;}host._ready=true;surface.style.visibility='visible';draw(host);});
+ return host;
+}
+function draw(host){
+ if(!host._ready)return;
+ const {cfg,game}=host._latest,root=host._surface;let bug=root.querySelector('.bug-wrap');
+ if(!cfg.feedBugVisible||!game){if(bug&&!bug.classList.contains('bug-exit'))animateScorebugOut(bug,'auto');return;}
+ const html=feedBugMarkup(game,{...cfg,bugScale:host._branding?.bugScale});if(bug&&host._html===html&&!bug.classList.contains('bug-exit'))return;
+ const template=document.createElement('template');template.innerHTML=html;const next=template.content.firstElementChild;next.dataset.motion='auto';
+ if(bug?.classList.contains('bug-exit')){bug.getAnimations({subtree:true}).forEach(a=>a.cancel());clearTimeout(bug._motionTimer);bug.remove();bug=null;}
+ if(!bug){bug=next;bug.classList.add('bug-enter');root.append(bug);finishBugEntrance(bug);}
+ else{
+  const oldScores=Object.fromEntries(['away','home'].map(side=>[side,bug.querySelector('[data-score-side='+side+']').dataset.scoreValue]));
+  const sameGame=host._gameId===game.id,entering=bug.classList.contains('bug-enter');
+  if(entering)next.classList.add('bug-enter');
+  const oldDown=bug.querySelector('.down-current').textContent;
+  if(sameGame){for(const pop of bug.querySelectorAll(':scope > .score-add'))next.append(pop.cloneNode(true));for(const side of ['away','home']){const cell=bug.querySelector('[data-score-side='+side+']'),fresh=next.querySelector('[data-score-side='+side+']');if(cell.dataset.scoreValue===fresh.dataset.scoreValue)fresh.replaceWith(cell.cloneNode(true));}}
+  morph(bug,next);
+  if(sameGame&&!entering)for(const side of ['away','home']){const cell=bug.querySelector('[data-score-side='+side+']');if(oldScores[side]!==cell.dataset.scoreValue&&/^\d+$/.test(oldScores[side])&&/^\d+$/.test(cell.dataset.scoreValue))animateScoreChange(cell,oldScores[side],cell.dataset.scoreValue);}
+  const down=bug.querySelector('.down');if(sameGame&&!entering&&oldDown!==down.querySelector('.down-current').textContent&&!matchMedia('(prefers-reduced-motion: reduce)').matches){clearTimeout(down._rollTimer);down.dataset.previous=oldDown;down.classList.remove('rolling');void down.offsetWidth;down.classList.add('rolling');down._rollTimer=setTimeout(()=>{down.classList.remove('rolling');delete down.dataset.previous;},380);}
  }
- el._game=game?{id:game.id,away:String(game.away.score),home:String(game.home.score)}:null;
+ for(const img of bug.querySelectorAll('.team-logo'))img.onerror=()=>{const fallback=document.createElement('span');fallback.className='team-monogram';fallback.textContent=game[img.closest('.home')?'home':'away'].abbr||'';img.replaceWith(fallback);};
+ host._html=html;host._gameId=game.id;
+}
+export function renderFeedBug(root,cfg,game,branding={}){
+ let host=root.querySelector('.feed-scorebug224');if(!host&&!cfg.feedBugVisible)return;
+ if(!host)host=makeHost(root);host._branding=branding;host.style.setProperty('--feed-bottom225',String(Number(branding.bugBottom)||64)+'px');host.style.transform=cfg.visible?'translateY(-58px)':'translateY(0)';host._latest={cfg,game};draw(host);
 }

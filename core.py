@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Local broadcast controller. Python 3.9+, no third-party dependencies."""
-import argparse, copy, json, math, mimetypes, os, threading, time, sys
+import argparse, copy, json, math, mimetypes, os, threading, time, sys, re
 from pathlib import Path
 from datetime import datetime, timezone
 from urllib.parse import urlparse, parse_qs
@@ -192,6 +192,9 @@ def _update(action,p):
                     for side in ['away','home']:
                         team=item.get(side,{})
                         game[side]={key:bounded_text(team.get(key,''),100) for key in ['id','name','abbr','score','record']}
+                        for key in ['color','secondary']:
+                            value=str(team.get(key,''))
+                            game[side][key]='#'+value.lstrip('#') if re.fullmatch(r'#?[0-9a-fA-F]{6}',value) else ''
                         url=str(team.get('logo',''))
                         game[side]['logo']=url[:500] if url.startswith('https://') else ''
                     cleaned.append(game)

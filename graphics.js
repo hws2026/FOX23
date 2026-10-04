@@ -1,5 +1,5 @@
 import{graphic219,names219}from'./additions219.js';
-import{renderBottomScores}from'./scores-render203.js?v=scores224';
+import{renderBottomScores}from'./scores-render203.js?v=scores225';
 // Warm the exit artwork before the first operator OUT command.
 const scorebugExitFrames211=Array.from({length:51},(_,i)=>{const img=new Image();img.src=new URL('./assets/scorebug-out219/'+String(i).padStart(2,'0')+'.svg',import.meta.url).href;return img;});
 import{extraGraphic,extraNames}from'./extras194.js?v=added194';

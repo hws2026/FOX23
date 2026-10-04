@@ -5,16 +5,23 @@ export const cloudEnabled = config.enabled && location.origin === config.origin 
 
 // Serialize this device's requests, and use the database version to arbitrate devices.
 export function createSharedRPC(local, db, {readOnly=false}={}) {
-  let tail = Promise.resolve(), version = null, baseline = null;
+  let tail = Promise.resolve(), version = null, baseline = null, localDirty = false;
   async function refresh() {
     const head = await db.head();
     if (!head) throw Error('Shared show is missing. No local data has been uploaded.');
-    if (head.version !== version) {
-      const row = baseline && head.version === version+1 && Array.isArray(head.last_patch)
-        ? {version:head.version,snapshot:applyChanges(baseline,head.last_patch)} : await db.read();
+    if (head.version !== version || localDirty) {
+      let row;
+      if (baseline && head.version === version) row = {version,snapshot:baseline};
+      else if (baseline && head.version === version+1) {
+        const patch = db.patch ? await db.patch(head.version) : head;
+        if (patch?.version === head.version && Array.isArray(patch.last_patch))
+          row = {version:head.version,snapshot:applyChanges(baseline,patch.last_patch)};
+      }
+      row ||= await db.read();
       if (!row) throw Error('Shared show is missing.');
+      localDirty = true;
       await local({endpoint:'cloud_load', snapshot:row.snapshot});
-      version = row.version; baseline = row.snapshot;
+      version = row.version; baseline = row.snapshot; localDirty = false;
     }
   }
   return request => {
@@ -22,28 +29,97 @@ export function createSharedRPC(local, db, {readOnly=false}={}) {
       if(readOnly && request.endpoint!=='state')throw Error('Cloud output is read-only.');
       try {
         await refresh();
+        // State requests can advance timers too. Restore the confirmed baseline if
+        // local processing or a write fails; never replay the uncertain request.
+        if (!readOnly) localDirty = true;
         const result = await local(request);
-        if(readOnly || result.status !== 200)return result;
+        if(readOnly)return result;
+        if(result.status !== 200)return result;
         const snapshot = await local({endpoint:'cloud_snapshot'});
         const edits = changes(baseline,snapshot);
         if (edits.length) {
           const saved = await db.save(version, snapshot, edits);
           if (saved == null) {
-            version = null; await refresh();
+            await refresh();
             if (request.endpoint === 'action') return {status:409,data:{error:'Another device changed the shared show. Try again.'}};
             return local(request);
           }
           version = saved; baseline = snapshot;
         }
+        localDirty = false;
         return result;
       } catch (error) {
         // Never replay an uncertain action (e.g. score +6) or save offline changes later.
-        version = null;
-        throw Error((readOnly?'Cloud output reconnecting. ':'Cloud sync unavailable. Action not confirmed; check the shared show before retrying. ') + error.message);
+        // A failed read keeps the last confirmed version, so reconnects can use a delta.
+        const failure = Error((readOnly?'Cloud output reconnecting. ':'Cloud sync unavailable. Action not confirmed; check the shared show before retrying. ') + error.message);
+        failure.code = error.code;
+        throw failure;
       }
     });
     tail = task.catch(()=>{}); return task;
   };
+}
+
+// Token refresh is shared by concurrent requests. Failed network reads keep the
+// refresh token; a rejected token requires an explicit sign-in.
+export function createCloudTransport({root,publishableKey,storage=sessionStorage,fetcher=fetch,now=Date.now}) {
+  const key='wld-cloud-session:'+root;
+  let session, refreshing;
+  try { session=JSON.parse(storage.getItem(key)); } catch {}
+  const signInRequired=()=>Object.assign(Error('Sign in again to reconnect the shared show.'),{code:'CLOUD_AUTH_REQUIRED'});
+  function clear() { session=null;try { storage.removeItem(key); } catch {} }
+  function remember(s) {
+    if(!s?.access_token || !s.refresh_token || !Number.isFinite(Number(s.expires_in)))
+      throw Error('Cloud sign-in returned an incomplete session. Try signing in again.');
+    session={...s,expires_at:now()+Number(s.expires_in)*1000};
+    try { storage.setItem(key,JSON.stringify(session)); } catch {}
+  }
+  async function request(path,body,token) {
+    const response=await fetcher(root+path,{method:body===undefined?'GET':'POST',cache:'no-store',headers:{apikey:publishableKey,'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},...(body===undefined?{}:{body:JSON.stringify(body)}),signal:AbortSignal.timeout(body===undefined&&!path.includes('snapshot')?20000:60000)});
+    let data;
+    try { data=await response.json(); } catch {
+      throw Object.assign(Error('Cloud returned an unreadable response (HTTP '+response.status+').'),{status:response.status});
+    }
+    if(!response.ok)throw Object.assign(Error(data?.msg||data?.message||data?.error_description||'Cloud request failed (HTTP '+response.status+').'),{status:response.status,code:data?.code});
+    return data;
+  }
+  async function refresh() {
+    if(refreshing)return refreshing;
+    if(!session?.refresh_token)throw signInRequired();
+    const previous=session;
+    refreshing=(async()=>{
+      try {
+        const next=await request('/auth/v1/token?grant_type=refresh_token',{refresh_token:previous.refresh_token});
+        if(session===previous)remember(next);
+      } catch(error) {
+        if([400,401,403].includes(error.status)) {
+          if(session===previous)clear();
+          throw signInRequired();
+        }
+        throw error;
+      } finally { refreshing=null; }
+    })();
+    return refreshing;
+  }
+  async function call(path,body,authenticated=true) {
+    if(!authenticated)return request(path,body);
+    if(!session?.access_token || !Number.isFinite(session.expires_at) || session.expires_at<now()+60000)await refresh();
+    const token=session?.access_token;
+    if(!token)throw signInRequired();
+    try { return await request(path,body,token); }
+    catch(error) {
+      if(error.status!==401)throw error;
+      // An explicit 401 did not execute the action; retry once with a fresh token.
+      if(session?.access_token===token)await refresh();
+      if(!session?.access_token)throw signInRequired();
+      try { return await request(path,body,session.access_token); }
+      catch(retryError) {
+        if(retryError.status===401){clear();throw signInRequired();}
+        throw retryError;
+      }
+    }
+  }
+  return {call,remember,clear,get session(){return session;}};
 }
 
 export async function connectCloud(local, {readOnly=false}={}) {
@@ -52,27 +128,22 @@ export async function connectCloud(local, {readOnly=false}={}) {
   if (config.publishableKey.startsWith('sb_secret_')) throw Error('Use a publishable key, never a secret key.');
   try { if (JSON.parse(atob(config.publishableKey.split('.')[1])).role === 'service_role') throw Error('secret'); }
   catch(e) { if(e.message==='secret') throw Error('Never use a service_role key in this panel.'); }
-  const root=config.url.replace(/\/$/,''), key='wld-cloud-session:'+root;
-  let session; try { session=JSON.parse(sessionStorage.getItem(key)); } catch {}
-  function remember(s) { session={...s,expires_at:Date.now()+s.expires_in*1000}; sessionStorage.setItem(key,JSON.stringify(session)); }
-  async function call(path,body,authenticated=true) {
-    if(authenticated && (!session || session.expires_at < Date.now()+60000)) {
-      if(!session?.refresh_token) throw Error('Sign in again by reloading the panel.');
-      remember(await call('/auth/v1/token?grant_type=refresh_token',{refresh_token:session.refresh_token},false));
-    }
-    const response=await fetch(root+path,{method:body===undefined?'GET':'POST',headers:{apikey:config.publishableKey,'Content-Type':'application/json',...(authenticated?{Authorization:'Bearer '+session.access_token}:{})},...(body===undefined?{}:{body:JSON.stringify(body)}),signal:AbortSignal.timeout(body===undefined&&!path.includes('snapshot')?20000:60000)});
-    const data=await response.json();
-    if(!response.ok) throw Error(data.msg||data.message||data.error_description||'Cloud request failed');
-    return data;
-  }
+  const transport=createCloudTransport({root:config.url.replace(/\/$/,''),publishableKey:config.publishableKey});
+  const {call,remember}=transport;
   let patches=true;
   const db={
-    head:async()=> {
-      try{return (await call('/rest/v1/wld_shows?select='+ (patches?'version,last_patch':'version') +'&limit=1'))[0];}
-      catch(error){if(patches && /last_patch/.test(error.message)){patches=false;return (await call('/rest/v1/wld_shows?select=version&limit=1'))[0];}throw error;}
+    head:async()=> (await call('/rest/v1/wld_shows?select=version&limit=1'))[0],
+    patch:async version=> {
+      if(!patches)return null;
+      try{return (await call('/rest/v1/wld_shows?select=version,last_patch&version=eq.'+encodeURIComponent(version)+'&limit=1'))[0];}
+      catch(error){if(/last_patch/.test(error.message) && [400,404].includes(error.status)){patches=false;return null;}throw error;}
     },
     read:async()=> (await call('/rest/v1/wld_shows?select=version,snapshot&limit=1'))[0],
-    save:(v,s,edits)=>patches?call('/rest/v1/rpc/wld_patch_show',{expected_version:v,edits}):call('/rest/v1/rpc/wld_save_show',{expected_version:v,s}),
+    save:async(v,s,edits)=> {
+      if(patches)try{return await call('/rest/v1/rpc/wld_patch_show',{expected_version:v,edits});}
+      catch(error){if(error.code==='PGRST202' && /wld_patch_show/.test(error.message))patches=false;else throw error;}
+      return call('/rest/v1/rpc/wld_save_show',{expected_version:v,s});
+    },
   };
   const sharedRPC=createSharedRPC(local,db,{readOnly});
   const box=document.createElement('section');box.className='card';
@@ -88,7 +159,7 @@ export async function connectCloud(local, {readOnly=false}={}) {
     let busy=false;
     const task=fn=>async e=>{e?.preventDefault();if(busy)return;busy=true;box.setAttribute('aria-busy','true');status.textContent='Connecting…';try{await fn();}catch(error){status.textContent=error.message;}finally{busy=false;box.removeAttribute('aria-busy');}};
     const join=async()=>{const row=await db.head();if(row){status.textContent='Loading shared show…';await sharedRPC({endpoint:'state'});box.remove();document.body.classList.remove('cloud-login222');style.remove();resolve();}else{setup.hidden=readOnly;status.textContent=readOnly?'No shared show for this account. Sign into the same account used by your control panel.':'No shared show yet. Nothing has been replaced or uploaded.';}};
-    box.querySelector('form').onsubmit=task(async()=>{const fields=new FormData(box.querySelector('form'));session=null;sessionStorage.removeItem(key);remember(await call('/auth/v1/token?grant_type=password',{email:fields.get('email'),password:fields.get('password')},false));box.querySelector('[name=password]').value='';await join();});
+    box.querySelector('form').onsubmit=task(async()=>{const fields=new FormData(box.querySelector('form'));transport.clear();remember(await call('/auth/v1/token?grant_type=password',{email:fields.get('email'),password:fields.get('password')},false));box.querySelector('[name=password]').value='';await join();});
     box.querySelector('[data-backup]').onclick=task(async()=>{
       backedUp=await local({endpoint:'cloud_snapshot'});
       const blob=new Blob([JSON.stringify({...backedUp.state,cloudLibraryBackup:backedUp.library},null,2)],{type:'application/json'});
@@ -98,7 +169,7 @@ export async function connectCloud(local, {readOnly=false}={}) {
     });
     box.querySelector('[data-create]').onclick=task(async()=>{if(!backedUp)throw Error('Download your backup first.');await call('/rest/v1/rpc/wld_create_show',{s:backedUp});await join();});
     box.querySelector('[data-join]').onclick=task(join);
-    const resume=box.querySelector('[data-continue]');resume.hidden=!session;resume.onclick=task(join);
+    const resume=box.querySelector('[data-continue]');resume.hidden=!transport.session;resume.onclick=task(join);
   });
   const badge=document.createElement('span');badge.textContent='Shared cloud show';badge.title='All devices signed into this show account use the same playlist and controls.';
   document.querySelector('.topbar-right')?.prepend(badge);
