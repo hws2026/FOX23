@@ -1,0 +1,71 @@
+WLD SHARED CLOUD SHOW — SETUP 221
+
+This adds a private database behind the existing GitHub Pages panel.
+Each device connects directly to Supabase. No host computer, pairing,
+Python server, or Desktop sync is required. GitHub Pages hosts the files;
+Supabase stores the shared show. This is prepared, not yet activated.
+
+1. Create a Supabase project in your own account. In its SQL editor,
+   run cloud/schema.sql. It creates the show table, an initial backup,
+   owner-only read policies and version-checked save functions.
+
+2. In Supabase Authentication, create a show user with email/password.
+   Use the same show user on your control devices. This is the panel
+   login, not your Supabase dashboard password. Keep public signups off.
+   Enter passwords only into the login form; never commit them to GitHub.
+
+3. Edit cloud/config.js:
+     enabled: true
+     url: your https://PROJECT.supabase.co URL
+     publishableKey: your project's PUBLIC publishable key (or anon key)
+   NEVER use a secret/service_role key. Keep origin and path set to
+   https://hws2026.github.io and /FOX23/ for your existing site.
+
+4. Merge the update files into your existing GitHub website and deploy.
+   First open it IN THE SAME BROWSER/PROFILE on THIS computer that already
+   contains your desired GitHub playlist. Sign in, download the backup,
+   confirm the file was saved, then click Create shared show.
+   Do not initialize from a different device or an empty browser profile.
+   Creation cannot overwrite a show that already exists. The initial
+   database backup is retained independently of later show edits.
+
+5. On every other device open the same GitHub URL and sign in with the
+   same show account. It joins the shared database automatically. Existing
+   local browser shows are NOT uploaded or merged. The Desktop/local URL
+   is excluded, and its data is unchanged. Closing all computers is fine.
+
+WHAT SYNCS
+Playlist, teams/rosters, uploaded image data held in the show, graphics
+settings, preview/program state, clocks and live controls. Changes are
+checked by the existing panel polling loop (about 600 ms plus network
+time). This is not zero-latency sync. Concurrent edits return a conflict
+instead of overwriting a newer save. Offline actions are not queued.
+After a network error, check the current score/state before retrying an
+action; the server may have accepted it before the connection dropped.
+
+WHAT DOES NOT SYNC
+Local video files, camera permissions/devices, browser-only preferences,
+and media stored separately from the show (such as split video inputs).
+Those still need selecting on the device that outputs them. Package asset
+paths must exist on the deployed site. Large embedded photos increase
+transfer time; the database rejects show snapshots larger than 30 MB.
+
+BACKUP / LOCAL SAFETY
+Cloud mode uses a memory-only engine and does not overwrite this browser's
+original saved show database. Disabling cloud returns to that old local
+snapshot, NOT the latest cloud state. Export the shared show before doing
+so if you need its current contents. The downloaded backup uses the normal
+show export shape plus cloudLibraryBackup for the reusable team library.
+The database's wld_initial_backups row contains the complete initial
+snapshot. Do not clear browser data until the backup and cloud playlist
+have been verified.
+
+VALIDATION STATUS
+Client conflict/serialization/offline recovery logic tested locally.
+Live Supabase authentication, SQL execution, cross-device latency and
+deployment require your project and have not yet been verified.
+
+Official setup references:
+https://supabase.com/docs/guides/database/postgres/row-level-security
+https://supabase.com/docs/guides/database/functions
+https://supabase.com/docs/guides/auth/passwords

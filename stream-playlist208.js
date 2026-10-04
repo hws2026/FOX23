@@ -1,4 +1,4 @@
-import{base}from'./bridge.js?v=cloud221';
+import{base}from'./bridge.js?v=cloud222';
 import{deckControl}from'./panel.js?v=league215';
 import{zip}from'./zip.js?v=tunnel159';
 const storage='wld-stream-playlist:'+base.pathname;

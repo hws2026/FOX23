@@ -1,9 +1,0 @@
-WLD SPORTS UPDATE 219
-Merge these files into your existing complete package, replacing matching files. Keep the existing assets folder; this update adds assets/scorebug-out219.
-Open index.html with Live Server, then reload the controller and output tabs.
-Title cards: Bottom scores > Title cards > expand each league. Set its network and labels, then Save title cards. {network} uses that league’s assignment. {league}, {nfl}, {mlb}, {nba}, {mls}, {ncaaf}, {ncaam}, {ncaaw} are supported.
-New library graphics: Team record (Teams), Player feature dock (Players), Season story photo wall (News). Save photo-wall slides in the playlist to sequence them.
-Compact weather now includes humidity. Touchdown bands animate in team colors. Lineup update wipes use the selected team’s accent.
-Scorebug entrance and score-update logic preserved. Exit timing/poses preserved; traced frame geometry consolidated and smoothed, with larger SVG render surfaces. Fast fade retained.
-Quality: text/CSS and new vector edges scale with output. Existing player images and source-derived exit artwork retain their original detail limits; this is not a claim that every asset has been recreated as native 4K art.
-Review: review219.html (isolated demo; does not change your saved show).

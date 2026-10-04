@@ -1,1 +1,0 @@
-Extract into the same folder as overlay.html. Merge the assets folder; do not replace the entire assets folder. These are the existing scorebug artwork files. No animation code, timing, or settings are changed. Hard-refresh the controller and output tabs after copying. This repairs absent/outdated artwork; it does not diagnose other Live Server issues.

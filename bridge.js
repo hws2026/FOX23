@@ -1,9 +1,9 @@
-import {cloudEnabled,connectCloud} from './cloud/sync.js';
+import {cloudEnabled,connectCloud} from './cloud/sync.js?v=cloud222';
 export const base=new URL('.',import.meta.url);
 export const channel=new BroadcastChannel('gridiron-pages:'+base.pathname);
-const originalFetch=globalThis.fetch.bind(globalThis);let remoteRPC,cloudRPC,worker,sequence=0,pending=new Map(),current,readyResolve;
+const originalFetch=globalThis.fetch.bind(globalThis);let remoteRPC,cloudRPC,worker,workerFailure,sequence=0,pending=new Map(),current,readyResolve;
 export const ready=new Promise(r=>readyResolve=r);
-function localRPC(request){return new Promise((resolve,reject)=>{const id=++sequence;pending.set(id,{resolve,reject});worker.postMessage({id,request});});}
+function localRPC(request){if(workerFailure)return Promise.reject(workerFailure);return new Promise((resolve,reject)=>{const id=++sequence;pending.set(id,{resolve,reject});worker.postMessage({id,request});});}
 export function rpc(request){if(remoteRPC)return remoteRPC(request);if(cloudRPC)return cloudRPC(request);return localRPC(request);}
 export function publish(state){current=state;channel.postMessage({kind:'state',state});dispatchEvent(new CustomEvent('gridiron-state',{detail:state}));}
 export async function startController(){
@@ -13,9 +13,9 @@ export async function startController(){
  if(!remote){
  await new Promise(resolve=>navigator.locks.request('gridiron-controller:'+base.pathname,{ifAvailable:true},async lock=>{
   acquired=!!lock;resolve();if(!lock)return;
-  worker=new Worker(new URL('runtime-worker.js?v=cloud221'+(cloudEnabled?'&cloud=1':''),base));
+  worker=new Worker(new URL('runtime-worker.js?v=cloud222'+(cloudEnabled?'&cloud=1':''),base));
   worker.onmessage=({data})=>{const p=pending.get(data.id);if(!p)return;pending.delete(data.id);data.error?p.reject(Error(data.error)):p.resolve(data.result);};
-  worker.onerror=e=>{for(const p of pending.values())p.reject(Error(e.message));pending.clear();};
+  worker.onerror=e=>{workerFailure=Error(e.message||'Show engine failed to start. Reload to retry.');for(const p of pending.values())p.reject(workerFailure);pending.clear();};
   readyResolve();await new Promise(()=>{});
  }));
  if(!acquired)throw Error('A control panel is already open for this site. Use that tab, or close it before opening another.');
