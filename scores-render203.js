@@ -1,3 +1,4 @@
+import{titleLabels}from'./scores-titles219.js';
 import{tickerFrame,gameDetails}from'./scores-timing209.js?v=league215';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const sessions=new WeakMap();
@@ -10,7 +11,7 @@ function orderedGames(games,league,selected){
 }
 
 function draw(root,s){const cfg=s.bottomScores||{};let el=root.querySelector('.bottom-scores203');if(!cfg.visible){if(el&&!el._exit){el._exit=el.animate([{opacity:1},{opacity:0}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?0:180,fill:'both'});el._exit.onfinish=()=>el.remove();}return;}if(el?._exit){el._exit.cancel();el._exit=null;}if(!el){el=document.createElement('aside');el.className='bottom-scores203';root.append(el);}
- const games=orderedGames(cfg.games||[],cfg.league,cfg.leagues),elapsed=Math.max(0,(cfg.holdAt||Date.now())-(cfg.anchor||0)),rotationKey=`${cfg.league}:${(cfg.leagues||[]).join(',')}:${cfg.gameId}:${!!cfg.playerStats}:${cfg.titlesEnabled!==false}:${JSON.stringify([cfg.titleCards||[],cfg.leagueTitleCards||{}])}`;
+ const games=orderedGames(cfg.games||[],cfg.league,cfg.leagues),elapsed=Math.max(0,(cfg.holdAt||Date.now())-(cfg.anchor||0)),rotationKey=`${cfg.league}:${(cfg.leagues||[]).join(',')}:${cfg.gameId}:${!!cfg.playerStats}:${cfg.titlesEnabled!==false}:${JSON.stringify([cfg.titleCards||[],cfg.leagueTitleCards||{},cfg.leagueNetworks||{},s.branding?.network])}`;
  if(!el._rotation||el._rotation.key!==rotationKey||elapsed<el._rotation.start||elapsed>=el._rotation.end){
   const plan=[];let lastLeague='';for(const g of games){if(cfg.titlesEnabled!==false&&!cfg.gameId&&g.league!==lastLeague)plan.push({id:'title:'+g.id,league:g.league,_titleCard:true,_tickerDetails:[''],away:{},home:{}});plan.push({...g,_tickerDetails:gameDetails(g,cfg.playerStats)});lastLeague=g.league;}
   const duration=cfg.gameId?(tickerFrame(plan,0,cfg.gameId,cfg.playerStats)?.duration||30000):plan.reduce((n,g)=>n+(tickerFrame([g],0,null,cfg.playerStats)?.duration||30000),0);
@@ -27,7 +28,7 @@ function draw(root,s){const cfg=s.bottomScores||{};let el=root.querySelector('.b
  let detail=final?(frame.slot===0?'FINAL':`FINAL  |  ${frame.detail}`):frame.detail;
  if(stale)detail='UPDATES DELAYED';
  const playerDetail=cfg.playerStats&&(game.players||[]).some(r=>detail.includes(r.name)&&detail.includes(r.text));
- const title=game._titleCard,labels=(cfg.leagueTitleCards?.[game.league]||cfg.titleCards||['{network}','SCORES & UPDATES']).map(label=>String(label).replaceAll('{league}',game.league).replaceAll('{network}',s.branding?.network||'WLD SPORTS')); 
+ const title=game._titleCard,labels=titleLabels(cfg,game.league,s.branding);
  const html=title?`<b class="bs-league">${esc(game.league)}</b><div class="bs-game-window"><div class="bs-game-row bs-title212" style="--title-font:${labels.length>4?20:25}px;grid-template-columns:repeat(${Math.max(1,labels.length)},minmax(0,1fr))">${labels.map(label=>`<span>${esc(label)}</span>`).join('')}</div></div>`:`<b class="bs-league">${esc(game.league)}</b><div class="bs-game-window"><div class="bs-game-row ${playerDetail?'bs-player-detail':''}">${playerDetail?'':team(game.away)+team(game.home)}<div class="bs-status"><span>${esc(detail).replace(/  \|  /g,'<i></i>')}</span></div></div></div>`;
  if(el._markup!==html){
   const previous=el._game,oldRow=el.querySelector('.bs-game-row')?.cloneNode(true),images=new Map([...el.querySelectorAll('img')].map(img=>[img.src,img]));el._markup=html;el.innerHTML=html;for(const img of el.querySelectorAll('img')){const loaded=images.get(img.src);if(loaded?.complete&&loaded.naturalWidth)img.replaceWith(loaded);}
@@ -48,7 +49,7 @@ function draw(root,s){const cfg=s.bottomScores||{};let el=root.querySelector('.b
       leaving.animate([{transform:'translateY(0)'},{transform:'translateY(-110%)'}],{duration:320,easing:'cubic-bezier(.2,.7,.3,1)'}).onfinish=()=>leaving.remove();
      }
     }
-    if(previous.detail!==detail)el.querySelector('.bs-status').animate([{transform:'translateY(-100%)'},{transform:'translateY(0)'}],{duration:180,easing:'ease-out'});
+    if(previous.detail!==detail)el.querySelector('.bs-status')?.animate([{transform:'translateY(-100%)'},{transform:'translateY(0)'}],{duration:180,easing:'ease-out'});
    }
   }
   el._game={id:game.id,away:String(game.away.score),home:String(game.home.score),detail};

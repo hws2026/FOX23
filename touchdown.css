@@ -89,3 +89,10 @@
 .td-sequence[data-variant=player] .td70-portrait.td-has-photo{left:130px;bottom:120px;width:820px;height:420px}
 @keyframes td70-name-in{from{clip-path:inset(-64px 100% -12px -24px)}to{clip-path:inset(-64px -24px -12px -24px)}}
 @keyframes td-name-out142{from{clip-path:inset(-64px -24px -12px -24px)}to{clip-path:inset(-64px -24px -12px 100%)}}
+
+/* Reference219: color bands continue moving underneath the held TD typography. */
+.td70-rails{overflow:hidden;background:linear-gradient(180deg,color-mix(in srgb,var(--team) 72%,#000) 0 42%,var(--secondary) 43% 100%)}
+.td70-rails::before,.td70-rails::after{content:"";position:absolute;inset:0;width:200%;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 9px,#ffffff26 10px 12px,#0003 13px 17px,transparent 19px 25px),repeating-linear-gradient(100deg,transparent 0 260px,#ffffff32 390px,transparent 620px);animation:td219-color-travel 2.8s linear infinite}
+.td70-rails::after{top:43%;opacity:.55;animation-direction:reverse;animation-duration:1.9s}
+@keyframes td219-color-travel{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){.td70-rails::before,.td70-rails::after{animation:none}}

@@ -16,7 +16,7 @@ LIBRARY=TeamLibrary(ROOT,DATA)
 POSITIONS = ['QB','LT','LG','C','RG','RT','WR','WR','TE','RB','WR','DE','DT','DT','DE','LB','LB','LB','CB','CB','FS','SS','K','P']
 NAMES = ['Jordan Ellis','Marcus Reed','Cameron Price','Alex Morgan','Drew Collins','Taylor Brooks','Jalen Carter','Noah Hayes','Mason Cole','Evan Grant','Devin Ross','Cole Bennett','Tyler James','Owen Parker','Blake Foster','Avery Scott','Logan West','Riley Davis','Kai Turner','Miles Ward','Nolan King','Isaiah Bell','Sam Lewis','Jesse Gray']
 FORMATION_LABELS = {'4-3-4': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '3-4-4': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-2-5': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '3-3-5': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '5-2-4': ['DL', 'DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-1-6': ['DL', 'DL', 'DL', 'DL', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB', 'CB']}
-GRAPHICS = {'weatherdetail','matchupclean','matchupbadge','comingupmatchup','reporterbadge','languagepromo','splitview','crewfour','playertease','serieshistory','talent','storytease','breaking','countdown','pregameplayer','intro','referee','standings','transition','scoringdrive','none','qbstats','scorebug','matchup','offense','defense','quarterback','player','coach','lowerthird','stats','teamstats','roster','event','period','final','announcers','sponsor','weather','reporter','situation','break'}
+GRAPHICS = {'teamrecord','playerdock','seasonwall','weatherdetail','matchupclean','matchupbadge','comingupmatchup','reporterbadge','languagepromo','splitview','crewfour','playertease','serieshistory','talent','storytease','breaking','countdown','pregameplayer','intro','referee','standings','transition','scoringdrive','none','qbstats','scorebug','matchup','offense','defense','quarterback','player','coach','lowerthird','stats','teamstats','roster','event','period','final','announcers','sponsor','weather','reporter','situation','break'}
 def roster(side):
     return [{'id':f'{side}-{i+1}', 'name':name, 'number':str(([7,72,64,55,68,77,11,18,86,24,13,90,95,98,91,50,54,56,21,23,30,32,3,9][i]+(2 if side=='home' else 0))%100), 'position':pos,'photo':'','stats':{'YDS':'248','TD':'2','CMP':'19/27'}} for i,(name,pos) in enumerate(zip(NAMES,POSITIONS))]
 def default_state():
@@ -24,7 +24,7 @@ def default_state():
     lineups={side:{'formation':'4-3-4','offense':[f'{side}-{i}' for i in range(2,12)],'defense':[f'{side}-{i}' for i in range(12,23)],'quarterback':f'{side}-1','specialTeams':{'kicker':f'{side}-23','punter':f'{side}-24','holder':'','longSnapper':'','kickReturner':'','puntReturner':''}} for side in teams}
     cue={'type':'matchup','team':'away','playerId':'away-1','title':'FRIDAY NIGHT FOOTBALL','subtitle':'Live from Memorial Stadium','event':'TOUCHDOWN','period':'HALFTIME','nextAway':'NORTH RIDGE','nextHome':'EAST VALLEY','nextTime':'FRIDAY • 7:00 PM','rosterPage':1,'transition':'auto','leftName':'ALEX MORGAN','leftRole':'PLAY-BY-PLAY','rightName':'JORDAN REED','rightRole':'ANALYST','sponsorTitle':'POSTGAME','sponsorSubtitle':'PRESENTED BY OUR PARTNER','sponsorNext':'COMING UP NEXT','weatherTemp':'67°','weatherWind':'NW 6 MPH','weatherForecast':'CLEAR','reporterName':'REPORTER NAME','qbValue':'','qbLabel':'','qbDetail':'SEASON STATS','staffName':'','staffRole':'HEAD COACH','staffDetail':'','stats':[{'label':'PASSING YDS','away':'248','home':'212'},{'label':'RUSHING YDS','away':'126','home':'98'},{'label':'FIRST DOWNS','away':'19','home':'17'}]}
     return {'revision':0,'teams':teams,'lineups':lineups,'game':{'scores':{'away':0,'home':0},'timeouts':{'away':3,'home':3},'possession':'away','quarter':'1ST','down':'1ST','distance':'10','ballOn':'25','flag':False,'clock':{'remaining':900,'running':False,'anchor':time.time()},'playClock':{'remaining':40,'running':False,'anchor':time.time()},'showPlayClock':True,'showDownDistance':True,'bottomStatus':'LIVE','overtimePeriod':1,'showInfo':True,'showBallPosition':False},'branding':{'network':'GRIDIRON','competition':'FRIDAY NIGHT FOOTBALL','venue':'MEMORIAL STADIUM','accent':'#f9cb40','bugScale':1.0,'bugBottom':64,'networkLogo':'','sponsorName':'YOUR SPONSOR','sponsorLogo':'','sponsorColor':'#101349','secondaryLogo':'','introLogo':''},'program':{'qbStats':{'visible':False,'team':'away'},'bug':True,'watermark':False,'graphic':{'type':'none'},'takeId':0},'preview':cue}
-TEAM_CUES={'breaking','pregameplayer','transition','scoringdrive','offense','defense','quarterback','qbstats','player','stats','coach','roster','event','lowerthird','situation'}
+TEAM_CUES={'teamrecord','playerdock','seasonwall','breaking','pregameplayer','transition','scoringdrive','offense','defense','quarterback','qbstats','player','stats','coach','roster','event','lowerthird','situation'}
 DIVISION_TEAMS = {'AFC EAST': ['BUFFALO', 'MIAMI', 'NEW ENGLAND', 'NY JETS'], 'AFC SOUTH': ['HOUSTON', 'INDIANAPOLIS', 'JACKSONVILLE', 'TENNESSEE'], 'AFC NORTH': ['BALTIMORE', 'CINCINNATI', 'CLEVELAND', 'PITTSBURGH'], 'AFC WEST': ['DENVER', 'KANSAS CITY', 'LAS VEGAS', 'LA CHARGERS'], 'NFC EAST': ['PHILADELPHIA', 'DALLAS', 'WASHINGTON', 'NY GIANTS'], 'NFC SOUTH': ['ATLANTA', 'CAROLINA', 'NEW ORLEANS', 'TAMPA BAY'], 'NFC NORTH': ['CHICAGO', 'DETROIT', 'GREEN BAY', 'MINNESOTA'], 'NFC WEST': ['ARIZONA', 'LA RAMS', 'SAN FRANCISCO', 'SEATTLE']}
 
 def cue_key(c):
@@ -37,6 +37,8 @@ def initial_cue(kind,team='away'):
     cue=copy.deepcopy(default_state()['preview']);cue.update(type=kind,team=team,playerId=STATE['lineups'][team]['quarterback'])
     if kind in ['splitview','playertease','serieshistory']:cue.update(title='',subtitle='',featureText='',featureFooter='')
     if kind in ['weatherdetail','matchupclean','matchupbadge','comingupmatchup','reporterbadge','languagepromo']:cue.update(title='',subtitle='',reporterName='',weatherWind='SE 8',weatherTemp='52°',weatherForecast='CLOUDY',weatherHumidity='54%',weatherIcon='CLOUDY',extraBadge='')
+    if kind in ['teamrecord','playerdock','seasonwall']:cue.update(title='',subtitle='',featureFooter='',storyImage='')
+    if kind=='teamrecord':cue['stats']=[{'label':'SCORING FIRST','away':'','home':''},{'label':'OPPONENT SCORES FIRST','away':'','home':''}]
     if kind=='crewfour':cue.update(leftName='',rightName='',reporterName='',staffName='')
     if kind=='talent':cue.update(leftName='',leftRole='',subtitle='',title='')
     if kind=='storytease':cue.update(title='',subtitle='',featureText='',featureFooter='')
@@ -152,6 +154,9 @@ def _update(action,p):
                 if v not in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW','ALL']:raise ValueError('Unknown score league')
                 c[k]=v
             elif k=='leagues':c[k]=list(dict.fromkeys(a for a in v if a in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW']))
+            elif k=='leagueNetworks':
+                if not isinstance(v,dict):raise ValueError('Invalid league networks')
+                c[k]={**c.get(k,{}),**{league:bounded_text(label,40) for league,label in v.items() if league in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW']}}
             elif k=='leagueTitleCards':
                 if not isinstance(v,dict):raise ValueError('Invalid league title cards')
                 cards={}
@@ -501,6 +506,8 @@ def _update(action,p):
             elif k in ['qbComp','qbAtt','qbYards','qbTD','qbINT']:
                 v=int(v)
                 if not 0<=v<=9999: raise ValueError('QB stats must be between 0 and 9999.')
+            elif k=='storyImage':
+                if not valid_image(v):raise ValueError('Choose PNG, JPEG or WebP under 2 MB')
             elif k=='stats':
                 if not isinstance(v,list) or len(v)>6: raise ValueError('Use up to six comparison rows.')
                 v=[{f:bounded_text(x.get(f,''),40) for f in ['label','away','home']} for x in v]
@@ -642,7 +649,7 @@ def _update(action,p):
             update('roster',{'team':side,'players':t['roster']})
             update('lineup',dict(team=side,**src['lineups'][side]))
         if isinstance(src.get('bottomScores'),dict):
-            update('bottom_scores',{k:v for k,v in src['bottomScores'].items() if k in ['league','leagues','date','auto','titleCards','titlesEnabled','leagueTitleCards']})
+            update('bottom_scores',{k:v for k,v in src['bottomScores'].items() if k in ['league','leagues','date','auto','titleCards','titlesEnabled','leagueTitleCards','leagueNetworks']})
             STATE['bottomScores'].update(visible=False,games=[],holdAt=0,updatedAt=0)
         update('branding',src['branding']);gg=src['game']
         update('game',{k:v for k,v in gg.items() if k not in ['scores','timeouts','clock','playClock']})
