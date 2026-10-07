@@ -1,4 +1,4 @@
-import {titleLeagues} from './scores-titles219.js';
+import {titleLeagues} from './scores-titles219.js?v=audit232';
 
 /** The saved picker order is authoritative; legacy ALL keeps the standard order. */
 export function selectedScoreLeagues(cfg = {}) {
@@ -14,6 +14,9 @@ export function selectedScoreLeagues(cfg = {}) {
  * cards, _leavingLeague identifies the card to slide out, and _activeLeague is
  * the league whose games follow. The final title closes the last league before
  * tickerFrame wraps to the opening deck. Empty leagues get a labeled title only.
+ * Decks retain the last completed game for the separate feed scorebug; only the
+ * opening deck previews the first scheduled game. Include league in that identity
+ * because different score providers can reuse a game ID.
  * Game details and their existing timing are left to the caller/tickerFrame.
  */
 export function buildScorePlan(games = [], cfg = {}) {
@@ -38,6 +41,8 @@ export function buildScorePlan(games = [], cfg = {}) {
     const active = selected[index] || null;
     const leaving = index > 0 ? selected[index - 1] : null;
     const empty = active !== null && groups.get(active).length === 0;
+    const completedGames = selected.slice(0, index).flatMap(league => groups.get(league));
+    const feedGame = completedGames[completedGames.length - 1] || groupedGames[0] || null;
     return {
       id: `deck224:${selected.join(',')}:${index}`,
       league: active || leaving,
@@ -47,6 +52,8 @@ export function buildScorePlan(games = [], cfg = {}) {
       _completedLeagues: selected.slice(0, index),
       _leavingLeague: leaving,
       _activeLeague: active,
+      _feedGameId: feedGame?.id ?? null,
+      _feedGameLeague: feedGame?.league ?? null,
       _deckStep: index,
       _cycleEnd: index === selected.length,
       _emptyLeague: empty,

@@ -1,0 +1,33 @@
+WLD SPORTS UPDATE 229 — EXISTING LOGO ASSIGNMENTS
+
+Your original NFL logo assignments remain in place. No re-uploading or
+reassigning is needed. DEN-1.png remains Denver's assigned alternate.
+
+Update228's Asset library only displayed assignments in the current matchup.
+That incorrectly described other teams' logos as unassigned even though the
+NFL Bottom scores and Feed scorebug mappings were still in use. Update229
+shows those existing assignments for all32 teams, including teams outside
+the current matchup. Opening the library never changes your logo choices.
+
+This ZIP includes all39 original supplied PNGs, unchanged, plus the complete
+228 update and cloud folder. It can also restore missing original images if
+the artwork folder was replaced rather than merged during installation.
+
+INSTALL OVER YOUR EXISTING FOX23 PROJECT
+1. Extract the ZIP outside FOX23.
+2. Copy the included root files into FOX23, replacing matching files.
+3. Merge the COMPLETE broadcast-logos226 folder into FOX23. Keep any extra
+   images or variants you added yourself. Do not delete the existing folder.
+4. Copy the complete cloud folder. Config and SQL are unchanged.
+5. Publish the files yourself, close old controller tabs, hard-refresh the
+   updated page, and refresh the OBS output source once.
+
+No SQL, game reset, game import, or logo reassignment is needed for this fix.
+Nothing has been published or changed in your live saved show.
+
+VERIFIED
+All32 existing logo mappings remain unchanged. All39 images match Update226
+byte for byte. The -1 filename is preserved. Custom/current show assignments
+remain visible. Asset-library viewing does not write or reset show state.
+The existing upload, rename, assignment and grouped player controls remain.
+Controller/output imports retain one shared module instance.

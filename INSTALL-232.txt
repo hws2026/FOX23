@@ -1,0 +1,51 @@
+WLD SPORTS UPDATE 232 — WEEKLY SCORES, TEAM STAT CARDS AND ANIMATION AUDIT
+
+INSTALL INTO YOUR EXISTING COMPLETE Documents/FOX23 PROJECT
+1. Extract this ZIP outside FOX23.
+2. Copy ALL included root files into FOX23, replacing matching files.
+3. Copy the complete cloud folder. No SQL migration is needed; do not run SQL.
+4. Merge broadcast-logos226, keeping additional logos/variants you added.
+5. Keep other existing project files/folders. This cumulative update requires
+   your complete FOX23 installation; it is not a standalone installation.
+6. Publish the files yourself. Close old control tabs and hard-refresh the
+   controller and OBS output so all changed modules load together.
+
+BOTTOM SCORES
+- Loads the full Monday–Sunday calendar week in Eastern Time. The chosen date
+  selects its containing week; a blank date follows the current week.
+- Includes all scheduled games returned by the selected league feeds, including
+  MLB doubleheaders. No OFF cards for teams without scheduled games.
+- UFL, NFL, MLB, NBA, MLS, Division I football and basketball remain available.
+- Full matchup cards slide to a single-team stat card. That card preserves the
+  original team's logo, name, record and score; winners retain yellow text.
+  The other team block is replaced by the player's stats. A home player's card
+  correctly uses the home team rather than the unrelated away team.
+- Provider leader rows now retain their reported team association, including
+  QB leaders such as Dak. Unknown team associations are never guessed.
+- Completed games skip their TV/network detail row. League title-deck branding
+  remains controlled by the league's title settings.
+- Same-card refreshes preserve in-progress slides and league-deck collapse.
+  Interrupted outgoing cards retain their visible position, and superseded
+  score digits/scrolls are cleaned up. Motion remains sliding, not a 3D flip.
+- The independent feed scorebug moves above the main scorebug when both are on,
+  and honors an explicit zero bottom offset.
+
+AUDIT FIXES
+- Rapid main-scorebug return cancels lingering rail exit animations.
+- Referee exits and QB reveals preserve the raised logo edges.
+- Network entrances survive unrelated controller updates.
+- Clearing a graphic waiting to enter no longer flashes its exit.
+- Timed bumpers begin in time for their existing server deadline.
+- Split-camera/video requests discard superseded streams and keep unchanged
+  playback through text updates.
+- Rapid clock adjustments and toggles compose in command-queue order.
+- Keyboard shortcuts preserve focused button activation and ignore held repeats.
+- Stream Deck initialization avoids duplicate buttons/connections.
+- Review fixtures load the same production styles.
+
+PRESERVED
+All 39 supplied PNGs and all 32 NFL logo assignments, including DEN-1, are
+unchanged. SVG rail artwork is unchanged. The asset library and complete cloud
+folder are included. No production show, GitHub, deployment or SQL was changed.
+
+See AUDIT-232.txt for regression coverage and visual-verification limits.

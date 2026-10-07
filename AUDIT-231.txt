@@ -1,0 +1,63 @@
+UPDATE 231 AUDIT — 2026-10-07
+
+RESULT
+22 regression suites passed. Root and cloud JavaScript syntax and
+root Python syntax passed. Payload/ZIP hashes and original artwork verified.
+
+COVERED
+Lighting classification, actual production draw lifecycle with deterministic
+DOM/timer substitutes, rapid updates, midpoint coalescing, cancellation, hidden
+outputs, reduced motion, layer geometry, and cleanup.
+League deck cycles, empty leagues, all details before moving on, independent
+feed controls, league/game identity collisions, and final-deck follow behavior.
+Complete schedule merging, bounded optional-record lookups, distinct MLB
+doubleheaders, UFL configuration and
+football data, college schedule coverage, provider fallback and pagination.
+Actual Python export/import, malformed-input rollback, rich show settings,
+roster/catalog metadata, assets, and saved-team links. An 8,000-game schedule
+survives validation and restart; oversized updates fail atomically.
+Browser worker save ordering, storage failures, rollback against the actual
+Python core, exact-once errors and cloud-mode separation.
+Prior asset management, player dropdown grouping, controller ownership,
+revision conflicts, HTTP/HTTPS startup recovery, and cloud transport recovery.
+
+VERIFICATION LIMITS
+These were isolated tests, not writes to your production show or account.
+Browser visual playback could not be checked: this session denied local server
+binding and the browser disallowed file URLs. Final motion should be reviewed
+in the installed HTTPS output. The original reference-video match was not
+reverified during this update.
+UFL is present on ESPN's official scoreboard; its JSON endpoint follows the
+existing ESPN football provider pattern. Direct live JSON verification was
+unavailable in this environment. Feed outages/omissions can still affect what
+providers report; errors remain visible and prior data becomes stale.
+College coverage is Division I, not every NCAA division. This audit is a broad
+code/regression review, not an exhaustive security certification.
+
+SOURCE
+ESPN UFL scoreboard:
+https://www.espn.com/ufl/scoreboard/_/week/2/year/2026/seasontype/2
+
+TEST SUITES
+- work/feed231/test-light.mjs — PASS
+- work/feed231/test-light-lifecycle.mjs — PASS
+- work/feed231/league-sequence.mjs — PASS
+- work/feed231/league-controls.mjs — PASS
+- work/feed231/league-sports-semantics.mjs — PASS
+- work/feed231/worker-durability.mjs — PASS
+- work/feed231/test-core-roundtrip.py — PASS
+- work/feed231/test-catalog-roundtrip.py — PASS
+- work/feed231/test-ufl-core.py — PASS
+- work/feed231/test-ufl-frontend.mjs — PASS
+- work/feed231/test-module-cache.mjs — PASS
+- work/assets228/test-scores228.mjs — PASS
+- work/assets228/test-controls228.mjs — PASS
+- work/assets228/test-ownership228.mjs — PASS
+- work/assets228/test-player-options228.mjs — PASS
+- work/assets228/test-real-core228.mjs — PASS
+- work/logos229/test-assignments.mjs — PASS
+- work/startup230/test-startup.mjs — PASS
+- work/fix225/test-cloud.mjs — PASS
+- work/assets228/test-backend.py — PASS
+- work/feed231/league-coverage.mjs — PASS
+- work/feed231/test-follow231.mjs — PASS

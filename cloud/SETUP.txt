@@ -1,4 +1,17 @@
-WLD SHARED CLOUD SHOW — SETUP 221
+WLD SHARED CLOUD SHOW — DOMAIN UPDATE 230
+
+EXISTING FOX23 SHOW / CUSTOM DOMAIN
+The exact HTTPS addresses below connect to the same configured Supabase show:
+  https://hws2026.github.io/FOX23/
+  https://fox23.huskysol.com/
+Localhost/Desktop copies remain independent. HTTP is not a cloud address.
+After the custom-domain certificate is issued, enable Enforce HTTPS in GitHub
+Settings > Pages, then open the HTTPS controller and sign in with the SAME
+show account. Sign-in may be needed again because this is a different origin.
+Join your existing show; do not create a new shared show if yours is missing.
+Changing the domain does not migrate browser-only shows or sign-in sessions.
+Do not clear site data. The existing show, SQL and logo assignments are unchanged.
+The instructions below are for first-time setup, not this domain update.
 
 This adds a private database behind the existing GitHub Pages panel.
 Each device connects directly to Supabase. No host computer, pairing,
@@ -19,7 +32,8 @@ Supabase stores the shared show. This is prepared, not yet activated.
      url: your https://PROJECT.supabase.co URL
      publishableKey: your project's PUBLIC publishable key (or anon key)
    NEVER use a secret/service_role key. Keep origin and path set to
-   https://hws2026.github.io and /FOX23/ for your existing site.
+   https://hws2026.github.io and /FOX23/ for your existing site. The sites list
+   also allows exactly https://fox23.huskysol.com with path /.
 
 4. Merge the update files into your existing GitHub website and deploy.
    First open it IN THE SAME BROWSER/PROFILE on THIS computer that already

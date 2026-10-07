@@ -10,3 +10,8 @@
 .graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame{animation:rail192-open .4s ease-in reverse both!important}
 .graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame *{animation:none!important}
 @media(prefers-reduced-motion:reduce){.graphics-layer.animate-in[data-motion=auto] :is(.player-spotlight,.announcer,.reporter-nameplate,.referee-card,.talent190,.series192,.lineup-ribbon) *,.graphics-layer.animate-in[data-motion=auto] :is(.player-spotlight,.announcer,.reporter-nameplate,.referee-card,.talent190,.series192),.graphics-layer.leaving[data-motion=auto] :is(.player-spotlight,.announcer,.reporter-nameplate,.referee-card,.talent190,.series192){animation:none!important}}
+/* 232: raised artwork stays inside its reveal mask at both held endpoints. */
+.graphics-layer.leaving[data-motion=auto]>.referee-card{--rail-open-top:-120px}
+.graphics-layer.animate-in[data-motion=auto]>.qb-sidebar.qb-redesign181{animation:qb232-rise .35s ease-out both}
+@keyframes qb232-rise{from{opacity:0;clip-path:inset(95% 0 0)}to{opacity:1;clip-path:inset(-24px 0 0)}}
+@media(prefers-reduced-motion:reduce){.graphics-layer.leaving[data-motion=auto]>.lineup-ribbon .lineup-ribbon-frame{animation:none!important}}

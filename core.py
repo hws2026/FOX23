@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Local broadcast controller. Python 3.9+, no third-party dependencies."""
-import argparse, copy, json, math, mimetypes, os, threading, time, sys, re
+import argparse, base64, binascii, copy, hashlib, json, math, mimetypes, os, threading, time, sys, re, uuid
 from pathlib import Path
 from datetime import datetime, timezone
 from urllib.parse import urlparse, parse_qs
@@ -13,6 +13,17 @@ DATA = Path(os.environ.get('BROADCAST_DATA', str(ROOT / 'data')))
 DATA.mkdir(parents=True, exist_ok=True)
 STATE_FILE = DATA / 'game.json'
 LIBRARY=TeamLibrary(ROOT,DATA)
+# Keep supplied files and alternate suffixes exactly as recorded in the asset manifest.
+_ASSET_MANIFEST=json.loads((ROOT/'broadcast-logos226'/'assignments.json').read_text())
+BUNDLED_ASSETS=[{'id':'bundled-team-'+Path(row['file']).stem.lower(),'name':row['name']+(' · '+row['variant'] if row.get('variant') not in [None,'base'] else ''),'filename':row['file'],'src':'broadcast-logos226/teams/'+row['file'],'kind':'team'} for row in _ASSET_MANIFEST['teams']]+[{'id':'bundled-mark-'+Path(row['file']).stem,'name':row['source'].removesuffix('.png').removesuffix(' Logo'),'filename':row['source'],'src':'broadcast-logos226/'+row['file'],'kind':'branding'} for row in _ASSET_MANIFEST['marks']]
+BUNDLED_ASSET_PATHS={row['src'] for row in BUNDLED_ASSETS}
+ASSET_KINDS={'team','player','coach','branding','other'}
+ASSET_LIMIT=1000
+SCORE_LEAGUES=('NFL','UFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW')
+# The feed may combine full college schedules with every selected pro league.
+# Reject an oversized update atomically rather than silently truncating games.
+SCORE_GAME_LIMIT=10000
+_asset_checked_library=None
 POSITIONS = ['QB','LT','LG','C','RG','RT','WR','WR','TE','RB','WR','DE','DT','DT','DE','LB','LB','LB','CB','CB','FS','SS','K','P']
 NAMES = ['Jordan Ellis','Marcus Reed','Cameron Price','Alex Morgan','Drew Collins','Taylor Brooks','Jalen Carter','Noah Hayes','Mason Cole','Evan Grant','Devin Ross','Cole Bennett','Tyler James','Owen Parker','Blake Foster','Avery Scott','Logan West','Riley Davis','Kai Turner','Miles Ward','Nolan King','Isaiah Bell','Sam Lewis','Jesse Gray']
 FORMATION_LABELS = {'4-3-4': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '3-4-4': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-2-5': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '3-3-5': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '5-2-4': ['DL', 'DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-1-6': ['DL', 'DL', 'DL', 'DL', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB', 'CB']}
@@ -23,7 +34,7 @@ def default_state():
     teams={side:{'name':name,'shortName':name.split()[-1],'heroLogo':'','abbr':abbr,'record':'0–0','color':color,'secondary':secondary,'logo':'','coach':coach,'roster':roster(side)} for side,name,abbr,color,secondary,coach in [('away','Metro Wolves','MW','#163d68','#b7cce5','Chris Walker'),('home','Harbor Hawks','HH','#07524e','#8ad3c5','Casey Mitchell')]}
     lineups={side:{'formation':'4-3-4','offense':[f'{side}-{i}' for i in range(2,12)],'defense':[f'{side}-{i}' for i in range(12,23)],'quarterback':f'{side}-1','specialTeams':{'kicker':f'{side}-23','punter':f'{side}-24','holder':'','longSnapper':'','kickReturner':'','puntReturner':''}} for side in teams}
     cue={'type':'matchup','team':'away','playerId':'away-1','title':'FRIDAY NIGHT FOOTBALL','subtitle':'Live from Memorial Stadium','event':'TOUCHDOWN','period':'HALFTIME','nextAway':'NORTH RIDGE','nextHome':'EAST VALLEY','nextTime':'FRIDAY • 7:00 PM','rosterPage':1,'transition':'auto','leftName':'ALEX MORGAN','leftRole':'PLAY-BY-PLAY','rightName':'JORDAN REED','rightRole':'ANALYST','sponsorTitle':'POSTGAME','sponsorSubtitle':'PRESENTED BY OUR PARTNER','sponsorNext':'COMING UP NEXT','weatherTemp':'67°','weatherWind':'NW 6 MPH','weatherForecast':'CLEAR','reporterName':'REPORTER NAME','qbValue':'','qbLabel':'','qbDetail':'SEASON STATS','staffName':'','staffRole':'HEAD COACH','staffDetail':'','stats':[{'label':'PASSING YDS','away':'248','home':'212'},{'label':'RUSHING YDS','away':'126','home':'98'},{'label':'FIRST DOWNS','away':'19','home':'17'}]}
-    return {'revision':0,'teams':teams,'lineups':lineups,'game':{'scores':{'away':0,'home':0},'timeouts':{'away':3,'home':3},'possession':'away','quarter':'1ST','down':'1ST','distance':'10','ballOn':'25','flag':False,'clock':{'remaining':900,'running':False,'anchor':time.time()},'playClock':{'remaining':40,'running':False,'anchor':time.time()},'showPlayClock':True,'showDownDistance':True,'bottomStatus':'LIVE','overtimePeriod':1,'showInfo':True,'showBallPosition':False},'branding':{'network':'GRIDIRON','competition':'FRIDAY NIGHT FOOTBALL','venue':'MEMORIAL STADIUM','accent':'#f9cb40','bugScale':1.0,'bugBottom':64,'networkLogo':'','sponsorName':'YOUR SPONSOR','sponsorLogo':'','sponsorColor':'#101349','secondaryLogo':'','introLogo':''},'program':{'qbStats':{'visible':False,'team':'away'},'bug':True,'watermark':False,'graphic':{'type':'none'},'takeId':0},'preview':cue}
+    return {'revision':0,'teams':teams,'lineups':lineups,'game':{'scores':{'away':0,'home':0},'timeouts':{'away':3,'home':3},'possession':'away','quarter':'1ST','down':'1ST','distance':'10','ballOn':'25','flag':False,'clock':{'remaining':900,'running':False,'anchor':time.time()},'playClock':{'remaining':40,'running':False,'anchor':time.time()},'showPlayClock':True,'showDownDistance':True,'bottomStatus':'LIVE','overtimePeriod':1,'showInfo':True,'showBallPosition':False},'branding':{'network':'GRIDIRON','competition':'FRIDAY NIGHT FOOTBALL','venue':'MEMORIAL STADIUM','accent':'#f9cb40','bugScale':1.0,'bugBottom':64,'networkLogo':'','sponsorName':'YOUR SPONSOR','sponsorLogo':'','sponsorColor':'#101349','secondaryLogo':'','introLogo':''},'program':{'qbStats':{'visible':False,'team':'away'},'bug':True,'watermark':False,'graphic':{'type':'none'},'takeId':0},'preview':cue,'assetLibrary':{'items':copy.deepcopy(BUNDLED_ASSETS)}}
 TEAM_CUES={'teamrecord','playerdock','seasonwall','breaking','pregameplayer','transition','scoringdrive','offense','defense','quarterback','qbstats','player','stats','coach','roster','event','lowerthird','situation'}
 DIVISION_TEAMS = {'AFC EAST': ['BUFFALO', 'MIAMI', 'NEW ENGLAND', 'NY JETS'], 'AFC SOUTH': ['HOUSTON', 'INDIANAPOLIS', 'JACKSONVILLE', 'TENNESSEE'], 'AFC NORTH': ['BALTIMORE', 'CINCINNATI', 'CLEVELAND', 'PITTSBURGH'], 'AFC WEST': ['DENVER', 'KANSAS CITY', 'LAS VEGAS', 'LA CHARGERS'], 'NFC EAST': ['PHILADELPHIA', 'DALLAS', 'WASHINGTON', 'NY GIANTS'], 'NFC SOUTH': ['ATLANTA', 'CAROLINA', 'NEW ORLEANS', 'TAMPA BAY'], 'NFC NORTH': ['CHICAGO', 'DETROIT', 'GREEN BAY', 'MINNESOTA'], 'NFC WEST': ['ARIZONA', 'LA RAMS', 'SAN FRANCISCO', 'SEATTLE']}
 
@@ -72,19 +83,118 @@ def remaining(c):
 def save():
     tmp=STATE_FILE.with_suffix('.tmp'); tmp.write_text(json.dumps(STATE,ensure_ascii=False)); tmp.replace(STATE_FILE)
 def valid_image(v):
-    return isinstance(v,str) and (v in {f'broadcast-logos226/marks/{name}.png' for name in ['nfl','afc','nfc','afc-championship','nfc-championship','divisional','wild-card']} or bool(__import__('re').fullmatch(r'assets/headshots/(?:nfl-[0-9]+|coach-[a-f0-9]+)\.(?:png|jpg|webp|gif)',v)) or v=='' or (len(v)<3500000 and any(v.startswith('data:image/'+x+';base64,') for x in ['png','jpeg','webp'])))
+    return isinstance(v,str) and (v in BUNDLED_ASSET_PATHS or bool(__import__('re').fullmatch(r'assets/headshots/(?:nfl-[0-9]+|coach-[a-f0-9]+)\.(?:png|jpg|webp|gif)',v)) or v=='' or (len(v)<3500000 and any(v.startswith('data:image/'+x+';base64,') for x in ['png','jpeg','webp'])))
 def bounded_text(v,n=120):
     if not isinstance(v,str) or len(v)>n: raise ValueError('Text is too long or invalid.')
     return v.strip()
+def restored_person_metadata(row):
+    """Validate exported catalog fields without trusting arbitrary imported keys."""
+    metadata={}
+    for key in ['sourceId','statsStatus','status','sourceUrl','statsSource','photoSource']:
+        if key not in row:continue
+        value=bounded_text(row[key],2048 if key in ['sourceUrl','statsSource','photoSource'] else 120)
+        if key in ['sourceUrl','statsSource','photoSource'] and value:
+            url=urlparse(value)
+            if url.scheme not in ['http','https'] or not url.netloc:raise ValueError('Invalid person source URL.')
+        metadata[key]=value
+    if 'seasonStats' in row:
+        categories=row['seasonStats']
+        if not isinstance(categories,dict) or len(categories)>24:raise ValueError('Invalid season statistics.')
+        clean={}
+        for category,stats in categories.items():
+            category=bounded_text(category,80)
+            if not category or not isinstance(stats,dict) or len(stats)>250:raise ValueError('Invalid season statistics category.')
+            values={}
+            for name,entry in stats.items():
+                name=bounded_text(name,100)
+                if not name or not isinstance(entry,dict):raise ValueError('Invalid season statistic.')
+                value=entry.get('value')
+                if value is not None and (type(value) not in [int,float] or not math.isfinite(value) or abs(value)>1e15):raise ValueError('Invalid season statistic value.')
+                values[name]={key:bounded_text(entry[key],120) for key in ['display','label'] if key in entry}
+                if 'value' in entry:values[name]['value']=value
+            clean[category]=values
+        metadata['seasonStats']=clean
+    return metadata
 def color(v):
     import re
     if not isinstance(v,str) or not re.fullmatch(r'#[0-9a-fA-F]{6}',v): raise ValueError('Use a six-digit hex color.')
     return v
+def asset_source(src,upload=False):
+    if not src or not valid_image(src):raise ValueError('Choose a valid PNG, JPEG, or WebP image.')
+    if src.startswith('data:'):
+        try:
+            header,encoded=src.split(',',1);raw=base64.b64decode(encoded,validate=True)
+        except (ValueError,binascii.Error):raise ValueError('The image data is invalid.')
+        signatures={'data:image/png;base64':raw.startswith(b'\x89PNG\r\n\x1a\n'),'data:image/jpeg;base64':raw.startswith(b'\xff\xd8\xff'),'data:image/webp;base64':len(raw)>=12 and raw[:4]==b'RIFF' and raw[8:12]==b'WEBP'}
+        if not signatures.get(header):raise ValueError('The image format does not match its data.')
+        if upload and len(raw)>2000000:raise ValueError('Choose an image under 2 MB.')
+    return src
+
+def asset_item(row,upload=False):
+    if not isinstance(row,dict):raise ValueError('Invalid asset item.')
+    name=bounded_text(row.get('name',''),120)
+    filename=bounded_text(row.get('filename',''),255)
+    if not name:raise ValueError('Enter an asset name.')
+    if not filename or any(c in filename for c in ['/', '\\', '\x00']):raise ValueError('Use an image filename without folders.')
+    kind=row.get('kind','other')
+    if kind not in ASSET_KINDS:raise ValueError('Choose a valid asset category.')
+    src=asset_source(row.get('src'),upload=upload)
+    key='asset-'+uuid.uuid4().hex if upload else row.get('id','')
+    if not isinstance(key,str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,120}',key):raise ValueError('Invalid asset ID.')
+    return {'id':key,'name':name,'filename':filename,'src':src,'kind':kind}
+
+def merge_assets(current,incoming):
+    if not isinstance(incoming,dict) or not isinstance(incoming.get('items'),list) or len(incoming['items'])>ASSET_LIMIT:raise ValueError('Use up to 1000 assets in a library.')
+    # Validate every imported row before changing the current show or registry.
+    clean=[asset_item(row) for row in incoming['items']]
+    items=copy.deepcopy(current['items']);sources={row['src'] for row in items};ids={row['id'] for row in items}
+    for row in clean:
+        if row['src'] in sources:continue
+        if len(items)>=ASSET_LIMIT:raise ValueError('The combined library exceeds 1000 assets.')
+        if row['id'] in ids:row['id']='asset-'+uuid.uuid4().hex
+        items.append(row);sources.add(row['src']);ids.add(row['id'])
+    return {'items':items}
+
+def ensure_assets():
+    global _asset_checked_library
+    library=STATE.get('assetLibrary')
+    if not isinstance(library,dict) or library is not _asset_checked_library:
+        # Older shows have no registry. Reuse valid stored rows without changing names.
+        rows=library.get('items',[]) if isinstance(library,dict) else []
+        clean=[];sources=set();ids=set()
+        for row in rows[:ASSET_LIMIT] if isinstance(rows,list) else []:
+            try:row=asset_item(row)
+            except (ValueError,TypeError):continue
+            if row['src'] in sources:continue
+            if row['id'] in ids:row['id']='asset-'+uuid.uuid4().hex
+            clean.append(row);sources.add(row['src']);ids.add(row['id'])
+        library={'items':clean};STATE['assetLibrary']=library;_asset_checked_library=library
+    items=library['items'];sources={row['src'] for row in items};ids={row['id'] for row in items}
+    def remember(src,name,kind,filename=None,key=None):
+        if not src or src in sources or len(items)>=ASSET_LIMIT:return
+        try:asset_source(src)
+        except (ValueError,TypeError):return
+        extension='jpg' if src.startswith('data:image/jpeg;') else 'webp' if src.startswith('data:image/webp;') else 'png'
+        filename=filename or (Path(src).name if not src.startswith('data:') else re.sub(r'[^a-z0-9]+','-',name.lower()).strip('-')[:100]+'.'+extension)
+        key=key or 'discovered-'+hashlib.sha256(src.encode()).hexdigest()[:24]
+        if key in ids:key='asset-'+uuid.uuid4().hex
+        items.append({'id':key,'name':name[:120],'filename':filename[:255],'src':src,'kind':kind});sources.add(src);ids.add(key)
+    for row in BUNDLED_ASSETS:remember(row['src'],row['name'],row['kind'],row['filename'],row['id'])
+    for side,team in STATE.get('teams',{}).items():
+        name=team.get('name') or side.title()+' team'
+        for field,label in [('logo','logo'),('heroLogo','banner logo')]:remember(team.get(field),name+' '+label,'team')
+        for row in team.get('roster',[]):remember(row.get('photo'),(row.get('name') or 'Player')+' photo','player')
+        for row in team.get('staff',[]):remember(row.get('photo'),(row.get('name') or 'Coach')+' photo','coach')
+    for field,label in [('networkLogo','Network logo'),('sponsorLogo','Sponsor logo'),('secondaryLogo','Secondary broadcast logo'),('introLogo','Intro logo'),('conferenceLogo','Transition logo')]:remember(STATE.get('branding',{}).get(field),label,'branding')
+    cues=[STATE.get('preview',{}),STATE.get('program',{}).get('graphic',{})]+list(STATE.get('program',{}).get('cueLibrary',{}).values())+[row.get('cue',{}) for row in STATE.get('program',{}).get('playlist',[])]
+    for cue in cues:remember(cue.get('storyImage'),(cue.get('title') or 'Story')+' image','other')
+
+
 STATE=default_state()
 if STATE_FILE.exists():
     try:
         saved=json.loads(STATE_FILE.read_text())
-        if set(STATE).issubset(saved):
+        if (set(STATE)-{'assetLibrary'}).issubset(saved):
             STATE=saved
             defaults=default_state()
             STATE['game']={**defaults['game'],**STATE['game']}
@@ -137,33 +247,76 @@ for _key,_cue in list(_transition_library.items()):
         _transition_library.setdefault(cue_key(_cue),copy.deepcopy(_cue))
         if _key in ['transition:away','transition:home']:del _transition_library[_key]
 
+ensure_assets()
+
 def update(action,p):
+    ensure_assets()
     _update(action,p)
     if action in ['team','roster','staff','lineup']:
         side=p.get('team','away');key=STATE.get('teamSelections',{}).get(side)
         if key:
             old=LIBRARY.get(key);old.update(copy.deepcopy(STATE['teams'][side]));old['lineup']=copy.deepcopy(STATE['lineups'][side]);LIBRARY.put(old)
+    ensure_assets()
 
 def _update(action,p):
     g=STATE['game'];side=p.get('team','away')
     if side not in ['away','home']: raise ValueError('Select a team.')
-    if action=='bottom_scores':
+    if action=='asset_upload':
+        rows=p.get('items')
+        if not isinstance(rows,list) or not 1<=len(rows)<=20:raise ValueError('Upload 1–20 images at a time.')
+        clean=[asset_item(row,upload=True) for row in rows]
+        STATE['assetLibrary']=merge_assets(STATE['assetLibrary'],{'items':clean})
+    elif action=='asset_rename':
+        item=next((row for row in STATE['assetLibrary']['items'] if row['id']==p.get('id')),None)
+        if item is None:raise ValueError('Choose an asset from the library.')
+        name=bounded_text(p.get('name',''),120)
+        if not name:raise ValueError('Enter an asset name.')
+        item['name']=name
+    elif action=='asset_assign':
+        item=next((row for row in STATE['assetLibrary']['items'] if row['id']==p.get('id')),None)
+        if item is None:raise ValueError('Choose an asset from the library.')
+        target=p.get('target')
+        if not isinstance(target,dict):raise ValueError('Choose where to assign the asset.')
+        kind=target.get('type');src=item['src'];slot=target.get('side')
+        if kind in ['team','player','coach'] and slot not in ['away','home']:raise ValueError('Choose the away or home team.')
+        if kind=='team':
+            field=target.get('field')
+            if field not in ['logo','heroLogo']:raise ValueError('Choose the team logo or banner logo.')
+            update('team',{'team':slot,field:src})
+        elif kind in ['player','coach']:
+            field='roster' if kind=='player' else 'staff'
+            rows=copy.deepcopy(STATE['teams'][slot].get(field,[]))
+            person=next((row for row in rows if row['id']==target.get('personId')),None)
+            if person is None:raise ValueError('Choose a person on that team.')
+            person['photo']=src
+            update(field,{'team':slot,'players' if kind=='player' else 'members':rows})
+        elif kind=='branding':
+            field=target.get('field')
+            if field not in ['networkLogo','sponsorLogo','secondaryLogo','introLogo','conferenceLogo']:raise ValueError('Choose a show identity logo.')
+            payload={field:src}
+            if field=='conferenceLogo' and 'autoColor' in target:payload['conferenceAutoColor']=color(target['autoColor'])
+            update('branding',payload)
+        elif kind=='preview':
+            if target.get('field')!='storyImage':raise ValueError('Choose the story image field.')
+            update('preview',{'type':'seasonwall','storyImage':src})
+        else:raise ValueError('Choose a valid asset destination.')
+    elif action=='bottom_scores':
         c=STATE.setdefault('bottomScores',{'league':'NFL','visible':False,'auto':True,'games':[],'feedBugVisible':False,'feedBugGameId':''})
         c.setdefault('feedBugVisible',False)
         c.setdefault('feedBugGameId','')
         for k,v in p.items():
             if k=='league':
-                if v not in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW','ALL']:raise ValueError('Unknown score league')
+                if v not in SCORE_LEAGUES and v!='ALL':raise ValueError('Unknown score league')
                 c[k]=v
-            elif k=='leagues':c[k]=list(dict.fromkeys(a for a in v if a in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW']))
+            elif k=='leagues':c[k]=list(dict.fromkeys(a for a in v if a in SCORE_LEAGUES))
             elif k=='leagueNetworks':
                 if not isinstance(v,dict):raise ValueError('Invalid league networks')
-                c[k]={**c.get(k,{}),**{league:bounded_text(label,40) for league,label in v.items() if league in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW']}}
+                c[k]={**c.get(k,{}),**{league:bounded_text(label,40) for league,label in v.items() if league in SCORE_LEAGUES}}
             elif k=='leagueTitleCards':
                 if not isinstance(v,dict):raise ValueError('Invalid league title cards')
                 cards={}
                 for league,labels in v.items():
-                    if league not in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW']:raise ValueError('Unknown title league')
+                    if league not in SCORE_LEAGUES:raise ValueError('Unknown title league')
                     if not isinstance(labels,list) or not 1<=len(labels)<=6:raise ValueError('Use one to six labels per league')
                     cards[league]=[bounded_text(a,40) for a in labels if str(a).strip()]
                     if not cards[league]:raise ValueError('Enter a title label')
@@ -178,15 +331,18 @@ def _update(action,p):
             elif k in ['visible','auto','playerStats','titlesEnabled']:c[k]=bool(v)
             elif k in ['anchor','holdAt','updatedAt']:c[k]=max(0,float(v))
             elif k in ['date','error']:c[k]=bounded_text(v,150)
-            elif k=='sources':c[k]={str(a)[:8]:str(b)[:40] for a,b in v.items() if a in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW']}
+            elif k=='sources':c[k]={str(a)[:8]:str(b)[:40] for a,b in v.items() if a in SCORE_LEAGUES}
             elif k=='games':
-                if not isinstance(v,list) or len(v)>1000:raise ValueError('Invalid score feed')
+                if not isinstance(v,list):raise ValueError('Invalid score feed')
+                if len(v)>SCORE_GAME_LIMIT:raise ValueError('The combined score feed exceeds 10000 games. The previous feed was kept.')
                 cleaned=[]
                 for item in v:
-                    if item.get('league') not in ['NFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW']:continue
+                    if item.get('league') not in SCORE_LEAGUES:continue
                     game={key:bounded_text(item.get(key,''),160) for key in ['id','league','start','status','state','possession','ball','down','provider','espnId','quarter','period','clock','distance']}
                     game['detail']=str(item.get('detail',''))[:1000]
                     game['players']=[{key:bounded_text(row.get(key,''),160) for key in ['name','team','position','text']} for row in item.get('players',[])[:8]]
+                    game['leaders']=[{key:bounded_text(row.get(key,''),160) for key in ['name','team','teamId','position','text']} for row in item.get('leaders',[])[:8]]
+                    game['broadcast']=bounded_text(item.get('broadcast',''),160)
                     game['playersUpdatedAt']=max(0,float(item.get('playersUpdatedAt',0)))
                     game['updatedAt']=max(0,float(item.get('updatedAt',0)))
                     for side in ['away','home']:
@@ -633,7 +789,8 @@ def _update(action,p):
             presets[key]={'name':bounded_text(p.get('name','Transition'),60),'cue':copy.deepcopy(STATE['preview'])}
     elif action=='reset_show':
         if p.get('confirm')!='CLEAR SHOW': raise ValueError('Type CLEAR SHOW to reset all show data.')
-        fresh=default_state()
+        assets=copy.deepcopy(STATE['assetLibrary'])
+        fresh=default_state();fresh['assetLibrary']=assets
         for team in fresh['teams'].values():
             team.update(name='',shortName='',abbr='',record='',logo='',heroLogo='',coach='',color='#163044',secondary='#81929c',roster=[])
         for lu in fresh['lineups'].values(): lu.update(offense=['']*10,defense=['']*11,quarterback='',specialTeams={k:'' for k in lu['specialTeams']})
@@ -644,48 +801,109 @@ def _update(action,p):
         fresh['preview']={'type':'scorebug','team':'away','transition':'auto','outTransition':'auto','stats':[]}
         revision=STATE['revision'];STATE.clear();STATE.update(fresh);STATE['revision']=revision
     elif action=='restore':
-        STATE.pop('teamSelections',None)
         src=p.get('state')
         # Restoring uses the same field validation as live edits; clocks always restore paused.
         if not isinstance(src,dict): raise ValueError('Invalid show file.')
-        fresh=default_state(); STATE.clear();STATE.update(fresh)
+        saved_program=src.get('program',{})
+        if not isinstance(saved_program,dict):raise ValueError('Invalid show program.')
+        assets=merge_assets(STATE['assetLibrary'],src.get('assetLibrary',{'items':[]}))
+        fresh=default_state();fresh['assetLibrary']=assets; STATE.clear();STATE.update(fresh)
+        if 'emptyShow' in saved_program:
+            if type(saved_program['emptyShow']) is not bool:raise ValueError('Invalid empty-show setting.')
+            STATE['program']['emptyShow']=saved_program['emptyShow']
         for side in ['away','home']:
             t=src['teams'][side]
-            update('team',dict(team=side,**{k:v for k,v in t.items() if k not in ['roster','staff']}))
+            # Exported teams also carry catalog/migration metadata. Only editable
+            # identity fields belong in the normal live-team validation path.
+            if not isinstance(t,dict):raise ValueError('Invalid team in show file.')
+            update('team',dict(team=side,**{k:v for k,v in t.items() if k in ['name','shortName','abbr','record','coach','color','secondary','logo','heroLogo']}))
+            if 'photoCatalogVersion' in t:
+                version=t['photoCatalogVersion']
+                if type(version) is not int or version<0:raise ValueError('Invalid photo catalog version.')
+                STATE['teams'][side]['photoCatalogVersion']=version
             update('staff',{'team':side,'members':t.get('staff',[])})
+            for member,row in zip(STATE['teams'][side]['staff'],t.get('staff',[])):
+                member.update(restored_person_metadata(row))
             # Validate imported lineups against roster after staging imported IDs.
             STATE['lineups'][side]=copy.deepcopy(src['lineups'][side])
             update('roster',{'team':side,'players':t['roster']})
+            for player,row in zip(STATE['teams'][side]['roster'],t['roster']):
+                player.update(restored_person_metadata(row))
             update('lineup',dict(team=side,**src['lineups'][side]))
         if isinstance(src.get('bottomScores'),dict):
             update('bottom_scores',{k:v for k,v in src['bottomScores'].items() if k in ['league','leagues','date','auto','playerStats','titleCards','titlesEnabled','leagueTitleCards','leagueNetworks','feedBugGameId']})
             STATE['bottomScores'].update(visible=False,feedBugVisible=False,games=[],holdAt=0,updatedAt=0)
         update('branding',src['branding']);gg=src['game']
-        update('game',{k:v for k,v in gg.items() if k not in ['scores','timeouts','clock','playClock']})
+        if not isinstance(gg,dict):raise ValueError('Invalid game in show file.')
+        update('game',{k:v for k,v in gg.items() if k in ['flag','showPlayClock','showDownDistance','showInfo','showBallPosition','possession','arDirection','arTerritory','arFieldGoal','overtimePeriod','quarter','bottomStatus','down','distance','ballOn']})
         for side in ['away','home']:
             update('score',{'team':side,'value':gg['scores'][side]});update('timeout',{'team':side,'value':gg['timeouts'][side]})
         for key in ['clock','playClock']: update('clock',{'key':key,'seconds':gg[key]['remaining'],'running':False})
-        saved_library=src.get('program',{}).get('cueLibrary',{})
+        # Pausing an on-air play clock normally schedules a hide. Import has no
+        # on-air clock, so retain its configured visibility without a stale timer.
+        STATE['game'].pop('playClockHideAt',None)
+        if 'preset' in gg['playClock']:
+            preset=gg['playClock']['preset']
+            if type(preset) is not int or not 1<=preset<=99:raise ValueError('Invalid play clock preset.')
+            STATE['game']['playClock']['preset']=preset
+        saved_presets=saved_program.get('transitionPresets',{})
+        if not isinstance(saved_presets,dict) or len(saved_presets)>40:raise ValueError('Invalid transition presets.')
+        for key,preset in saved_presets.items():
+            if not isinstance(preset,dict) or not isinstance(preset.get('cue'),dict) or preset['cue'].get('type')!='transition':raise ValueError('Invalid transition preset.')
+            update('preview',preset['cue'])
+            update('transition_preset',{'id':key,'name':preset.get('name','Transition')})
+        saved_library=saved_program.get('cueLibrary',{})
         if not isinstance(saved_library,dict) or len(saved_library)>100: raise ValueError('Invalid graphics library.')
+        validated_library={}
         for saved_cue in saved_library.values():
             if not isinstance(saved_cue,dict): raise ValueError('Invalid saved graphic.')
             update('preview',saved_cue)
-        saved_qb=src.get('program',{}).get('qbStats',{})
+            validated_library[cue_key(STATE['preview'])]=copy.deepcopy(STATE['preview'])
+        saved_qb=saved_program.get('qbStats',{})
+        if not isinstance(saved_qb,dict):raise ValueError('Invalid QB stats graphic.')
         if saved_qb.get('type')=='qbstats':
             update('preview',{k:v for k,v in saved_qb.items() if k!='visible'})
             STATE['program']['qbStats']={**copy.deepcopy(STATE['preview']),'visible':False}
-        update('playlist_save',{'items':src.get('program',{}).get('playlist',[])})
+        saved_countdown=saved_program.get('countdown',{})
+        if not isinstance(saved_countdown,dict):raise ValueError('Invalid countdown graphic.')
+        if saved_countdown.get('type')=='countdown':
+            update('preview',{k:v for k,v in saved_countdown.items() if k!='visible'})
+            STATE['program']['countdown']={**copy.deepcopy(STATE['preview']),'visible':False}
+        update('playlist_save',{'items':saved_program.get('playlist',[])})
         update('preview',src['preview'])
+        # Validation above uses preview editing, but older playlist/on-air cues
+        # must not replace the operator's newer saved graphic-library settings.
+        STATE['program']['cueLibrary']=validated_library
+        STATE['program']['cueLibrary'][cue_key(STATE['preview'])]=copy.deepcopy(STATE['preview'])
+        if 'lastTransitionStyle' in saved_program:STATE['program']['lastTransitionStyle']=bounded_text(saved_program['lastTransitionStyle'],160)
+        if 'watermarkMotion' in saved_program:
+            motion=saved_program['watermarkMotion']
+            if motion not in ['auto','fade']:raise ValueError('Invalid network motion.')
+            update('watermark',{'motion':motion})
+        selections=src.get('teamSelections',{})
+        if not isinstance(selections,dict) or set(selections)-{'away','home'}:raise ValueError('Invalid saved team selections.')
+        linked={}
+        for side,key in selections.items():
+            key=bounded_text(key,120)
+            # A backup can move to a browser with a different custom-team library.
+            # Keep the imported team detached when its saved-library entry is absent.
+            if key not in LIBRARY.teams:continue
+            if key in linked.values():raise ValueError('The same saved team cannot fill both sides.')
+            linked[side]=key
+        if linked:STATE['teamSelections']=linked
+        for key in ['scoreNotice','scoreNotices','timeoutNotice']:STATE['program'].pop(key,None)
         STATE['program'].update(bug=False,watermark=False,graphic={'type':'none'})
     else: raise ValueError('Unknown action.')
 
 
 def pages_snapshot():
+    ensure_assets()
     return json.dumps({'state':STATE,'library':LIBRARY.overrides})
 
 def pages_request(raw):
     request=json.loads(raw);endpoint=request.get('endpoint');query=request.get('query',{})
     try:
+        ensure_assets()
         expire_timed_graphic();expire_play_clock()
         if endpoint=='teams':
             key=query.get('id','')

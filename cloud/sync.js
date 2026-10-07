@@ -1,7 +1,10 @@
-import config from './config.js?v=cloud226';
+import config from './config.js?v=audit232';
 import {changes,applyChanges} from './delta.js?v=cloud226';
-export const cloudEnabled = config.enabled && location.origin === config.origin &&
-  new URL('../', import.meta.url).pathname === config.path;
+export function isCloudSite(config, origin, path) {
+  return !!config.enabled && [{origin:config.origin,path:config.path},...(config.sites||[])]
+    .some(site=>site.origin===origin && site.path===path);
+}
+export const cloudEnabled = isCloudSite(config,location.origin,new URL('../', import.meta.url).pathname);
 
 // Serialize each controller's requests. Ownership and show edits use the same
 // database compare-and-swap, so a yielded controller cannot commit a late action.

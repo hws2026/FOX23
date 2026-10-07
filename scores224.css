@@ -9,3 +9,14 @@
 .bs-deck224-empty{position:absolute;right:12px;bottom:0;background:#0a0d11;font:16px Arial;color:#d1d5db;padding:2px 8px}
 
 .feed-scorebug224{position:absolute;inset:0;pointer-events:none;z-index:65;transition:transform 420ms cubic-bezier(.4,0,.2,1)}
+
+/* Score and player cards share one clipped vertical slide surface. */
+.bottom-scores203 .bs-game-row{background:linear-gradient(#14171b,#08090b)}
+.bottom-scores203 .bs-player-team228{display:grid;place-items:center;flex:0 0 140px;border-right:3px solid #030406;font:600 28px/1 Arial,sans-serif;color:#f7f7f7;background:#222a33}
+.bottom-scores203 .bs-player-detail .bs-status{justify-content:flex-start;text-align:left}
+.bottom-scores203 .bs-detail-window228{min-width:0;max-width:100%;overflow:hidden}
+.bottom-scores203 .bs-detail-text228{display:block;width:max-content;white-space:nowrap;line-height:1.2}
+.bottom-scores203 .bs-detail-text228 strong{font-weight:700;text-transform:uppercase}
+.bottom-scores203 .bs-detail-text228 small{font-size:20px;color:#b8c5d0;margin-left:14px}
+.bottom-scores203 .bs-status-old228{position:absolute;right:0;top:0;height:100%;flex:none;background:linear-gradient(#14171b,#08090b);z-index:2}
+@media(prefers-reduced-motion:reduce){.bottom-scores203 .bs-detail-window228.has-overflow{max-height:100%;overflow:visible}.bottom-scores203 .has-overflow .bs-detail-text228{width:auto;white-space:normal;font-size:19px;line-height:1.1;overflow-wrap:anywhere}.feed-scorebug224{transition:none}}

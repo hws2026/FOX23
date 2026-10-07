@@ -1,0 +1,66 @@
+WLD SPORTS UPDATE 228 — ASSET LIBRARY + SLIDING SCORE CARDS
+
+UPDATE ONLY. Apply over Update 226 or 227. Includes the 227 controller fixes.
+Keep your existing broadcast-logos226 artwork folder and all other assets.
+
+INSTALL
+1. Extract this ZIP outside FOX23.
+2. Copy the included root files into FOX23, replacing matching files.
+3. Copy the COMPLETE included cloud folder, including config.js and delta.js.
+4. Merge the included broadcast-logos226 folder into the existing one. It only
+   contains assignments.json; KEEP every existing logo image and subfolder.
+5. Publish the updated files yourself. Close all old controller tabs on every
+   device, reopen/hard-refresh the updated page, and refresh OBS output once.
+   Older tabs already running older scripts cannot honor the new handoff rules.
+
+No SQL needs to run. Cloud config, SQL and logo artwork are unchanged.
+Nothing has been pushed or deployed, and your live show has not been changed.
+
+ASSET LIBRARY
+Open Asset library in the navigation. Upload PNG, JPEG or WebP images, rename
+their display names, and assign them to the active away/home team's logo,
+raised logo, player or coach; network/sponsor/show/intro/transition logos; or
+the Story wall preview. Save a team in Team library to reuse its assignments.
+Up to 20 images per upload, 2 MB each; 1,000 assets per show library.
+Existing show images are discovered automatically. Your 39 supplied team and
+league logos are included as presets. Original filenames remain intact,
+including alternate suffixes such as DEN-1.png. Distinct uploaded artwork stays
+separate; identical uploaded image data is reused. Renaming changes the asset
+label, not the source file. Clearing/importing a game retains your library.
+Export show includes uploaded image data and asset names.
+
+PLAYER SELECTION
+Player dropdowns use position headings with jersey numbers sorted numerically
+inside each group. This covers lineups, graphics, special teams and photo
+assignment. Player records and lineup IDs are preserved.
+
+BOTTOM SCORE CARDS
+Game cards and updated stat cards slide vertically. Changed scores slide in
+their number windows. Player stat cards have a fixed team abbreviation, and
+long lines scroll horizontally with time to read them. FINAL stays on the
+score summary instead of being repeated in every player's stats.
+The feed scorebug shows only down and distance (e.g. 2ND & 7). The field
+location stays in the separate BALL ON strip.
+
+CONTROLLER HANDOFF
+Retains Update 227's revision-conflict recovery and active-controller ownership.
+Also removes a second stale Stream Deck module load that could create duplicate
+connection controls. Signing in/continuing a saved session takes control;
+the previous updated controller watches. Take control explicitly to move it
+back. Passive polling and OBS output cannot take control.
+
+SEPARATE GAME FILE
+WLD-COWBOYS-AT-EAGLES-2023-11-05.json is delivered separately. After installing
+228, use Output & files > Import show when ready. It replaces the game setup,
+pauses clocks and clears output; export your current show first to keep it.
+See its companion NOTES file for sources and lineup details.
+
+VERIFIED LOCALLY
+Asset validation, assignments, renames, reset retention, import merging,
+old-show migration, export, cloud snapshots and invalid-action rollback passed.
+Grouped dropdowns, ticker timing and feed down/distance checks passed.
+Browser checks confirmed upload, rename, game import, retained assets, grouped
+rosters, score-card slides, score-number slides and overflow scrolling.
+Controller ownership, real Python timer conflicts, standby feed behavior and
+existing cloud recovery regressions passed. Main scorebug drawing code and
+all original logo artwork are unchanged.

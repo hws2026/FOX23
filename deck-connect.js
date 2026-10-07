@@ -1,9 +1,14 @@
-import{base}from'./bridge.js?v=control227';
-import{deckControl}from'./panel.js?v=control227';
+import{base}from'./bridge.js?v=audit232';
+import{deckControl}from'./panel.js?v=audit232';
+// Mixed cache-key imports must share one button, socket and command history.
+const connectorKey=Symbol.for('gridiron.nfl-deck-connector:'+base.pathname);
+const connector=globalThis[connectorKey]||(globalThis[connectorKey]=createConnector());
+export function pairingKey(){return connector.pairingKey();}
+function createConnector(){
 const storageKey='gridiron-deck-key:'+base.pathname;
 const button=document.createElement('button');button.className='button subtle';button.textContent='Connect NFL - Stream Deck';document.querySelector('.topbar-right').prepend(button);
 let socket,timer,enabled=false;const processed=new Map();
-export function pairingKey(){let key=localStorage.getItem(storageKey);if(!key){const bytes=crypto.getRandomValues(new Uint8Array(32));key=Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');localStorage.setItem(storageKey,key);}return key;}
+function pairingKey(){let key=localStorage.getItem(storageKey);if(!key){const bytes=crypto.getRandomValues(new Uint8Array(32));key=Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');localStorage.setItem(storageKey,key);}return key;}
 function connect(){
  clearTimeout(timer);if(socket&&[0,1].includes(socket.readyState))return;
  button.textContent='Connecting NFL - Stream Deck…';
@@ -24,3 +29,5 @@ function connect(){
 }
 button.onclick=()=>{enabled=true;connect();};
 if(localStorage.getItem(storageKey+':enabled')==='1'){enabled=true;connect();}
+return {pairingKey};
+}

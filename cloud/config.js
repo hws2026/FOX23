@@ -6,4 +6,6 @@ export default {
   // The local/Desktop panel remains independent, even with these files installed.
   origin: 'https://hws2026.github.io',
   path: '/FOX23/',
+  // Exact production addresses only; localhost and desktop copies stay local.
+  sites: [{origin: 'https://fox23.huskysol.com', path: '/'}],
 };

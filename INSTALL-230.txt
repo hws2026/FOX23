@@ -1,0 +1,56 @@
+WLD SPORTS UPDATE 230 — CUSTOM DOMAIN / HTTPS STARTUP
+
+WHY THE CONTROLLER STOPPED
+The custom domain opened over HTTP. The browser does not expose Web Locks on
+public HTTP pages, so the old code tried to read request from a missing API.
+The crash occurred before the show worker or cloud login started.
+
+GitHub Pages was inspected read-only: DNS check successful; TLS certificate
+provisioning at Certificate Requested; Enforce HTTPS disabled until issuance.
+A secure-address check returned a certificate name mismatch. No certificate
+warning was bypassed. GitHub settings, DNS and the live show were not edited.
+
+REQUIRED HOSTING STEP
+Once GitHub finishes issuing the certificate, open repository Settings > Pages
+and enable Enforce HTTPS. Open https://fox23.huskysol.com/ after issuance.
+A code ZIP cannot finish certificate provisioning. Do not bypass browser
+certificate warnings. DNS already passed; changing it is not needed based on
+the observed status.
+https://github.com/hws2026/FOX23/settings/pages
+https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https
+
+WHAT THIS UPDATE FIXES
+- Stops before starting a writer when required browser support is missing.
+- Shows an HTTPS explanation and a secure-address link instead of the request
+  exception. Local-file and unsupported-browser cases also get clear recovery.
+- Retains the cross-tab controller lock; does not bypass ownership protection.
+- Recognizes exactly https://fox23.huskysol.com/ as a cloud show address, in
+  addition to https://hws2026.github.io/FOX23/. Local/Desktop stays independent.
+- Uses the same configured Supabase project and same show account. No new show,
+  SQL or account setup is needed. A different domain can require sign-in again.
+- Includes CNAME with fox23.huskysol.com so the published root keeps the existing
+  custom-domain setting. The files are ready to publish before issuance finishes.
+
+INSTALL OVER YOUR EXISTING Documents/FOX23 PROJECT
+1. Extract this ZIP outside FOX23.
+2. Copy the included root files into FOX23, replacing matching files.
+3. Copy the complete cloud folder, including the UPDATED config.js and sync.js.
+4. Merge the broadcast-logos226 folder. Keep any extra variants you added.
+5. Keep all other existing files/folders. Publish your update yourself.
+6. After the certificate is ready, enable Enforce HTTPS, close old control tabs,
+   and hard-refresh the HTTPS controller. Refresh the OBS output too.
+7. Sign in with the existing show account and join the existing show. If that
+   show is missing, stop and check the account; do not initialize an empty one.
+
+This is a cumulative 226–230 update for the existing complete project. Includes
+all39 original PNGs and all32 logo mappings, unchanged, plus the full cloud folder.
+Your asset library, game data, logo choices, -1 alternates and SQL are unchanged.
+Browser-only data and sign-in sessions belong to their original browser address;
+the update does not transfer or clear them. No production data was accessed.
+
+VERIFIED
+HTTP fails before worker/cloud access. HTTPS and localhost startup, duplicate-tab
+protection, remote-mode compatibility, exact cloud origin/path scope, recovery
+messages, module cache consistency and all8 cloud ownership regressions passed.
+Original artwork and logo assignments match229 byte for byte. ZIP integrity and
+payload hashes verified. Live HTTPS operation awaits certificate provisioning.

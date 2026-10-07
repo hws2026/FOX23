@@ -1,0 +1,52 @@
+WLD SPORTS UPDATE 231 — COMPLETE SCORE FEEDS, UFL, LIGHT SWEEPS AND AUDIT FIXES
+
+INSTALL INTO YOUR EXISTING COMPLETE Documents/FOX23 PROJECT
+1. Extract this ZIP outside FOX23.
+2. Copy ALL included root files into FOX23, replacing matching files.
+3. Copy the complete cloud folder. Do not execute the SQL files; no database
+   migration is required for this update.
+4. Merge the broadcast-logos226 folder. Keep extra logos/variants you added.
+5. Keep all other existing project files and folders. This is a cumulative
+   update package for your complete project, not a standalone installation.
+6. Publish the update yourself, then close old control tabs and hard-refresh
+   the HTTPS controller and OBS output. Use your existing show/account.
+
+BOTTOM SCORE UPDATES
+- Choose the leagues you want before showing the feed. UFL is now included.
+- Every scheduled matchup returned by the selected feeds is retained, including
+  MLB doubleheaders. Teams without a scheduled game do not receive OFF cards.
+- Official and ESPN schedules are combined; a partial official schedule no
+  longer discards games supplied only by ESPN. Distinct events stay distinct.
+- College coverage is Division I: FBS + FCS football and Division I basketball.
+- Loaded game counts are shown per league so you can check schedule coverage.
+- All selected league cards appear, then all games and their available details
+  in that league. The full deck returns; the completed card slides out and the
+  next league comes in. Rotation repeats after the last league.
+- The independent Feed scorebug can follow that rotation or a pinned game. It
+  retains the previous game during transition decks, including the final deck.
+- Matchup changes get a quick cool-white/blue light sweep. Team/logo/color and
+  score updates light the affected section. Clock-only updates do not flash.
+- The bottom game/stat cards keep their sliding motion. Player rows retain team
+  abbreviations. Down/distance excludes the team/yard already shown in BALL ON.
+- Baseball innings, soccer time and college basketball periods use the feed's
+  status wording. Delays/halftime do not retain live field indicators. Overtime
+  finals retain their overtime label. Missing data is not invented.
+
+AUDIT FIXES
+- Local edits report success only after browser storage commits. Failed saves
+  roll back instead of silently leaving edits for a later poll to save.
+- Untouched exported shows can be imported with catalog and play-clock metadata.
+- Imports preserve assets, logos, lineups, catalog statistics, transition presets,
+  countdown settings, network motion, saved graphics and valid saved-team links.
+- Older playlist cues no longer overwrite newer saved-graphic settings.
+- Import does not create false scoring flashes or a stale play-clock hide timer.
+- Empty-show backups keep their empty settings. Outputs restore cleared and
+  clocks paused. Unknown custom-library IDs remain detached with teams intact.
+
+PRESERVED
+All 39 original PNGs and all 32 NFL logo mappings, including DEN-1, are unchanged.
+The main scorebug artwork, CSS, entrance/exit and rendering are unchanged.
+The complete cloud folder, existing domain CNAME, asset library and prior fixes
+are included. No account, production show, GitHub, DNS or SQL changes were made.
+
+See AUDIT-231.txt for tests and verification limits.
