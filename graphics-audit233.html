@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'">
+<title>Graphics audit 233 · isolated rehearsal</title>
+<link rel="stylesheet" href="./graphics-audit233.css?v=update238">
+<link rel="stylesheet" href="./graphics.css?v=20260923-controls105">
+<link rel="stylesheet" href="./reference.css?v=update238">
+<link rel="stylesheet" href="./touchdown.css?v=ref219">
+<link rel="stylesheet" href="./scores203.css?v=update238">
+<link rel="stylesheet" href="./scores224.css?v=update238">
+<link rel="stylesheet" href="./additions219.css?v=update238">
+<link rel="stylesheet" href="./audit233.css?v=update238">
+</head><body class="audit233-page">
+<header class="audit233-header"><div><h1>Graphics audit 233</h1><p>Isolated demonstration data · no controller connection or saved-show changes</p></div><a href="./">Control panel</a></header>
+<main>
+<section class="audit233-controls" aria-label="Graphic and playback controls">
+ <label>Graphic type<select id="type"><option value="all">All types</option></select></label>
+ <label>Find variant<input id="filter" type="search" placeholder="e.g. quarterback, sponsor, yellow"></label>
+ <div class="audit233-picker"><button id="prev" aria-label="Previous variant">←</button><label>Variant<select id="cue"></select></label><button id="next" aria-label="Next variant">→</button></div>
+ <label>Surface<select id="surface"><option value="live">Live output</option><option value="preview">Preview</option></select></label>
+ <label>Motion<select id="motion"><option value="auto">Default</option><option value="fade">Fast fade</option></select></label>
+ <label>Stage scale<select id="scale"><option value="fit">Fit window</option><option value="1">100% · 1920×1080</option><option value="0.6666666667">66.7% · 1280×720</option><option value="0.3333333333">33.3% · 640×360</option><option value="0.1666666667">16.7% · 320×180</option></select></label>
+ <label><input id="logos" type="checkbox" checked> Supplied DAL/PHI logos</label>
+ <label><input id="bottom" type="checkbox"> Bottom scores</label>
+ <label><input id="feed" type="checkbox"> Feed scorebug</label>
+ <label><input id="mainBug" type="checkbox" checked> Main scorebug requested</label>
+ <label><input id="countdown" type="checkbox"> Independent countdown</label>
+ <label><input id="sideStats" type="checkbox"> Independent side stats</label>
+ <label>Feed slot<select id="feedSlot"><option value="deck">Opening league deck</option><option value="game">NFL matchup</option><option value="away">Away player stat</option><option value="home">Home player stat</option><option value="next">Next league deck</option><option value="mlb">MLB matchup</option></select></label>
+ <div class="audit233-actions"><button data-action="entrance">IN / replay</button><button data-action="hold">Held layout</button><button data-action="content-update">Update content</button><button data-action="exit">OUT</button><button data-action="interrupted-exit">Rapid OUT → return</button><button id="freeze">Freeze current frame</button></div>
+ <label>Sample stage<select id="sampleStage"><option value="entrance">Entrance</option><option value="content-update">Content update</option><option value="exit">Exit</option><option value="interrupted-exit">Interrupted exit</option></select></label>
+ <label>Sample after (ms)<input id="sampleTime" type="number" min="0" max="10000" step="10" value="300"></label><button id="sample">Play to sample &amp; freeze</button>
+</section>
+<p id="status" role="status">Loading inventory…</p><p id="error" role="alert" hidden></p>
+<div id="audit233-viewport"><div id="audit233-canvas"><div id="stage" class="stage"></div></div></div>
+<div class="audit233-notes"><p id="scope"></p><p>Sample time uses the real renderer and real elapsed time, then freezes a copy of the visible frame. Global timers and clocks are never replaced. The measured sample time is reported; self-clearing transitions may correctly be blank at later samples. Held layout waits 2 seconds before freezing.</p><p>Preview uses the production preview path, so program-only docks can differ. Camera, saved-video and browser sources stay disconnected; those variants test the layout only. Players and scores are synthetic. The page does not verify pixel accuracy automatically.</p></div>
+<section class="audit233-review" aria-label="Review checklist"><h2>Coverage checklist</h2><p id="coverage">No visual checks recorded.</p><div class="audit233-verdict"><label>Review stage<select id="reviewStage"><option value="entrance">Entrance</option><option value="hold">Held layout</option><option value="content-update">Content update</option><option value="exit">Exit</option><option value="interrupted-exit">Interrupted exit</option></select></label><label>Finding<input id="note" placeholder="Optional observed issue or reference"></label><button data-verdict="pass">Mark visually checked</button><button data-verdict="fail">Record issue</button><button data-verdict="unverified">Reset to unverified</button><button id="export">Export checklist JSON</button></div><p>Marks apply only to the selected variant, surface, motion, scale and overlay settings. Replaying a graphic never marks it verified. Checklist changes exist only in this page session unless exported.</p><div id="checklist"></div></section>
+<details class="audit233-editor"><summary>Current fixture cue · edit locally</summary><p>Apply edits to this isolated case. Selecting another variant restores its fixture. Split sources remain disconnected.</p><textarea id="cueJson" rows="14" spellcheck="false" aria-label="Cue JSON"></textarea><button id="applyCue">Apply cue &amp; replay</button></details>
+<details class="audit233-editor"><summary>Current state and animation diagnostics</summary><pre id="diagnostics"></pre></details>
+</main><script type="module" src="./graphics-audit233.js?v=update238"></script></body></html>

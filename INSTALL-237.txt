@@ -1,0 +1,17 @@
+WLD UPDATE 237 - TIMEOUT AND BOTH SIDE PANELS
+
+Merge this cumulative update into your complete FOX23 project, replacing every
+matching file. Keep all other files and folders. Publish manually and refresh
+controller/output pages together. This ZIP is an update, not a fresh install.
+
+The upper timeout tab rises first; the side count slides out at about 1.4 seconds,
+then retracts by 3.35 seconds while the upper tab stays. Automatic upper notices
+leave after 8.5 seconds. Manual upper notices hold until Out. Player stats resume
+after the timeout clears. Both types of side panel have mirrored slanted ends
+with narrow team-color bevels. Live color swaps update both colors without
+restarting the notice. Restoring a timeout clears its stale automatic notice.
+
+Open timeout-review237.html for the isolated frame panel and lifecycle checks.
+The existing MLB originals, logo cover fit, and Swap & save colors are retained.
+VALIDATION-237.json records this scoped audit and its limitations. Prior release
+reports remain included as historical evidence. No deployment is performed.

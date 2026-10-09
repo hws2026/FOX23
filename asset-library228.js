@@ -1,5 +1,6 @@
 import {groupedPlayerOptions} from './player-options228.js';
 import {nflLogoAssignments226} from './nfl-logos226.js';
+import {mlbLogoAssignments236} from './mlb-logos236.js';
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const kinds = {team:'Team logos', player:'Players', coach:'Coaches', branding:'Show logos', other:'Other images'};
@@ -15,6 +16,11 @@ export function assetUses(state) {
   for (const team of nflLogoAssignments226) {
     const src = 'broadcast-logos226/teams/' + team.file;
     const label = `${team.code} · Bottom scores & Feed scorebug`;
+    add(src, label); add(new URL('./' + src, import.meta.url).href, label);
+  }
+  for (const team of mlbLogoAssignments236) {
+    const src = 'broadcast-logos236/mlb/' + team.file;
+    const label = `MLB ${team.code} · Default bottom scores & Feed scorebug`;
     add(src, label); add(new URL('./' + src, import.meta.url).href, label);
   }
   for (const [side, team] of Object.entries(state.teams || {})) {
@@ -56,7 +62,7 @@ export function createAssetLibrary({getState, act, imageFile, toast, render, sam
   }
   function view() {
     if (!selected && items().length) selected = items()[0].id;
-    return `<div class="asset-library228"><div class="section-top"><div><h2>Asset library</h2><p>Your NFL logos keep their existing team assignments. Manage names, upload more images, or assign other slots here.</p></div><span class="pill">${items().length} IMAGES</span></div><form class="card asset-upload228" id="asset-upload228"><div><h3>Upload images</h3><p class="help">PNG, JPEG, or WebP · up to 2 MB each · up to 20 files at once. Alternate filenames such as -1 stay separate. Your library stays available when you import or clear a game.</p></div><label>Images<input id="asset-files228" type="file" accept="image/png,image/jpeg,image/webp" multiple required></label><label>Category<select id="asset-kind228">${Object.entries(kinds).map(([key,label]) => option(key,label,'other')).join('')}</select></label><button class="primary">Upload to library</button><p id="asset-upload-status228" role="status"></p></form><div class="asset-layout228"><article class="card asset-browser228"><div class="asset-filters228"><label>Search assets<input type="search" id="asset-search228" value="${esc(search)}" placeholder="Name or original filename"></label><label>Category<select id="asset-filter228">${option('','All images',filter)}${Object.entries(kinds).map(([key,label]) => option(key,label,filter)).join('')}</select></label></div><div id="asset-results228">${cards()}</div></article><aside class="card asset-detail228" id="asset-detail228" aria-label="Selected asset">${detail()}</aside></div></div>`;
+    return `<div class="asset-library228"><div class="section-top"><div><h2>Asset library</h2><p>Your broadcast logos keep their existing team assignments. Manage names, upload more images, or assign other slots here.</p></div><span class="pill">${items().length} IMAGES</span></div><form class="card asset-upload228" id="asset-upload228"><div><h3>Upload images</h3><p class="help">PNG, JPEG, or WebP · up to 2 MB each · up to 20 files at once. Alternate filenames such as -1 stay separate. Your library stays available when you import or clear a game.</p></div><label>Images<input id="asset-files228" type="file" accept="image/png,image/jpeg,image/webp" multiple required></label><label>Category<select id="asset-kind228">${Object.entries(kinds).map(([key,label]) => option(key,label,'other')).join('')}</select></label><button class="primary">Upload to library</button><p id="asset-upload-status228" role="status"></p></form><div class="asset-layout228"><article class="card asset-browser228"><div class="asset-filters228"><label>Search assets<input type="search" id="asset-search228" value="${esc(search)}" placeholder="Name or original filename"></label><label>Category<select id="asset-filter228">${option('','All images',filter)}${Object.entries(kinds).map(([key,label]) => option(key,label,filter)).join('')}</select></label></div><div id="asset-results228">${cards()}</div></article><aside class="card asset-detail228" id="asset-detail228" aria-label="Selected asset">${detail()}</aside></div></div>`;
   }
   function wireCards(root) {
     root.querySelectorAll('[data-asset228]').forEach(button => button.onclick = () => { selected = button.dataset.asset228; refresh(root); });

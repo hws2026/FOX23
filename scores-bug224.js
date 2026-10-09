@@ -1,6 +1,7 @@
 import {nflBroadcastLogo226} from './nfl-logos226.js';
+import {mlbBroadcastLogo236} from './mlb-logos236.js';
 import {scorebug,animateScorebugOut,finishBugEntrance,morph} from './feed-scorebug225.js';
-import {feedUpdateSnapshot,feedUpdateTargets,runFeedLightUpdate,beginFeedLights,feedLightCSS} from './feed-light231.js?v=audit232';
+import {feedUpdateSnapshot,feedUpdateTargets,runFeedLightUpdate,beginFeedLights,feedLightCSS} from './feed-light231.js?v=update238';
 export function feedGame(games,cfg,frame){
  if(cfg.feedBugGameId)return games.find(g=>g.id===cfg.feedBugGameId)||null;
  if(frame?.game&&!frame.game._titleCard)return games.find(g=>g.id===frame.game.id&&g.league===frame.game.league)||null;
@@ -24,7 +25,7 @@ export function feedBugState(game,cfg={},now=Date.now()){
  const overtimePeriod=finalOT?Number(finalOT[1]||finalOT[2]||1):structured&&period>4?period-4:1;
  const interrupted=/postpon|cancel|suspend|abandon|delay|half[ -]?time|^half$|intermission|\bend\b/i.test(rawStatus);
  const active=live&&!stale&&!interrupted;
- const teams=Object.fromEntries(['away','home'].map(side=>{const t=game[side]||{};return[side,{name:t.name||t.abbr||'',abbr:t.abbr||'',record:t.record||'',logo:nflBroadcastLogo226(game.league,t)||safeLogo(t.logo),color:color(t.color,'#243545'),secondary:color(t.secondary,'#c8d4dd')}];}));
+ const teams=Object.fromEntries(['away','home'].map(side=>{const t=game[side]||{};return[side,{name:t.name||t.abbr||'',abbr:t.abbr||'',record:t.record||'',logo:nflBroadcastLogo226(game.league,t)||(game.league==='MLB'?mlbBroadcastLogo236(game.league,t,game.provider):'')||safeLogo(t.logo),color:color(t.color,'#243545'),secondary:color(t.secondary,'#c8d4dd')}];}));
  // Baseball innings, soccer time and college-basketball halves come from the
  // provider's status text instead of being mislabeled as football quarters.
  const providerStatus=rawStatus.toUpperCase()==='LIVE'?(clock?rawClock:'IN PROGRESS'):rawStatus.toUpperCase();
@@ -41,7 +42,7 @@ function makeHost(root){
  // Separate DOM prevents the main game clock, main renderer, and SVG IDs from
  // overwriting or removing the independent feed scorebug.
  const shadow=host.attachShadow({mode:'open'}),surface=document.createElement('div');surface.className='feed-root225';
- const sheets=['graphics.css?v=20260923-controls105','reference.css?v=audit232'];
+ const sheets=['graphics.css?v=20260923-controls105','reference.css?v=update238'];
  const ready=sheets.map(path=>new Promise(resolve=>{const link=document.createElement('link');link.rel='stylesheet';link.href=new URL(path,import.meta.url).href;link.onload=()=>resolve(true);link.onerror=()=>resolve(false);shadow.append(link);}));
  const style=document.createElement('style');style.textContent=shadowCSS+feedLightCSS;shadow.append(style,surface);host._surface=surface;root.append(host);
  Promise.all(ready).then(result=>{if(!host.isConnected)return;if(result.some(ok=>!ok)){host.dataset.error='Scorebug styles failed to load; reload output.';return;}host._ready=true;draw(host);alignFeedBug(root,host,host._latest.cfg,host._branding||{});surface.style.visibility='visible';});

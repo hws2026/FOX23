@@ -1,0 +1,24 @@
+/* DAL–PHI reference: upper tab first; side count slides out at ~1.4s,
+   retracts by ~3.35s, upper tab stays until OUT. Side faces share mirrored bevels. */
+.timeout-tail-window237{position:absolute;right:calc(100% - 90px);bottom:6px;width:590px;height:46px;overflow:hidden}
+.dock-home .timeout-tail-window237{right:auto;left:calc(100% - 90px)}
+.timeout-tail234{position:absolute;inset:0;background:rgba(15,15,15,.78);clip-path:polygon(0 0,100% 0,100% 100%,12px 100%);transform:translateX(100%)}
+.dock-home .timeout-tail234{clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%);transform:translateX(-100%)}
+.timeout-tail234>span{display:flex;align-items:center;justify-content:center;width:100%;height:100%;box-sizing:border-box;padding:0 94px 0 22px;overflow:hidden;white-space:nowrap;color:#f0f0ea;font:italic 36px/1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:.4px;text-transform:uppercase;text-shadow:0 1px 1px #0006}
+.dock-home .timeout-tail234>span{padding:0 22px 0 94px}
+.timeout-tail234::after,.qb-live-anchor .side-stat-row::after{content:'';position:absolute;top:0;bottom:0;left:6px;right:auto;width:12px;transform:skewX(14deg);background:linear-gradient(90deg,color-mix(in srgb,var(--team) 70%,white) 0 18%,var(--team) 18% 42%,#071015 42% 62%,var(--team) 62% 88%,var(--secondary) 88%)}
+.dock-home .timeout-tail234::after,.qb-live-anchor.dock-home .side-stat-row::after{left:auto;right:6px;transform:skewX(-14deg)}
+.qb-live-anchor:not(.dock-home) .side-stat-row{clip-path:polygon(0 0,100% 0,100% 100%,12px 100%)}
+.qb-live-anchor.dock-home .side-stat-row{clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%)}
+.timeout-alert234 .situation-reveal h1,.timeout-anchor .timeout-notice strong{font-weight:400}
+.timeout-alert234 .situation-reveal h1 b,.timeout-anchor .timeout-notice strong b{font-weight:700}
+.graphics-layer.animate-in .timeout-tail234,.timeout-anchor:not(.out) .timeout-tail234{animation:timeout-tail-away237 3.35s linear both;animation-delay:var(--timeout-elapsed237,0ms)}
+.graphics-layer.animate-in .dock-home .timeout-tail234,.timeout-anchor.dock-home:not(.out) .timeout-tail234{animation-name:timeout-tail-home237}
+/* Fade uses the same hold/retract schedule, with short opacity transitions. */
+.graphics-layer.animate-in[data-motion=fade] .timeout-tail234,.timeout-anchor[data-motion=fade]:not(.out) .timeout-tail234{transform:none;animation-name:timeout-tail-fade237}
+.graphics-layer.leaving .timeout-tail234,.timeout-anchor.out .timeout-tail234{animation:none}
+@keyframes timeout-tail-away237{0%,41.79%{transform:translateX(100%)}56.72%,85.07%{transform:translateX(0)}100%{transform:translateX(100%)}}
+@keyframes timeout-tail-home237{0%,41.79%{transform:translateX(-100%)}56.72%,85.07%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+@keyframes timeout-tail-fade237{0%,41.79%{opacity:0}46.57%,85.07%{opacity:1}89.85%,100%{opacity:0}}
+@keyframes timeout-window237{0%{visibility:hidden}41.79%{visibility:visible}100%{visibility:hidden}}
+@media(prefers-reduced-motion:reduce){.timeout-tail234{animation:none!important;transform:none!important}.timeout-tail-window237{animation:timeout-window237 3.35s step-end both;animation-delay:var(--timeout-elapsed237,0ms)}}

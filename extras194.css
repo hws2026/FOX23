@@ -10,3 +10,6 @@
 .badge194 .matchup194-team span{font-family:Impact,'Arial Narrow',sans-serif;font-size:40px}
 .weather194 h1{font-family:Impact,'Arial Narrow',sans-serif;font-size:54px}.weather194 h2{font-family:Impact,'Arial Narrow',sans-serif;font-size:40px}.weather194-values strong{font-family:Impact,'Arial Narrow',sans-serif;font-size:53px}
 .weather194-metal:after{content:'';position:absolute;left:34%;bottom:10px;width:24px;height:8px;background:repeating-linear-gradient(55deg,transparent 0 5px,#405560 6px 8px)}
+/* 234: portrait and landscape network marks share a fixed, contained logo cell. */
+.language194-logo{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);overflow:hidden}
+.language194-logo img{display:block;min-width:0;min-height:0;max-width:100%;max-height:100%;object-fit:contain}

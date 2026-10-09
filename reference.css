@@ -1,6 +1,7 @@
-@import url('./extras194.css?v=added194');
-@import url('./custom192.css?v=audit232');
-@import url('./rail-motion192.css?v=audit232');
+@import url('./timeout237.css?v=update238');
+@import url('./extras194.css?v=audit234-final');
+@import url('./custom192.css?v=audit234-final');
+@import url('./rail-motion192.css?v=audit234-final');
 @import url("./pregame.css?v=tunnel159");
 /* Reference-driven revisions. Dimensions use the 1920 Ãƒâ€” 1080 broadcast canvas. */
 /* Timeout bars restored to their original lower team-panel position and weight. */
@@ -1000,7 +1001,7 @@
 @keyframes lineup-logo-out82{0%{transform:perspective(700px) rotateY(0);opacity:1}99%{transform:perspective(700px) rotateY(90deg);opacity:1}100%{transform:perspective(700px) rotateY(90deg);opacity:0}}
 @keyframes lineup-tab-out82{from{opacity:1;transform:translate(-50%,0)}to{opacity:0;transform:translate(-50%,18px)}}
 @keyframes lineup-copy-out82{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(16px)}}
-@media(prefers-reduced-motion:reduce){.graphics-layer.animate-in>.lineup-ribbon *,.graphics-layer.leaving>.lineup-ribbon *{animation:none!important}.graphics-layer.leaving:has(>.lineup-ribbon){opacity:0!important}}
+@media(prefers-reduced-motion:reduce){.graphics-layer.animate-in>.lineup-ribbon *,.graphics-layer.leaving>.lineup-ribbon *{animation:none!important}/* 234: the lineup exit remains visible until its independent rails finish. */}
 
 .lineup-rookie{display:inline-block;color:#ffdc27;font-size:.64em;letter-spacing:.5px;margin-left:7px;font-style:normal;vertical-align:baseline}
 
@@ -1254,7 +1255,7 @@
 @keyframes break-copy-in109{0%,58%{opacity:0;translate:0 5px}94%,100%{opacity:1;translate:0 0}}
 /* Commentator frame is independent of the blue face, with one outer silhouette. */
 .announcer-frame{padding:5px 10px 12px;background:none;clip-path:none;isolation:isolate}
-.announcer-frame::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;background:url('./announcer-rails.svg?v=109') center/100% 100% no-repeat}
+.announcer-frame::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;background:url('./announcer-rails.svg?v=audit234-final') center/100% 100% no-repeat}
 .announcer-panel{position:relative;isolation:isolate;clip-path:polygon(14px 0,calc(100% - 14px) 0,100% 20px,100% calc(100% - 22px),calc(100% - 22px) 100%,22px 100%,0 calc(100% - 22px),0 20px);background:linear-gradient(110deg,#082039,#103958 48%,#071c34)}
 .announcer-panel::before{content:'';position:absolute;inset:0;z-index:-1;background:url('./assets/lineup-contours.svg?v=restore172') center/600px 160px repeat;opacity:.14;pointer-events:none}
 .announcer-person{padding:12px 22px 9px}
@@ -1494,7 +1495,7 @@
 @keyframes intro-fin130{0%,17%{translate:0 210px;opacity:0;rotate:y -48deg}32%{opacity:1;rotate:y -24deg}70%{translate:0 0;rotate:y 4deg}100%{translate:0 0;opacity:1;rotate:y 0deg}}
 @keyframes intro-accent130{0%,8%{translate:-110% 0}32%,42%{translate:4% 0}58%,69%{translate:27% 0}94%,100%{translate:120% 0}}
 /* Broadcast logos fill the team-end panels; cropping stays centered in the face. */
-.intro-logo>.team-logo{object-fit:cover!important;object-position:center center!important}
+.intro-logo>.team-logo{object-fit:cover!important;object-position:center center!important;transform:scale(1.12)!important}
 
 /* 131 preview revision: flat moving planes, outward logo travel, no card tilt. */
 .intro-fin{perspective:none;rotate:none;transform:none;overflow:hidden}.intro-fin.home{transform:scaleX(-1)}
@@ -1979,3 +1980,77 @@
 /* Audit 193: keep headshots intact; full-body artwork also fits without distortion. */
 .pregame-player-photo img{object-fit:contain;object-position:center top}
 .kickoff-top{height:46px;line-height:1.2;padding:3px 10px 2px}
+
+/* Audit233: one segmented steel outline; no duplicate generic rail underneath. */
+.announcer-frame{padding:3px 8px 12px}
+.announcer-frame::after{background-image:url('./announcer-rails.svg?v=audit234-final')}
+.announcer-panel{clip-path:polygon(18px 0,calc(100% - 18px) 0,100% 28px,100% calc(100% - 26px),calc(100% - 28px) 100%,64% 100%,61% calc(100% - 9px),39% calc(100% - 9px),36% 100%,28px 100%,0 calc(100% - 26px),0 28px)}
+.cue-yellow233,.cue-yellow233 *{color:#ffce28!important}
+
+/* Compact countdown follows the supplied upper-left reference. */
+.kickoff-bug{left:86px;right:auto}
+/* The ticker raises bottom graphics58px; preserve the countdown's screen anchor. */
+.stage:has(> .bottom-scores203) .broadcast-content209 .kickoff-bug{top:115px}
+
+.stage:has(> .bottom-scores203) .broadcast-content209 .network-watermark{top:108px}
+
+/* 234: booth reference, 07-25-27 / 59–69 seconds. The face unfolds above
+   the lower rail, names settle next, and the broadcast badge arrives last. */
+.announcer.announcer234{left:218px;right:218px;bottom:52px;height:170px;isolation:isolate;overflow:visible}
+.announcer234-body{position:absolute;inset:0;transform-origin:50% calc(100% - 5px)}
+.announcer234-face{position:absolute;inset:4px 2px 10px;background:linear-gradient(110deg,#08263c,#0a2941 48%,#061d33);clip-path:polygon(25px 0,calc(100% - 25px) 0,100% 35px,100% calc(100% - 35px),calc(100% - 36px) 100%,66% 100%,62% calc(100% - 9px),38% calc(100% - 9px),34% 100%,36px 100%,0 calc(100% - 35px),0 35px)}
+.announcer234-face::before{content:'';position:absolute;inset:0;background:url('./assets/lineup-contours.svg?v=restore172') center/600px 170px repeat;opacity:.95}
+.announcer234-rails{position:absolute;inset:0;background:url('./announcer-rails.svg?v=audit234-final') center/100% 100% no-repeat;pointer-events:none;clip-path:inset(0 0 22%)}
+.announcer234-bottom-rails{position:absolute;inset:0;clip-path:inset(78% 0 0);pointer-events:none}
+.announcer234-bottom-rails i{position:absolute;top:0;bottom:0;width:50%;background:url('./announcer-rails.svg?v=audit234-final') left center/200% 100% no-repeat}
+.announcer234-bottom-rails .announcer234-rail-left{left:0}
+.announcer234-bottom-rails .announcer234-rail-right{right:0;background-position:right center}
+.announcer234-names{position:absolute;inset:12px 20px 16px;display:grid;grid-template-columns:repeat(var(--crew-count),minmax(0,1fr));align-items:center}
+.announcer.announcer234 .announcer-person{padding:8px 15px 0;min-width:0;text-align:center}
+.announcer.announcer234 h1{font:italic 700 64px/1 'DIN Condensed','Arial Narrow',var(--display);margin:0;overflow:visible;text-overflow:clip;letter-spacing:.3px;text-shadow:2px 3px 1px #000b;white-space:normal}
+.announcer234 h1 small,.announcer234 h1 strong{display:block;white-space:nowrap;overflow:hidden;font:inherit;min-width:0}
+.announcer234 h1 small{font-size:46px;line-height:1.02;margin-bottom:2px}
+.announcer234 h1 small:empty{display:none}
+.announcer234.announcer234-roles h1{font-size:52px;white-space:nowrap;overflow:hidden}
+.announcer234.announcer234-roles p{font:italic 700 28px/1.1 'DIN Condensed','Arial Narrow',var(--display);margin:8px 0 0;color:#edf3f6}
+.announcer234-badge{position:absolute;left:50%;bottom:calc(100% - 6px);transform:translateX(-50%);transform-origin:50% 100%;width:380px;height:55px;display:grid;place-items:center}
+.announcer234-badge img{display:block;width:100%;height:100%;min-width:0;min-height:0;max-width:100%;max-height:100%;object-fit:contain}
+.announcer234-badge span{display:block;max-width:100%;padding:5px 15px;border:2px solid #9eaeb8;background:#08273b;color:white;font:bold 29px/1.1 Arial,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.graphics-layer.animate-in[data-motion=auto]>.announcer.announcer234,.graphics-layer.leaving[data-motion=auto]>.announcer.announcer234{animation:none!important;clip-path:none;transform:none;opacity:1;translate:none}
+.graphics-layer.animate-in[data-motion=auto]>.announcer.announcer234 .announcer234-body{animation:announcer234-in .22s .28s ease-out both!important}
+.graphics-layer.animate-in[data-motion=auto]>.announcer.announcer234 .announcer-person{animation:announcer234-copy .20s .40s ease-out both!important}
+.graphics-layer.animate-in[data-motion=auto]>.announcer.announcer234 .announcer234-bottom-rails{animation:announcer234-rails-in .3s ease-out both!important}
+.graphics-layer.animate-in[data-motion=auto]>.announcer.announcer234 .announcer234-rail-left{animation:announcer234-left-in .3s ease-out both!important}
+.graphics-layer.animate-in[data-motion=auto]>.announcer.announcer234 .announcer234-rail-right{animation:announcer234-right-in .3s ease-out both!important}
+.graphics-layer.animate-in[data-motion=auto]>.announcer.announcer234 .announcer234-badge{animation:announcer234-badge-in .20s .52s ease-out both!important}
+.graphics-layer.leaving[data-motion=auto]>.announcer.announcer234 .announcer234-body{animation:announcer234-out .52s ease-in both!important}
+.graphics-layer.leaving[data-motion=auto]>.announcer.announcer234 .announcer234-bottom-rails{animation:announcer234-rails-in .20s .32s ease-in reverse both!important}
+.graphics-layer.leaving[data-motion=auto]>.announcer.announcer234 .announcer234-rail-left{animation:announcer234-left-in .20s .32s ease-in reverse both!important}
+.graphics-layer.leaving[data-motion=auto]>.announcer.announcer234 .announcer234-rail-right{animation:announcer234-right-in .20s .32s ease-in reverse both!important}
+.graphics-layer.leaving[data-motion=auto]>.announcer.announcer234 .announcer-person{animation:announcer234-copy .12s linear reverse both!important}
+.graphics-layer.leaving[data-motion=auto]>.announcer.announcer234 .announcer234-badge{animation:announcer234-badge-in .12s ease-in reverse both!important}
+@keyframes announcer234-in{from{opacity:0;clip-path:inset(100% 0 0)}to{opacity:1;clip-path:inset(0)}}
+@keyframes announcer234-out{0%,16%{opacity:1;clip-path:inset(0)}62%,100%{opacity:0;clip-path:inset(100% 0 0)}}
+@keyframes announcer234-rails-in{0%{opacity:0;clip-path:inset(78% 44% 0)}8%{opacity:1}100%{opacity:1;clip-path:inset(78% 0 0)}}
+@keyframes announcer234-left-in{from{transform:translateX(16.5%)}to{transform:translateX(0)}}
+@keyframes announcer234-right-in{from{transform:translateX(-16.5%)}to{transform:translateX(0)}}
+@keyframes announcer234-copy{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes announcer234-badge-in{from{opacity:0;clip-path:inset(100% 0 0);translate:0 8px}to{opacity:1;clip-path:inset(0);translate:0 0}}
+@media(prefers-reduced-motion:reduce){.stage .graphics-layer.animate-in[data-motion=auto]>.announcer.announcer234 *,.stage .graphics-layer.leaving[data-motion=auto]>.announcer.announcer234 *{animation:none!important}.stage .graphics-layer.leaving[data-motion=auto]>.announcer.announcer234{opacity:0}}
+
+/* 234: fixed logo slots must not grow an implicit grid row to image intrinsic size.
+   The slot keeps its designed raised position; the artwork fits inside it. */
+.stage :is(.spotlight-logo,.lineup-ribbon-logo,.result-logo,.matchup-logo,.heading-mark,.referee-mark,.news-team-mark,.record219-logo,.sponsorpick233-team,.studio-emblem,.pattern-logo>div,.transition-emblem,.bumper-logo,.qb-top-logo){grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+.stage :is(.spotlight-logo,.lineup-ribbon-logo,.result-logo,.matchup-logo,.heading-mark,.referee-mark,.news-team-mark,.record219-logo,.sponsorpick233-team,.studio-emblem,.pattern-logo>div,.transition-emblem,.bumper-logo,.qb-top-logo)>img{min-width:0;min-height:0;max-width:100%;max-height:100%;object-fit:contain}
+
+/* 234: 07-28-57 coach reference. The existing ribbon pieces open independently;
+   the raised team mark, one-line name and credentials share the measured face. */
+.player-spotlight.staff-ribbon234{left:190px;bottom:48px;width:1540px;height:300px;--ribbon-height:210px}
+.staff-ribbon234 .spotlight-logo{left:-4px;bottom:8px;width:330px;height:282px}
+.staff-ribbon234 .spotlight-copy{left:365px;right:50px;top:8px;height:68px}
+.staff-ribbon234 .staff-ribbon-name{font:italic 700 66px/1.05 'DIN Condensed','Arial Narrow',var(--display);padding:0 8px 0 0}
+.staff-ribbon-name small{font:inherit;font-size:.78em}
+.staff-ribbon-name strong{font:inherit}
+.staff-ribbon234 .staff-ribbon-role{left:420px;right:48px;top:112px;font-size:43px;line-height:1.08;letter-spacing:2px}
+.staff-ribbon234-detail .staff-ribbon-role{top:90px;font-size:38px}
+.staff-ribbon234 .staff-ribbon-detail{left:420px;right:48px;top:140px;font-size:37px;line-height:1.08;letter-spacing:2px}

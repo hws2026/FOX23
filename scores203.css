@@ -13,6 +13,9 @@
 
 .bottom-scores203 .bs-winner strong,.bottom-scores203 .bs-winner>b{color:#ffd32d}
 
+/* Fit full assigned team names while keeping the logo, record and score slots. */
+.bottom-scores203 .bs-team-name234{min-width:0;font-family:'DIN Condensed','Arial Narrow',Arial,sans-serif;text-overflow:clip}
+
 @media(prefers-reduced-motion:reduce){.broadcast-content209{transition:none!important}}
 
 /* Reference league/network title cards preceding a new league's scores. */

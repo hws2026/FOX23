@@ -1,4 +1,4 @@
-import{paths}from'./scores-data203.js?v=audit232';
+import{paths}from'./scores-data203.js?v=update238';
 const cached=new Map();
 async function get(url){const r=await fetch(url,{signal:AbortSignal.timeout(8000)});if(!r.ok)throw Error('Player stats unavailable');return r.json();}
 const number=v=>Number.parseFloat(String(v))||0;

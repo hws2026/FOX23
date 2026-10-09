@@ -1,0 +1,545 @@
+{
+  "release": 238,
+  "createdAt": "2026-10-09T01:01:29.271810+00:00",
+  "scope": [
+    "Game intro logo scale 1.12 within existing cover windows",
+    "Explicit Current week button and NFL Tuesday\u2013Monday current slate",
+    "Removal of college scores from choices, requests, saved state and rotation",
+    "User-initiated browser tab/window capture for split view; local and paired transport"
+  ],
+  "cumulativeIncludes": "Update237 timeout/both side panels and Update236 MLB originals/color swap/cover logos",
+  "intro": {
+    "scale": 1.12,
+    "scope": "Intro artwork only; original windows, scorebug CSS and all animation rules unchanged.",
+    "heldPairs": [
+      [
+        "DAL",
+        "PHI"
+      ],
+      [
+        "GB",
+        "DAL"
+      ],
+      [
+        "SF",
+        "PIT"
+      ]
+    ],
+    "entranceSamples": 6,
+    "entranceMilliseconds": [
+      900,
+      1050,
+      1200,
+      1350,
+      1500,
+      1650
+    ],
+    "visualReview": "Held pairs and six DAL/PHI entrance samples inspected in browser.",
+    "sourceDeltaVerified": true,
+    "originalAssetsUnchanged": true
+  },
+  "scores": {
+    "status": "passed",
+    "scope": "Current week selection, NFL Tuesday\u2013Monday automatic window, pinned calendar weeks, college feed retirement, state migration and unchanged pro feed behavior",
+    "testedSourceSha256": {
+      "core.py": "6199e12124d14ab06d11b4285390038ead343bebda698d748784106aab0bde62",
+      "scores-week232.js": "2f24e4b234a15b57efd27e3a19e88ff977486ef0c027a8731428d1a3752f4f3b",
+      "scores-data203.js": "3db520b70c7d804355fe204be627abf31e14bff5859afadea3a41cc39954197b",
+      "scores-panel203.js": "907954add7b144e896878ad5aae4e07f48e25d5d8f261a58c59b15d9b6c8e995",
+      "scores-titles219.js": "f93f647e53f1d79b7ac201e0d2d2bc6c9c8e6a2cec855ee69069f7363d307414",
+      "scores-sequence224.js": "a5a9cf6ad81e0764b067fe68b2799c2a9b3342949bfbb880aeae730bd07fe769",
+      "scores-render203.js": "f95d31495710d7de0db60f4a7ab06c4b062be7e39eecb8543e34732d50312020",
+      "scores-review238.html": "be3bdf0102f3a1b904a885eda74dee6bff2a7b93308440bd2ca88243d981c0b5",
+      "scores-review238.js": "b236b742958190fd8618da11c57b5f5a015cf4ed2fcc12d17e90294e4f40148c"
+    },
+    "sourceUnchangedDuringRun": true,
+    "javascript": {
+      "tests": 20,
+      "passed": 20,
+      "failed": 0,
+      "evidence": "current-week-results.tap"
+    },
+    "python": {
+      "status": "passed",
+      "sourceSha256": "6199e12124d14ab06d11b4285390038ead343bebda698d748784106aab0bde62",
+      "tests": 8,
+      "passed": 8,
+      "failures": [],
+      "productionStateWrites": false,
+      "storage": "temporary copied core and isolated data directory"
+    },
+    "productionStateWrites": false,
+    "browserReview": "Owned by parent; not included in these deterministic results",
+    "verifiedFindings": [
+      "An explicit saved date remains pinned indefinitely; Current week now clears it and fetches immediately.",
+      "Previous Monday\u2013Sunday NFL window omitted the following Monday and rolled away the prior Thursday/Sunday slate on Monday.",
+      "Current automatic NFL slate is Tuesday\u2013Monday; explicit dates retain Monday\u2013Sunday and other leagues retain Monday\u2013Sunday.",
+      "Requests capture date mode and per-league windows; old results/enrichment cannot overwrite a switched or newly current slate.",
+      "NFL, MLB, NBA, MLS and UFL remain. College-only selections default to NFL; mixed selections retain professional order. College requests, games, titles, metadata and pinned IDs are removed without changing custom show teams/assets."
+    ],
+    "liveCauseLimit": "The hosted controller was at sign-in; no live saved date was inspected. Shell provider probes failed DNS. Do not assert the exact cause of the user\u2019s missing Thursday game from these tests.",
+    "referenceEvidence": {
+      "url": "https://amp.nfl.com/news/nfl-how-to-watch-week-5-2026-schedule-london-game-details-and-more",
+      "published": "2026-10-07",
+      "fact": "NFL Week 5 schedule includes Thursday October 8 and Monday October 12, supporting one slate that spans the Sunday calendar cutoff."
+    },
+    "requestOutcomes": "The isolated review page distinguishes successful results, successful empty week and provider request failure; no live-state integration."
+  },
+  "publicFeedProbe": {
+    "isolated": true,
+    "productionStateWrites": false,
+    "outcome": "provider-unavailable",
+    "checkedAt": "2026-10-09T00:40:53.573Z",
+    "todayEastern": "2026-10-08",
+    "mode": "current",
+    "date": "",
+    "leagues": [
+      "NFL"
+    ],
+    "windows": {
+      "NFL": {
+        "start": "2026-10-06",
+        "end": "2026-10-12",
+        "espn": "20261006-20261012"
+      }
+    },
+    "error": "NFL unavailable",
+    "sources": {
+      "NFL": ""
+    },
+    "games": []
+  },
+  "captureBrowser": {
+    "syntheticOnly": true,
+    "realPickerCalls": 0,
+    "injectedPickerCalls": 4,
+    "busy": false,
+    "checks": [
+      {
+        "name": "Two independent slots reach both WebRTC outputs",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "Cancelled simulated picker preserves source and both receivers",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "Choosing preview keeps the old on-air capture alive",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "Replacement reaches both outputs without another pairing",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "Native OUT clone starts without srcObject and requires runtime rebinding",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "Both production OUT clones keep capture video after incoming layer cleanup",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "OUT clone removal releases its bindings without stopping owned streams",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "Stop feed 1 stops owned tracks and clears both outputs",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "Stopping feed 1 keeps feed 2 live",
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "errors": [],
+    "playbackInterruptions": 0,
+    "cloneOut": {
+      "videos": [
+        {
+          "width": 640,
+          "height": 360,
+          "hasStream": true,
+          "pixel": [
+            24,
+            164,
+            79
+          ],
+          "expected": [
+            24,
+            164,
+            80
+          ],
+          "colorMatches": true
+        },
+        {
+          "width": 640,
+          "height": 360,
+          "hasStream": true,
+          "pixel": [
+            22,
+            76,
+            180
+          ],
+          "expected": [
+            22,
+            76,
+            180
+          ],
+          "colorMatches": true
+        }
+      ],
+      "sourceTracksLive": true
+    },
+    "peer": {
+      "host": "connected",
+      "output": "connected",
+      "senders": [
+        "empty",
+        "video",
+        "empty",
+        "empty"
+      ]
+    },
+    "videos": {
+      "source1": {
+        "hasStream": false,
+        "readyState": 0,
+        "width": 0,
+        "height": 0,
+        "playing": false,
+        "pixel": null,
+        "expected": [
+          24,
+          164,
+          80
+        ],
+        "colorMatches": null,
+        "status": "Capture is not connected here. Keep its controller open and pair this OBS output with that controller; cloud show sync does not carry screen video.",
+        "tracks": []
+      },
+      "local1": {
+        "hasStream": false,
+        "readyState": 0,
+        "width": 0,
+        "height": 0,
+        "playing": false,
+        "pixel": null,
+        "expected": [
+          24,
+          164,
+          80
+        ],
+        "colorMatches": null,
+        "status": "Capture is not connected here. Keep its controller open and pair this OBS output with that controller; cloud show sync does not carry screen video.",
+        "tracks": []
+      },
+      "paired1": {
+        "hasStream": false,
+        "readyState": 0,
+        "width": 0,
+        "height": 0,
+        "playing": false,
+        "pixel": null,
+        "expected": [
+          24,
+          164,
+          80
+        ],
+        "colorMatches": null,
+        "status": "Capture is not connected here. Keep its controller open and pair this OBS output with that controller; cloud show sync does not carry screen video.",
+        "tracks": []
+      },
+      "source2": {
+        "hasStream": true,
+        "readyState": 4,
+        "width": 640,
+        "height": 360,
+        "playing": true,
+        "pixel": [
+          22,
+          76,
+          180
+        ],
+        "expected": [
+          22,
+          76,
+          180
+        ],
+        "colorMatches": true,
+        "status": "stream",
+        "tracks": [
+          {
+            "kind": "video",
+            "readyState": "live",
+            "muted": false
+          }
+        ]
+      },
+      "local2": {
+        "hasStream": true,
+        "readyState": 4,
+        "width": 640,
+        "height": 360,
+        "playing": true,
+        "pixel": [
+          22,
+          76,
+          180
+        ],
+        "expected": [
+          22,
+          76,
+          180
+        ],
+        "colorMatches": true,
+        "status": "stream",
+        "tracks": [
+          {
+            "kind": "video",
+            "readyState": "live",
+            "muted": false
+          }
+        ]
+      },
+      "paired2": {
+        "hasStream": true,
+        "readyState": 4,
+        "width": 640,
+        "height": 360,
+        "playing": true,
+        "pixel": [
+          22,
+          76,
+          180
+        ],
+        "expected": [
+          22,
+          76,
+          180
+        ],
+        "colorMatches": true,
+        "status": "stream",
+        "tracks": [
+          {
+            "kind": "video",
+            "readyState": "live",
+            "muted": false
+          }
+        ]
+      }
+    }
+  },
+  "captureCore": {
+    "passed": 8,
+    "checks": [
+      "two opaque capture tokens survive Preview and Take",
+      "preview replacement keeps the program token and other slot unchanged",
+      "Apply updates the program token and Out preserves the prepared cue",
+      "invalid capture tokens and unknown modes reject atomically; empty capture is allowed",
+      "existing five split source modes still validate",
+      "export and restore preserve opaque references with output hidden",
+      "restored playlist can take the same capture reference without serializing media",
+      "invalid restored capture rejects without replacing the saved show"
+    ],
+    "isolated": true,
+    "realScreenCapture": false
+  },
+  "tests": {
+    "passed": true,
+    "syntaxFiles": 35,
+    "tests": [
+      {
+        "name": "capture-runtime",
+        "passed": true
+      },
+      {
+        "name": "capture-core",
+        "passed": true
+      },
+      {
+        "name": "scores",
+        "passed": true
+      },
+      {
+        "name": "timeout-core",
+        "passed": true
+      },
+      {
+        "name": "color-panel",
+        "passed": true
+      },
+      {
+        "name": "color-core",
+        "passed": true
+      },
+      {
+        "name": "color-render",
+        "passed": true
+      }
+    ],
+    "testedSourceSha256": {
+      "transition-check158.html": "491a4f22c63abf2903b2d8efb8de8b0c36a725cbdf7d222fe83074171b5e748f",
+      "boot.js": "38c16e4558aaa9e86660aae6e940513ed3744dfb974dd566b4d08e18426c8921",
+      "overlay-boot.js": "b0d447b529973a9675a810312691b0523042797eedf49f53940f4e17e3ba5431",
+      "graphics-audit233-model.js": "2bc0f989a594b1435b419b6ae5508a2ff11b9e13a8535a5a397ce6dc29696d26",
+      "ar-link.js": "e012f1294b2d09c1e734b8c3ce5e036e0e8f64e2381b4e0512fc5fffa7f9ff89",
+      "mlb-review236.js": "063532d686a383edd454d9d4c999beaeb0c20bb5b40006b152787d99f5dc0762",
+      "reference.css": "75da0377d37607e959579d115fb608b1b3612f79a763b50755960c32f6446e17",
+      "index.html": "7920867ca1461b6c77932c70a932a22ae718ea5fc1ccdd0e987c710d6278a8ef",
+      "pair-controller.js": "5eacc9a0608c238f3c3f7edd3c61e8a07568b0d3a864f56628f9b62e0ab6570c",
+      "review219.html": "cb8aa573185ad43f892f4300c37a25a8f2b58883a22d07eb93ef70a93d1f7930",
+      "stream-playlist208.js": "11f87fd98307835f2e383799b72d0adaac31830da48f6f51090082fb4725643f",
+      "bridge.js": "6072f0631b24166406dcaf1a5c501b6a6d9ee7ef94efcab0266042cae6f8ef36",
+      "scores-data203.js": "3db520b70c7d804355fe204be627abf31e14bff5859afadea3a41cc39954197b",
+      "timeout-review237.js": "9217d5d2c2479545c6c4e3086fcf9fbfa6178444f38fa28bfdd78ef72c8c047e",
+      "animation-review171.html": "cc459955aef78f30cf63fa1ff3e056b9654cd2cb297479511f620bbe1d2b1704",
+      "logos-review235.js": "dd99041605ff956b57f55e7c0a44a6084db166c4092ab2fd01601e674075769f",
+      "runtime-worker.js": "bdfe7ad160ec7bcd0dd93bd768ed6cf4a33f6a1f396bdec4a7bc5f147cdaf44b",
+      "deck-connect.js": "c5235f359fff793a18b6660bd540cbe0c58739e7744496d6c0b9126bf0a9c6c9",
+      "graphics.js": "3debd19c0e8f70b01bc29d067d31035d51509b0415422b53637127205bc07719",
+      "logos-review235.html": "35b7cadd39c8d70060e29dabef3dfe7783dbeaaf6be05f3c9c1e3db3b8d35c5e",
+      "reference-review192.html": "93bbe95be4322f9623587fd32562846c48d38632b1d4a1d875f8c4cf1cd22ec5",
+      "scores-players208.js": "47023dbfaeee9c5275a034d7ba7dadad17941c6ac24a35368e66d7fe81bd84e7",
+      "additions-review194.html": "4853f4fcdae3e7ce7ae3feac0d79312ff4b35ca3c2b8e66c63f4c64edf7739d7",
+      "graphics-frames234.html": "3511126dad721f35eae4c36db4da29ee67eaed45779d620aba81d8de8517029a",
+      "graphics-frames234.js": "dab852ded179700d6886739a75bf3da500b7e0d5598a67ba3985625a7a0e8f0e",
+      "command.html": "2c1b8322ad31b72484b095095348f6205e979e0a6abe0ab4e4b32bc707da8248",
+      "core.py": "6199e12124d14ab06d11b4285390038ead343bebda698d748784106aab0bde62",
+      "scores-bug224.js": "f0e071992d3000fa61babf3d153c934bf1141568bedcb627fed7b72c988928da",
+      "broadcast-rehearsal.html": "82a4e5e3690176ccba5c0b0a984819d02c0451b2f6b5269cb3a770816f825b30",
+      "scorebug-review172.html": "96d741b467c10cdb6615439c28769b4d89cf4e12b87737aa3db612f9801adfa6",
+      "graphics-review193.html": "4fb5c8b8087fa2de629822e3094489886b0aa3629215253fb815c260e93ea83c",
+      "panel.js": "b867948b9b3b1e7c095c8352393c632cf1d303313322d19bb9c9cc50fbbc5409",
+      "plugin-download.js": "0c8b35234b56e1df9eef7e9e94714d71bb13b0f6106a8dc14552f2021310032b",
+      "broadcast-rehearsal.js": "1f68eda3dc2b4e7aea9d904e6a2f4f1c0c6f0f3075ba0d8472035fea9ab30f77",
+      "scores-review225.html": "e5a6da675e2702532bc2a04f31ec54dd82db1e2d9950399abdfb9c1d5c3a774d",
+      "pregame-review.js": "a86663853fd2290089fc1fe96ff8c5928e9518e21d5d2c9ea59f51c77ca314b8",
+      "graphics-audit233.html": "50bc13bee52cb3736cf11aad7694a821fe915c1b791a88ad59eb449d67361d38",
+      "scores-review224.html": "f6c74a83c2ee22071dee3e78d492ec3dc4b70efc218105f8e1539bb40411aa2c",
+      "spotlight-review144.html": "95be1af2c579fca510389a365ce1753730bf0fb688c166647a3768befc248db2",
+      "team-library.js": "acdd253351a62ceca9dd0807cad038311427b6050e8f16af773b4aef9b9f4edf",
+      "scores-titles219.js": "f93f647e53f1d79b7ac201e0d2d2bc6c9c8e6a2cec855ee69069f7363d307414",
+      "scores-week232.js": "2f24e4b234a15b57efd27e3a19e88ff977486ef0c027a8731428d1a3752f4f3b",
+      "overlay.html": "da2c1b74202e82b274a60c38c5a241d854f23525430d1dc232fccb4bae1af1a7",
+      "timeout-review237.html": "3739bf2ffe775c8a256ce18d4bad8f0d2041896a4b8460f177e1ed05cd129822",
+      "split192.js": "3d2bc444c37876f6726b53fd6e041a95171efcf54aec1c62590503e273013231",
+      "graphics-audit233.js": "b63e04edf36a9415cf4a4e2d69b8296cb2a9242706b7b49ebd07fa97feef11dc",
+      "scores-panel203.js": "907954add7b144e896878ad5aae4e07f48e25d5d8f261a58c59b15d9b6c8e995",
+      "audit193-updates.html": "a48bc11bb5809a6b96d029d52c9f6c95e49960b60c1748c74b98c9062df483a8",
+      "audit193-responsive.html": "77511b22e23ef0ad4ef3bc0ebd7174756ae8912004d2543fc0faf5ac01dd9c08",
+      "graphics-review181.html": "eb63d7b395fa9e7a231c7f9bfacd10d768080553cc10f5f07fad8c11f94824fb",
+      "scores-render203.js": "f95d31495710d7de0db60f4a7ab06c4b062be7e39eecb8543e34732d50312020",
+      "mlb-review236.html": "621a1b3882463cd9ab576ac3dd57478f0e010cc474c60e8189cb976caf774af7",
+      "team-gallery.html": "d23bec2c35cbeb703267d0247aad1743e977ea5d422a1cee97100ae178d87ee3",
+      "scores-sequence224.js": "a5a9cf6ad81e0764b067fe68b2799c2a9b3342949bfbb880aeae730bd07fe769",
+      "audit193.html": "6780046d9376d840dab150923a84512255edb7b8faf74a891d0580117ca70283",
+      "pair-output.js": "c5578d88cfcf877362325c373bd6454a137276fd97e1317ca6e7e91f7106f540",
+      "additions-review190.html": "9af47c151c84222decc23b26ce3d07dc906a573ec7ef69e5f311c272e320bbfd",
+      "cloud/sync.js": "65aa7b861715a529a85a319282e69d4ce27b4ff46e72ec45981e0701630457b1",
+      "cloud/output.js": "529aadb95b3a733cc48eff9ab29fd1718840b460734475a110aa00f7d04dc88e",
+      "split-capture238.js": "4f0be008428b0736e41d7cb36ecbabf03f6329d9b0039862d63af8fdefe2ee5f",
+      "capture-review238.html": "5ef910b12f7084be11c6c287bd00d7f8e05bf2ea6e85528babe628087d33607b",
+      "capture-review238.js": "5b2de419e8fa04024b952705269da67049f36d3b4f680b359eff01ba686002b7",
+      "scores-review238.html": "be3bdf0102f3a1b904a885eda74dee6bff2a7b93308440bd2ca88243d981c0b5",
+      "scores-review238.js": "b236b742958190fd8618da11c57b5f5a015cf4ed2fcc12d17e90294e4f40148c"
+    },
+    "sourceUnchangedDuringRun": true
+  },
+  "priorTimeoutCoverage": {
+    "browserChecks": 132,
+    "coreTestsRerun": 8,
+    "visualFrameSets": [
+      "home automatic",
+      "away automatic"
+    ],
+    "details": "See VALIDATION-237.json for video source measurements and coverage."
+  },
+  "preservedOriginalAssets": {
+    "NFL": 39,
+    "MLB": 27
+  },
+  "changedFiles": [
+    "additions-review190.html",
+    "additions-review194.html",
+    "animation-review171.html",
+    "ar-link.js",
+    "audit193-responsive.html",
+    "audit193-updates.html",
+    "audit193.html",
+    "boot.js",
+    "bridge.js",
+    "broadcast-rehearsal.html",
+    "broadcast-rehearsal.js",
+    "cloud/output.js",
+    "cloud/sync.js",
+    "command.html",
+    "core.py",
+    "deck-connect.js",
+    "graphics-audit233-model.js",
+    "graphics-audit233.html",
+    "graphics-audit233.js",
+    "graphics-frames234.html",
+    "graphics-frames234.js",
+    "graphics-review181.html",
+    "graphics-review193.html",
+    "graphics.js",
+    "index.html",
+    "logos-review235.html",
+    "logos-review235.js",
+    "mlb-review236.html",
+    "mlb-review236.js",
+    "overlay-boot.js",
+    "overlay.html",
+    "pair-controller.js",
+    "pair-output.js",
+    "panel.js",
+    "plugin-download.js",
+    "pregame-review.js",
+    "reference-review192.html",
+    "reference.css",
+    "review219.html",
+    "runtime-worker.js",
+    "scorebug-review172.html",
+    "scores-bug224.js",
+    "scores-data203.js",
+    "scores-panel203.js",
+    "scores-players208.js",
+    "scores-render203.js",
+    "scores-review224.html",
+    "scores-review225.html",
+    "scores-sequence224.js",
+    "scores-titles219.js",
+    "scores-week232.js",
+    "split192.js",
+    "spotlight-review144.html",
+    "stream-playlist208.js",
+    "team-gallery.html",
+    "team-library.js",
+    "timeout-review237.html",
+    "timeout-review237.js",
+    "transition-check158.html"
+  ],
+  "newFiles": [
+    "capture-review238.html",
+    "capture-review238.js",
+    "scores-review238.html",
+    "scores-review238.js",
+    "split-capture238.js"
+  ],
+  "limits": [
+    "Public ESPN request failed in the isolated browser; tonight\u2019s live TNF payload and the exact hosted failure cause remain unverified.",
+    "Video transport verified with synthetic canvas streams and real browser WebRTC. No desktop capture, real OBS application or cross-network TURN test was performed.",
+    "Cloud-only state sync does not carry captured video. Use same-browser output or a fresh manual OBS pairing. Keep the controller open.",
+    "This is a local cumulative update ZIP; no deployment or live show mutation performed."
+  ]
+}

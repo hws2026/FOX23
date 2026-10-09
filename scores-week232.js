@@ -14,6 +14,17 @@ export function scoreWeek(date='',now=Date.now()){
  const end=day.toISOString().slice(0,10);
  return {start,end,espn:start.replaceAll('-','')+'-'+end.replaceAll('-','')};
 }
+export function leagueScoreWeek(league,date='',now=Date.now()){
+ const calendar=scoreWeek(date,now);
+ // Current NFL slates finish on Monday. Keep that slate on Monday rather than
+ // dropping its Thursday/Sunday games. Explicit dates retain calendar weeks.
+ if(league!=='NFL'||date)return calendar;
+ const day=new Date(easternDate(now)+'T00:00:00Z');
+ day.setUTCDate(day.getUTCDate()-(day.getUTCDay()+5)%7);
+ const start=day.toISOString().slice(0,10);day.setUTCDate(day.getUTCDate()+6);
+ const end=day.toISOString().slice(0,10);
+ return {start,end,espn:start.replaceAll('-','')+'-'+end.replaceAll('-','')};
+}
 export function gameInWeek(game,week){
  const start=Date.parse(game.start);
  // Keep provider-returned TBD games rather than silently dropping a fixture.

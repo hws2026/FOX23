@@ -1,11 +1,12 @@
-import {titleLeagues} from './scores-titles219.js?v=audit232';
+import {titleLeagues} from './scores-titles219.js?v=update238';
 
 /** The saved picker order is authoritative; legacy ALL keeps the standard order. */
 export function selectedScoreLeagues(cfg = {}) {
   const selected = Array.isArray(cfg.leagues) && cfg.leagues.length
     ? cfg.leagues
     : cfg.league === 'ALL' ? titleLeagues : [cfg.league || 'NFL'];
-  return [...new Set(selected)].filter(league => titleLeagues.includes(league));
+  const supported = [...new Set(selected)].filter(league => titleLeagues.includes(league));
+  return supported.length ? supported : ['NFL'];
 }
 
 /**

@@ -1,12 +1,27 @@
 import {morph} from './feed-scorebug225.js';
 import {nflBroadcastLogo226} from './nfl-logos226.js';
-import{titleLabels,leagueNetwork}from'./scores-titles219.js?v=audit232';
-import{buildScorePlan,selectedScoreLeagues}from'./scores-sequence224.js?v=audit232';
-import{feedGame,renderFeedBug}from'./scores-bug224.js?v=audit232';
-const sheet224=document.createElement('link');sheet224.rel='stylesheet';sheet224.href=new URL('./scores224.css?v=audit232',import.meta.url).href;document.head.append(sheet224);
-import{tickerFrame,gameDetails,playerTeam,playerTeamAbbr,playerDetailText}from'./scores-timing209.js?v=audit232';
+import {mlbBroadcastLogo236} from './mlb-logos236.js';
+import{titleLabels,leagueNetwork}from'./scores-titles219.js?v=update238';
+import{buildScorePlan,selectedScoreLeagues}from'./scores-sequence224.js?v=update238';
+import{feedGame,renderFeedBug}from'./scores-bug224.js?v=update238';
+const sheet224=document.createElement('link');sheet224.rel='stylesheet';sheet224.href=new URL('./scores224.css?v=update238',import.meta.url).href;document.head.append(sheet224);
+import{tickerFrame,gameDetails,playerTeam,playerTeamAbbr,playerDetailText}from'./scores-timing209.js?v=update238';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const sessions=new WeakMap();
+// Keep the assigned team name complete without taking space from its logo,
+// record or score. Re-measure after updates and font loads; exiting rows retain
+// their captured fit so the horizontal name geometry never jumps during OUT.
+function fitScoreTeamNames234(root){
+ for(const label of root.querySelectorAll('.bs-game-row:not(.bs-row-old) .bs-team-name234')){
+  if(!label.clientWidth)continue;
+  label.style.fontSize='';
+  let size=parseFloat(getComputedStyle(label).fontSize)||27;
+  for(let pass=0;pass<3&&label.scrollWidth>label.clientWidth;pass++){
+   size=Math.max(1,Math.floor(size*Math.max(1,label.clientWidth-2)/label.scrollWidth*100)/100);
+   label.style.fontSize=size+'px';
+  }
+ }
+}
 // Freeze the visible slide, not a clone with reset Web Animation state. Temporary
 // score digits are never carried into the next card.
 function tickerSnapshot(node){
@@ -40,12 +55,14 @@ function draw(root,s){
  if(!cfg.visible){if(el&&!el._exit){el._exit=el.animate([{opacity:1},{opacity:0}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?0:180,fill:'both'});el._exit.onfinish=()=>{stopTickerMotion(el);el.remove();};}return;}
  if(el?._exit){el._exit.cancel();el._exit=null;}
  if(!el){el=document.createElement('aside');el.className='bottom-scores203';root.append(el);}
- if(!game){const html=`<b class="bs-league">${esc(cfg.league||'NFL')}</b><span class="bs-empty">${esc(cfg.error?'Score feed unavailable':cfg.updatedAt?'No games scheduled this week':'Loading scores…')}</span>`;if(el._markup!==html){stopTickerMotion(el);el.innerHTML=html;el._markup=html;}el._game=null;return;}
+ if(!game){const html=`<b class="bs-league">${esc(selectedScoreLeagues(cfg).join(' / '))}</b><span class="bs-empty">${esc(cfg.error?'Score feed unavailable':cfg.updatedAt?'No games scheduled this week':'Loading scores…')}</span>`;if(el._markup!==html){stopTickerMotion(el);el.innerHTML=html;el._markup=html;}el._game=null;return;}
 
  const final=game.state==='post'&&!/postpon|cancel|suspend|abandon|delay/i.test(game.status);
  const stale=!final&&Date.now()-Number(game.updatedAt||cfg.updatedAt)>90000;
- const winner=final&&game.away.score!==''&&game.home.score!==''&&Number(game.away.score)!==Number(game.home.score)?(Number(game.away.score)>Number(game.home.score)?game.away.id:game.home.id):null;
- const team=t=>`<div data-score-side="${t.side||(t===game.home?'home':'away')}" class="bs-team ${winner===t.id?'bs-winner':''}"><img src="${esc(nflBroadcastLogo226(game.league,t)||(/^https:\/\//.test(t.logo)?t.logo:'data:,'))}" alt=""><strong>${esc(t.name||t.abbr)}</strong><small>${esc(t.record)}</small><b class="${!stale&&game.possession===t.id?'bs-possession':''}"><span class="bs-score-window"><span class="bs-score-value">${esc(t.score)}</span></span></b></div>`;
+ const scores=[game.away.score,game.home.score];
+ const validScores=scores.every(v=>v!==''&&v!=null&&Number.isFinite(Number(v)));
+ const winner=final&&validScores&&Number(scores[0])!==Number(scores[1])?(Number(scores[0])>Number(scores[1])?'away':'home'):null;
+ const team=t=>{const side=t.side||(t===game.home?'home':'away');return `<div data-score-side="${side}" class="bs-team ${winner===side?'bs-winner':''}"><img src="${esc(nflBroadcastLogo226(game.league,t)||(game.league==='MLB'?mlbBroadcastLogo236(game.league,t,game.provider):'')||(/^https:\/\//.test(t.logo)?t.logo:'data:,'))}" alt=""><strong class="bs-team-name234">${esc(t.name||t.abbr)}</strong><small>${esc(t.record)}</small><b class="${!stale&&game.possession&&String(game.possession)===String(t.id)?'bs-possession':''}"><span class="bs-score-window"><span class="bs-score-value">${esc(t.score)}</span></span></b></div>`;};
  let detail=final&&frame.slot===0?'FINAL':frame.detail;
  if(stale)detail='UPDATES DELAYED';
  const playerRows=[...(game.leaders||[]),...(cfg.playerStats&&Date.now()-Number(game.playersUpdatedAt||0)<90000?game.players||[]:[])];
@@ -107,6 +124,7 @@ function draw(root,s){
    }
   }
  }
+ fitScoreTeamNames234(el);
  if(el._scroll){if(cfg.holdAt)el._scroll.pause();else if(el._scroll.playState==='paused')el._scroll.play();}
 }
 export function renderBottomScores(root,state){if(root.classList.contains('broadcast-content209'))root=root.parentElement;let session=sessions.get(root);if(!session){session={state};sessions.set(root,session);session.timer=setInterval(()=>{if(!root.isConnected){clearInterval(session.timer);sessions.delete(root);return;}draw(root,session.state);},500);}session.state=state;draw(root,state);}

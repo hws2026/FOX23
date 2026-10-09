@@ -1,0 +1,26 @@
+WLD UPDATE 236 — MLB ORIGINAL LOGOS AND SAVEABLE COLOR SWAP
+
+Merge this cumulative update into your complete FOX23 project. Keep your other
+files and folders, replacing every matching file. This is an update, not a
+standalone fresh-install archive. Publish manually, then refresh controller and
+output pages so the update236 resource URLs load together.
+
+Show Setup has a Swap & save colors button for each team. It swaps the current
+primary and accent inputs, saves the pair through the normal team action, and
+updates the linked team library and output. Other unfinished setup fields and
+selected logo files stay in their controls.
+
+The bottom scores and feed scorebug use the 27 supplied MLB originals. The asset
+library lists those originals without replacing existing names or assignments.
+Marlins, Brewers, and Yankees use their provider logos until originals are added.
+Existing custom logo sources continue to take precedence. NFL assets, their
+assignments, and the 235 scorebug/opener cover-crop fix remain unchanged.
+
+mlb-review236.html is an isolated MLB review panel; logos-review235.html retains
+the scorebug/opener logo frame review. Neither panel controls a saved show.
+
+VALIDATION-236.json records this release's actual checks and limits.
+LOGO-COVERAGE-235.json preserves the previous scoped review. FILES-236.json
+contains SHA256 hashes for every other file in this archive. No verification
+show state, work folder, or __verify236 symlink is included. This package does
+not claim completion of a broader all-graphics audit or a connected OBS check.

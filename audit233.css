@@ -1,0 +1,7 @@
+/* 233: the bottom scores strip lifts broadcast-content209 by 58px. Fit the
+   930px QB panel, its raised logo/reveal mask and 942px shell in the remaining
+   stage height. Keep the accepted full-height layout when the strip is absent. */
+.stage:has(> .bottom-scores203) .qb-sidebar.qb-redesign181 {
+  bottom: 14px;
+  transform: scale(1.05);
+}

@@ -1,4 +1,4 @@
-import config from './config.js?v=audit232';
+import config from './config.js?v=update238';
 import {changes,applyChanges} from './delta.js?v=cloud226';
 export function isCloudSite(config, origin, path) {
   return !!config.enabled && [{origin:config.origin,path:config.path},...(config.sites||[])]

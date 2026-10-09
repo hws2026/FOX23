@@ -1,4 +1,4 @@
-import {cloudEnabled,connectCloud} from './cloud/sync.js?v=audit232';
+import {cloudEnabled,connectCloud} from './cloud/sync.js?v=update238';
 export const base=new URL('.',import.meta.url);
 export const channel=new BroadcastChannel('gridiron-pages:'+base.pathname);
 const originalFetch=globalThis.fetch.bind(globalThis);let remoteRPC,cloudRPC,worker,workerFailure,sequence=0,pending=new Map(),current,readyResolve;
@@ -19,7 +19,7 @@ export async function startController(){
  if(!remote){
  await new Promise((resolve,reject)=>navigator.locks.request('gridiron-controller:'+base.pathname,{ifAvailable:true},async lock=>{
   acquired=!!lock;if(!lock){resolve();return;}
-  worker=new Worker(new URL('runtime-worker.js?v=audit232'+(cloudEnabled?'&cloud=1':''),base));
+  worker=new Worker(new URL('runtime-worker.js?v=update238'+(cloudEnabled?'&cloud=1':''),base));
   worker.onmessage=({data})=>{const p=pending.get(data.id);if(!p)return;pending.delete(data.id);data.error?p.reject(Error(data.error)):p.resolve(data.result);};
   worker.onerror=e=>{workerFailure=Error(e.message||'Show engine failed to start. Reload to retry.');for(const p of pending.values())p.reject(workerFailure);pending.clear();};
   readyResolve();resolve();await new Promise(()=>{});

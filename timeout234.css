@@ -1,0 +1,30 @@
+/* The reference keeps the timeout ordinal above the team wing and the count
+   on a separate thin tail, attached to the wing's outside lower edge. */
+.timeout-alert234 .timeout-tail234,.timeout-anchor .timeout-tail234{
+ position:absolute;right:calc(100% - 44px);bottom:6px;width:470px;height:48px;
+ box-sizing:border-box;padding:2px 2px 3px;
+ background:linear-gradient(180deg,#aebbc3,#273743 28%,#070e15 75%,#526572);
+ clip-path:polygon(0 0,100% 0,100% 100%,10px 100%);
+}
+.dock-home.timeout-alert234 .timeout-tail234,.timeout-anchor.dock-home .timeout-tail234{
+ right:auto;left:calc(100% - 44px);clip-path:polygon(0 0,100% 0,calc(100% - 10px) 100%,0 100%);
+}
+.timeout-tail234>span{
+ display:flex;align-items:center;justify-content:center;width:100%;height:100%;
+ box-sizing:border-box;padding:0 48px 0 22px;overflow:hidden;white-space:nowrap;
+ background:linear-gradient(180deg,#17222dcc,#090e16f2);color:#f2f4f7;
+ font:italic 32px/1 'DIN Condensed','Arial Narrow',sans-serif;letter-spacing:.4px;text-transform:uppercase;
+}
+.dock-home .timeout-tail234>span{padding:0 22px 0 48px}
+.graphics-layer.animate-in[data-motion=auto] .timeout-tail234,
+.timeout-anchor:not(.out):not([data-motion=fade]) .timeout-tail234{animation:timeout-tail-away234 .32s cubic-bezier(.2,.7,.2,1) both}
+.graphics-layer.animate-in[data-motion=auto] .dock-home .timeout-tail234,
+.timeout-anchor.dock-home:not(.out):not([data-motion=fade]) .timeout-tail234{animation-name:timeout-tail-home234}
+.graphics-layer.leaving[data-motion=auto] .timeout-tail234,
+.timeout-anchor.out:not([data-motion=fade]) .timeout-tail234{animation:timeout-tail-away234 .18s ease-in reverse both}
+.graphics-layer.leaving[data-motion=auto] .dock-home .timeout-tail234,
+.timeout-anchor.dock-home.out:not([data-motion=fade]) .timeout-tail234{animation-name:timeout-tail-home234}
+.timeout-anchor[data-motion=fade]:not(.out) .timeout-tail234{animation:reference-fade .16s linear both}
+.timeout-anchor.out[data-motion=fade] .timeout-tail234{animation:reference-fade .16s linear reverse both}
+@keyframes timeout-tail-away234{from{clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%)}to{clip-path:polygon(0 0,100% 0,100% 100%,10px 100%)}}
+@keyframes timeout-tail-home234{from{clip-path:polygon(0 0,0 0,0 100%,0 100%)}to{clip-path:polygon(0 0,100% 0,calc(100% - 10px) 100%,0 100%)}}

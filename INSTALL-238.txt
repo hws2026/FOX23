@@ -1,0 +1,31 @@
+WLD UPDATE 238 - SCORES, SPLIT CAPTURE, INTRO LOGO SCALE
+
+Merge this cumulative update into your complete FOX23 project, replacing every
+matching file. Keep all other files and folders. Publish manually and refresh
+controller/output pages together. This ZIP is an update, not a fresh install.
+
+Includes the prior timeout/side-panel fixes, 27 original MLB logos, logo cover
+fit, and per-team Swap & save colors. The intro logos are now 12% larger inside
+their existing windows; other graphic styles are preserved.
+
+BOTTOM SCORES: Current week clears any pinned date and refreshes immediately.
+Current NFL weeks run Tuesday-Monday (including Thursday and Monday games).
+Explicit dates and other professional leagues keep Monday-Sunday calendar weeks.
+NFL, MLB, NBA, MLS and UFL remain. College choices and saved college rotations
+are retired automatically; custom show teams and asset files are retained.
+The live provider request could not be verified in this test environment.
+
+SPLIT VIEW: select Browser tab / window capture, then Choose tab / window.
+Your browser opens its normal sharing picker. Choose updates Preview; Take Live
+publishes it. Changing Preview preserves the current on-air source until Take.
+Stop sharing ends the selected source immediately. Capture is muted and lasts
+only while its controller session stays open. Re-select it after a reload.
+For OBS Browser Source use Pair devices -> OBS output and create a NEW pairing;
+older pairings do not reserve video tracks. On another network, TURN may be
+needed as with existing device pairing. Cloud-only output does not carry video.
+
+Reviews: capture-review238.html uses synthetic moving patterns (no desktop
+capture); scores-review238.html tests Current week in memory; timeout-review237.html
+shows the timeout frame/lifecycle panel. VALIDATION-238.json records exact scope,
+tests and limitations. Prior validation reports are historical.
+No deployment is performed by this package.

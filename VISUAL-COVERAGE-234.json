@@ -1,0 +1,628 @@
+{
+  "build": "audit234-final",
+  "status": "default-stage pass and targeted reference corrections reviewed; exhaustive variant audit still open",
+  "summary": "Visually inspected all 48 default graphic types at held, entrance, exit, content-update, interrupted-entrance and rapid-return stages, plus detailed time strips for the corrected reference graphics, seven highlight paths and alternate transition styles. The frame panel exposes 416 isolated cases/variants. Targeted final-build screenshots verify the commentator names/rails, Spanish mark, lineup exit, interrupted reporter rails, coach ribbon, timeout tails, player stat type and bottom-feed team text. This is not a claim that every frame of every variant or connected OBS path has been visually approved.",
+  "checks": [
+    {
+      "review": "All default graphic types, visually inspected in browser batches",
+      "phase": "held",
+      "caseCount": 48,
+      "requestedTimesMs": [
+        2133,
+        2138,
+        2139,
+        2141,
+        2142,
+        2147,
+        2148,
+        2149,
+        2150,
+        2151,
+        2152,
+        2153,
+        2154,
+        2155,
+        2156,
+        2157,
+        2158,
+        2160,
+        2161,
+        2162,
+        2164,
+        2171,
+        4166
+      ],
+      "evidence": [
+        "work/announcer234/browser/all-held-1.png",
+        "work/announcer234/browser/all-held-2.png",
+        "work/announcer234/browser/all-held-3.png",
+        "work/announcer234/browser/all-held-4.png",
+        "work/announcer234/browser/all-held-5.png",
+        "work/announcer234/browser/all-held-6.png",
+        "work/announcer234/browser/all-held-7.png",
+        "work/announcer234/browser/all-held-8.png"
+      ],
+      "brokenImages": 0,
+      "pendingImages": 0,
+      "notes": "Review performed during implementation. Subsequent targeted final-build checks below supersede lineup exit, coach, playerdock, reporter interruption, referee highlights and bottom-feed text sizing. Italic touchdown overhang is intentional and not clipped."
+    },
+    {
+      "review": "All default graphic types, visually inspected in browser batches",
+      "phase": "in",
+      "caseCount": 48,
+      "requestedTimesMs": [
+        400
+      ],
+      "evidence": [
+        "work/announcer234/browser/all-in-1.png",
+        "work/announcer234/browser/all-in-2.png",
+        "work/announcer234/browser/all-in-3.png",
+        "work/announcer234/browser/all-in-4.png",
+        "work/announcer234/browser/all-in-5.png",
+        "work/announcer234/browser/all-in-6.png",
+        "work/announcer234/browser/all-in-7.png",
+        "work/announcer234/browser/all-in-8.png"
+      ],
+      "brokenImages": 0,
+      "pendingImages": 0,
+      "notes": "Review performed during implementation. Subsequent targeted final-build checks below supersede lineup exit, coach, playerdock, reporter interruption, referee highlights and bottom-feed text sizing. Italic touchdown overhang is intentional and not clipped."
+    },
+    {
+      "review": "All default graphic types, visually inspected in browser batches",
+      "phase": "out",
+      "caseCount": 48,
+      "requestedTimesMs": [
+        240
+      ],
+      "evidence": [
+        "work/announcer234/browser/all-out-1.png",
+        "work/announcer234/browser/all-out-2.png",
+        "work/announcer234/browser/all-out-3.png",
+        "work/announcer234/browser/all-out-4.png",
+        "work/announcer234/browser/all-out-5.png",
+        "work/announcer234/browser/all-out-6.png",
+        "work/announcer234/browser/all-out-7.png",
+        "work/announcer234/browser/all-out-8.png"
+      ],
+      "brokenImages": 0,
+      "pendingImages": 0,
+      "notes": "Review performed during implementation. Subsequent targeted final-build checks below supersede lineup exit, coach, playerdock, reporter interruption, referee highlights and bottom-feed text sizing. Italic touchdown overhang is intentional and not clipped."
+    },
+    {
+      "review": "All default graphic types, visually inspected in browser batches",
+      "phase": "update",
+      "caseCount": 48,
+      "requestedTimesMs": [
+        500
+      ],
+      "evidence": [
+        "work/announcer234/browser/all-update-1.png",
+        "work/announcer234/browser/all-update-2.png",
+        "work/announcer234/browser/all-update-3.png",
+        "work/announcer234/browser/all-update-4.png",
+        "work/announcer234/browser/all-update-5.png",
+        "work/announcer234/browser/all-update-6.png",
+        "work/announcer234/browser/all-update-7.png",
+        "work/announcer234/browser/all-update-8.png"
+      ],
+      "brokenImages": 0,
+      "pendingImages": 0,
+      "notes": "Review performed during implementation. Subsequent targeted final-build checks below supersede lineup exit, coach, playerdock, reporter interruption, referee highlights and bottom-feed text sizing. Italic touchdown overhang is intentional and not clipped."
+    },
+    {
+      "review": "All default graphic types, visually inspected in browser batches",
+      "phase": "interrupt",
+      "caseCount": 48,
+      "requestedTimesMs": [
+        80
+      ],
+      "evidence": [
+        "work/announcer234/browser/all-interrupt-1.png",
+        "work/announcer234/browser/all-interrupt-2.png",
+        "work/announcer234/browser/all-interrupt-3.png",
+        "work/announcer234/browser/all-interrupt-4.png",
+        "work/announcer234/browser/all-interrupt-5.png",
+        "work/announcer234/browser/all-interrupt-6.png",
+        "work/announcer234/browser/all-interrupt-7.png",
+        "work/announcer234/browser/all-interrupt-8.png"
+      ],
+      "brokenImages": 0,
+      "pendingImages": 0,
+      "notes": "Review performed during implementation. Subsequent targeted final-build checks below supersede lineup exit, coach, playerdock, reporter interruption, referee highlights and bottom-feed text sizing. Italic touchdown overhang is intentional and not clipped."
+    },
+    {
+      "review": "All default graphic types, visually inspected in browser batches",
+      "phase": "return",
+      "caseCount": 48,
+      "requestedTimesMs": [
+        900
+      ],
+      "evidence": [
+        "work/announcer234/browser/all-return-1.png",
+        "work/announcer234/browser/all-return-2.png",
+        "work/announcer234/browser/all-return-3.png",
+        "work/announcer234/browser/all-return-4.png",
+        "work/announcer234/browser/all-return-5.png",
+        "work/announcer234/browser/all-return-6.png",
+        "work/announcer234/browser/all-return-7.png",
+        "work/announcer234/browser/all-return-8.png"
+      ],
+      "brokenImages": 0,
+      "pendingImages": 0,
+      "notes": "Review performed during implementation. Subsequent targeted final-build checks below supersede lineup exit, coach, playerdock, reporter interruption, referee highlights and bottom-feed text sizing. Italic touchdown overhang is intentional and not clipped."
+    },
+    {
+      "review": "final-announcers-in",
+      "cases": [
+        "announcers:reference-three"
+      ],
+      "phase": "in",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        0,
+        150,
+        300,
+        450,
+        600,
+        750
+      ],
+      "result": "visually checked",
+      "observation": "Compared with the supplied 58.70\u201359.50 second reference sequence: center-out lower metal rails, rising face, stacked first/surname text, raised network badge.",
+      "evidence": "work/announcer234/browser/final-announcers-in.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-announcers-out",
+      "cases": [
+        "announcers:reference-three"
+      ],
+      "phase": "out",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        0,
+        120,
+        240,
+        360,
+        480,
+        600
+      ],
+      "result": "visually checked",
+      "observation": "Text and badge withdraw, face lowers, then independent rail halves close inward; empty by 600 ms.",
+      "evidence": "work/announcer234/browser/final-announcers-out.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-announcers-preview",
+      "cases": [
+        "announcers:reference-three"
+      ],
+      "phase": "hold",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "result": "visually checked",
+      "observation": "Preview has the same contained logo, name hierarchy and held geometry as live.",
+      "evidence": "work/announcer234/browser/final-announcers-preview.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-announcers-fade",
+      "cases": [
+        "announcers:reference-three"
+      ],
+      "phase": "in",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500
+      ],
+      "result": "visually checked",
+      "observation": "Fade style remains a simple opacity entrance with no rail deformation.",
+      "evidence": "work/announcer234/browser/final-announcers-fade.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-lineup-out",
+      "cases": [
+        "offense:default"
+      ],
+      "phase": "out",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        0,
+        120,
+        240,
+        360,
+        480,
+        600
+      ],
+      "result": "visually checked",
+      "observation": "Corrected premature ancestor opacity: face closes first, rails remain full width before retracting; cleared by 600 ms.",
+      "evidence": "work/announcer234/browser/final-lineup-out.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-reporter-interrupt",
+      "cases": [
+        "reporter:default"
+      ],
+      "phase": "interrupt",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        0,
+        40,
+        80,
+        120,
+        160,
+        200
+      ],
+      "result": "visually checked",
+      "observation": "OUT at 180 ms during IN freezes the partial lower rail, fades from that pose, and does not flash a full face or border.",
+      "evidence": "work/announcer234/browser/final-reporter-interrupt.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-coach-in",
+      "cases": [
+        "coach:ribbon-with-detail"
+      ],
+      "phase": "in",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        0,
+        150,
+        300,
+        450,
+        600,
+        750
+      ],
+      "result": "visually checked",
+      "observation": "Full-width optional coach ribbon: center-out rails, contained team mark, one-line name, two support lines. Scorebug suppressed.",
+      "evidence": "work/announcer234/browser/final-coach-in.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-coach-dock",
+      "cases": [
+        "coach:scorebug-dock"
+      ],
+      "phase": "hold",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "result": "visually checked",
+      "observation": "Existing scorebug-attached coach layout remains available and attached.",
+      "evidence": "work/announcer234/browser/final-coach-dock.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-timeout-away",
+      "cases": [
+        "event:TIMEOUT-team-0"
+      ],
+      "phase": "hold",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "result": "visually checked",
+      "observation": "Away timeout ordinal above selected wing; separate remaining-count strip extends from its outer lower edge.",
+      "evidence": "work/announcer234/browser/final-timeout-away.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-timeout-home",
+      "cases": [
+        "event:TIMEOUT-home-remaining-1"
+      ],
+      "phase": "hold",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "result": "visually checked",
+      "observation": "Mirrored home timeout tab/tail with singular 1 TIMEOUT REMAINING; accompanied by main scorebug.",
+      "evidence": "work/announcer234/browser/final-timeout-home.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-playerdock",
+      "cases": [
+        "playerdock:default"
+      ],
+      "phase": "hold",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "result": "visually checked",
+      "observation": "Larger numeric values beside smaller COMP/ATT and YARDS labels, editable context, dark lower stat band; no portrait fixture available.",
+      "evidence": "work/announcer234/browser/final-playerdock.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-spanish-contained",
+      "cases": [
+        "languagepromo:default"
+      ],
+      "phase": "hold",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "result": "visually checked",
+      "observation": "Spanish broadcast card WLD mark fits fully within the logo cell and clears both text lines.",
+      "evidence": "work/announcer234/browser/final-spanish-contained.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-yellow-referee",
+      "cases": [
+        "referee:highlights-true"
+      ],
+      "phase": "hold",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "result": "visually checked",
+      "observation": "Name and role/experience render yellow, including nested ordinal text.",
+      "evidence": "work/announcer234/browser/final-yellow-referee.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-feed-names",
+      "cases": [
+        "bottom-feed:default"
+      ],
+      "phase": "hold",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "result": "visually checked",
+      "observation": "Full Dallas Cowboys and Philadelphia Eagles names fit; logos, records and scores remain present; zero overflow flags.",
+      "evidence": "work/announcer234/browser/final-feed-names.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-feed-away-stat",
+      "cases": [
+        "bottom-feed:final-away"
+      ],
+      "phase": "hold",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "result": "visually checked",
+      "observation": "Winning away team logo/name/record/score retained with yellow winner name and score. Only that team next to player stat; network/final label absent.",
+      "evidence": "work/announcer234/browser/final-feed-away-stat.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-feed-home-stat",
+      "cases": [
+        "bottom-feed:final-home"
+      ],
+      "phase": "hold",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "result": "visually checked",
+      "observation": "Equivalent home-winner stat card; correct team shown and opponent portion removed.",
+      "evidence": "work/announcer234/browser/final-feed-home-stat.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-feed-deck",
+      "cases": [
+        "bottom-feed:next-league"
+      ],
+      "phase": "in",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        0,
+        200,
+        400,
+        600,
+        800,
+        1000
+      ],
+      "result": "visually checked",
+      "observation": "League deck enters, current league is removed from the remaining deck, subsequent cards retain their slots.",
+      "evidence": "work/announcer234/browser/final-feed-deck.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-transition-pattern",
+      "cases": [
+        "transition:default"
+      ],
+      "phase": "in",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        0,
+        300,
+        600,
+        900,
+        1200,
+        1500
+      ],
+      "result": "visually checked",
+      "observation": "Pattern transition reviewed from 0 to 1500 ms; mark and text contained.",
+      "evidence": "work/announcer234/browser/final-transition-pattern.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-transition-teamwall",
+      "cases": [
+        "transition:default"
+      ],
+      "phase": "in",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        0,
+        300,
+        600,
+        900,
+        1200,
+        1500
+      ],
+      "result": "visually checked",
+      "observation": "Team-wall transition reviewed from 0 to 1500 ms; shutters cover stage and settle with contained team mark.",
+      "evidence": "work/announcer234/browser/final-transition-teamwall.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "final-transition-networkwall",
+      "cases": [
+        "transition:default"
+      ],
+      "phase": "in",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        0,
+        300,
+        600,
+        900,
+        1200,
+        1500
+      ],
+      "result": "visually checked",
+      "observation": "Network-wall transition reviewed from 0 to 1500 ms; brand contained and stage covered.",
+      "evidence": "work/announcer234/browser/final-transition-networkwall.png",
+      "brokenImages": 0,
+      "pendingImages": 0
+    },
+    {
+      "review": "Seven forced-yellow paths",
+      "evidence": [
+        "work/announcer234/browser/yellow-announcers.png",
+        "work/announcer234/browser/yellow-player.png",
+        "work/announcer234/browser/yellow-stats.png",
+        "work/announcer234/browser/yellow-lowerthird.png",
+        "work/announcer234/browser/yellow-coach.png",
+        "work/announcer234/browser/yellow-quarterback.png",
+        "work/announcer234/browser/final-yellow-referee.png"
+      ],
+      "observation": "All seven available highlight paths visibly paint yellow. QB control covers its context heading; QB player name has no forced-yellow control. Referee rechecked with populated text on the final build."
+    },
+    {
+      "review": "Contained team-art slots",
+      "evidence": [
+        "work/announcer234/browser/contained-held-3.png",
+        "work/announcer234/browser/contained-held-7.png"
+      ],
+      "observation": "Fixed intrinsic grid sizing in lower-thirds, player/stat cards, lineup, matchup, sponsor pick, team record and related mark cells. Actual image bounds remain within assigned cells; original asset bytes unchanged."
+    },
+    {
+      "review": "final-feed-update",
+      "cases": [
+        "bottom-feed:default"
+      ],
+      "phase": "update",
+      "sampledFrames": 6,
+      "requestedTimesMs": [
+        0,
+        120,
+        240,
+        360,
+        480,
+        600
+      ],
+      "result": "visually checked",
+      "observation": "Updated score changes 17 to 20 while full assigned team names, logos and records remain contained. No overflow or broken images.",
+      "evidence": "work/announcer234/browser/final-feed-update.png"
+    },
+    {
+      "review": "Normal in-app panel size",
+      "result": "visually checked",
+      "observation": "Review controls no longer remain sticky over the frames on narrow/short panels. Six selected lower-third frames can be scrolled fully into view.",
+      "evidence": "work/announcer234/browser/delivery-announcer-frames.png"
+    }
+  ],
+  "limitations": [
+    "The 416-case inventory exceeds the manually reviewed default-stage and targeted variant coverage listed here; unsampled variants remain open.",
+    "Six-stage default passes use selected timestamps, supplemented by detailed strips for changed animation families; they are not continuous frame-by-frame coverage of every animation.",
+    "OBS shared-media delivery, camera permission and live remote browser embedding require a connected output check; isolated review fixtures deliberately do not use the production show or hardware.",
+    "Reference matches retain the user WLD brand and uploaded team artwork. No production deployment was performed.",
+    "Early audit screenshots show defects subsequently corrected; final-prefixed checks identify the delivered-build verification."
+  ]
+}

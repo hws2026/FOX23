@@ -16,18 +16,23 @@ LIBRARY=TeamLibrary(ROOT,DATA)
 # Keep supplied files and alternate suffixes exactly as recorded in the asset manifest.
 _ASSET_MANIFEST=json.loads((ROOT/'broadcast-logos226'/'assignments.json').read_text())
 BUNDLED_ASSETS=[{'id':'bundled-team-'+Path(row['file']).stem.lower(),'name':row['name']+(' · '+row['variant'] if row.get('variant') not in [None,'base'] else ''),'filename':row['file'],'src':'broadcast-logos226/teams/'+row['file'],'kind':'team'} for row in _ASSET_MANIFEST['teams']]+[{'id':'bundled-mark-'+Path(row['file']).stem,'name':row['source'].removesuffix('.png').removesuffix(' Logo'),'filename':row['source'],'src':'broadcast-logos226/'+row['file'],'kind':'branding'} for row in _ASSET_MANIFEST['marks']]
+# Optional for older embedded deployments; the packaged browser worker mounts this manifest.
+_MLB_ASSET_FILE=ROOT/'broadcast-logos236'/'mlb-assignments.json'
+_MLB_ASSET_MANIFEST=json.loads(_MLB_ASSET_FILE.read_text()) if _MLB_ASSET_FILE.exists() else {'teams':[]}
+BUNDLED_ASSETS += [{'id':'bundled-mlb-'+row['code'].lower(),'name':row['name'],'filename':row['file'],'src':'broadcast-logos236/mlb/'+row['file'],'kind':'team'} for row in _MLB_ASSET_MANIFEST['teams']]
 BUNDLED_ASSET_PATHS={row['src'] for row in BUNDLED_ASSETS}
 ASSET_KINDS={'team','player','coach','branding','other'}
 ASSET_LIMIT=1000
-SCORE_LEAGUES=('NFL','UFL','MLB','NBA','MLS','NCAAF','NCAAM','NCAAW')
-# The feed may combine full college schedules with every selected pro league.
+SCORE_LEAGUES=('NFL','MLB','NBA','MLS','UFL')
+REMOVED_SCORE_LEAGUES={'NCAAF','NCAAM','NCAAW'}
+# Keep every scheduled matchup across the selected professional leagues.
 # Reject an oversized update atomically rather than silently truncating games.
 SCORE_GAME_LIMIT=10000
 _asset_checked_library=None
 POSITIONS = ['QB','LT','LG','C','RG','RT','WR','WR','TE','RB','WR','DE','DT','DT','DE','LB','LB','LB','CB','CB','FS','SS','K','P']
 NAMES = ['Jordan Ellis','Marcus Reed','Cameron Price','Alex Morgan','Drew Collins','Taylor Brooks','Jalen Carter','Noah Hayes','Mason Cole','Evan Grant','Devin Ross','Cole Bennett','Tyler James','Owen Parker','Blake Foster','Avery Scott','Logan West','Riley Davis','Kai Turner','Miles Ward','Nolan King','Isaiah Bell','Sam Lewis','Jesse Gray']
 FORMATION_LABELS = {'4-3-4': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '3-4-4': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-2-5': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '3-3-5': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '5-2-4': ['DL', 'DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-1-6': ['DL', 'DL', 'DL', 'DL', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB', 'CB']}
-GRAPHICS = {'teamrecord','playerdock','seasonwall','weatherdetail','matchupclean','matchupbadge','comingupmatchup','reporterbadge','languagepromo','splitview','crewfour','playertease','serieshistory','talent','storytease','breaking','countdown','pregameplayer','intro','referee','standings','transition','scoringdrive','none','qbstats','scorebug','matchup','offense','defense','quarterback','player','coach','lowerthird','stats','teamstats','roster','event','period','final','announcers','sponsor','weather','reporter','situation','break'}
+GRAPHICS = {'sponsorpick','teamrecord','playerdock','seasonwall','weatherdetail','matchupclean','matchupbadge','comingupmatchup','reporterbadge','languagepromo','splitview','crewfour','playertease','serieshistory','talent','storytease','breaking','countdown','pregameplayer','intro','referee','standings','transition','scoringdrive','none','qbstats','scorebug','matchup','offense','defense','quarterback','player','coach','lowerthird','stats','teamstats','roster','event','period','final','announcers','sponsor','weather','reporter','situation','break'}
 def roster(side):
     return [{'id':f'{side}-{i+1}', 'name':name, 'number':str(([7,72,64,55,68,77,11,18,86,24,13,90,95,98,91,50,54,56,21,23,30,32,3,9][i]+(2 if side=='home' else 0))%100), 'position':pos,'photo':'','stats':{'YDS':'248','TD':'2','CMP':'19/27'}} for i,(name,pos) in enumerate(zip(NAMES,POSITIONS))]
 def default_state():
@@ -35,7 +40,7 @@ def default_state():
     lineups={side:{'formation':'4-3-4','offense':[f'{side}-{i}' for i in range(2,12)],'defense':[f'{side}-{i}' for i in range(12,23)],'quarterback':f'{side}-1','specialTeams':{'kicker':f'{side}-23','punter':f'{side}-24','holder':'','longSnapper':'','kickReturner':'','puntReturner':''}} for side in teams}
     cue={'type':'matchup','team':'away','playerId':'away-1','title':'FRIDAY NIGHT FOOTBALL','subtitle':'Live from Memorial Stadium','event':'TOUCHDOWN','period':'HALFTIME','nextAway':'NORTH RIDGE','nextHome':'EAST VALLEY','nextTime':'FRIDAY • 7:00 PM','rosterPage':1,'transition':'auto','leftName':'ALEX MORGAN','leftRole':'PLAY-BY-PLAY','rightName':'JORDAN REED','rightRole':'ANALYST','sponsorTitle':'POSTGAME','sponsorSubtitle':'PRESENTED BY OUR PARTNER','sponsorNext':'COMING UP NEXT','weatherTemp':'67°','weatherWind':'NW 6 MPH','weatherForecast':'CLEAR','reporterName':'REPORTER NAME','qbValue':'','qbLabel':'','qbDetail':'SEASON STATS','staffName':'','staffRole':'HEAD COACH','staffDetail':'','stats':[{'label':'PASSING YDS','away':'248','home':'212'},{'label':'RUSHING YDS','away':'126','home':'98'},{'label':'FIRST DOWNS','away':'19','home':'17'}]}
     return {'revision':0,'teams':teams,'lineups':lineups,'game':{'scores':{'away':0,'home':0},'timeouts':{'away':3,'home':3},'possession':'away','quarter':'1ST','down':'1ST','distance':'10','ballOn':'25','flag':False,'clock':{'remaining':900,'running':False,'anchor':time.time()},'playClock':{'remaining':40,'running':False,'anchor':time.time()},'showPlayClock':True,'showDownDistance':True,'bottomStatus':'LIVE','overtimePeriod':1,'showInfo':True,'showBallPosition':False},'branding':{'network':'GRIDIRON','competition':'FRIDAY NIGHT FOOTBALL','venue':'MEMORIAL STADIUM','accent':'#f9cb40','bugScale':1.0,'bugBottom':64,'networkLogo':'','sponsorName':'YOUR SPONSOR','sponsorLogo':'','sponsorColor':'#101349','secondaryLogo':'','introLogo':''},'program':{'qbStats':{'visible':False,'team':'away'},'bug':True,'watermark':False,'graphic':{'type':'none'},'takeId':0},'preview':cue,'assetLibrary':{'items':copy.deepcopy(BUNDLED_ASSETS)}}
-TEAM_CUES={'teamrecord','playerdock','seasonwall','breaking','pregameplayer','transition','scoringdrive','offense','defense','quarterback','qbstats','player','stats','coach','roster','event','lowerthird','situation'}
+TEAM_CUES={'sponsorpick','teamrecord','playerdock','seasonwall','breaking','pregameplayer','transition','scoringdrive','offense','defense','quarterback','qbstats','player','stats','coach','roster','event','lowerthird','situation'}
 DIVISION_TEAMS = {'AFC EAST': ['BUFFALO', 'MIAMI', 'NEW ENGLAND', 'NY JETS'], 'AFC SOUTH': ['HOUSTON', 'INDIANAPOLIS', 'JACKSONVILLE', 'TENNESSEE'], 'AFC NORTH': ['BALTIMORE', 'CINCINNATI', 'CLEVELAND', 'PITTSBURGH'], 'AFC WEST': ['DENVER', 'KANSAS CITY', 'LAS VEGAS', 'LA CHARGERS'], 'NFC EAST': ['PHILADELPHIA', 'DALLAS', 'WASHINGTON', 'NY GIANTS'], 'NFC SOUTH': ['ATLANTA', 'CAROLINA', 'NEW ORLEANS', 'TAMPA BAY'], 'NFC NORTH': ['CHICAGO', 'DETROIT', 'GREEN BAY', 'MINNESOTA'], 'NFC WEST': ['ARIZONA', 'LA RAMS', 'SAN FRANCISCO', 'SEATTLE']}
 
 def cue_key(c):
@@ -49,7 +54,10 @@ def initial_cue(kind,team='away'):
     if kind in ['splitview','playertease','serieshistory']:cue.update(title='',subtitle='',featureText='',featureFooter='')
     if kind in ['weatherdetail','matchupclean','matchupbadge','comingupmatchup','reporterbadge','languagepromo']:cue.update(title='',subtitle='',reporterName='',weatherWind='SE 8',weatherTemp='52°',weatherForecast='CLOUDY',weatherHumidity='54%',weatherIcon='CLOUDY',extraBadge='')
     if kind in ['teamrecord','playerdock','seasonwall']:cue.update(title='',subtitle='',featureFooter='',storyImage='')
+    if kind=='sponsorpick':cue.update(sponsorPickLayout='matchup',sponsorPickSide='both',sponsorPickName='',sponsorPickMatchup='',sponsorPickLine='',sponsorPickStat='',sponsorPickFooter='')
     if kind=='teamrecord':cue['stats']=[{'label':'SCORING FIRST','away':'','home':''},{'label':'OPPONENT SCORES FIRST','away':'','home':''}]
+    if kind=='announcers':cue.update(announcerCount=2,announcerStyle='stacked',announcerBadge='network',centerName='',centerRole='',reporterName='',reporterRole='',staffName='',staffRole='')
+    if kind=='coach':cue.update(coachLayout='dock')
     if kind=='crewfour':cue.update(leftName='',rightName='',reporterName='',staffName='')
     if kind=='talent':cue.update(leftName='',leftRole='',subtitle='',title='')
     if kind=='storytease':cue.update(title='',subtitle='',featureText='',featureFooter='')
@@ -87,6 +95,20 @@ def valid_image(v):
 def bounded_text(v,n=120):
     if not isinstance(v,str) or len(v)>n: raise ValueError('Text is too long or invalid.')
     return v.strip()
+def split_source_url(value):
+    value=bounded_text(value,2048)
+    if not value:return ''
+    if any(ord(c)<32 or ord(c)==127 for c in value) or '\\' in value or value.startswith('//'):
+        raise ValueError('Use an HTTP(S) URL or site-relative media path.')
+    try:parsed=urlparse(value)
+    except ValueError:raise ValueError('Use an HTTP(S) URL or site-relative media path.')
+    if parsed.scheme:
+        if parsed.scheme.lower() not in ['http','https'] or not parsed.hostname or parsed.username is not None or parsed.password is not None:
+            raise ValueError('Use an HTTP(S) URL without credentials.')
+    elif parsed.netloc or not parsed.path:
+        raise ValueError('Use an HTTP(S) URL or site-relative media path.')
+    return value
+
 def restored_person_metadata(row):
     """Validate exported catalog fields without trusting arbitrary imported keys."""
     metadata={}
@@ -190,6 +212,31 @@ def ensure_assets():
     for cue in cues:remember(cue.get('storyImage'),(cue.get('title') or 'Story')+' image','other')
 
 
+def normalize_score_leagues238(state):
+    """Retire college feeds without touching show teams or the asset library."""
+    c=state.get('bottomScores')
+    if not isinstance(c,dict):return False
+    before=copy.deepcopy(c)
+    if isinstance(c.get('leagues'),list):
+        c['leagues']=list(dict.fromkeys(league for league in c['leagues'] if league in SCORE_LEAGUES)) or ['NFL']
+    if c.get('league') in REMOVED_SCORE_LEAGUES:
+        c['league']=(c.get('leagues') or ['NFL'])[0]
+        c.setdefault('leagues',[c['league']])
+    removed_ids={game.get('id') for game in c.get('games',[]) if isinstance(game,dict) and game.get('league') not in SCORE_LEAGUES}
+    if isinstance(c.get('games'),list):c['games']=[game for game in c['games'] if isinstance(game,dict) and game.get('league') in SCORE_LEAGUES]
+    for key in ['sources','leagueNetworks','leagueTitleCards']:
+        if isinstance(c.get(key),dict):c[key]={league:value for league,value in c[key].items() if league in SCORE_LEAGUES}
+    for key in ['feedBugGameId','gameId']:
+        value=c.get(key,'')
+        if value in removed_ids or str(value).split(':',1)[0] in REMOVED_SCORE_LEAGUES:c[key]=''
+    return c!=before
+
+def migrate_score_leagues238():
+    if normalize_score_leagues238(STATE):
+        STATE['revision']+=1
+        save()
+
+
 STATE=default_state()
 if STATE_FILE.exists():
     try:
@@ -248,10 +295,12 @@ for _key,_cue in list(_transition_library.items()):
         if _key in ['transition:away','transition:home']:del _transition_library[_key]
 
 ensure_assets()
+migrate_score_leagues238()
 
 def update(action,p):
     ensure_assets()
     _update(action,p)
+    normalize_score_leagues238(STATE)
     if action in ['team','roster','staff','lineup']:
         side=p.get('team','away');key=STATE.get('teamSelections',{}).get(side)
         if key:
@@ -306,9 +355,12 @@ def _update(action,p):
         c.setdefault('feedBugGameId','')
         for k,v in p.items():
             if k=='league':
+                if v in REMOVED_SCORE_LEAGUES:v='NFL'
                 if v not in SCORE_LEAGUES and v!='ALL':raise ValueError('Unknown score league')
                 c[k]=v
-            elif k=='leagues':c[k]=list(dict.fromkeys(a for a in v if a in SCORE_LEAGUES))
+            elif k=='leagues':
+                if not isinstance(v,list):raise ValueError('Invalid score leagues')
+                c[k]=list(dict.fromkeys(a for a in v if a in SCORE_LEAGUES)) or ['NFL']
             elif k=='leagueNetworks':
                 if not isinstance(v,dict):raise ValueError('Invalid league networks')
                 c[k]={**c.get(k,{}),**{league:bounded_text(label,40) for league,label in v.items() if league in SCORE_LEAGUES}}
@@ -316,6 +368,7 @@ def _update(action,p):
                 if not isinstance(v,dict):raise ValueError('Invalid league title cards')
                 cards={}
                 for league,labels in v.items():
+                    if league in REMOVED_SCORE_LEAGUES:continue
                     if league not in SCORE_LEAGUES:raise ValueError('Unknown title league')
                     if not isinstance(labels,list) or not 1<=len(labels)<=6:raise ValueError('Use one to six labels per league')
                     cards[league]=[bounded_text(a,40) for a in labels if str(a).strip()]
@@ -352,7 +405,7 @@ def _update(action,p):
                             value=str(team.get(key,''))
                             game[side][key]='#'+value.lstrip('#') if re.fullmatch(r'#?[0-9a-fA-F]{6}',value) else ''
                         url=str(team.get('logo',''))
-                        game[side]['logo']=url[:500] if url.startswith('https://') else ''
+                        game[side]['logo']=url[:500] if url.startswith('https://') else url if game['league']=='MLB' and valid_image(url) else ''
                     cleaned.append(game)
                 c[k]=cleaned
             else:raise ValueError('Unknown score setting')
@@ -416,7 +469,9 @@ def _update(action,p):
         old=g['timeouts'][side]
         g['timeouts'][side]=max(0,min(3,int(p['value']) if 'value' in p else old+int(p.get('delta',0))))
         if g['timeouts'][side]<old:
-            STATE['program']['timeoutNotice']={'team':side,'until':time.time()+6,'remaining':g['timeouts'][side]}
+            STATE['program']['timeoutNotice']={'team':side,'until':time.time()+8.5,'remaining':g['timeouts'][side]}
+        elif g['timeouts'][side]>old and STATE['program'].get('timeoutNotice',{}).get('team')==side:
+            STATE['program'].pop('timeoutNotice',None)
 
     elif action=='game':
         for k,v in p.items():
@@ -605,7 +660,17 @@ def _update(action,p):
                 if v not in ['team','player','duo','network','none']: raise ValueError('Choose news artwork.')
             elif k=='newsText': v=bounded_text(v,400)
             elif k in ['splitSource1','splitSource2']:
-                if v not in ['none','camera','video']:raise ValueError('Choose a split-view source.')
+                if v not in ['none','camera','video','video_url','browser','capture']:raise ValueError('Choose a split-view source.')
+            elif k in ['splitUrl1','splitUrl2']:v=split_source_url(v)
+            elif k in ['splitCapture1','splitCapture2']:
+                v=bounded_text(v,100)
+                if v and not re.fullmatch(r'capture-[A-Za-z0-9_-]+',v):raise ValueError('Choose a browser tab or window again.')
+            elif k=='sponsorPickLayout':
+                if v not in ['matchup','playerstat']:raise ValueError('Choose a sponsor pick layout.')
+            elif k=='sponsorPickSide':
+                if v not in ['both','away','home']:raise ValueError('Choose sponsor pick team logos.')
+            elif k=='sponsorPickFooter':v=bounded_text(v,400)
+            elif k in ['sponsorPickName','sponsorPickMatchup','sponsorPickLine','sponsorPickStat']:v=bounded_text(v,160)
             elif k in ['splitCamera1','splitCamera2','splitVideo1','splitVideo2','splitLabel1','splitLabel2']:v=bounded_text(v,200)
             elif k in ['teaserTeamText','teaserPositionText']:v=bounded_text(v,100)
             elif k=='teaserPlayback':
@@ -645,6 +710,8 @@ def _update(action,p):
                 if v not in ['fieldgoal','kicker','punt','third','fourth']: raise ValueError('Invalid situational graphic.')
             elif k=='breakLayout':
                 if v not in ['small','large','stinger']: raise ValueError('Invalid break layout.')
+            elif k=='coachLayout':
+                if v not in ['dock','ribbon']: raise ValueError('Choose scorebug dock or full-width coach ribbon.')
             elif k in ['drivePlays','driveYards','attemptDistance','kickerMade','kickerAttempts','kickerLong','conversions','attempts']:
                 v=int(v)
                 if not 0<=v<=999: raise ValueError('Use a number between 0 and 999.')
@@ -665,6 +732,13 @@ def _update(action,p):
                 v=[{'name':bounded_text(row.get('name','').strip(),40),**{key:max(0,min(99,int(row.get(key,0) or 0))) for key in ['wins','losses','ties']}} for row in v]
             elif k in ['tier1Away','tier1Home','tier2Away','tier2Home','tier3Away','tier3Home','refereeName','refereeRole','refereeExperience','tier1','tier2','tier3','tierBottom','divisionTitle','conversionLayout','flagVariant','penaltyType','penaltyPlayer','penaltyDetail','transitionStyle','transitionTitle','transitionPerson','transitionDetail','transitionDuration']:
                 v=bounded_text(v,160)
+            elif k=='announcerCount':
+                v=int(v)
+                if v not in [2,3,4]: raise ValueError('Choose two, three or four crew members.')
+            elif k=='announcerStyle':
+                if v not in ['stacked','roles']: raise ValueError('Choose stacked names or names with roles.')
+            elif k=='announcerBadge':
+                if v not in ['network','none']: raise ValueError('Choose broadcast badge or no badge.')
             elif k=='rosterPage':
                 v=int(v)
                 if not 1<=v<=4: raise ValueError('Roster page must be between 1 and 4.')
@@ -676,9 +750,22 @@ def _update(action,p):
             elif k=='stats':
                 if not isinstance(v,list) or len(v)>6: raise ValueError('Use up to six comparison rows.')
                 v=[{f:bounded_text(x.get(f,''),40) for f in ['label','away','home']} for x in v]
-            elif k in ['weatherHumidity','weatherIcon','extraBadge','title','subtitle','event','period','nextAway','nextHome','nextTime','playerId','leftName','leftRole','rightName','rightRole','sponsorTitle','sponsorSubtitle','sponsorNext','weatherTemp','weatherWind','weatherForecast','reporterName','qbValue','qbLabel','qbDetail','qbSeasonLabel','staffId','staffName','staffRole','staffDetail','spotlightDetail','lowerContext','lowerContextText','situationDetail','breakHeadline','breakDetail','driveTime','driveResult','driveNote','kickerId','kickerContext']: v=bounded_text(v,120)
+            elif k in ['weatherHumidity','weatherIcon','extraBadge','title','subtitle','event','period','nextAway','nextHome','nextTime','playerId','leftName','leftRole','centerName','centerRole','rightName','rightRole','reporterRole','sponsorTitle','sponsorSubtitle','sponsorNext','weatherTemp','weatherWind','weatherForecast','reporterName','qbValue','qbLabel','qbDetail','qbSeasonLabel','staffId','staffName','staffRole','staffDetail','spotlightDetail','lowerContext','lowerContextText','situationDetail','breakHeadline','breakDetail','driveTime','driveResult','driveNote','kickerId','kickerContext']: v=bounded_text(v,120)
             else: raise ValueError('Invalid graphic field.')
             cue[k]=v
+        if kind=='announcers' and 'announcerCount' in p:
+            # Adding a position may use Show Setup crew. Keep left/right and any
+            # saved or explicitly submitted name/role exactly as configured.
+            slots=[('center',2)] if cue['announcerCount']==3 else [('reporter',2),('staff',3)] if cue['announcerCount']==4 else []
+            crew=STATE['branding'].get('crew',[])
+            for slot,index in slots:
+                name_key,role_key=slot+'Name',slot+'Role'
+                placeholder='REPORTER NAME' if slot=='reporter' else ''
+                if name_key in p or cue.get(name_key,'').strip() not in ['',placeholder]:continue
+                member=crew[index] if index<len(crew) else {}
+                cue[name_key]=member.get('name','')
+                if role_key not in p and cue.get(role_key,'') in ['', 'HEAD COACH' if slot=='staff' else '']:
+                    cue[role_key]=member.get('role','')
         if cue.get('type')=='quarterback' and cue.get('qbIntroMode')=='season':
             if cue.get('qbSeasonComp',0)>cue.get('qbSeasonAtt',0) or cue.get('qbSeasonTD',0)>cue.get('qbSeasonComp',0) or cue.get('qbSeasonINT',0)>cue.get('qbSeasonAtt',0): raise ValueError('Completions and interceptions cannot exceed attempts; touchdowns cannot exceed completions.')
         if cue.get('type')=='situation' and cue.get('conversions',0)>cue.get('attempts',0): raise ValueError('Conversions cannot exceed attempts.')
@@ -898,6 +985,7 @@ def _update(action,p):
 
 def pages_snapshot():
     ensure_assets()
+    migrate_score_leagues238()
     return json.dumps({'state':STATE,'library':LIBRARY.overrides})
 
 def pages_request(raw):
@@ -909,6 +997,7 @@ def pages_request(raw):
             key=query.get('id','')
             data=LIBRARY.get(key) if key else {'teams':LIBRARY.summaries(),'selected':STATE.get('teamSelections',{})}
         elif endpoint in ['state','export']:
+            migrate_score_leagues238()
             if endpoint=='state' and str(query.get('since',''))==str(STATE['revision']):return json.dumps({'status':204})
             data=copy.deepcopy(STATE)
             if endpoint=='export':

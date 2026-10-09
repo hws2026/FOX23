@@ -1,17 +1,18 @@
-import{graphic219,names219}from'./additions219.js';
-import{renderBottomScores}from'./scores-render203.js?v=audit232';
+import{graphic219,names219,fitAdditions219}from'./additions219.js?v=update238';
+import{renderBottomScores}from'./scores-render203.js?v=update238';
 // Warm the exit artwork before the first operator OUT command.
 const scorebugExitFrames211=Array.from({length:51},(_,i)=>{const img=new Image();img.src=new URL('./assets/scorebug-out219/'+String(i).padStart(2,'0')+'.svg',import.meta.url).href;return img;});
-import{extraGraphic,extraNames}from'./extras194.js?v=added194';
-import{splitGraphic,syncSplitMedia}from'./split192.js?v=audit232';
+import{extraGraphic,extraNames}from'./extras194.js?v=update238';
+import{splitGraphic,syncSplitMedia,preserveSplitSource}from'./split192.js?v=update238';
+import{applyCueHighlights}from'./highlights233.js?v=update238';
 import{conferenceTransition,playerTeaser,seriesHistory,crewLowerThird}from'./custom192.js?v=teaser209';
-import {newsGraphic,pregamePlayer,studioTransition,countdownMarkup,updateKickoff} from './pregame.js?v=tunnel159';
+import {newsGraphic,pregamePlayer,studioTransition,countdownMarkup,updateKickoff} from './pregame.js?v=update238';
 export function gameStatusText(g){if(['FINAL','FINAL/OT'].includes(g.bottomStatus))return g.quarter==='OT'?'FINAL/OT'+(Number(g.overtimePeriod)>1?g.overtimePeriod:''):'FINAL';return g.bottomStatus&&g.bottomStatus!=='LIVE'?g.bottomStatus:'';}
 export const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const formations={'4-3-4':[4,3,4],'3-4-4':[3,4,4],'4-2-5':[4,2,5],'3-3-5':[3,3,5],'5-2-4':[5,2,4],'4-1-6':[4,1,6]};
 export const defensePositions={"4-3-4":["DL","DL","DL","DL","LB","LB","LB","CB","FS","SS","CB"],"3-4-4":["DL","DL","DL","LB","LB","LB","LB","CB","FS","SS","CB"],"4-2-5":["DL","DL","DL","DL","LB","LB","CB","CB","FS","SS","CB"],"3-3-5":["DL","DL","DL","LB","LB","LB","CB","CB","FS","SS","CB"],"5-2-4":["DL","DL","DL","DL","DL","LB","LB","CB","FS","SS","CB"],"4-1-6":["DL","DL","DL","DL","LB","CB","CB","FS","SS","CB","CB"]};
 export const offensePositions=['LT','LG','C','RG','RT','WR','WR','TE','RB','WR'];
-export const graphicNames={...names219,...extraNames,splitview:'Two-feed split view',crewfour:'Four-person crew lower third',playertease:'Player-name teaser',serieshistory:'Series history',talent:'Studio talent credentials',storytease:'Story teaser',breaking:'News ribbon',countdown:'Kickoff countdown',pregameplayer:'Pregame player feature',intro:'Game opening intro',referee:'Referee',standings:'Division standings',transition:'Broadcast transition',scoringdrive:'Scoring drive',scorebug:'Scorebug',qbstats:'Player side stats',none:'No graphic',matchup:'Matchup banner',offense:'Offensive lineup',defense:'Defensive lineup',quarterback:'QB introduction',player:'Player spotlight',coach:'Coaching staff',lowerthird:'Lower third',stats:'Player statistics',teamstats:'Team comparison',event:'Scoring & alerts',period:'Period summary',final:'Final-score banner',announcers:'Commentators',sponsor:'Sponsor promo',weather:'Weather',reporter:'Reporter nameplate',situation:'Situational stats',break:'Commercial break'};
+export const graphicNames={...names219,...extraNames,splitview:'Two-feed split view',crewfour:'Four-person crew lower third',playertease:'Player-name teaser',serieshistory:'Series history',talent:'Studio talent credentials',storytease:'Story teaser',breaking:'News ribbon',countdown:'Kickoff countdown',pregameplayer:'Pregame player feature',intro:'Game opening intro',referee:'Referee',standings:'Division standings',transition:'Broadcast transition',scoringdrive:'Scoring drive',scorebug:'Scorebug',qbstats:'Player side stats',none:'No graphic',matchup:'Matchup banner',offense:'Offensive lineup',defense:'Defensive lineup',quarterback:'QB introduction',player:'Player spotlight',coach:'Coaching staff',lowerthird:'Lower third',stats:'Player statistics',teamstats:'Team comparison',roster:'Roster',event:'Scoring & alerts',period:'Period summary',final:'Final-score banner',announcers:'Commentators',sponsor:'Sponsor promo',weather:'Weather',reporter:'Reporter nameplate',situation:'Situational stats',break:'Commercial break'};
 export function clockSeconds(c,now=Date.now()/1000){return Math.max(0,Math.ceil(c.remaining-(c.running?now-c.anchor:0)));}
 export function clockText(c,now){const sec=clockSeconds(c,now);return `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;}
 function teamStyle(t){return `--team:${esc(t.color)};--secondary:${esc(t.secondary)}`;}
@@ -35,33 +36,97 @@ export function passerRating(comp,att,yards,td,int){
  return Number(((cap((comp/att-.3)*5)+cap((yards/att-3)*.25)+cap(td/att*20)+cap(2.375-int/att*25))/6*100).toFixed(1));
 }
 function qbSeason(c){const comp=Number(c.qbSeasonComp)||0,att=Number(c.qbSeasonAtt)||0,yards=Number(c.qbSeasonYards)||0,td=Number(c.qbSeasonTD)||0,int=Number(c.qbSeasonINT)||0,rating=passerRating(comp,att,yards,td,int);return `<div class="qb-feature qb-season"><header>${esc(c.qbSeasonLabel||'SEASON STATS')}</header><dl>${[['COMP/ATT',comp+'/'+att],['YDS',yards],['TD',td],['INT',int],['PASSER RATING',rating===null?'—':rating.toFixed(1)]].map(([label,value])=>`<div><dt>${label}</dt><dd>${value}</dd></div>`).join('')}</dl></div>`;}
-function quarterback(s,c){const t=s.teams[c.team],p=player(t,s.lineups[c.team].quarterback),stat=Object.entries(p.stats)[0]||['STATS','—'],parts=p.name.trim().split(/\s+/),first=parts.length>1?parts.shift():'',last=parts.join(' ');return `<section class="qb-sidebar qb-redesign181" style="${teamStyle(t)}"><img class="qb-outer-shell" src="./qb-shell183.svg?v=188" alt="" aria-hidden="true"><div class="qb-top-logo">${logo(t)}</div><div class="qb-cutout">${portrait(p)}</div><div class="qb-info-plate"><div class="qb-team-header">${esc(t.name)}</div><div class="qb-sidebar-name"><small>${esc(first)}</small><strong>${esc(last)}</strong></div>${c.qbIntroMode==='season'?qbSeason(c):`<div class="qb-feature"><b>${esc(c.qbValue||stat[1])}</b><strong>${esc(c.qbLabel||stat[0])}</strong><p class="${c.qbContextYellow?'qb-context-yellow':''}">${esc(c.qbDetail||'SEASON STATS')}</p></div>`}</div></section>`;}
+function quarterback(s,c){const t=s.teams[c.team],p=player(t,s.lineups[c.team].quarterback),stat=Object.entries(p.stats)[0]||['STATS','—'],parts=p.name.trim().split(/\s+/),first=parts.length>1?parts.shift():'',last=parts.join(' ');return `<section class="qb-sidebar qb-redesign181" style="${teamStyle(t)}"><img class="qb-outer-shell" src="./qb-shell183.svg?v=188" alt="" aria-hidden="true"><div class="qb-top-logo">${logo(t)}</div><div class="qb-cutout">${portrait(p)}</div><div class="qb-info-plate"><div class="qb-team-header">${esc(t.name)}</div><div class="qb-sidebar-name"><small>${esc(first)}</small><strong>${esc(last)}</strong></div>${c.qbIntroMode==='season'?qbSeason(c):`<div class="qb-feature"><b>${esc(c.qbValue||stat[1])}</b><strong>${esc(c.qbLabel||stat[0])}</strong><p class="${(c.qbContextYellow===true||c.qbContextYellow==='true')?'qb-context-yellow':''}">${esc(c.qbDetail||'SEASON STATS')}</p></div>`}</div></section>`;}
 
 function reporter(s,c){return `<section class="reporter-nameplate"><div class="reporter-network">${networkMark(s)}</div><h1>${esc(c.reporterName||'REPORTER NAME')}</h1></section>`;}
-function coachDock(s,c){const t=s.teams[c.team],staff=(t.staff||[]).find(x=>x.id===c.staffId);if(staff)c={...c,staffName:staff.name,staffRole:staff.role,staffDetail:staff.detail};return `<section class="staff-anchor dock-${esc(c.team)}" style="${teamStyle(t)};bottom:${Number(s.branding.bugBottom)}px;--dock-scale:${bugRenderScale(s)}"><div class="staff-reveal"><div class="staff-tab">${esc(c.staffRole||'HEAD COACH')}</div><div class="staff-plate"><h1>${esc(c.staffName||t.coach)}</h1><p>${esc(c.staffDetail||c.staffRole||'HEAD COACH')}</p></div></div></section>`;}
+function coachDock(s,c){
+ const t=s.teams[c.team],staff=(t.staff||[]).find(x=>x.id===c.staffId);if(staff)c={...c,staffName:staff.name,staffRole:staff.role,staffDetail:staff.detail};
+ if(c.coachLayout==='ribbon'){
+  const parts=String(c.staffName||t.coach||'').trim().split(/\s+/),first=parts.length>1?parts.shift():'',last=parts.join(' '),detail=String(c.staffDetail||'');
+  return `<section class="player-spotlight staff-ribbon234 has-detail ${detail?'staff-ribbon234-detail':''}" style="${teamStyle(t)}"><div class="spotlight-body"><div class="spotlight-face"></div><div class="spotlight-metal"><i class="spotlight-rail-left"></i><i class="spotlight-rail-right"></i><i class="spotlight-rail-top"></i></div><div class="spotlight-copy"><h1 class="staff-ribbon-name">${first?`<small>${esc(first)}</small> `:''}<strong>${esc(last)}</strong></h1></div><p class="spotlight-detail staff-ribbon-role">${esc(c.staffRole||'HEAD COACH')}</p>${detail?`<p class="spotlight-detail staff-ribbon-detail">${esc(detail)}</p>`:''}</div><div class="spotlight-logo">${logo(t)}</div></section>`;
+ }
+ return `<section class="staff-anchor dock-${esc(c.team)}" style="${teamStyle(t)};bottom:${Number(s.branding.bugBottom)}px;--dock-scale:${bugRenderScale(s)}"><div class="staff-reveal"><div class="staff-tab">${esc(c.staffRole||'HEAD COACH')}</div><div class="staff-plate"><h1>${esc(c.staffName||t.coach)}</h1><p>${esc(c.staffDetail||c.staffRole||'HEAD COACH')}</p></div></div></section>`;
+}
 function weather(s,c){return `<section class="weather-card"><header><h1>WEATHER</h1><p>${esc([s.branding.city,s.branding.stateAbbr].filter(Boolean).join(', ')||s.branding.venue||'')}</p></header><dl>${[['TEMP',c.weatherTemp||'—'],['HUMIDITY',c.weatherHumidity||'—'],['WINDS',c.weatherWind||'—']].map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>`;}
 function playerSpotlight(s,c){const t=s.teams[c.team],p=player(t,c.playerId),detail=String(c.spotlightDetail||''),parts=detail.match(/^(\d+)\s+(.*)$/);return `<section class="player-spotlight ${detail?'has-detail':''}" style="${teamStyle(t)}"><div class="spotlight-body"><div class="spotlight-face"></div><div class="spotlight-metal"><i class="spotlight-rail-left"></i><i class="spotlight-rail-right"></i><i class="spotlight-rail-top"></i></div><div class="spotlight-copy"><span class="spotlight-number">${esc(p.number)}</span><h1>${esc(p.name)}</h1></div>${detail?`<p class="spotlight-detail">${parts?`<b>${esc(parts[1])}</b> ${esc(parts[2])}`:esc(detail)}</p>`:''}</div><div class="spotlight-logo">${logo(t)}</div></section>`;}
 function playerStatistics(s,c){const t=s.teams[c.team],p=player(t,c.playerId),stats=Object.entries(p.stats||{});return `<section class="player-spotlight spotlight-statistics has-detail" style="${teamStyle(t)}"><div class="spotlight-body"><div class="spotlight-face"></div><div class="spotlight-metal"><i class="spotlight-rail-left"></i><i class="spotlight-rail-right"></i><i class="spotlight-rail-top"></i></div><div class="spotlight-copy"><span class="spotlight-number">${esc(p.number)}</span><h1>${esc(p.name)}</h1></div><div class="spotlight-stat-context">${esc(t.name)} / ${esc(p.position)}</div><div class="spotlight-stat-grid" style="--stat-count:${Math.max(1,stats.length)}">${stats.map(([label,value])=>`<div><b>${esc(value)}</b><span>${esc(label)}</span></div>`).join('')}</div></div><div class="spotlight-logo">${logo(t)}</div></section>`;}
 function playerCard(s,c){const t=s.teams[c.team],lu=s.lineups[c.team],p=player(t,c.type==='quarterback'?lu.quarterback:c.playerId);return `<section class="player-graphic" style="${teamStyle(t)}"><div class="player-card-photo">${portrait(p)}</div><div class="player-card-info"><div class="eyebrow">${esc(t.name)} / ${esc(c.type==='quarterback'?'QUARTERBACK':p.position)}</div><h1><span>${esc(p.number)}</span> ${esc(p.name)}</h1><div class="player-stats">${Object.entries(p.stats).map(([label,val])=>`<div><b>${esc(val)}</b><span>${esc(label)}</span></div>`).join('')}</div></div><div class="card-team-logo">${logo(t)}</div></section>`;}
 function lower(s,c){const t=s.teams[c.team],context=c.lowerContext==='CUSTOM'?(c.lowerContextText||''):c.lowerContext==='LAST WEEK VS'||c.lowerContext==='THIS WEEK VS'?c.lowerContext+': '+(c.lowerContextText||''):c.lowerContext||'';return `<section class="player-spotlight team-lower-third has-detail ${context?'has-context':''} ${c.title?'has-body':''}" style="${teamStyle(t)};bottom:${Number(s.branding.bugBottom)||0}px"><div class="spotlight-body"><div class="spotlight-face"></div><div class="spotlight-metal"><i class="spotlight-rail-left"></i><i class="spotlight-rail-right"></i><i class="spotlight-rail-top"></i></div><div class="spotlight-copy"><h1>${esc(t.name)}</h1></div><p class="spotlight-detail">${esc(c.subtitle)}</p>${context?`<p class="spotlight-context">${esc(context)}</p>`:''}${c.title?`<p class="spotlight-detail lower-body">${esc(c.title)}</p>`:''}</div><div class="spotlight-logo">${logo(t)}</div></section>`;}
 function compare(s,c){return `<section class="full-graphic comparison">${panelHeader(s,'TEAM COMPARISON',s.branding.competition)}<div class="compare-head">${logo(s.teams.away)}<span>${esc(s.teams.away.name)}</span><span>${esc(s.teams.home.name)}</span>${logo(s.teams.home)}</div><div class="stat-table">${c.stats.map(r=>`<div><b>${esc(r.away)}</b><span>${esc(r.label)}</span><b>${esc(r.home)}</b></div>`).join('')}</div>${footer(s)}</section>`;}
-function rosterGraphic(s,c){const t=s.teams[c.team],page=Math.min(c.rosterPage||1,Math.ceil(t.roster.length/30));return `<section class="full-graphic roster-graphic" style="${teamStyle(t)}">${panelHeader(s,'TEAM ROSTER',t.name,t)}<div class="roster-columns">${t.roster.slice((page-1)*30,page*30).map(p=>`<div class="roster-name"><b>${esc(p.number)}</b><strong>${esc(p.name)}</strong><span>${esc(p.position)}</span></div>`).join('')}</div>${footer(s,`${t.name} • PAGE ${page} OF ${Math.ceil(t.roster.length/30)}`)}</section>`;}
+function rosterGraphic(s,c){const t=s.teams[c.team],pages=Math.max(1,Math.ceil(t.roster.length/30)),page=Math.max(1,Math.min(c.rosterPage||1,pages));return `<section class="full-graphic roster-graphic" style="${teamStyle(t)}">${panelHeader(s,'TEAM ROSTER',t.name,t)}<div class="roster-columns">${t.roster.slice((page-1)*30,page*30).map(p=>`<div class="roster-name"><b>${esc(p.number)}</b><strong>${esc(p.name)}</strong><span>${esc(p.position)}</span></div>`).join('')}</div>${footer(s,`${t.name} • PAGE ${page} OF ${pages}`)}</section>`;}
 function touchdown(s,c,t,p,variant){
  const fragments=Array.from({length:24},(_,i)=>{const angle=i*137.508*Math.PI/180,reach=170+(i%6)*68;return `<i style="--i:${i};--dx:${Math.round(Math.cos(angle)*reach)}px;--dy:${Math.round(Math.sin(angle)*reach*.6)}px;--turn:${Math.round(angle*180/Math.PI)%360}deg;--blade:${80+i%5*25}px"></i>`;}).join('');
  return `<section class="td-sequence" data-variant="${esc(variant)}" style="${teamStyle(t)};--td-cover-height:${Math.max(206,Number(s.branding.bugBottom)+200*bugRenderScale(s)+4)}px"><div class="td70-rails"><i></i><i></i><i></i></div><div class="td70-portrait ${variant==='player'&&p.photo?'td-has-photo':'td-logo-only'}">${variant==='player'?(p.photo?portrait(p):''):variant==='team'?logo(t):''}</div><h1 class="td70-title" aria-label="TOUCHDOWN">${[...'TOUCHDOWN'].map((letter,i)=>`<span aria-hidden="true" style="--i:${i}">${letter}</span>`).join('')}</h1>${variant==='generic'?'':`<div class="td70-name">${variant==='player'?`<b>${esc(p.number)}</b><div class="td70-identity"><small>${esc(p.position||'')}</small><strong>${esc(p.name)}</strong></div>`:`<strong>${esc(t.shortName||t.name)}</strong>`}</div>`}<div class="td70-burst" aria-hidden="true">${fragments}</div><svg class="td70-electric" viewBox="0 0 920 480" aria-hidden="true"><path d="M0 83L55 91 76 73 105 96 125 90 137 134 169 129 193 150 214 135 260 163 275 156 302 194 285 207 315 246 352 235 370 280 397 273 432 318 416 328 470 377M137 134L128 159 155 185M302 194L328 180 357 201M370 280L339 298 359 330"/></svg></section>`;
 }
+function timeoutCopy234(s,side,number=0,override=''){
+ const value=Number(s.game.timeouts?.[side]),remaining=Number.isFinite(value)?Math.max(0,Math.min(3,Math.trunc(value))):3;
+ const explicit=Number(number),ordinal=[1,2,3].includes(explicit)?explicit:Math.max(1,3-remaining);
+ return {label:['','1ST','2ND','3RD'][ordinal]+' TIMEOUT',detail:String(override||'').trim()||(remaining===0?'NO TIMEOUTS REMAINING':remaining+' TIMEOUT'+(remaining===1?'':'S')+' REMAINING')};
+}
+function timeoutLabel237(label){return `<b>${esc(label.split(' ')[0])}</b> <span>TIMEOUT</span>`;}
+function timeoutTail234(detail){return `<div class="timeout-tail-window237"><div class="timeout-tail234"><span>${esc(detail)}</span></div></div>`;}
+function timeoutExit237(source,target=source,motion='auto'){
+ if(!target)return;
+ const upper=source.querySelector('.situation-reveal,.timeout-notice'),upperTarget=target.querySelector('.situation-reveal,.timeout-notice');
+ if(upper&&upperTarget){const style=getComputedStyle(upper),pose={transform:style.transform,opacity:style.opacity};upperTarget.style.animation='none';upperTarget.animate([pose,motion==='fade'?{...pose,opacity:0}:{...pose,transform:'translateY(calc(100% + 5px))'}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?0:180,easing:'ease-in',fill:'both'});}
+ const from=source.querySelector('.timeout-tail234'),tail=target.querySelector('.timeout-tail234');if(!from||!tail)return;
+ const style=getComputedStyle(from),pose={transform:style.transform,opacity:style.opacity};
+ for(const animation of tail.getAnimations())animation.cancel();tail.style.animation='none';
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,home=target.classList.contains('dock-home');
+ tail.animate([pose,motion==='fade'?{...pose,opacity:0}:{...pose,transform:`translateX(${home?'-':''}100%)`}],{duration:reduced?0:motion==='fade'?160:320,easing:'ease-in',fill:'both'});
+}
+export function syncTimeoutNotice237(root,s,{preview=false,visible=true,cue=s.program.graphic}={}){
+ root._timeoutState237=s;root._timeoutPreview237=preview;
+ const notice=s.program.timeoutNotice,manual=cue?.type==='event'&&cue.event==='TIMEOUT';
+ const key=notice?notice.team+':'+notice.until:'';
+ const motion=selectedGraphicMotion(s,{type:'event',team:notice?.team||'away'});
+ let dock=root.querySelector('.timeout-anchor');
+ const remove=el=>{clearTimeout(el._timeoutExpiry237);clearTimeout(el._timeoutRetire237);clearTimeout(el._timeoutTail237);el.remove();};
+ const retire=el=>{
+  if(el.classList.contains('out'))return;
+  clearTimeout(el._timeoutExpiry237);el.dataset.motion=motion;timeoutExit237(el,el,motion);el.classList.add('out');
+  el._timeoutRetire237=setTimeout(()=>{remove(el);if(root.isConnected)renderGraphics(root,root._timeoutState237,root._timeoutPreview237);},350);
+ };
+ // A manually taken timeout already owns both the upper label and side count.
+ if(preview||manual){if(manual&&!preview)root._manualTimeout237=key;if(dock)remove(dock);return;}
+ // Taking that manual pair Out must not bring the same automatic notice back underneath it.
+ if(!visible||!notice||root._manualTimeout237===key||!s.teams[notice.team]||!(Number(notice.until)*1000>Date.now())){if(dock)retire(dock);return;}
+ if(dock&&dock.dataset.notice!==key){remove(dock);dock=null;}
+ if(!dock){
+  dock=document.createElement('div');dock.className='timeout-anchor dock-'+notice.team;dock.dataset.notice=key;
+  const copy=timeoutCopy234(s,notice.team);
+  dock.innerHTML=`<div class="timeout-notice"><div><strong>${timeoutLabel237(copy.label)}</strong></div></div>${timeoutTail234(copy.detail)}`;
+  const elapsed=Math.max(0,Date.now()-(Number(notice.until)-8.5)*1000);dock.style.setProperty('--timeout-elapsed237',-elapsed+'ms');
+  dock._timeoutTail237=setTimeout(()=>dock.querySelector('.timeout-tail-window237')?.setAttribute('data-finished','true'),Math.max(0,3350-elapsed));
+  root.append(dock);
+ }
+ // Preserve the original schedule across live branding updates and interrupted OUT.
+ clearTimeout(dock._timeoutRetire237);
+ if(dock.classList.contains('out')){for(const el of dock.querySelectorAll('.timeout-tail234,.timeout-notice')){el.style.removeProperty('animation');for(const a of el.getAnimations())a.cancel();}dock.style.setProperty('--timeout-elapsed237',-Math.max(0,Date.now()-(Number(notice.until)-8.5)*1000)+'ms');dock.classList.remove('out');}
+ dock.dataset.motion=motion;dock.style.setProperty('--team',s.teams[notice.team].color);dock.style.setProperty('--secondary',s.teams[notice.team].secondary);dock.style.bottom=s.branding.bugBottom+'px';dock.style.setProperty('--bug-scale',bugRenderScale(s));
+ const copy=timeoutCopy234(s,notice.team);
+ const title=dock.querySelector('.timeout-notice strong');if(title.textContent!==copy.label)title.innerHTML=timeoutLabel237(copy.label);
+ dock.querySelector('.timeout-tail234>span').textContent=copy.detail;
+ clearTimeout(dock._timeoutExpiry237);
+ const current=dock;dock._timeoutExpiry237=setTimeout(()=>{if(current.isConnected)retire(current);},Math.max(0,Number(notice.until)*1000-Date.now()));
+}
 function event(s,c){const t=s.teams[c.team||'away'],p=player(t,c.penaltyPlayer||c.playerId),variant=c.flagVariant||'team';
 if(c.event==='FLAG')return `<section class="situation-group"><div class="situation-anchor dock-${esc(c.team||'away')} penalty-panel ${variant==='player'?'with-player':''}" style="${teamStyle(t)};bottom:${s.branding.bugBottom}px;--dock-scale:${bugRenderScale(s)}"><div class="situation-reveal"><h1>${esc(c.penaltyType==='CUSTOM'?c.penaltyDetail:c.penaltyType||'FLAG')}</h1>${variant==='player'?`<p><b>#${esc(p.number)}</b> ${esc(p.name)}</p>`:c.penaltyDetail&&c.penaltyType!=='CUSTOM'?`<p>${esc(c.penaltyDetail)}</p>`:''}</div></div></section>`;
 if(c.event==='TOUCHDOWN')return touchdown(s,c,t,p,variant);
-const label=c.event==='TIMEOUT'?`${['','1ST','2ND','3RD'][Number(c.timeoutNumber)||Math.max(1,Math.min(3,3-Number(s.game.timeouts[c.team||'away'])))]} TIMEOUT`:c.event;
-return `<section class="situation-group"><div class="situation-anchor dock-${esc(c.team||'away')} attempt-tag alert-tab ${c.event==='UNDER REVIEW'?'review-tab':''}" style="${teamStyle(t)};bottom:${s.branding.bugBottom}px;--dock-scale:${bugRenderScale(s)}"><div class="situation-reveal"><h1>${esc(label)}</h1>${c.subtitle?`<p>${esc(c.subtitle)}</p>`:''}</div></div></section>`;}
+const timeout=c.event==='TIMEOUT'?timeoutCopy234(s,c.team||'away',c.timeoutNumber,c.subtitle):null,label=timeout?.label||c.event;
+return `<section class="situation-group"><div class="situation-anchor dock-${esc(c.team||'away')} attempt-tag alert-tab ${timeout?'timeout-alert234':''} ${c.event==='UNDER REVIEW'?'review-tab':''}" style="${teamStyle(t)};bottom:${s.branding.bugBottom}px;--dock-scale:${bugRenderScale(s)}"><div class="situation-reveal"><h1>${timeout?timeoutLabel237(label):esc(label)}</h1>${!timeout&&c.subtitle?`<p>${esc(c.subtitle)}</p>`:''}</div>${timeout?timeoutTail234(timeout.detail):''}</div></section>`;}
 
 function upcoming(s,c){return `<section class="full-graphic upcoming">${panelHeader(s,'COMING UP NEXT',s.branding.competition)}<div class="upcoming-content"><h2>${esc(c.nextAway)}</h2><span>VS</span><h2>${esc(c.nextHome)}</h2><p>${esc(c.nextTime)}</p></div>${footer(s)}</section>`;}
 function networkMark(s){return s.branding.networkLogo?`<img src="${esc(s.branding.networkLogo)}" alt="${esc(s.branding.network)}">`:`<span>${esc(s.branding.network)}</span>`;}
 export function matchupVenue(s,c){return {stadium:(!c.title||c.title==='FRIDAY NIGHT FOOTBALL'?s.branding.venue:c.title)||'',location:(!c.subtitle||/^Live from /i.test(c.subtitle)?[s.branding.city,s.branding.stateAbbr].filter(Boolean).join(', '):c.subtitle)};}
 function openingIntro(s,c){const v=matchupVenue(s,c);return `<section class="opening-intro">${s.branding.introLogo?`<div class="intro-custom-mark"><img src="${esc(s.branding.introLogo)}" alt="Opening intro logo"></div>`:''}<svg class="intro-trace ${s.branding.introLogo?'custom-mark-active':''}" viewBox="0 0 800 360" aria-hidden="true"><path d="M235 340L185 265L198 198L222 163L218 118Q251 32 386 26Q522 29 560 115L571 174L540 199L554 246L514 297L462 318L437 349H310L286 318Z"/><path d="M183 202H573M208 228H550M240 259H533"/><g><path d="M80 179L66 194L80 209M108 179L94 194L108 209M136 179L122 194L136 209M664 179L678 194L664 209M692 179L706 194L692 209M720 179L734 194L720 209"/></g></svg><div class="intro-wings">${['away','home'].map(side=>`<div class="intro-fin ${side}" style="${teamStyle(s.teams[side])}"><div class="intro-side-solid"><div class="intro-solid-face"></div><div class="intro-solid-accent"></div><svg class="intro-solid-bevel" viewBox="0 0 460 470" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="intro-edge-metal137" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#090d10"/><stop offset=".22" stop-color="#576168"/><stop offset=".4" stop-color="#182126"/><stop offset=".76" stop-color="#080e12"/><stop offset="1" stop-color="#020508"/></linearGradient></defs><path fill="#020507" d="M0 0L26 10L179 236L318 470H280L148 251Z"/><path fill="url(#intro-edge-metal137)" d="M0 0L18 6L168 244L304 470H281L149 251Z"/><path fill="#738088" opacity=".7" d="M0 0L6 2L158 247L292 470H287L153 250Z"/><path fill="#020609" d="M139 112H312L460 353V385L294 138H155Z"/><path fill="#344149" d="M139 112H312L319 124H149Z"/><path fill="#8d979a" opacity=".5" d="M140 112H312L314 116H144Z"/><path fill="#081015" d="M309 122L460 362V377L300 132Z"/><path d="M12 14L164 247L297 468" stroke="var(--secondary)" stroke-width="3" stroke-dasharray="2 8" opacity=".85" fill="none"/><path fill="#fff" opacity=".06" d="M25 24L147 230L134 245L0 20V5Z"/></svg></div></div>`).join('')}</div><div class="intro-band"><svg class="intro-exit-etch" viewBox="0 0 800 250" preserveAspectRatio="none" aria-hidden="true"><path d="M330 0V226L400 249L470 226V0M365 94L400 108L435 94V120L400 134L365 120Z"/></svg>${['away','home'].map(side=>{const t=s.teams[side],city=t.name.endsWith(t.shortName)?t.name.slice(0,-t.shortName.length).trim():t.abbr;return `<div class="intro-half ${side}" style="${teamStyle(t)}"><div class="intro-logo">${logo({...t,logo:t.heroLogo||t.logo})}</div><div class="intro-copy"><span>${esc(city)}</span><strong data-word="${esc(t.shortName||t.name)}"><span>${esc(t.shortName||t.name)}</span></strong><b>${esc(t.record)}</b></div></div>`}).join('')}</div><div class="intro-network">${networkMark(s)}</div><div class="intro-location">${esc(v.stadium)}${v.location?' - '+esc(v.location):''}</div></section>`;}
 function resultBanner(s,c){const final=c.type==='final',isBreak=c.type==='break',showScores=final||isBreak,venue=matchupVenue(s,c);return `<section class="result-banner ${showScores?'final-banner':'venue-banner'} ${isBreak?'break-banner':''}" style="--away-color:${esc(s.teams.away.color)};--home-color:${esc(s.teams.home.color)}"><div class="result-metal"><div class="result-surface"></div></div><div class="result-badge">${networkMark(s)}</div>${['away','home'].map(side=>{const t=s.teams[side];return `<div class="result-team ${side}" style="${teamStyle(t)}"><div class="result-logo">${logo({...t,logo:t.heroLogo||t.logo})}</div><div class="result-name">${esc(showScores?(t.shortName||t.name):(t.name.endsWith(t.shortName)?t.name.slice(0,-t.shortName.length).trim():t.name))}</div>${isBreak?`<span class="break-record">${esc(t.record||'')}</span>`:''}</div>`}).join('')}<div class="result-center">${showScores?`<div class="result-scores"><b>${s.game.scores.away}</b><i></i><b>${s.game.scores.home}</b></div>`:`<div class="result-venue">${esc(s.teams.away.shortName)} vs ${esc(s.teams.home.shortName)}</div>`}<div class="result-status">${isBreak?breakClock(s):esc(final?gameStatusText({...s.game,bottomStatus:'FINAL'}):venue.stadium+(venue.location?' - '+venue.location:''))}</div></div></section>`;}
-function announcers(s,c){return `<section class="announcer"><div class="metal-rail rail-left"></div><div class="metal-rail rail-right"></div><div class="announcer-frame"><div class="announcer-panel"><div class="announcer-person"><h1>${esc(c.leftName||'PLAY-BY-PLAY')}</h1><p>${esc(c.leftRole||'')}</p></div><div class="announcer-person"><h1>${esc(c.rightName||'ANALYST')}</h1><p>${esc(c.rightRole||'')}</p></div></div></div></section>`;}
+function announcers(s,c){
+ const count=[2,3,4].includes(Number(c.announcerCount))?Number(c.announcerCount):2,roles=c.announcerStyle==='roles';
+ const slots=count===3?[['leftName','leftRole'],['centerName','centerRole'],['rightName','rightRole']]:count===4?[['leftName','leftRole'],['rightName','rightRole'],['reporterName','reporterRole'],['staffName','staffRole']]:[['leftName','leftRole'],['rightName','rightRole']];
+ const people=slots.map(([name,role],i)=>{const crew=s.branding.crew?.[{leftName:0,rightName:1,centerName:2,reporterName:2,staffName:3}[name]]||{},full=String(c[name]||crew.name||'').trim(),parts=full.split(/\s+/),first=parts.length>1?parts.shift():'',last=parts.join(' ');return `<div class="announcer-person"><h1>${roles?esc(full):`<small>${esc(first)}</small><strong>${esc(last)}</strong>`}</h1>${roles?`<p>${esc(c[role]||crew.role||'')}</p>`:''}</div>`;}).join('');
+ return `<section class="announcer announcer234 ${roles?'announcer234-roles':''}" style="--crew-count:${count}"><div class="announcer234-body"><div class="announcer234-face"></div><div class="announcer234-names">${people}</div><div class="announcer234-rails" aria-hidden="true"></div></div><div class="announcer234-bottom-rails" aria-hidden="true"><i class="announcer234-rail-left"></i><i class="announcer234-rail-right"></i></div>${c.announcerBadge==='none'?'':`<div class="announcer234-badge">${networkMark(s)}</div>`}</section>`;
+}
 function sponsor(s,c){const b=s.branding;return `<section class="sponsor-promo" style="--sponsor:${esc(b.sponsorColor||'#101349')}"><div class="sponsor-panel"><div class="sponsor-brand">${b.sponsorLogo?`<img src="${esc(b.sponsorLogo)}" alt="${esc(b.sponsorName)}">`:`<strong>${esc(b.sponsorName||'YOUR SPONSOR')}</strong>`}</div><h1>${esc(c.sponsorTitle||'POSTGAME')}</h1><p>${esc(c.sponsorSubtitle||'')}</p><div class="sponsor-next">▸ ${esc(c.sponsorNext||'COMING UP NEXT')}</div></div></section>`;}
 function qbPassingStats(c){const values=[['COMP/ATT',Number(c.qbAtt)>0?`${Number(c.qbComp)||0}/${Number(c.qbAtt)}`:null],['YDS',Number(c.qbYards)||null],['TD',Number(c.qbTD)||null],['INT',Number(c.qbINT)||null]];return values.filter(([,v])=>v!==null);}
 function sidePlayerStats(c){return [[c.sideStatsLayout?.startsWith('receiving')?'REC':'RUSH',Number(c.sideCount)||null],['YDS',Number(c.sideYards)||null],['TD',Number(c.sideTD)||null]].filter(([,v])=>v!==null);}
@@ -83,7 +148,7 @@ function referee(s,c){const parts=String(c.refereeExperience||s.branding.referee
 function standings(s,c){const division=c.divisionId||c.divisionTitle||'NFC EAST',conference=division.startsWith('AFC')?'AFC':'NFC';return `<section class="standings-card conference-${conference.toLowerCase()}"><div class="standings-face"><header><h1>${esc(division)}</h1></header><div class="division-records">${(c.standingsRows||[]).slice(0,4).map(r=>`<div><b>${esc(r.name)}</b><strong>${Number(r.wins)||0}-${Number(r.losses)||0}${Number(r.ties)?'-'+Number(r.ties):''}</strong></div>`).join('')}</div></div><img class="conference-logo" src="./assets/league/${conference.toLowerCase()}.png" alt="${conference}"><div class="standings-rail"></div></section>`;}
 
 function broadcastTransition(s,c){if(c.transitionStyle==='conference')return conferenceTransition(s);c={...c,transitionDuration:1.2};if(['teamwall','networkwall','pattern'].includes(c.transitionStyle))return studioTransition(s,c);if(c.transitionStyle==='matchup')return `<section class="two-team-bumper" data-out-motion="${selectedGraphicMotion(s,c)}" style="--bumper-time:${Math.max(1.2,Math.min(15,Number(c.transitionDuration)||1.2))}s"><div class="bumper-panels">${['away','home'].map(side=>`<div class="bumper-team ${side}" style="${teamStyle(s.teams[side])}"><div class="bumper-folds" aria-hidden="true">${[0,1].map(()=>`<div class="bumper-fold">${Array.from({length:12},(_,i)=>`<i style="--row:${i}"></i>`).join('')}</div>`).join('')}</div><div class="bumper-logo">${logo(s.teams[side])}</div><div class="bumper-edge" aria-hidden="true"></div></div>`).join('')}<div class="bumper-versus"><span>‹</span><b>VS</b><span>›</span></div></div></section>`;const t=s.teams[c.team||'away'],style=c.transitionStyle||'team',staff=(t.staff||[]).find(p=>p.id===c.staffId)||(t.staff||[]).find(p=>p.name.toLowerCase()===String(c.transitionPerson||t.coach||'').toLowerCase()),role=staff?.role||(/^COACHING STAFF$/i.test(c.transitionDetail||'')?'':c.transitionDetail)||c.staffRole||'HEAD COACH';return `<section class="broadcast-transition transition-${esc(style)}" style="${teamStyle(t)}"><div class="transition-shutter"></div><div class="transition-emblem">${style==='network'?secondaryMark(s):logo(t)}</div>${style==='person'?`<div class="transition-person"><small>${esc(c.transitionTitle||t.name)}</small><h1>${esc(staff?.name||c.transitionPerson||t.coach)}</h1><p>${esc(role)}</p></div>`:''}</section>`;}
-const suppressBug=['teamrecord','seasonwall',...Object.keys(extraNames),'splitview','crewfour','playertease','serieshistory','talent','storytease','lowerthird','breaking','pregameplayer','intro','referee','standings','transition','scoringdrive','matchup','offense','defense','teamstats','roster','period','final','announcers','sponsor','weather','reporter','quarterback','player','stats','break'];
+const suppressBug=['sponsorpick','teamrecord','seasonwall',...Object.keys(extraNames),'splitview','crewfour','playertease','serieshistory','talent','storytease','lowerthird','breaking','pregameplayer','intro','referee','standings','transition','scoringdrive','matchup','offense','defense','teamstats','roster','period','final','announcers','sponsor','weather','reporter','quarterback','player','stats','break'];
 const teamMotionTypes=new Set(['transition','scoringdrive','offense','defense','quarterback','qbstats','player','stats','coach','roster','event','lowerthird','situation']);
 function motionKey(c){if(c.type==='transition'){const style=c.transitionStyle||'team';return 'transition:'+style+(['team','person','teamwall','pattern'].includes(style)?':'+(c.team||'away'):'');}return c.type+(teamMotionTypes.has(c.type)?':'+(c.team||'away'):'');}
 export function selectedGraphicMotion(s,c){
@@ -93,13 +158,15 @@ export function selectedGraphicMotion(s,c){
 }
 export function renderGraphics(root,s,preview=false){
 root.classList.toggle('is-preview',preview);const c=preview?s.preview:s.program.graphic;let graphic=graphic219(s,c)||extraGraphic(s,c);if(c.type==='splitview')graphic=splitGraphic(s,c);if(c.type==='crewfour')graphic=crewLowerThird(s,c);if(c.type==='playertease')graphic=playerTeaser(s,c);if(c.type==='serieshistory')graphic=seriesHistory(s,c);if(c.type==='talent')graphic=talentCredentials(s,c);if(c.type==='storytease')graphic=storyTeaser(s,c);if(c.type==='breaking')graphic=newsGraphic(s,c);if(c.type==='pregameplayer')graphic=pregamePlayer(s,c);if(preview&&c.type==='countdown')graphic=countdownMarkup(s,c);if(c.type==='intro')graphic=openingIntro(s,c);if(c.type==='referee')graphic=referee(s,c);if(c.type==='standings')graphic=standings(s,c);if(c.type==='transition')graphic=broadcastTransition(s,['pattern','teamwall','networkwall'].includes(c.transition)?{...c,transitionStyle:c.transition}:c);if(c.type==='period')graphic=matchup(s,c);if(['matchup','final'].includes(c.type))graphic=resultBanner(s,c);if(c.type==='announcers')graphic=announcers(s,c);if(c.type==='sponsor')graphic=sponsor(s,c);if(['offense','defense'].includes(c.type))graphic=lineup(s,c);if(c.type==='quarterback')graphic=quarterback(s,c);if(c.type==='weather')graphic=weather(s,c);if(c.type==='scoringdrive')graphic=scoringDrive(s,c);if(c.type==='reporter')graphic=reporter(s,c);if(c.type==='player')graphic=playerSpotlight(s,c);if(c.type==='stats')graphic=playerStatistics(s,c);if(c.type==='coach')graphic=coachDock(s,c);if(c.type==='situation')graphic=situation(s,c);if(c.type==='break')graphic=commercial(s,c);if(c.type==='lowerthird')graphic=lower(s,c);if(c.type==='teamstats')graphic=compare(s,c);if(c.type==='roster')graphic=rosterGraphic(s,c);if(c.type==='event')graphic=event(s,c);
-const hidesBug=suppressBug.includes(c.type)&&!(c.type==='transition'&&c.transitionStyle==='matchup');
+const hidesBug=(suppressBug.includes(c.type)&&!(c.type==='transition'&&c.transitionStyle==='matchup'))||(c.type==='coach'&&c.coachLayout==='ribbon');
 const animateKey=preview?`preview-${c.type}`:`${s.program.takeId}`;
 const animate=root.dataset.key!==animateKey;root.dataset.key=animateKey;root.style.setProperty('--network-badge-scale',s.branding.networkBadgeScale||1.25);root.style.setProperty('--accent',s.branding.accent);root.style.setProperty('--away-color',s.teams.away.color);root.style.setProperty('--home-color',s.teams.home.color);
-let layer=root.querySelector('.graphics-layer:not(.leaving)');
+if(animate)clearTransitionCover233(root);
+let layer=root.querySelector('.graphics-layer:not(.leaving):not(.transition-cover):not(.transition-covered)');
 if(!layer){layer=document.createElement('div');layer.className='graphics-layer';root.append(layer);}
 const bugMotion=selectedGraphicMotion(s,{type:'scorebug',transition:root.querySelector('.bug-wrap')?.dataset.motion});
 const previousType=layer.dataset.type||'none';
+const previousHidesBug=suppressBug.includes(previousType)||(previousType==='coach'&&layer.dataset.coachLayout==='ribbon');
 const sameLineup=['offense','defense'].includes(c.type)&&previousType===c.type&&layer.dataset.team===c.team&&!!layer.firstElementChild;
 if(layer.dataset.html!==graphic||animate){
  // A queued card has not reached air, so clearing it must not clone a visible OUT.
@@ -115,10 +182,14 @@ if(layer.dataset.html!==graphic||animate){
   layer.className='graphics-layer';morph(layer.firstElementChild,template.content.firstElementChild);
   animateLineupUpdate(layer,oldContent,c,changed);
  }else{
-  if(animate&&!waitingForHandoff&&layer.children.length&&layer.dataset.motion!=='cut'){const outgoing=layer.cloneNode(true),motion=selectedGraphicMotion(s,{type:layer.dataset.type,team:layer.dataset.team,transitionStyle:layer.dataset.transitionStyle,transition:layer.dataset.motion,outTransition:layer.dataset.outMotion});if(motion==='fade'||layer.querySelector('.commercial-mini'))freezeGraphicFrame(layer,outgoing);outgoing.className='graphics-layer leaving';outgoing.dataset.motion=['pattern','teamwall','networkwall'].includes(motion)?'auto':motion;const customExit=layer.dataset.type==='transition'&&['pattern','teamwall','networkwall'].includes(motion),differentExit=customExit&&motion!==layer.dataset.renderedStyle;if(customExit&&!differentExit)outgoing.innerHTML=studioTransition(s,{team:layer.dataset.team||'away',transitionStyle:motion});if(differentExit){freezeGraphicFrame(layer,outgoing);outgoing.className='graphics-layer transition-covered';root.append(outgoing);const cover=document.createElement('div');cover.className='graphics-layer transition-cover animate-in';cover.dataset.motion='auto';cover.innerHTML=studioTransition(s,{team:layer.dataset.team||'away',transitionStyle:motion});root.append(cover);setTimeout(()=>{outgoing.remove();if(!cover.isConnected)return;cover.classList.remove('animate-in');cover.classList.add('leaving');},850);setTimeout(()=>cover.remove(),1450);}else root.append(outgoing);if(motion!=='fade'&&outgoing.querySelector('.commercial-mini')){const mini=outgoing.querySelector('.commercial-mini'),from=mini.style.transform;mini.style.removeProperty('transform');mini.style.setProperty('animation','none','important');mini.animate([{transform:from},{transform:'scale(1,.018)',offset:.75},{transform:'scale(.08,.012)'}],{duration:380,easing:'ease-in',fill:'both'});}if(!differentExit)retireGraphic(outgoing);}
+  if(animate&&!waitingForHandoff&&layer.children.length&&layer.dataset.motion!=='cut'){
+   const outgoing=layer.cloneNode(true);
+   if(!layer.querySelector('.timeout-alert234')&&hasUnfinishedGraphicMotion233(layer))retireInterruptedGraphic233(root,layer,outgoing);
+   else{const motion=selectedGraphicMotion(s,{type:layer.dataset.type,team:layer.dataset.team,transitionStyle:layer.dataset.transitionStyle,transition:layer.dataset.motion,outTransition:layer.dataset.outMotion});if((motion==='fade'&&!layer.querySelector('.timeout-alert234'))||layer.querySelector('.commercial-mini'))freezeGraphicFrame(layer,outgoing,false);outgoing.className='graphics-layer leaving';outgoing.dataset.motion=['pattern','teamwall','networkwall'].includes(motion)?'auto':motion;const customExit=layer.dataset.type==='transition'&&['pattern','teamwall','networkwall'].includes(motion),differentExit=customExit&&motion!==layer.dataset.renderedStyle;if(customExit&&!differentExit)outgoing.innerHTML=studioTransition(s,{team:layer.dataset.team||'away',transitionStyle:motion});if(differentExit)startTransitionCover233(root,layer,outgoing,studioTransition(s,{team:layer.dataset.team||'away',transitionStyle:motion}));else root.append(outgoing);if(motion!=='fade'&&outgoing.querySelector('.commercial-mini')){const mini=outgoing.querySelector('.commercial-mini'),from=mini.style.transform;mini.style.removeProperty('transform');mini.style.setProperty('animation','none','important');mini.animate([{transform:from},{transform:'scale(1,.018)',offset:.75},{transform:'scale(.08,.012)'}],{duration:380,easing:'ease-in',fill:'both'});}if(!differentExit){const timeout=layer.querySelector('.timeout-alert234');if(timeout)timeoutExit237(timeout,outgoing.querySelector('.timeout-alert234'),motion);retireGraphic(outgoing);}}
+  }
   if(!animate&&previousType===c.type&&layer.firstElementChild&&graphic){const template=document.createElement('template');template.innerHTML=graphic;morph(layer.firstElementChild,template.content.firstElementChild);}else{if(animate){layer.className='graphics-layer';void layer.offsetWidth;}layer.className=`graphics-layer ${animate?'animate-in':''}`;layer.innerHTML=graphic;}
  }
- layer.dataset.lineupGroup=String(c.lineupGroup||0);layer.dataset.lineupPhase=c.lineupPhase||'title';layer.dataset.motion=c.type==='matchup'?'fade':['pattern','teamwall','networkwall'].includes(c.transition)?'auto':c.transition||'auto';layer.dataset.transitionStyle=c.transitionStyle||'';layer.dataset.renderedStyle=['pattern','teamwall','networkwall'].includes(c.transition)?c.transition:c.transitionStyle||'';layer.dataset.outMotion=c.outTransition||layer.dataset.motion;layer.dataset.html=graphic;layer.dataset.type=c.type;layer.dataset.team=c.team||'';
+ layer.dataset.lineupGroup=String(c.lineupGroup||0);layer.dataset.lineupPhase=c.lineupPhase||'title';layer.dataset.motion=c.type==='matchup'?'fade':['pattern','teamwall','networkwall'].includes(c.transition)?'auto':c.transition||'auto';layer.dataset.transitionStyle=c.transitionStyle||'';layer.dataset.renderedStyle=['pattern','teamwall','networkwall'].includes(c.transition)?c.transition:c.transitionStyle||'';layer.dataset.outMotion=c.outTransition||layer.dataset.motion;layer.dataset.html=graphic;layer.dataset.type=c.type;layer.dataset.team=c.team||'';layer.dataset.coachLayout=c.coachLayout||'dock';
  // Align timed bumpers to the server deadline so polling cannot cut off the exit.
  if(!preview&&c.type==='transition'&&c.transitionStyle==='matchup'&&s.program.timedGraphic){
   const duration=1.2;
@@ -146,7 +217,7 @@ if(visible){const template=document.createElement('template');template.innerHTML
   if(returning||replay)finishBugEntrance(bug);
   if(!entering&&!returning&&!replay&&!preview)for(const side of ['away','home']){const cell=bug.querySelector('[data-score-side='+side+']');if(oldScores[side]!==cell.dataset.scoreValue)animateScoreChange(cell,oldScores[side],cell.dataset.scoreValue);}
 
- }else{bug=next;const intro=c.type==='scorebug'||root.dataset.bugRequested==='false'||(!root.dataset.bugIntroduced&&!suppressBug.includes(previousType));bug.classList.add(intro?'bug-enter':'bug-return');root.dataset.bugIntroduced='true';root.append(bug);finishBugEntrance(bug);if(suppressBug.includes(previousType))delayGraphicMotion(bug,['offense','defense','announcers','player','stats'].includes(previousType)?520:200);}
+ }else{bug=next;const intro=c.type==='scorebug'||root.dataset.bugRequested==='false'||(!root.dataset.bugIntroduced&&!previousHidesBug);bug.classList.add(intro?'bug-enter':'bug-return');root.dataset.bugIntroduced='true';root.append(bug);finishBugEntrance(bug);if(previousHidesBug)delayGraphicMotion(bug,['offense','defense','announcers','player','stats','coach'].includes(previousType)?520:200);}
 }else if(bug&&!bug.classList.contains('bug-exit')){animateScorebugOut(bug,bugMotion);}
 root.dataset.bugRequested=String(s.program.bug);
 const revealId=String(s.game.playClockRevealId||0),priorReveal=root.dataset.playClockReveal;
@@ -155,7 +226,9 @@ if(priorReveal!==undefined&&priorReveal!==revealId&&visible&&s.game.showPlayCloc
 }
 root.dataset.playClockReveal=revealId;
 
-const qbCue=preview?(c.type==='qbstats'?c:null):(s.program.qbStats?.visible?s.program.qbStats:null);
+syncTimeoutNotice237(root,s,{preview,visible,cue:c});
+const timeoutOwnsSide=!preview&&(root.querySelector('.timeout-anchor')||root.querySelector('.timeout-alert234'));
+const qbCue=timeoutOwnsSide?null:preview?(c.type==='qbstats'?c:null):(s.program.qbStats?.visible?s.program.qbStats:null);
 let qbDock=root.querySelector('.qb-live-anchor');
 if(qbCue&&visible&&qbLiveStats(qbCue).length){const t=document.createElement('template');t.innerHTML=qbLive(s,qbCue);const nextDock=t.content.firstElementChild;if(qbDock){const reversing=qbDock.classList.contains('qb-live-out'),bar=qbDock.querySelector('.qb-live-bar'),from=reversing?{transform:getComputedStyle(bar).transform,opacity:getComputedStyle(bar).opacity}:null;clearTimeout(qbDock._exitTimer);if(reversing)qbDock._dockMotion?.cancel();morph(qbDock,nextDock);if(reversing)animateQBDock(qbDock,false,from);}else{qbDock=nextDock;root.append(qbDock);}}
 else if(qbDock&&!qbDock.classList.contains('qb-live-out')){qbDock.dataset.motion=selectedGraphicMotion(s,{type:'qbstats',team:qbDock.classList.contains('dock-home')?'home':'away',transition:qbDock.dataset.motion});animateQBDock(qbDock,true);}
@@ -172,21 +245,12 @@ if(['offense','defense'].includes(c.type)){
  });
  fit();document.fonts?.ready.then(fit);
 }
-const noticeMotion=selectedGraphicMotion(s,{type:'event',team:s.program.timeoutNotice?.team||'away'});root.dataset.noticeMotion=noticeMotion;
-const notice=!preview&&visible?s.program.timeoutNotice:null;
-let timeoutDock=root.querySelector('.timeout-anchor');
-if(notice&&notice.until*1000>Date.now()){
- const key=String(notice.until);
- if(!timeoutDock||timeoutDock.dataset.notice!==key){
-  timeoutDock?.remove();const t=s.teams[notice.team];const el=document.createElement('div');el.className='timeout-anchor dock-'+notice.team;el.dataset.notice=key;el.dataset.motion=noticeMotion;el.style.cssText=`${teamStyle(t)};bottom:${s.branding.bugBottom}px;--bug-scale:${bugRenderScale(s)}`;
-  el.innerHTML=`<div class="timeout-notice"><div><strong>${['','1ST','2ND','3RD'][Math.max(1,Math.min(3,3-Number(notice.remaining)))]} TIMEOUT</strong></div></div>`;
-  root.append(el);setTimeout(()=>{if(el.isConnected){el.dataset.motion=root.dataset.noticeMotion;el.classList.add('out');setTimeout(()=>el.remove(),210);}},Math.max(0,notice.until*1000-Date.now()));
- }
-}else if(timeoutDock&&!timeoutDock.classList.contains('out')){timeoutDock.dataset.motion=noticeMotion;timeoutDock.classList.add('out');setTimeout(()=>timeoutDock.remove(),210);}
 
 highlightDescriptiveNumbers(layer);
+applyCueHighlights(layer,c);
 syncSplitMedia(root);syncKickoff(root,s,preview);updateKickoff(root);
-fitGraphicLabels(layer);
+fitGraphicLabels(layer);fitAdditions219(layer);
+document.fonts?.ready.then(()=>{if(layer.isConnected){fitGraphicLabels(layer);fitAdditions219(layer);}});
 for(const el of layer.querySelectorAll('.news-body p')){el.style.fontSize='43px';while(el.scrollHeight>el.clientHeight&&parseFloat(el.style.fontSize)>25)el.style.fontSize=(parseFloat(el.style.fontSize)-1)+'px';}
 syncNetworkWatermark(root,s);
 const fitIntro=()=>root.querySelectorAll(".intro-copy strong>span").forEach(el=>{el.style.transform="none";const width=el.getBoundingClientRect().width,available=el.parentElement.getBoundingClientRect().width;el.style.transform=`scaleX(${width?Math.min(1,available/width):1})`;});fitIntro();document.fonts?.ready.then(fitIntro);
@@ -202,16 +266,59 @@ function highlightDescriptiveNumbers(layer){
 }
 function fitGraphicLabels(layer){
  // Fit operator-entered names and alert labels without clipping their last letters.
- for(const el of layer.querySelectorAll('.extra194 h1,.extra194 h2,.extra194 p,.extra194 strong,.extra194-badge span,.pregame-player-copy h1,.pregame-player-copy p,.pregame-player-copy small,.pregame-player-copy footer,.roster-name strong,.crew192-names strong,.crew192-names small,.playertease192 h1,.series192-copy h1,.series192-copy p,.series192-team b,.talent190 h1,.talent190 p,.talent190 small,.story190-copy h1,.story190-copy p,.story190-outline,.qb-sidebar-name strong,.qb-sidebar-name small,.spotlight-context,.spotlight-stat-grid b,.spotlight-stat-grid span,.spotlight-stat-context,.venue-banner .result-venue,.venue-banner .result-status,.spotlight-copy h1,.spotlight-detail,.situation-reveal h1,.staff-plate h1,.td70-name strong,.result-name,.referee-copy h1,.reporter-nameplate h1')){
+ for(const el of layer.querySelectorAll('.announcer-person h1,.announcer-person p,.announcer-person small,.announcer-person strong,.news-art>b,.record219 h1,.record219 h2,.record219 dt,.record219 dd,.playerdock219-name,.playerdock219 p,.sponsorpick233 h1,.sponsorpick233 p,.sponsorpick233 footer,.sponsorpick233-name,.sponsorpick233-sponsor b,.extra194 h1,.extra194 h2,.extra194 p,.extra194 strong,.extra194-badge span,.pregame-player-copy h1,.pregame-player-copy p,.pregame-player-copy small,.pregame-player-copy footer,.roster-name strong,.crew192-names strong,.crew192-names small,.playertease192 h1,.series192-copy h1,.series192-copy p,.series192-team b,.talent190 h1,.talent190 p,.talent190 small,.story190-copy h1,.story190-copy p,.story190-outline,.qb-sidebar-name strong,.qb-sidebar-name small,.spotlight-context,.spotlight-stat-grid b,.spotlight-stat-grid span,.spotlight-stat-context,.venue-banner .result-venue,.venue-banner .result-status,.spotlight-copy h1,.spotlight-detail,.situation-reveal h1,.timeout-tail234>span,.staff-plate h1,.td70-name strong,.result-name,.referee-copy h1,.reporter-nameplate h1')){
   el.style.removeProperty('font-size');
   const style=getComputedStyle(el),size=parseFloat(style.fontSize),width=el.clientWidth;
   if(width>0&&el.scrollWidth>width+1){const padding=parseFloat(style.paddingLeft)+parseFloat(style.paddingRight);el.style.fontSize=Math.max(size*.45,size*(width-padding)/Math.max(1,el.scrollWidth-padding))+'px';}
   if(el.matches('.reporter-nameplate h1')){for(let i=0;i<4&&el.scrollWidth>el.clientWidth;i++){const size=parseFloat(getComputedStyle(el).fontSize);el.style.fontSize=(size*Math.min(.98,(el.clientWidth-16)/el.scrollWidth))+'px';}}
  }
 }
-function freezeGraphicFrame(source,clone){
- const original=[...source.querySelectorAll('*')],copies=[...clone.querySelectorAll('*')];
- original.forEach((node,i)=>{const style=getComputedStyle(node),target=copies[i];for(const key of ['opacity','transform','translate','clip-path','visibility','display'])target.style.setProperty(key,style.getPropertyValue(key),'important');target.style.setProperty('animation','none','important');});
+function clearTransitionCover233(root){
+ const run=root._transitionCover233;if(!run)return;
+ root._transitionCover233=null;clearTimeout(run.revealTimer);clearTimeout(run.retireTimer);
+ run.outgoing.remove();run.cover.remove();
+}
+function startTransitionCover233(root,source,outgoing,markup){
+ clearTransitionCover233(root);
+ // A reduced-motion take is immediate, including replacement transitions.
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){outgoing.remove();return;}
+ freezeGraphicFrame(source,outgoing);outgoing.className='graphics-layer transition-covered';root.append(outgoing);
+ const cover=document.createElement('div');cover.className='graphics-layer transition-cover animate-in';cover.dataset.motion='auto';cover.innerHTML=markup;root.append(cover);
+ const run={outgoing,cover,revealTimer:null,retireTimer:null};root._transitionCover233=run;
+ run.revealTimer=setTimeout(()=>{if(root._transitionCover233!==run)return;outgoing.remove();if(!cover.isConnected){clearTransitionCover233(root);return;}cover.classList.remove('animate-in');cover.classList.add('leaving');},850);
+ run.retireTimer=setTimeout(()=>{if(root._transitionCover233===run)clearTransitionCover233(root);},1450);
+}
+function hasUnfinishedGraphicMotion233(layer){
+ // A finite entrance/update still in flight must not restart at its held pose.
+ return layer.getAnimations({subtree:true}).some(a=>a.playState!=='finished'&&a.playState!=='idle'&&Number.isFinite(a.effect?.getComputedTiming().endTime));
+}
+function retireInterruptedGraphic233(root,source,outgoing){
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){outgoing.remove();return;}
+ freezeGraphicFrame(source,outgoing);outgoing.className='graphics-layer leaving';outgoing.dataset.motion='fade';
+ // Freeze descendant poses, then animate only the captured layer opacity. A
+ // normal declaration lets Web Animations control it without a CSS OUT replay.
+ const opacity=outgoing.style.getPropertyValue('opacity');outgoing.style.setProperty('opacity',opacity);
+ root.append(outgoing);
+ const fade=outgoing.animate([{opacity},{opacity:0}],{duration:120,easing:'ease-out',fill:'forwards'});
+ fade.onfinish=()=>outgoing.remove();
+}
+function freezeGraphicFrame(source,clone,includeRoot=true){
+ const original=[...(includeRoot?[source]:[]),...source.querySelectorAll('*')],copies=[...(includeRoot?[clone]:[]),...clone.querySelectorAll('*')];
+ const properties=new Set(['opacity','transform','translate','rotate','scale','clip-path','visibility','display','width','height','filter','mask-size','mask-position','stroke-dasharray','stroke-dashoffset','stroke-width']);
+ for(const animation of source.getAnimations?.({subtree:true})||[])for(const frame of animation.effect?.getKeyframes?.()||[])for(const key of Object.keys(frame))if(!['offset','computedOffset','easing','composite'].includes(key))properties.add(key.replace(/[A-Z]/g,c=>'-'+c.toLowerCase()));
+ const frameId=freezeGraphicFrame.serial=(freezeGraphicFrame.serial||0)+1,pseudoRules=[];
+ original.forEach((node,i)=>{
+  const style=getComputedStyle(node),target=copies[i];for(const key of properties)target.style.setProperty(key,style.getPropertyValue(key),'important');target.style.setProperty('animation','none','important');target.style.setProperty('transition','none','important');
+  // Reporter faces and rails are pseudo-elements. Keep their sampled poses
+  // when the clone switches from an interrupted IN to the short layer fade.
+  for(const pseudo of ['::before','::after']){
+   const pose=getComputedStyle(node,pseudo);if(!pose.content||pose.content==='none'||pose.content==='normal')continue;
+   const id=`${frameId}-${i}`;target.setAttribute('data-frozen-pseudo234',id);
+   const declarations=[...properties,'transform-origin','content'].map(key=>[key,pose.getPropertyValue(key)]).filter(([,value])=>value).map(([key,value])=>`${key}:${value}!important`).join(';');
+   pseudoRules.push(`:is(#frozen-pseudo234,[data-frozen-pseudo234="${id}"])${pseudo}{${declarations};animation:none!important;transition:none!important}`);
+  }
+ });
+ if(pseudoRules.length){const style=document.createElement('style');style.textContent=pseudoRules.join('\n');clone.append(style);}
 }
 function animateLineupUpdate(layer,oldContent,c,changed){
  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
@@ -230,7 +337,7 @@ function animateLineupUpdate(layer,oldContent,c,changed){
  }
  layer._lineupUpdateTimer=setTimeout(()=>face.querySelectorAll('.lineup-outgoing,.lineup-update-wipe').forEach(el=>el.remove()),(c.lineupPhase||'title')==='title'?260:440);
 }
-function retireGraphic(layer){requestAnimationFrame(()=>{const times=layer.getAnimations({subtree:true}).map(a=>a.effect.getComputedTiming().endTime-(Number(a.currentTime)||0)).filter(Number.isFinite);const delay=times.length?Math.max(...times,0)+34:34;setTimeout(()=>layer.remove(),Math.min(10000,delay));});}
+function retireGraphic(layer){requestAnimationFrame(()=>{const times=layer.getAnimations({subtree:true}).map(a=>a.effect.getComputedTiming().endTime-(Number(a.currentTime)||0)).filter(Number.isFinite);const delay=times.length?Math.max(...times,0)+34:34;setTimeout(()=>{const root=layer.parentElement,timeout=layer.querySelector('.timeout-alert234');layer.remove();if(timeout&&root?.isConnected&&root._timeoutState237)renderGraphics(root,root._timeoutState237,root._timeoutPreview237);},Math.min(10000,delay));});}
 function cancelGraphicHandoff(el){
  el._handoffMotion232?.cancel();el._handoffMotion232=null;
 }
@@ -317,7 +424,7 @@ function morph(node,next){
  if(node.nodeType!==next.nodeType||node.nodeName!==next.nodeName){node.replaceWith(next.cloneNode(true));return;}
  if(node.nodeType===Node.TEXT_NODE){if(node.textContent!==next.textContent)node.textContent=next.textContent;return;}
  if(node.nodeType!==Node.ELEMENT_NODE)return;
- for(const a of [...node.attributes])if(!next.hasAttribute(a.name))node.removeAttribute(a.name);
+ for(const a of [...node.attributes])if(!next.hasAttribute(a.name)&&!preserveSplitSource(node,next,a.name))node.removeAttribute(a.name);
  for(const a of [...next.attributes])if(node.getAttribute(a.name)!==a.value)node.setAttribute(a.name,a.value);
  const old=[...node.childNodes],fresh=[...next.childNodes];
  for(let i=0;i<Math.max(old.length,fresh.length);i++){if(!fresh[i])old[i].remove();else if(!old[i])node.append(fresh[i].cloneNode(true));else morph(old[i],fresh[i]);}

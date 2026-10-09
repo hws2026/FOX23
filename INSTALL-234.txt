@@ -1,0 +1,63 @@
+WLD SPORTS UPDATE 234 — FRAME PANEL AND REFERENCE GRAPHICS
+
+INSTALL INTO YOUR EXISTING COMPLETE Documents/FOX23 PROJECT
+1. Extract this ZIP outside FOX23.
+2. Copy ALL included root files into FOX23, replacing matching files.
+3. Copy the complete cloud folder. SQL is unchanged; no SQL migration is needed.
+4. Merge broadcast-logos226, retaining any additional logos/variants you added.
+5. Keep all other files/folders in your existing installation. This cumulative
+   update requires the complete FOX23 project; it is not a standalone install.
+6. Publish the files yourself. Close old controller tabs and hard-refresh the
+   controller and OBS output so the updated modules load together.
+
+CONTROL PANEL AND FRAME REVIEW
+The normal controller remains index.html. Open graphics-frames234.html from the
+same served site for the restored six-frame audit panel. It includes all inventory
+graphics and alternate layouts plus bottom-score/feed-scorebug fixtures. Select
+all-graphics batches or a single graphic's frame strip, IN/held/update/OUT/rapid
+return, motion style, preview/live, logo artwork or text, and stage crop.
+The panel uses isolated sample data and does not connect to your saved show.
+Use Record issue / Mark reviewed and Export findings to save review evidence.
+Sampling a graphic never automatically marks it reviewed.
+
+COMMENTATORS
+The commentator ribbon supports 2, 3 or 4 people, stacked first/last names or full
+names with roles, and an optional raised broadcast badge. It uses the network
+logo from Show Setup. Newly added crew
+positions use the additional configured crew entries without replacing saved
+names or roles. Existing yellow controls apply to the names and optional roles.
+Bottom rail segments open from the center outward before the face and names.
+The Spanish-language graphic contains its network mark in a fixed 145-by-72
+cell. Explicit grid rows also prevent logo stretching in player, lower-third,
+lineup and matchup slots. Interrupted reporter exits preserve the current
+pseudo-element pose; source regression checks cover that behavior separately
+from painted-frame review.
+The coach control offers a full-width ribbon matching the supplied reference,
+with a team mark, one-line name and supporting credentials. Existing scorebug
+dock layouts remain available. Player-dock stat numbers use larger type than
+the accompanying labels while preserving the editable stat text.
+Timeout graphics retain the ordinal tab above the selected team and add a
+separate remaining-timeouts tail extending from that team's outside lower edge.
+The tail reads the existing game count; a custom event detail overrides its text.
+Taking or rendering the graphic does not consume a timeout or change the clock.
+
+AUDIT SAMPLING
+Held/OUT/update/return samples wait for finite entrance animations to finish,
+including the 4-second mini commercial and delayed league-deck motion. Looping
+background effects and scrolling score text do not block held preparation.
+Labels and exported diagnostics report actual pause time. Interrupted-IN samples
+remain separate. A blocked entrance reports an audit error instead of a false
+held-state pass. Uploaded logos and their existing assignments are preserved.
+
+COVERAGE STATUS
+This package contains fixes and the review panel; the full visual audit remains
+ongoing unless the accompanying coverage file explicitly records completion.
+See AUDIT-234.txt and VISUAL-COVERAGE-234.json for functional test evidence,
+actual browser observations and remaining coverage. Media fixtures are isolated;
+real shared-media delivery to OBS still requires a separate connected check.
+
+PRESERVED
+All 39 original PNGs, 32 NFL logo assignments (including DEN-1), asset-library
+files, team_library.py and SQL are unchanged. The full cloud folder is included.
+The cumulative payload retains Update 233 fixes. No publishing or production
+show changes are performed by this ZIP.

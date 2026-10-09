@@ -8,3 +8,40 @@
 .record219 dd{font-weight:400;font-size:30px}
 @keyframes card219-in{from{opacity:0;clip-path:polygon(50% 0,50% 0,50% 96%,50% 100%,50% 100%,50% 87%)}to{opacity:1;clip-path:polygon(0 0,100% 0,100% 96%,90% 100%,7% 100%,0 87%)}}
 .seasonwall219-copy h1,.seasonwall219-copy h2,.seasonwall219-copy p{font-family:'Arial Black',Arial,sans-serif;font-weight:900;letter-spacing:-3px}.seasonwall219-copy h1{font-size:112px}.seasonwall219-copy h2{font-size:78px}.seasonwall219-copy p{font-size:48px}.seasonwall219-grid{box-shadow:inset 0 0 24px #0008}
+/* 233: full-frame photos can fill the wall; isolated portraits and marks must fit. */
+.seasonwall219[data-art=logo] .seasonwall219-wall img,.seasonwall219[data-art=portrait] .seasonwall219-wall img{object-fit:contain;padding:24px 80px}
+.seasonwall219[data-art=portrait] .seasonwall219-wall img{object-position:center bottom;padding-bottom:0}
+.seasonwall219-monogram{position:absolute;inset:0;display:grid;place-items:center;font:italic 260px/1 var(--display);color:var(--secondary);text-shadow:0 10px 12px #0008}
+/* Sponsor reference: centered selection card and wide player-stat ribbon. */
+.sponsorpick233{position:absolute;left:575px;bottom:64px;width:770px;color:#fff;text-align:center;text-transform:uppercase;font-family:var(--display);filter:drop-shadow(0 3px 2px #0003);isolation:isolate}
+.sponsorpick233 header,.sponsorpick233 footer{height:44px;background:color-mix(in srgb,var(--sponsor) 37%,#253a5b);display:flex;align-items:center;justify-content:center;padding:3px 12px}
+.sponsorpick233 header h1{font:34px/1.1 'DIN Condensed',Impact,'Arial Narrow',sans-serif;white-space:nowrap;width:100%;margin:0}
+.sponsorpick233 footer{font:32px/1.05 'DIN Condensed',Impact,'Arial Narrow',sans-serif;white-space:nowrap}
+.sponsorpick233-body{height:212px;display:grid;grid-template-columns:228px minmax(0,1fr);background:var(--sponsor);border:5px solid var(--sponsor)}
+.sponsorpick233-sponsor{display:grid;place-items:center;min-width:0;padding:20px 13px}
+.sponsorpick233-sponsor img{display:block;width:100%;height:100%;max-height:170px;object-fit:contain}
+.sponsorpick233-sponsor b{display:block;max-width:100%;font:900 40px/1.02 Arial,sans-serif;overflow-wrap:anywhere}
+.sponsorpick233-selection{display:grid;grid-template-rows:minmax(0,1fr) 44px;min-width:0;background:repeating-linear-gradient(45deg,transparent 0 4px,#ffffff08 5px 6px),color-mix(in srgb,var(--sponsor) 65%,#0b2445)}
+.sponsorpick233-teams{display:flex;justify-content:center;align-items:center;gap:32px;min-height:0;padding:10px 24px}
+.sponsorpick233-team{width:184px;height:140px;min-width:0;display:grid;place-items:center}
+.sponsorpick233-team img{width:100%;height:100%;object-fit:contain}
+.sponsorpick233-team>b{font:italic 70px/1 var(--display)}
+.sponsorpick233-name{display:flex;align-items:center;justify-content:center;min-width:0;padding:3px 14px;font:italic 42px/1 var(--display);white-space:nowrap;background:repeating-linear-gradient(165deg,transparent 0 13px,#ffffff06 14px 16px),#061526}
+.sponsorpick233-stat{left:275px;width:1370px;bottom:82px}
+.sponsorpick233-stat .sponsorpick233-body{height:190px;grid-template-columns:285px minmax(0,1fr)}
+.sponsorpick233-stat .sponsorpick233-sponsor{padding:22px 38px}
+.sponsorpick233-stat-copy{min-width:0;display:flex;flex-direction:column;justify-content:center;padding:8px 28px 12px;gap:2px}
+.sponsorpick233-stat h1{margin:0;font:italic 73px/1.05 'DIN Condensed',Impact,'Arial Narrow',sans-serif;color:var(--pick-accent);white-space:nowrap}
+.sponsorpick233-stat p{margin:0;font:italic 55px/1.1 'DIN Condensed',Impact,'Arial Narrow',sans-serif;white-space:nowrap}
+.sponsorpick233 em{font-style:inherit;color:var(--pick-accent)}
+.graphics-layer.animate-in[data-motion=auto]>.sponsorpick233{animation:sponsorpick233-in .36s ease-out both}
+.graphics-layer.leaving[data-motion=auto]:has(> :is(.record219,.playerdock219,.seasonwall219,.sponsorpick233)){animation:none!important;opacity:1;transform:none;translate:none}
+/* 02:54:00 reference: larger inline values, smaller COMP/ATT and YARDS labels. */
+.playerdock219 p.playerdock234-stats{font-size:28px;line-height:1.05;white-space:nowrap}
+.playerdock234-stats .playerdock234-value{font-size:1.5em;line-height:1;font-weight:700}
+.playerdock219::before{background:linear-gradient(to top,#080b0df5 0 58px,transparent 58px),linear-gradient(120deg,var(--team),#070b0eee)}
+.graphics-layer.leaving[data-motion=auto]>.sponsorpick233{animation:sponsorpick233-in .25s ease-in reverse both}
+@keyframes sponsorpick233-in{0%{opacity:0;clip-path:inset(100% 0 0)}12%{opacity:1}100%{opacity:1;clip-path:inset(0)}}
+@media(prefers-reduced-motion:reduce){.sponsorpick233,.sponsorpick233 *{animation:none!important}}
+.seasonwall219-copy{max-height:460px;display:flow-root}
+.seasonwall219-copy h1,.seasonwall219-copy h2,.seasonwall219-copy p{overflow-wrap:anywhere}
