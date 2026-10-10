@@ -1,7 +1,7 @@
 import {mlbLogoAssignments236,mlbBroadcastLogo236} from './mlb-logos236.js';
 import {nflBroadcastLogo226} from './nfl-logos226.js';
-import {renderBottomScores} from './scores-render203.js?v=update238';
-import {feedBugState} from './scores-bug224.js?v=update238';
+import {renderBottomScores} from './scores-render203.js?v=update239';
+import {feedBugState} from './scores-bug224.js?v=update239';
 const $=id=>document.getElementById(id),batchSize=6,params=new URLSearchParams(location.search);
 const mlbProvider=t=>`https://www.mlbstatic.com/team-logos/${t.mlbId}.svg`;
 const aliases={ARI:'AZ',CWS:'CHW',ATH:'OAK',KC:'KCR',SD:'SDP',SF:'SFG',TB:'TBR',WSH:'WAS'};

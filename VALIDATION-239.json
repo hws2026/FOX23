@@ -1,0 +1,415 @@
+{
+  "release": 239,
+  "createdAt": "2026-10-10T15:59:09.499271+00:00",
+  "functionalChanges": [
+    "bridge.js",
+    "cloud/sync.js",
+    "runtime-worker.js"
+  ],
+  "cacheOnlyChanges": [
+    "additions-review190.html",
+    "additions-review194.html",
+    "animation-review171.html",
+    "ar-link.js",
+    "audit193-responsive.html",
+    "audit193-updates.html",
+    "audit193.html",
+    "boot.js",
+    "broadcast-rehearsal.html",
+    "broadcast-rehearsal.js",
+    "capture-review238.html",
+    "capture-review238.js",
+    "cloud/output.js",
+    "command.html",
+    "deck-connect.js",
+    "graphics-audit233-model.js",
+    "graphics-audit233.html",
+    "graphics-audit233.js",
+    "graphics-frames234.html",
+    "graphics-frames234.js",
+    "graphics-review181.html",
+    "graphics-review193.html",
+    "graphics.js",
+    "index.html",
+    "logos-review235.html",
+    "logos-review235.js",
+    "mlb-review236.html",
+    "mlb-review236.js",
+    "overlay-boot.js",
+    "overlay.html",
+    "pair-controller.js",
+    "pair-output.js",
+    "panel.js",
+    "plugin-download.js",
+    "pregame-review.js",
+    "reference-review192.html",
+    "reference.css",
+    "review219.html",
+    "scorebug-review172.html",
+    "scores-bug224.js",
+    "scores-data203.js",
+    "scores-panel203.js",
+    "scores-players208.js",
+    "scores-render203.js",
+    "scores-review224.html",
+    "scores-review225.html",
+    "scores-review238.html",
+    "scores-review238.js",
+    "scores-sequence224.js",
+    "split192.js",
+    "spotlight-review144.html",
+    "stream-playlist208.js",
+    "team-gallery.html",
+    "team-library.js",
+    "timeout-review237.html",
+    "timeout-review237.js",
+    "transition-check158.html"
+  ],
+  "scope": [
+    "Wait for actual worker initialization before sign-in; stage messages and 60 second startup deadline; startup errors use Reload controller recovery",
+    "Expired saved sessions return to a usable sign-in form",
+    "Retain valid sessions and offer Retry loading shared show after temporary failures",
+    "Stage-specific connection messages and duplicate-click protection"
+  ],
+  "tests": [
+    {
+      "test": "work/login239/test-login.mjs",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "65a5a2",
+        "wall_time_seconds": 0.180455209,
+        "exit_code": 0,
+        "original_token_count": 277,
+        "output": "ok 1 - initial login performs no authentication, remote reads, writes, or worker requests\nok 2 - rejected saved refresh clears session, hides Continue/setup, focuses email, and releases controls\nok 3 - temporary saved-session network failure keeps Continue and token for retry\nok 4 - successful password then engine failure retains session and retries loading without another password request\nok 5 - fresh login shows distinct authentication, lookup, control and load stages\nok 6 - pending login disables buttons, prevents a duplicate request and restores retry after failure\nok 7 - a new credential attempt clears old setup/session without creating or replacing a show\nok 8 - saved-session stage is visible and read-only connection never claims control\nok 9 - an account without a show offers setup but never creates or uploads automatically\nok 10 - a show lookup error after authentication identifies the lookup phase and permits retry\nok 11 - transport distinguishes rejected credentials from a transient refresh failure\nok 12 - authentication timeout shows the failed phase and restores Sign in\n1..12\n"
+      }
+    },
+    {
+      "test": "work/login239/test-runtime-startup.mjs",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "cc605c",
+        "wall_time_seconds": 0.21556175,
+        "exit_code": 0,
+        "original_token_count": 408,
+        "output": "PASS cloud sign-in waits for actual worker ready and startup stages stay visible\nPASS bounded engine hang terminates worker before sign-in with no requests or writes\nPASS bounded storage hang terminates worker before sign-in with no requests or writes\nPASS bounded runtime hang terminates worker before sign-in with no requests or writes\nPASS bounded assets hang terminates worker before sign-in with no requests or writes\nPASS bounded show hang terminates worker before sign-in with no requests or writes\nPASS initialization error rejects startup and pending RPC once; late replies cannot publish\nPASS worker error is fatal during initialization\nPASS worker messageerror is fatal during initialization\nPASS successful local startup preserves state request, controller lock, and no cloud connection\nPASS secure-context, local-server, locking and worker-construction failures remain actionable\nPASS remote pairing path remains independent of local runtime\nPASS worker emits ready only after files, saved snapshot, show import and local checkpoint are initialized\nPASS worker engine error is reported without needing an RPC or unhandled rejection\nPASS worker storage error is reported without needing an RPC or unhandled rejection\nPASS worker runtime error is reported without needing an RPC or unhandled rejection\nPASS worker assets error is reported without needing an RPC or unhandled rejection\nPASS worker show error is reported without needing an RPC or unhandled rejection\nPASS blocked IndexedDB cannot falsely declare ready; cloud startup does not initialize local rollback checkpoint\nPASS 19 startup and runtime scenarios.\n"
+      }
+    },
+    {
+      "test": "work/login239/test-boot-errors.mjs",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "c5a8e6",
+        "wall_time_seconds": 0.100431458,
+        "exit_code": 0,
+        "original_token_count": 32,
+        "output": "PASS: boot catches engine failure/timeout and presents Reload controller; existing HTTPS and missing-file recovery preserved.\n"
+      }
+    },
+    {
+      "test": "work/login239/test-module-cache.mjs",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "04c5a1",
+        "wall_time_seconds": 0.195796875,
+        "exit_code": 0,
+        "original_token_count": 46,
+        "output": "PASS: 51 module URLs scanned from controller, output and command entry points; critical modules have one version identity; worker loads asset manifest and migrates cloud snapshots.\n"
+      }
+    },
+    {
+      "test": "work/fix225/test-cloud.mjs",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "448f40",
+        "wall_time_seconds": 0.099307667,
+        "exit_code": 0,
+        "original_token_count": 42,
+        "output": "PASS: unchanged lightweight polls, outage baseline retained, incremental reconnect, concurrent refresh, HTTP 401 recovery, invalid-session re-login, no output writes\n"
+      }
+    },
+    {
+      "test": "work/cloud222/test.mjs",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "22c745",
+        "wall_time_seconds": 0.170277083,
+        "exit_code": 0,
+        "original_token_count": 37,
+        "output": "PASS: delta propagation, small writes, conflict rejection, offline safety, deletion/array diff, prototype protection, explicit saved-session login\n"
+      }
+    },
+    {
+      "test": "work/cloud223/test.mjs",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "830c49",
+        "wall_time_seconds": 0.138552083,
+        "exit_code": 0,
+        "original_token_count": 31,
+        "output": "PASS: read-only cross-device snapshots, incremental updates, no output writes, action rejection, offline retry and recovery\n"
+      }
+    }
+  ],
+  "syntaxChecks": [
+    {
+      "file": "boot.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "overlay-boot.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "graphics-audit233-model.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "ar-link.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "mlb-review236.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "pair-controller.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "stream-playlist208.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "bridge.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "scores-data203.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "timeout-review237.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "logos-review235.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "runtime-worker.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "deck-connect.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "graphics.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "scores-players208.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "graphics-frames234.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "scores-review238.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "scores-bug224.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "panel.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "plugin-download.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "broadcast-rehearsal.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "pregame-review.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "team-library.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "split192.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "graphics-audit233.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "scores-panel203.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "capture-review238.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "scores-render203.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "scores-sequence224.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "pair-output.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "cloud/sync.js",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "file": "cloud/output.js",
+      "passed": true,
+      "output": ""
+    }
+  ],
+  "browser": {
+    "passed": true,
+    "scenarios": [
+      {
+        "name": "Expired saved session \u2192 clear stale Continue \u2192 password sign-in",
+        "passed": true,
+        "authRequests": 2,
+        "controlWrites": 1
+      },
+      {
+        "name": "Password accepted \u2192 show load fails \u2192 retry succeeds without new authentication",
+        "passed": true,
+        "authRequests": 1,
+        "controlWrites": 1
+      }
+    ],
+    "consoleErrors": [],
+    "scope": "Real browser, production connectCloud, simulated server and in-memory session storage; no live account or show mutation"
+  },
+  "actualLocalStartup": {
+    "connected": true,
+    "controlsRendered": true,
+    "engine": "actual Pyodide runtime",
+    "consoleObservation": "One unattributed MutationObserver observe(non-Node) error was logged; controller reached Connected and rendered controls. The isolated login scenarios had no console errors."
+  },
+  "preservation": {
+    "priorRelease": 238,
+    "originalNFLPNGs": 39,
+    "originalMLBPNGs": 27,
+    "graphicsFunctionalChanges": 0,
+    "cloudConfigurationChanged": false,
+    "liveShowMutation": false
+  },
+  "sourceSha256": {
+    "additions-review190.html": "d80c5af660081b194fb12e3f02b59bd36596d56d0dfac1b7595dc24b4f62fb75",
+    "additions-review194.html": "9bc839fb98077c563f31bc3ff22f2417d22216c820875c6af2e2ca3460dcf365",
+    "animation-review171.html": "c3b481e470941733092ce52b90136cfca3bda07b14d755a8c9f7a543cff89448",
+    "ar-link.js": "e3a5c2c73dbe7086fb9be7a9ef500de7683633a0ad6785e6bfcd403f7bb4f742",
+    "audit193-responsive.html": "8514e3bbd782e6952cc6b08ba81bf4972f0ed7dbec335bcc6e92e6b4b3e38a79",
+    "audit193-updates.html": "cdec5262efed82844bce08e3e7eacdc3ce36c674ee3b16605ed9a5c5b2ca38fd",
+    "audit193.html": "735a56fb6abb35d8b52e6cb6cec8ea9195352615cfbd2c39dc09967590ad6449",
+    "boot.js": "1c55d71808dcdef28338ae6d2b185c086c46d7667b13f92c22cb880c43b85e27",
+    "bridge.js": "f6919e5c7db6f6ba8ae35066d81b4beca8835d9713d5ffa1a1e8cf09925f2f81",
+    "broadcast-rehearsal.html": "c9bf469b4b390350f2c45392e4b6b83a919fb657b3a8920a49a29c7deab0d146",
+    "broadcast-rehearsal.js": "6dacbfbce8cfb5b2495fefe7b40990f8f80a25b3868a8d5927aba52a9557c922",
+    "capture-review238.html": "d5855dd1cdde097976e33d2cd7bc1f8aff511b2870a45f5eadc479703305315b",
+    "capture-review238.js": "3f4582590aff5fb4ce149a9340d6e404db4c158c7259a74f20b28b79324fd723",
+    "cloud/output.js": "fdac9cd212a248c0683097700fe214dd719781be46c76e9c04ade0943a9b1f98",
+    "cloud/sync.js": "cb96dae1a0714ac7b2f18ff88dcbe1140b035e27e3fc4b67bf1cc8fedef31c78",
+    "command.html": "ac69c2f73e67d2208d8e29a25a4c23a07ad1f2cd82cd5407cf4c469fba2c03e4",
+    "deck-connect.js": "128296b712c126203c51806f74d68e71fcf18c47bf21096d2613e09f7d344d06",
+    "graphics-audit233-model.js": "25008804283a9c2cf1ccc4a7507d17b55b9ce701f47c1898f4e9aea6c9af2227",
+    "graphics-audit233.html": "735d7122b7099f50c0bf0b9651fae124f9c570cf74f66cb342ad4dda13c14a8b",
+    "graphics-audit233.js": "d98274888f4984da7a1ea831b3d46acfd46141b947efc45f104e61dee3b92070",
+    "graphics-frames234.html": "5987eb79b16e943f1f22c6fd5954c327f6632aa4b6fb553402e0d6382fd8a8c8",
+    "graphics-frames234.js": "58f52f5125488ae3fb83208fbfd59d21fc0d83857fd75a50e76ef780d395dfb7",
+    "graphics-review181.html": "67855a73486c5b12ee1ef6d3ff1cb6a9e423b7890c32d65e1a7970d41720f399",
+    "graphics-review193.html": "ebe1324ab8f4a0f4ddb64cb87bee4b61cd433052a7037df3224bed4f41d91f1a",
+    "graphics.js": "65d9ccfbf4ea8ab74d250840fecd376f51bfb5d9444125ee883747ef0c331d47",
+    "index.html": "6525bf3874b9f9ab2a182dfec513b01de5bd3fbf9f698622982d2b918d4c4576",
+    "logos-review235.html": "fe6b6138bd2f969586929d09ef888d065146cdf95f60d013ae17ed13b163ba22",
+    "logos-review235.js": "7755fa2a6076f8df1059f654a6181a92a790fb55750161b8d3b21b14dc711261",
+    "mlb-review236.html": "5c6a234a592bf226b97a07f6d6c2d3dfe0cd12f2e8deab1392cc0942e7a6117f",
+    "mlb-review236.js": "bf5d6262d085ad38c9521046ceb4783f82f1b0d8c5d94003609d109f2ac16d55",
+    "overlay-boot.js": "d74b71565a64ecb82992a96e27e124132e07da5d27401171e8593b2b2b268376",
+    "overlay.html": "7562e198a123ab951c9aaf1d1337757d1a07c7fd4163f01755c1919c68acebef",
+    "pair-controller.js": "78187203aea2edfd6c4baab31f82501578db76e8b969fbc305c4e564f93668bc",
+    "pair-output.js": "00be6a206d33023bfc8fa6f60e206b3d83525ca929a7fc7a9cf84ea7f0a44034",
+    "panel.js": "98a44c2081a25c87aa661656813011bc94bc47187af68ca370e7906f3d42e329",
+    "plugin-download.js": "ba94d73b504e7ebf3d3018921b91b055e25d4197077e6a7308ab842b07d1b8d3",
+    "pregame-review.js": "64286e9724a64de728596c1b0d41f61b621ea8e7b1543611815b13f8e37bd909",
+    "reference-review192.html": "f3006b5c798b651646179232896eec893276e03a054dd385803a79e2a5bcdcff",
+    "reference.css": "14b9b3da57e397644cc4dd8961a926b0199f7e1a63e1bf83058ba457f5cc9c1b",
+    "review219.html": "30b64dce9a2eaa64a4de9ceb39ccf185d187b4452c38def88b7ac8ab230c1b66",
+    "runtime-worker.js": "759c0db3e2a2ce0be30d3d121cce428d1975e56b81179dfda7b8c2229657ff42",
+    "scorebug-review172.html": "73b5c069b8a56c095c7fc5f00a388ded5facba45b8844740cee25c3a5ef3af19",
+    "scores-bug224.js": "1277bf7c9c736664849a0a0d7a83899c6850b61adfc20d30cbfe8b407e12f247",
+    "scores-data203.js": "ea6056a0afa904ff3bfbd1e44ea25b3aecfba4737ec2839a67c641d46ca57b03",
+    "scores-panel203.js": "b51aae90c1cfb323e7dbefcf0e268d837da0cac83994aff54b1ffff4430f18b0",
+    "scores-players208.js": "3ea55ff42acac7a8d8163843c7610a5b8c17e9ca18b869a42b439dc87a71dfd8",
+    "scores-render203.js": "8b503d59acc0d12354f7cc0224dcbd909ece665eeed21e697609aec69f7c0278",
+    "scores-review224.html": "8ddc2dbaf83ecec5678402b487998c4842f92bbdccfe1e51e80d42d2560a8cda",
+    "scores-review225.html": "e91eb2c04b0711911915520ab022b9aa5103b174e9adadfeef8345c11fdff626",
+    "scores-review238.html": "552d08cb1bdd9f06dac4f3b1aef9fef7291f360473fc32e8db9601b12db50d75",
+    "scores-review238.js": "ac58d96fa06c5a444d00b303a09fedd7f65c6c1845bccd6e010880d59058c780",
+    "scores-sequence224.js": "f0617e96a3a842767e9dfb86ee5cda339b93afb6cc9bf294482fe6643dca64f7",
+    "split192.js": "b3af1825dc7a3b0a7bc32104ff755da7c04d529ab09cbe57bd3aed83b5a2bc19",
+    "spotlight-review144.html": "d4ecde06c5286ceb181ab0474aba9370920470ec6cdbf8563945e6f5ef1cc7c9",
+    "stream-playlist208.js": "8492992839a05d33d35b37a7284051593a9c574c81bf879994356a0bbf6e48e4",
+    "team-gallery.html": "c832ee070f88af3237fbc3e05ff5f1d787550eca87e89985c2ab139186e23ba9",
+    "team-library.js": "a72c28d1c71b8acf7a34c2a8f21370572cadb2a7566f2af4ae2af76302cb9119",
+    "timeout-review237.html": "7b5f7b3fdbc61619400026e1d9fd2c8884d890df3ce0e4dd570401ea6207ec01",
+    "timeout-review237.js": "324101e1ba9d57a47dce89b0edb63ad814d3c9126f2e4cb1c73350f1444d8337",
+    "transition-check158.html": "81b184f790ad7abbcad5dcd63edfd1178943b7fcefbe96b7c5a170d176614fdf"
+  },
+  "limitations": [
+    "Fresh authentication with the real account has not been verified; the precise cause of the reported live fresh-sign-in stall remains unconfirmed.",
+    "Hosted Continue saved session returned Sign in again to reconnect the shared show during inspection.",
+    "This cumulative ZIP must be uploaded before these changes affect the hosted site. No deployment was performed."
+  ]
+}

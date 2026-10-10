@@ -1,4 +1,4 @@
-import {titleLeagues} from './scores-titles219.js?v=update238';
+import {titleLeagues} from './scores-titles219.js?v=update239';
 
 /** The saved picker order is authoritative; legacy ALL keeps the standard order. */
 export function selectedScoreLeagues(cfg = {}) {

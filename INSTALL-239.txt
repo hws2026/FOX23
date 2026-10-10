@@ -1,0 +1,25 @@
+WLD UPDATE 239 - LOGIN RECOVERY
+
+Merge this cumulative update into your complete FOX23 project, replacing all
+matching files and the cloud folder contents included here. Keep other files.
+Publish through your normal GitHub Pages workflow, then reload controller and
+output pages. The new entry point loads boot.js?v=update239.
+This ZIP is an update, not a fresh install. It includes Updates 236-238.
+
+The controller now waits for the show engine to be ready before sign-in. It
+shows the startup step and stops with Reload controller after a 60-second
+startup timeout. An expired saved session now returns to the email/password
+form. Successful sign-in followed by a temporary show-loading failure offers
+Retry loading shared show, without asking for the password again.
+
+No graphics styles, logo assets, custom domain, HTTPS settings, cloud project,
+or show data are changed by this fix. Do not clear browser storage or create a
+new shared show to recover an existing account.
+
+Verified: 12 login recovery scenarios, 19 engine startup scenarios, boot-error
+recovery, module identity, three existing cloud regression suites, 32 JavaScript
+syntax checks, two real-browser simulated login paths, and actual local engine
+startup to Connected. See VALIDATION-239.json for scope and limitations.
+Fresh sign-in with your real account and the final hosted deployment remain
+unverified. If it still fails after upload, the on-screen stage/error identifies
+where the attempt stopped; share that message, not your password.

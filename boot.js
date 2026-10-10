@@ -3,11 +3,11 @@ status.textContent=new URLSearchParams(location.search).has('remote')?'Waiting f
 // Import inside the error boundary: a missing transitive module must not leave
 // the page forever showing its untouched "Connecting / Loading show" placeholders.
 try{
- const {startController}=await import('./bridge.js?v=update238');
+ const {startController}=await import('./bridge.js?v=update239');
  await startController();
- await import('./ar-link.js?v=update238');await import('./panel.js?v=update238');
- if(!new URLSearchParams(location.search).has('remote'))await import('./pair-controller.js?v=update238');
- await import('./plugin-download.js?v=update238');await import('./deck-connect.js?v=update238');await import('./stream-playlist208.js?v=update238');
+ await import('./ar-link.js?v=update239');await import('./panel.js?v=update239');
+ if(!new URLSearchParams(location.search).has('remote'))await import('./pair-controller.js?v=update239');
+ await import('./plugin-download.js?v=update239');await import('./deck-connect.js?v=update239');await import('./stream-playlist208.js?v=update239');
 }catch(e){
  status.textContent='Setup failed';status.className='connection offline';
  const error=document.createElement('div');error.className='card';error.setAttribute('role','alert');
@@ -25,7 +25,7 @@ try{
   recovery.textContent='Open the HTTPS site in an up-to-date browser with Web Locks support. The controller has stopped before loading the show engine to prevent competing control tabs. No saved show data was changed.';
  }else{
  // Diagnostic GETs are read-only and never clear storage or initialize a show.
- const required=['bridge.js?v=update238','cloud/sync.js','cloud/config.js','cloud/delta.js'];
+ const required=['bridge.js?v=update239','cloud/sync.js','cloud/config.js','cloud/delta.js'];
  const checked=await Promise.all(required.map(async path=>{
   try{const response=await fetch(new URL(path,import.meta.url),{method:'HEAD',cache:'no-store',signal:AbortSignal.timeout(5000)});return response.status===404?path:null;}catch{return null;}
  }));

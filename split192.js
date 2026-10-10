@@ -1,4 +1,4 @@
-import {bindSplitCapture} from './split-capture238.js?v=update238';
+import {bindSplitCapture} from './split-capture238.js?v=update239';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function db(){return new Promise((resolve,reject)=>{const r=indexedDB.open('gridiron-local-split-media',1);r.onupgradeneeded=()=>r.result.createObjectStore('videos');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});}
 export async function saveSplitVideo(file,slot){if(!file)return null;if(!file.type.startsWith('video/'))throw Error('Choose a video file.');const d=await db(),key='slot-'+slot+'-'+Date.now();await new Promise((resolve,reject)=>{const tx=d.transaction('videos','readwrite');tx.objectStore('videos').put(file,key);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});d.close();return key;}

@@ -1,13 +1,13 @@
-import {renderGraphics,updateClocks,graphicNames} from './graphics.js?v=update238';
-import {caseState233,updateFixture233} from './graphics-audit233-model.js?v=update238';
-import {freezeFrame234,animationList234} from './graphics-freeze234.js?v=update238';
+import {renderGraphics,updateClocks,graphicNames} from './graphics.js?v=update239';
+import {caseState233,updateFixture233} from './graphics-audit233-model.js?v=update239';
+import {freezeFrame234,animationList234} from './graphics-freeze234.js?v=update239';
 import {nflLogoAssignments226} from './nfl-logos226.js';
 const $=id=>document.getElementById(id),sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const controls=['view','scope','phase','motion','outMotion','surface','time','step','crop','teamMarks','brandingMarks'];
 let page=0,run=0,records=[],jobs=[],findings=[],cases=[];
 function showError(error){$('status').dataset.error=true;$('status').textContent='Audit error: '+String(error?.message||error);}
 addEventListener('error',e=>showError(e.error||e.message));addEventListener('unhandledrejection',e=>showError(e.reason));
-const data=await fetch('./graphics-audit233-data.json?v=update238').then(r=>{if(!r.ok)throw Error('Inventory could not load ('+r.status+').');return r.json();}).catch(error=>{showError(error);throw error;});
+const data=await fetch('./graphics-audit233-data.json?v=update239').then(r=>{if(!r.ok)throw Error('Inventory could not load ('+r.status+').');return r.json();}).catch(error=>{showError(error);throw error;});
 // This focused inventory never connects to or saves a show. Only the two approved
 // graphic types are rendered; the main renderer and logo assignments remain shared.
 const colors235={"ARI":{"color":"#a40227","secondary":"#ffffff"},"ATL":{"color":"#a71930","secondary":"#000000"},"BAL":{"color":"#29126f","secondary":"#000000"},"BUF":{"color":"#00338d","secondary":"#d50a0a"},"CAR":{"color":"#0085ca","secondary":"#000000"},"CHI":{"color":"#0b1c3a","secondary":"#e64100"},"CIN":{"color":"#fb4f14","secondary":"#000000"},"CLE":{"color":"#472a08","secondary":"#ff3c00"},"DAL":{"color":"#002a5c","secondary":"#b0b7bc"},"DEN":{"color":"#0a2343","secondary":"#fc4c02"},"DET":{"color":"#0076b6","secondary":"#bbbbbb"},"GB":{"color":"#204e32","secondary":"#ffb612"},"HOU":{"color":"#021018","secondary":"#eb0028"},"IND":{"color":"#003b75","secondary":"#ffffff"},"JAX":{"color":"#007487","secondary":"#d7a22a"},"KC":{"color":"#e31837","secondary":"#ffb612"},"LV":{"color":"#000000","secondary":"#a5acaf"},"LAC":{"color":"#0080c6","secondary":"#ffc20e"},"LAR":{"color":"#003594","secondary":"#ffd100"},"MIA":{"color":"#008e97","secondary":"#fc4c02"},"MIN":{"color":"#4f2683","secondary":"#ffc62f"},"NE":{"color":"#002a5c","secondary":"#c60c30"},"NO":{"color":"#d3bc8d","secondary":"#000000"},"NYG":{"color":"#003c7f","secondary":"#c9243f"},"NYJ":{"color":"#115740","secondary":"#ffffff"},"PHI":{"color":"#06424d","secondary":"#000000"},"PIT":{"color":"#000000","secondary":"#ffb612"},"SF":{"color":"#aa0000","secondary":"#b3995d"},"SEA":{"color":"#002a5c","secondary":"#69be28"},"TB":{"color":"#bd1c36","secondary":"#3e3a35"},"TEN":{"color":"#4495d2","secondary":"#001532"},"WSH":{"color":"#5a1414","secondary":"#ffb612"}};

@@ -1,4 +1,4 @@
-import {connectCloud} from './sync.js?v=update238';
+import {connectCloud} from './sync.js?v=update239';
 // This reader never executes controller actions or writes show snapshots.
 export function snapshotReader(){
  let snapshot;

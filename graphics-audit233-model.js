@@ -1,5 +1,5 @@
 // Pure fixture helpers: no controller, storage, cloud, feed API or media access.
-import {gameDetails,readingTime} from './scores-timing209.js?v=update238';
+import {gameDetails,readingTime} from './scores-timing209.js?v=update239';
 export function mergeFixture(base,patch){
  const out=structuredClone(base);
  for(const [key,value]of Object.entries(patch||{})){

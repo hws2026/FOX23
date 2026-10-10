@@ -1,14 +1,14 @@
-import {renderGraphics,updateClocks,graphicNames} from './graphics.js?v=update238';
-import {caseState233,updateFixture233} from './graphics-audit233-model.js?v=update238';
-import {freezeFrame234,animationList234} from './graphics-freeze234.js?v=update238';
-import {buildScorePlan} from './scores-sequence224.js?v=update238';
-import {gameDetails,readingTime} from './scores-timing209.js?v=update238';
+import {renderGraphics,updateClocks,graphicNames} from './graphics.js?v=update239';
+import {caseState233,updateFixture233} from './graphics-audit233-model.js?v=update239';
+import {freezeFrame234,animationList234} from './graphics-freeze234.js?v=update239';
+import {buildScorePlan} from './scores-sequence224.js?v=update239';
+import {gameDetails,readingTime} from './scores-timing209.js?v=update239';
 const $=id=>document.getElementById(id),sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const controls=['view','scope','phase','motion','outMotion','surface','time','step','crop','teamMarks','brandingMarks','feedSlot','feedState','feedLeague','feedPlayback'];
 let page=0,run=0,records=[],jobs=[],findings=[],cases=[];
 function showError(error){$('status').dataset.error=true;$('status').textContent='Audit error: '+String(error?.message||error);}
 addEventListener('error',e=>showError(e.error||e.message));addEventListener('unhandledrejection',e=>showError(e.reason));
-const data=await fetch('./graphics-audit233-data.json?v=update238').then(r=>{if(!r.ok)throw Error('Inventory could not load ('+r.status+').');return r.json();}).catch(error=>{showError(error);throw error;});
+const data=await fetch('./graphics-audit233-data.json?v=update239').then(r=>{if(!r.ok)throw Error('Inventory could not load ('+r.status+').');return r.json();}).catch(error=>{showError(error);throw error;});
 // Populate the isolated default specimens so empty authoring fields cannot hide
 // copy, statistic or rail defects. These illustrative values never enter a show.
 const defaultSpecimens234={

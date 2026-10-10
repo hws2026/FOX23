@@ -1,11 +1,11 @@
 import {morph} from './feed-scorebug225.js';
 import {nflBroadcastLogo226} from './nfl-logos226.js';
 import {mlbBroadcastLogo236} from './mlb-logos236.js';
-import{titleLabels,leagueNetwork}from'./scores-titles219.js?v=update238';
-import{buildScorePlan,selectedScoreLeagues}from'./scores-sequence224.js?v=update238';
-import{feedGame,renderFeedBug}from'./scores-bug224.js?v=update238';
-const sheet224=document.createElement('link');sheet224.rel='stylesheet';sheet224.href=new URL('./scores224.css?v=update238',import.meta.url).href;document.head.append(sheet224);
-import{tickerFrame,gameDetails,playerTeam,playerTeamAbbr,playerDetailText}from'./scores-timing209.js?v=update238';
+import{titleLabels,leagueNetwork}from'./scores-titles219.js?v=update239';
+import{buildScorePlan,selectedScoreLeagues}from'./scores-sequence224.js?v=update239';
+import{feedGame,renderFeedBug}from'./scores-bug224.js?v=update239';
+const sheet224=document.createElement('link');sheet224.rel='stylesheet';sheet224.href=new URL('./scores224.css?v=update239',import.meta.url).href;document.head.append(sheet224);
+import{tickerFrame,gameDetails,playerTeam,playerTeamAbbr,playerDetailText}from'./scores-timing209.js?v=update239';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const sessions=new WeakMap();
 // Keep the assigned team name complete without taking space from its logo,

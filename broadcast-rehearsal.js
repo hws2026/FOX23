@@ -1,4 +1,4 @@
-import {renderGraphics} from './graphics.js?v=update238';
+import {renderGraphics} from './graphics.js?v=update239';
 const s=await(await fetch('./rehearsal-seed.json')).json(),timeline=await(await fetch('./rehearsal-timeline.json')).json(),base=structuredClone(s.preview),stage=document.querySelector('#stage'),status=document.querySelector('#status');
 let index=-1,timer=null,paused=false,deadline=0,remaining=0;
 const resize=()=>stage.style.transform='scale('+document.querySelector('#screen').clientWidth/1920+')';new ResizeObserver(resize).observe(document.querySelector('#screen'));resize();

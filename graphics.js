@@ -1,12 +1,12 @@
-import{graphic219,names219,fitAdditions219}from'./additions219.js?v=update238';
-import{renderBottomScores}from'./scores-render203.js?v=update238';
+import{graphic219,names219,fitAdditions219}from'./additions219.js?v=update239';
+import{renderBottomScores}from'./scores-render203.js?v=update239';
 // Warm the exit artwork before the first operator OUT command.
 const scorebugExitFrames211=Array.from({length:51},(_,i)=>{const img=new Image();img.src=new URL('./assets/scorebug-out219/'+String(i).padStart(2,'0')+'.svg',import.meta.url).href;return img;});
-import{extraGraphic,extraNames}from'./extras194.js?v=update238';
-import{splitGraphic,syncSplitMedia,preserveSplitSource}from'./split192.js?v=update238';
-import{applyCueHighlights}from'./highlights233.js?v=update238';
+import{extraGraphic,extraNames}from'./extras194.js?v=update239';
+import{splitGraphic,syncSplitMedia,preserveSplitSource}from'./split192.js?v=update239';
+import{applyCueHighlights}from'./highlights233.js?v=update239';
 import{conferenceTransition,playerTeaser,seriesHistory,crewLowerThird}from'./custom192.js?v=teaser209';
-import {newsGraphic,pregamePlayer,studioTransition,countdownMarkup,updateKickoff} from './pregame.js?v=update238';
+import {newsGraphic,pregamePlayer,studioTransition,countdownMarkup,updateKickoff} from './pregame.js?v=update239';
 export function gameStatusText(g){if(['FINAL','FINAL/OT'].includes(g.bottomStatus))return g.quarter==='OT'?'FINAL/OT'+(Number(g.overtimePeriod)>1?g.overtimePeriod:''):'FINAL';return g.bottomStatus&&g.bottomStatus!=='LIVE'?g.bottomStatus:'';}
 export const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const formations={'4-3-4':[4,3,4],'3-4-4':[3,4,4],'4-2-5':[4,2,5],'3-3-5':[3,3,5],'5-2-4':[5,2,4],'4-1-6':[4,1,6]};

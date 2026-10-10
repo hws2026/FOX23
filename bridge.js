@@ -1,9 +1,38 @@
-import {cloudEnabled,connectCloud} from './cloud/sync.js?v=update238';
+import {cloudEnabled,connectCloud} from './cloud/sync.js?v=update239';
 export const base=new URL('.',import.meta.url);
 export const channel=new BroadcastChannel('gridiron-pages:'+base.pathname);
 const originalFetch=globalThis.fetch.bind(globalThis);let remoteRPC,cloudRPC,worker,workerFailure,sequence=0,pending=new Map(),current,readyResolve;
 export const ready=new Promise(r=>readyResolve=r);
 function localRPC(request){if(workerFailure)return Promise.reject(workerFailure);return new Promise((resolve,reject)=>{const id=++sequence;pending.set(id,{resolve,reject});worker.postMessage({id,request});});}
+const startupStages239={engine:'Downloading browser engine…',storage:'Opening saved show storage…',runtime:'Starting browser engine…',assets:'Loading show engine files…',show:'Opening show engine…'};
+function startRuntime239(){return new Promise((resolve,reject)=>{
+ let started=false,stage='Loading browser engine…';
+ const status=globalThis.document?.querySelector('#connection');
+ const progress=value=>{stage=value;if(status)status.textContent=value;};
+ progress(stage);
+ const fail=error=>{
+  if(workerFailure)return;
+  workerFailure=error;clearTimeout(deadline);worker?.terminate();
+  for(const p of pending.values())p.reject(error);pending.clear();reject(error);
+ };
+ const deadline=setTimeout(()=>fail(Object.assign(Error('The show engine did not finish starting within 60 seconds. Last step: '+stage+' Reload controller to retry.'),{code:'RUNTIME_INIT_TIMEOUT'})),60000);
+ try{
+  worker=new Worker(new URL('runtime-worker.js?v=update239'+(cloudEnabled?'&cloud=1':''),base));
+  worker.onmessage=({data})=>{
+   if(workerFailure)return;
+   if(data.kind==='runtime-startup'){
+    if(started)return;
+    if(data.error){fail(Object.assign(Error('The show engine could not start: '+data.error),{code:'RUNTIME_INIT_FAILED'}));return;}
+    if(data.ready){started=true;clearTimeout(deadline);progress('Show engine ready…');resolve();return;}
+    if(startupStages239[data.stage])progress(startupStages239[data.stage]);
+    return;
+   }
+   const p=pending.get(data.id);if(!p)return;pending.delete(data.id);data.error?p.reject(Error(data.error)):p.resolve(data.result);
+  };
+  worker.onerror=e=>fail(Error(e.message||'Show engine failed to start. Reload to retry.'));
+  worker.onmessageerror=()=>fail(Error('The show engine could not communicate with the controller. Reload to retry.'));
+ }catch(e){fail(e);}
+});}
 export const canControl=()=>cloudRPC?.hasControl!==false;
 export function rpc(request){if(remoteRPC)return remoteRPC(request);if(cloudRPC)return cloudRPC(request);return localRPC(request);}
 export function publish(state){current=state;channel.postMessage({kind:'state',state});dispatchEvent(new CustomEvent('gridiron-state',{detail:state}));}
@@ -19,9 +48,7 @@ export async function startController(){
  if(!remote){
  await new Promise((resolve,reject)=>navigator.locks.request('gridiron-controller:'+base.pathname,{ifAvailable:true},async lock=>{
   acquired=!!lock;if(!lock){resolve();return;}
-  worker=new Worker(new URL('runtime-worker.js?v=update238'+(cloudEnabled?'&cloud=1':''),base));
-  worker.onmessage=({data})=>{const p=pending.get(data.id);if(!p)return;pending.delete(data.id);data.error?p.reject(Error(data.error)):p.resolve(data.result);};
-  worker.onerror=e=>{workerFailure=Error(e.message||'Show engine failed to start. Reload to retry.');for(const p of pending.values())p.reject(workerFailure);pending.clear();};
+  await startRuntime239();
   readyResolve();resolve();await new Promise(()=>{});
  }).catch(reject));
  if(!acquired)throw Error('A control panel is already open for this site. Use that tab, or close it before opening another.');

@@ -1,7 +1,7 @@
 import {nflBroadcastLogo226} from './nfl-logos226.js';
 import {mlbBroadcastLogo236} from './mlb-logos236.js';
 import {scorebug,animateScorebugOut,finishBugEntrance,morph} from './feed-scorebug225.js';
-import {feedUpdateSnapshot,feedUpdateTargets,runFeedLightUpdate,beginFeedLights,feedLightCSS} from './feed-light231.js?v=update238';
+import {feedUpdateSnapshot,feedUpdateTargets,runFeedLightUpdate,beginFeedLights,feedLightCSS} from './feed-light231.js?v=update239';
 export function feedGame(games,cfg,frame){
  if(cfg.feedBugGameId)return games.find(g=>g.id===cfg.feedBugGameId)||null;
  if(frame?.game&&!frame.game._titleCard)return games.find(g=>g.id===frame.game.id&&g.league===frame.game.league)||null;
@@ -42,7 +42,7 @@ function makeHost(root){
  // Separate DOM prevents the main game clock, main renderer, and SVG IDs from
  // overwriting or removing the independent feed scorebug.
  const shadow=host.attachShadow({mode:'open'}),surface=document.createElement('div');surface.className='feed-root225';
- const sheets=['graphics.css?v=20260923-controls105','reference.css?v=update238'];
+ const sheets=['graphics.css?v=20260923-controls105','reference.css?v=update239'];
  const ready=sheets.map(path=>new Promise(resolve=>{const link=document.createElement('link');link.rel='stylesheet';link.href=new URL(path,import.meta.url).href;link.onload=()=>resolve(true);link.onerror=()=>resolve(false);shadow.append(link);}));
  const style=document.createElement('style');style.textContent=shadowCSS+feedLightCSS;shadow.append(style,surface);host._surface=surface;root.append(host);
  Promise.all(ready).then(result=>{if(!host.isConnected)return;if(result.some(ok=>!ok)){host.dataset.error='Scorebug styles failed to load; reload output.';return;}host._ready=true;draw(host);alignFeedBug(root,host,host._latest.cfg,host._branding||{});surface.style.visibility='visible';});

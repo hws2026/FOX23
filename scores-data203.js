@@ -1,5 +1,5 @@
-import {scoreWeek,leagueScoreWeek,gameInWeek} from './scores-week232.js?v=update238';
-import {playerDetailText} from './scores-timing209.js?v=update238';
+import {scoreWeek,leagueScoreWeek,gameInWeek} from './scores-week232.js?v=update239';
+import {playerDetailText} from './scores-timing209.js?v=update239';
 export const leagues=['NFL','MLB','NBA','MLS','UFL'];
 export const paths={NFL:'football/nfl',NBA:'basketball/nba',MLS:'soccer/usa.1',MLB:'baseball/mlb',UFL:'football/ufl'};
 export function selectedFeedLeagues(cfg={}){

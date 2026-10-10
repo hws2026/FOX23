@@ -1,5 +1,4 @@
-importScripts('https://cdn.jsdelivr.net/pyodide/v0.29.2/full/pyodide.js');
-let py, db, lastSaved, recoveryError;
+let py, db, lastSaved, recoveryError, startupError;
 const cloudMode=new URL(location.href).searchParams.has('cloud');
 const checkpoint231="(core.copy.deepcopy(core.STATE), core.copy.deepcopy(core.LIBRARY.overrides), core.copy.deepcopy(core.LIBRARY.teams))";
 function rollback231(){
@@ -9,19 +8,28 @@ function database(){return new Promise((resolve,reject)=>{const r=indexedDB.open
 function read(){return new Promise((resolve,reject)=>{const r=db.transaction('show').objectStore('show').get('current');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});}
 function write(value){return new Promise((resolve,reject)=>{const tx=db.transaction('show','readwrite');tx.objectStore('show').put(value,'current');tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||Error('Save aborted'));});}
 async function init(){
+ postMessage({kind:'runtime-startup',stage:'engine'});
+ importScripts('https://cdn.jsdelivr.net/pyodide/v0.29.2/full/pyodide.js');
+ postMessage({kind:'runtime-startup',stage:'storage'});
  db=await database();const saved=await read();
+ postMessage({kind:'runtime-startup',stage:'runtime'});
  py=await loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v0.29.2/full/'});
+ postMessage({kind:'runtime-startup',stage:'assets'});
  py.FS.mkdirTree('/studio/data');py.FS.mkdirTree('/studio/catalog');py.FS.mkdirTree('/studio/broadcast-logos226');py.FS.mkdirTree('/studio/broadcast-logos236');
- for(const [url,path] of [['core.py?v=update238','/studio/core.py'],['broadcast-logos226/assignments.json','/studio/broadcast-logos226/assignments.json'],['broadcast-logos236/mlb-assignments.json','/studio/broadcast-logos236/mlb-assignments.json'],['team_library.py?v=photos163','/studio/team_library.py'],['nfl-2026.json?v=photos163','/studio/catalog/nfl-2026.json']]){
+ for(const [url,path] of [['core.py?v=update239','/studio/core.py'],['broadcast-logos226/assignments.json','/studio/broadcast-logos226/assignments.json'],['broadcast-logos236/mlb-assignments.json','/studio/broadcast-logos236/mlb-assignments.json'],['team_library.py?v=photos163','/studio/team_library.py'],['nfl-2026.json?v=photos163','/studio/catalog/nfl-2026.json']]){
   const r=await fetch(url);if(!r.ok)throw Error('Cannot load '+url);py.FS.writeFile(path,await r.text());
  }
  if(saved){py.FS.writeFile('/studio/data/game.json',JSON.stringify(saved.state));py.FS.writeFile('/studio/data/team-library.json',JSON.stringify(saved.library));}
+ postMessage({kind:'runtime-startup',stage:'show'});
  await py.runPythonAsync("import sys; sys.path.insert(0, '/studio'); import core");
  if(!cloudMode)py.runPython('worker_checkpoint231 = '+checkpoint231);
 }
-const ready=init();let queue=Promise.resolve();
+// Report initialization independently of RPC requests. A failed initialization
+// must not become an unhandled rejection while the login screen is waiting.
+const ready=init().then(()=>postMessage({kind:'runtime-startup',ready:true}),error=>{startupError=error;postMessage({kind:'runtime-startup',error:String(error.message||error)});});let queue=Promise.resolve();
 onmessage=({data})=>{queue=queue.then(async()=>{let needsRollback=false;try{
  await ready;
+ if(startupError)throw startupError;
  if(recoveryError)throw recoveryError;
  if(data.request.endpoint==='cloud_snapshot'){
   postMessage({id:data.id,result:JSON.parse(py.runPython('core.pages_snapshot()'))});return;

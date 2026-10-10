@@ -1,5 +1,5 @@
-import {createSplitCaptureHub,attachPairedCaptureHost,attachPairedCaptureOutput,splitCaptureHub} from './split-capture238.js?v=update238';
-import {splitGraphic,syncSplitMedia} from './split192.js?v=update238';
+import {createSplitCaptureHub,attachPairedCaptureHost,attachPairedCaptureOutput,splitCaptureHub} from './split-capture238.js?v=update239';
+import {splitGraphic,syncSplitMedia} from './split192.js?v=update239';
 const $=id=>document.getElementById(id),checks=[],errors=[],patterns=[],subscriptions=new Map(),selected=new Map(),expected=new Map();
 let owner,local,paired,hostPC,outputPC,cancelNext=false,sequence=0,busy=false,promptCalls=0,playbackInterruptions=0,cloneOut=null;
 const colors=[[180,36,48],[22,76,180],[24,164,80],[172,88,20]],pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));

@@ -1,7 +1,7 @@
-import {scoreWeek,leagueScoreWeek,scoreWeekLabel,gameInWeek} from './scores-week232.js?v=update238';
-import{leagueLabels as cardLabels,leagueNetwork}from'./scores-titles219.js?v=update238';
-import{enrichPlayers}from'./scores-players208.js?v=update238';
-import{leagues,leagueLabels,fetchLeague,selectedFeedLeagues}from'./scores-data203.js?v=update238';
+import {scoreWeek,leagueScoreWeek,scoreWeekLabel,gameInWeek} from './scores-week232.js?v=update239';
+import{leagueLabels as cardLabels,leagueNetwork}from'./scores-titles219.js?v=update239';
+import{enrichPlayers}from'./scores-players208.js?v=update239';
+import{leagues,leagueLabels,fetchLeague,selectedFeedLeagues}from'./scores-data203.js?v=update239';
 export function createScores({getState,act,esc,toast,canControl=()=>true}){
  let busy=false,last=0,lastKey='',queued=false,statsEnabled=false;
  const cfg=()=>getState()?.bottomScores||{league:'NFL',games:[]};

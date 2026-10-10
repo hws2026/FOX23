@@ -1,6 +1,6 @@
-import {createScores} from './scores-panel203.js?v=update238';
-import {selectedFeedLeagues} from './scores-data203.js?v=update238';
-import {leagueScoreWeek,easternDate} from './scores-week232.js?v=update238';
+import {createScores} from './scores-panel203.js?v=update239';
+import {selectedFeedLeagues} from './scores-data203.js?v=update239';
+import {leagueScoreWeek,easternDate} from './scores-week232.js?v=update239';
 const state={branding:{network:'WLD SPORTS'},bottomScores:{league:'ALL',leagues:['NFL'],date:'2023-11-05',auto:false,visible:false,feedBugVisible:false,games:[],sources:{},updatedAt:0}};
 const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const report=()=>{

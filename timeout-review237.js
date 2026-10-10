@@ -1,8 +1,8 @@
-import {renderGraphics,updateClocks} from './graphics.js?v=update238';
-import {caseState233} from './graphics-audit233-model.js?v=update238';
-import {freezeFrame234} from './graphics-freeze234.js?v=update238';
+import {renderGraphics,updateClocks} from './graphics.js?v=update239';
+import {caseState233} from './graphics-audit233-model.js?v=update239';
+import {freezeFrame234} from './graphics-freeze234.js?v=update239';
 const $=id=>document.getElementById(id),sleep=ms=>new Promise(r=>setTimeout(r,ms));
-const data=await fetch('./graphics-audit233-data.json?v=update238').then(r=>r.json());
+const data=await fetch('./graphics-audit233-data.json?v=update239').then(r=>r.json());
 const entry=data.cases.find(x=>x.id==='scorebug:default');
 let busy=false,frames=[],checks=[];
 function status(text,error=false){$('status').textContent=text;$('status').toggleAttribute('data-error',error);}

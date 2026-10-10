@@ -1,8 +1,8 @@
-import {renderGraphics,updateClocks,graphicNames} from './graphics.js?v=update238';
-import {caseState233,updateFixture233} from './graphics-audit233-model.js?v=update238';
+import {renderGraphics,updateClocks,graphicNames} from './graphics.js?v=update239';
+import {caseState233,updateFixture233} from './graphics-audit233-model.js?v=update239';
 
 const $=id=>document.getElementById(id),sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
-const data=await fetch('./graphics-audit233-data.json?v=update238').then(r=>{if(!r.ok)throw Error('Audit inventory did not load ('+r.status+').');return r.json();}).catch(error=>{$('status').textContent='Audit inventory failed to load.';$('error').hidden=false;$('error').textContent=error.message;throw error;});
+const data=await fetch('./graphics-audit233-data.json?v=update239').then(r=>{if(!r.ok)throw Error('Audit inventory did not load ('+r.status+').');return r.json();}).catch(error=>{$('status').textContent='Audit inventory failed to load.';$('error').hidden=false;$('error').textContent=error.message;throw error;});
 let stage=$('stage'),content,current,selected,filtered=[],run=0,frozen=false,cueOverride=null,lastAction='hold';
 const reviews=new Map(),errors=[];
 const options=()=>({surface:$('surface').value,motion:$('motion').value,scale:$('scale').value,logos:$('logos').checked,bottom:$('bottom').checked,feed:$('feed').checked,mainBug:$('mainBug').checked,countdown:$('countdown').checked,sideStats:$('sideStats').checked,feedSlot:$('feedSlot').value,customCue:cueOverride?structuredClone(cueOverride):null});
@@ -137,5 +137,5 @@ $('export').onclick=exportChecklist;$('applyCue').onclick=()=>{try{const cue=JSO
 setInterval(()=>{if(current&&!frozen&&content?.isConnected)updateClocks(content,current);},100);
 // Module-loaded styles may be appended after static links; keep scoped audit
 // corrections last without changing production style rules or their contents.
-const auditSheet=[...document.querySelectorAll('link[rel=stylesheet]')].find(n=>n.href.includes('/audit233.css?v=update238'));if(auditSheet)document.head.append(auditSheet);
+const auditSheet=[...document.querySelectorAll('link[rel=stylesheet]')].find(n=>n.href.includes('/audit233.css?v=update239'));if(auditSheet)document.head.append(auditSheet);
 const urlCase=new URLSearchParams(location.search).get('case');if(urlCase)selected=data.cases.find(c=>c.id===urlCase);filterCases();

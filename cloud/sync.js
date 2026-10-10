@@ -1,4 +1,4 @@
-import config from './config.js?v=update238';
+import config from './config.js?v=update239';
 import {changes,applyChanges} from './delta.js?v=cloud226';
 export function isCloudSite(config, origin, path) {
   return !!config.enabled && [{origin:config.origin,path:config.path},...(config.sites||[])]
@@ -205,20 +205,61 @@ export async function connectCloud(local, {readOnly=false}={}) {
   const status=box.querySelector('[role=status]'), setup=box.querySelector('[data-setup]');
   let backedUp;
   await new Promise(resolve=>{
-    let busy=false;
-    const task=fn=>async e=>{e?.preventDefault();if(busy)return;busy=true;box.setAttribute('aria-busy','true');status.textContent='Connecting…';try{await fn();}catch(error){status.textContent=error.message;}finally{busy=false;box.removeAttribute('aria-busy');}};
-    const join=async()=>{const row=await db.head();if(row){status.textContent=readOnly?'Loading shared show…':'Taking control of shared show…';if(!readOnly)await sharedRPC.claimControl();await sharedRPC({endpoint:'state'});box.remove();document.body.classList.remove('cloud-login222');style.remove();resolve();}else{setup.hidden=readOnly;status.textContent=readOnly?'No shared show for this account. Sign into the same account used by your control panel.':'No shared show yet. Nothing has been replaced or uploaded.';}};
-    box.querySelector('form').onsubmit=task(async()=>{const fields=new FormData(box.querySelector('form'));transport.clear();remember(await call('/auth/v1/token?grant_type=password',{email:fields.get('email'),password:fields.get('password')},false));box.querySelector('[name=password]').value='';await join();});
-    box.querySelector('[data-backup]').onclick=task(async()=>{
+    let busy=false,phase='',retryLoading=false;
+    const form=box.querySelector('form'),resume=box.querySelector('[data-continue]');
+    const backup=box.querySelector('[data-backup]'),create=box.querySelector('[data-create]'),joinButton=box.querySelector('[data-join]');
+    const buttons=[form.querySelector('button'),resume,backup,create,joinButton];
+    const setPhase=text=>{phase=text;status.textContent=text;document.querySelector('#connection').textContent=text;};
+    const syncControls=()=>{
+      resume.hidden=!transport.session;
+      resume.textContent=retryLoading?'Retry loading shared show':'Continue saved session';
+      for(const button of buttons)button.disabled=busy || (button===create&&!backedUp);
+    };
+    const task=(label,fn)=>async e=>{
+      e?.preventDefault();if(busy)return;busy=true;box.setAttribute('aria-busy','true');syncControls();setPhase(label);
+      try{await fn();}
+      catch(error){
+        retryLoading=!!transport.session;
+        if(error.code==='CLOUD_AUTH_REQUIRED'){
+          setup.hidden=true;backedUp=null;
+          status.textContent='Your saved sign-in has expired. Enter your email and password to sign in again.';
+          document.querySelector('#connection').textContent='Sign in again to shared show';
+          box.querySelector('[name=email]')?.focus();
+        }else{
+          const detail=['TimeoutError','AbortError'].includes(error.name)?'The request timed out. Check your connection and try again.':error.message;
+          status.textContent=phase.replace(/…$/, '')+': '+detail;
+          document.querySelector('#connection').textContent='Shared show connection needs attention';
+        }
+      }finally{busy=false;box.removeAttribute('aria-busy');syncControls();}
+    };
+    const join=async()=>{
+      setPhase('Finding your shared show…');
+      const row=await db.head();
+      if(row){
+        if(!readOnly){setPhase('Taking control of shared show…');await sharedRPC.claimControl();}
+        setPhase('Loading shared show…');await sharedRPC({endpoint:'state'});
+        box.remove();document.body.classList.remove('cloud-login222');style.remove();resolve();
+      }else{
+        setup.hidden=readOnly;
+        setPhase(readOnly?'No shared show for this account. Sign into the same account used by your control panel.':'No shared show yet. Nothing has been replaced or uploaded.');
+      }
+    };
+    form.onsubmit=task('Signing in…',async()=>{
+      const fields=new FormData(form);
+      transport.clear();setup.hidden=true;backedUp=null;retryLoading=false;syncControls();
+      remember(await call('/auth/v1/token?grant_type=password',{email:fields.get('email'),password:fields.get('password')},false));
+      box.querySelector('[name=password]').value='';await join();
+    });
+    backup.onclick=task('Preparing show backup…',async()=>{
       backedUp=await local({endpoint:'cloud_snapshot'});
       const blob=new Blob([JSON.stringify({...backedUp.state,cloudLibraryBackup:backedUp.library},null,2)],{type:'application/json'});
       const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='WLD-GitHub-show-before-cloud-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),60000);
-      box.querySelector('[data-create]').disabled=false;
-      status.textContent='Backup download requested. Keep the file before creating the shared show.';
+      setPhase('Backup download requested. Keep the file before creating the shared show.');
     });
-    box.querySelector('[data-create]').onclick=task(async()=>{if(!backedUp)throw Error('Download your backup first.');await call('/rest/v1/rpc/wld_create_show',{s:backedUp});await join();});
-    box.querySelector('[data-join]').onclick=task(join);
-    const resume=box.querySelector('[data-continue]');resume.hidden=!transport.session;resume.onclick=task(join);
+    create.onclick=task('Creating shared show…',async()=>{if(!backedUp)throw Error('Download your backup first.');await call('/rest/v1/rpc/wld_create_show',{s:backedUp});await join();});
+    joinButton.onclick=task('Finding your shared show…',join);
+    resume.onclick=task('Checking saved session…',join);
+    syncControls();
   });
   if(!readOnly){
     const holder=document.createElement('span');holder.style.cssText='display:inline-flex;gap:8px;align-items:center';
