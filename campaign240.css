@@ -1,0 +1,38 @@
+/* Reuse pregame.css news rails, clipped face, label and entry/exit timeline.
+   Every override is scoped to campaign240; the existing news card is untouched. */
+.news-ribbon.campaign240{left:0;right:0;margin-inline:auto;color:var(--campaign-text)}
+.campaign240 .news-face{background:var(--package-lines),linear-gradient(100deg,color-mix(in srgb,var(--campaign-primary) 85%,#000),var(--campaign-primary) 60%,color-mix(in srgb,var(--campaign-primary) 85%,#000))}
+/* Reference news ribbons have a flat face floor and symmetric recessed lower rails. */
+.campaign240 .news-face{bottom:25px;clip-path:polygon(1.8% 0,98.2% 0,100% 40.7%,99.2% 78.6%,97.3% 100%,2.7% 100%,.8% 78.6%,0 40.7%)}
+.campaign240 .news-metal{background-image:url('./campaign240-rails.svg')}
+.campaign240 .campaign240-copy{position:absolute;left:64px;right:64px;top:20px;bottom:23px;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:34px;min-width:0;overflow:hidden}
+.campaign240.campaign240-has-logo .campaign240-copy{left:282px}
+.campaign240.campaign240-has-image .campaign240-copy{right:calc(var(--campaign-image-size) + 78px)}
+.campaign240 .campaign240-headline{font:italic 700 calc(64px * var(--campaign-scale))/1.08 var(--display);letter-spacing:1px;margin:0;min-width:0;min-height:0;max-height:126px;flex:1.25 1 0;overflow:hidden;overflow-wrap:anywhere;white-space:pre-line;color:var(--campaign-text)}
+.campaign240 .news-body :is(.campaign240-message,.campaign240-footer){position:static;inset:auto;display:block;align-items:normal;font:italic 700 43px/1.14 var(--display);letter-spacing:.7px;margin:0;min-width:0;width:auto;min-height:0;max-height:126px;flex:1 1 0;overflow:hidden;overflow-wrap:anywhere;white-space:pre-line;color:var(--campaign-text);animation:none!important}
+.campaign240 .news-body .campaign240-footer{font-size:30px;letter-spacing:1px;text-align:right}
+.campaign240.campaign240-align-center .campaign240-copy{text-align:center}
+.campaign240.campaign240-align-center .campaign240-footer{text-align:center}
+.campaign240 .campaign240-copy>:is(.campaign240-headline,.campaign240-message,.campaign240-footer){display:grid;align-content:center;box-sizing:border-box;height:100%;max-height:126px;padding-block:3px}
+.campaign240 .campaign240-copy>.campaign240-footer{white-space:nowrap;overflow-wrap:normal}
+.campaign240 .campaign240-tab{left:50%;transform:translateX(-50%);max-width:740px;min-width:255px;background:var(--campaign-accent);color:var(--campaign-text);padding-left:22px;padding-right:22px}
+.campaign240 .campaign240-tab span{display:block;max-width:696px;height:33px;white-space:nowrap;font:italic 700 32px/1 var(--display);overflow:hidden}
+.campaign240 .campaign240-logo{left:30px;bottom:17px;width:222px;height:222px;display:grid;place-items:center}
+.campaign240 .campaign240-logo img{width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:none;transform:none}
+.campaign240 .campaign240-image{left:auto;right:52px;bottom:28px;width:min(var(--campaign-image-size),140px);height:min(var(--campaign-image-size),140px);display:block;box-sizing:border-box;padding:8px;background:#fff;clip-path:none;overflow:visible;filter:none;transform:none;rotate:none}
+.campaign240 .campaign240-image img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;filter:none;transform:none;rotate:none;clip-path:none;mix-blend-mode:normal;image-rendering:auto}
+.campaign240.campaign240-image-art .campaign240-image{padding:0;background:transparent}
+.campaign240.campaign240-compact{width:1200px}
+.campaign240-compact .campaign240-logo{width:184px;height:202px}
+.campaign240-compact.campaign240-has-logo .campaign240-copy{left:242px}
+.campaign240-compact .campaign240-copy{gap:24px}
+.campaign240-compact .campaign240-headline{font-size:calc(56px * var(--campaign-scale))}
+.campaign240-compact .campaign240-tab{max-width:620px}
+.campaign240-compact .campaign240-tab span{max-width:576px}
+
+/* The news rails provide the reveal; do not animate the entire shell again. */
+.graphics-layer.animate-in[data-motion=auto]>.campaign240{animation:none}
+.graphics-layer.animate-in[data-motion=auto]>.campaign240 .campaign240-copy{animation:news-copy156 .28s .45s both}
+.graphics-layer.leaving[data-motion=auto]>.campaign240 .campaign240-copy{animation:news-copy156 .15s reverse both}
+.graphics-layer[data-motion=fade] .campaign240-copy{animation:none!important}
+@media(prefers-reduced-motion:reduce){.graphics-layer .campaign240,.graphics-layer .campaign240 *{animation:none!important;transition:none!important}}

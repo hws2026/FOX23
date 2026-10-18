@@ -1,0 +1,749 @@
+{
+  "release": 240,
+  "createdAt": "2026-10-18T15:54:50.285966+00:00",
+  "scope": [
+    "Editable campaign ribbon with separate optional logo and custom QR/art slots",
+    "No implicit WLD logo; QR remains fully inside the face",
+    "Copy runs horizontally across the available ribbon width",
+    "Full and compact ribbons always remain horizontally centered",
+    "Campaign-only symmetric metal rail and straight face floor, preserving center-out motion",
+    "Complete local package plus loopback launchers and missing-file preflight"
+  ],
+  "tests": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "name": "renderer",
+        "chunk_id": "3510d6",
+        "wall_time_seconds": 0.338855417,
+        "exit_code": 0,
+        "original_token_count": 421,
+        "output": "\u2714 new graphic is opt-in and does not render for existing types (1.748084ms)\n\u2714 default campaign has editable typography and no implicit network logo (1.98ms)\n\u2714 both compact news layouts are distinct and arbitrary class input falls back (3.098375ms)\n\u2714 cue uses own text/colors/images and does not borrow global team branding (2.359ms)\n\u2714 blank optional copy and explicitly removed images remain absent (1.020084ms)\n\u2714 operator text is HTML escaped including attributes (0.300625ms)\n\u2714 colors only accept six digit hex, preventing style injection (0.115542ms)\n\u2714 numeric knobs are bounded and invalid inputs use defaults (0.341125ms)\n\u2714 alignment is enum checked (0.159458ms)\n\u2714 upload images and bundled package assets are accepted (0.10825ms)\n\u2714 active schemes, remote URLs, traversal and broken data URIs are rejected (0.080375ms)\n\u2714 invalid images never become image nodes (0.069708ms)\n\u2714 headline preserves operator line breaks and is bounded defensively (0.05775ms)\n\u2714 kicker preserves the full core-accepted 120 characters and bounds longer input (0.230792ms)\n\u2714 fitting is safe on missing or hidden roots (0.390209ms)\n\u2714 fitting resets old measurements and reduces overflow without mutating cues (28.584542ms)\n\u2714 campaign shell reuses news geometry and motion with scoped overrides (6.434459ms)\n\u2714 QR slot is opt-in, flat, contained and separate from logo (15.18325ms)\n\u2714 largest QR stays inside the news face and away from its beveled end (1.806708ms)\n\u2714 campaign lower rail is symmetric and keeps a straight face floor (24.890875ms)\n\u2139 tests 20\n\u2139 suites 0\n\u2139 pass 20\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 256.438209\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "name": "module-cache",
+        "chunk_id": "298d0f",
+        "wall_time_seconds": 0.335330334,
+        "exit_code": 0,
+        "original_token_count": 46,
+        "output": "PASS: 53 module URLs scanned from controller, output and command entry points; critical modules have one version identity; worker loads asset manifest and migrates cloud snapshots.\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "name": "startup",
+        "chunk_id": "a0bc40",
+        "wall_time_seconds": 0.335268542,
+        "exit_code": 0,
+        "original_token_count": 408,
+        "output": "PASS cloud sign-in waits for actual worker ready and startup stages stay visible\nPASS bounded engine hang terminates worker before sign-in with no requests or writes\nPASS bounded storage hang terminates worker before sign-in with no requests or writes\nPASS bounded runtime hang terminates worker before sign-in with no requests or writes\nPASS bounded assets hang terminates worker before sign-in with no requests or writes\nPASS bounded show hang terminates worker before sign-in with no requests or writes\nPASS initialization error rejects startup and pending RPC once; late replies cannot publish\nPASS worker error is fatal during initialization\nPASS worker messageerror is fatal during initialization\nPASS successful local startup preserves state request, controller lock, and no cloud connection\nPASS secure-context, local-server, locking and worker-construction failures remain actionable\nPASS remote pairing path remains independent of local runtime\nPASS worker emits ready only after files, saved snapshot, show import and local checkpoint are initialized\nPASS worker engine error is reported without needing an RPC or unhandled rejection\nPASS worker storage error is reported without needing an RPC or unhandled rejection\nPASS worker runtime error is reported without needing an RPC or unhandled rejection\nPASS worker assets error is reported without needing an RPC or unhandled rejection\nPASS worker show error is reported without needing an RPC or unhandled rejection\nPASS blocked IndexedDB cannot falsely declare ready; cloud startup does not initialize local rollback checkpoint\nPASS 19 startup and runtime scenarios.\n"
+      }
+    }
+  ],
+  "syntaxChecks": [
+    {
+      "path": "ar-link.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "asset-library228.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "boot.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "bridge.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "broadcast-rehearsal.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "campaign-editor240.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "campaign240.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "capture-review238.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "cloud/output.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "cloud/sync.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "deck-connect.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "graphics-audit233-model.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "graphics-audit233.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "graphics-frames234.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "graphics.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "logos-review235.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "mlb-review236.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "overlay-boot.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "pair-controller.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "pair-output.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "panel.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "plugin-download.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "pregame-review.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "runtime-worker.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "scores-bug224.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "scores-data203.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "scores-panel203.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "scores-players208.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "scores-render203.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "scores-review238.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "scores-sequence224.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "split192.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "stream-playlist208.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "team-library.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "timeout-review237.js",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "path": "core.py",
+      "passed": true
+    },
+    {
+      "path": "start-local.py",
+      "passed": true
+    }
+  ],
+  "core": {
+    "passed": 11,
+    "atomicRejections": 71,
+    "checks": [
+      "new campaign has independent, valid defaults and a global cue-library key",
+      "all design fields survive preview and take; campaign holds until explicitly hidden",
+      "preview edits do not alter program; Apply updates design and Hide retains the cue",
+      "switching graphics recalls campaign design without changing existing graphics or show identity",
+      "invalid enums, numbers, colors, text, image URIs, bytes and oversized uploads reject atomically",
+      "range endpoints, three headline lines and explicit image removal are accepted",
+      "library assignments target campaign preview and preserve separate logo and custom-image/QR slots",
+      "export/restore preserves latest saved design, older playlist design and inline QR image assets",
+      "restored playlist takes the intended campaign design without a stinger timer",
+      "invalid preview, library and playlist campaign assets reject a restore atomically",
+      "campaign editor starts with valid appearance defaults after Clear Show"
+    ],
+    "isolated": true
+  },
+  "assetLibrary": {
+    "passed": 4,
+    "checks": [
+      "campaign image usage appears for preview, program, saved library and playlist",
+      "usage inspection does not mutate show state",
+      "existing NFL/MLB logo assignment labels remain present",
+      "library exposes separate campaign logo/custom-image/QR destinations"
+    ]
+  },
+  "launcherTests": {
+    "passed": 18,
+    "source": "work/portable240/test-local.py",
+    "environment": "macOS Python, loopback HTTP"
+  },
+  "browser": {
+    "engine": "actual Pyodide runtime",
+    "connected": true,
+    "uploadedQRSurvivedReload": true,
+    "previewAndTakeLiveVerified": true,
+    "layoutCases": [
+      {
+        "case": "compact",
+        "card": {
+          "bottom": 828.6931610107422,
+          "height": 178.2551727294922,
+          "right": 1112.3074645996094,
+          "width": 855.6249389648438,
+          "x": 256.6825256347656,
+          "y": 650.43798828125
+        },
+        "centerError": 0.00421142578125,
+        "face": {
+          "bottom": 810.8676605224609,
+          "height": 103.38639831542967,
+          "right": 1107.3190307617188,
+          "width": 845.6480102539062,
+          "x": 261.6710205078125,
+          "y": 707.4812622070312
+        },
+        "image": {
+          "bottom": 808.7309341430664,
+          "height": 96.9678726196289,
+          "right": 1075.234733581543,
+          "width": 96.96782684326172,
+          "x": 978.2669067382812,
+          "y": 711.7630615234375
+        },
+        "stage": {
+          "bottom": 878.6029510498047,
+          "height": 770.0558471679688,
+          "right": 1368.9984130859375,
+          "width": 1368.9984130859375,
+          "x": 0,
+          "y": 108.54710388183594
+        },
+        "text": [
+          {
+            "box": {
+              "bottom": 809.7951354980469,
+              "height": 89.83432006835938,
+              "right": 541.9989166259766,
+              "width": 239.68836975097656,
+              "x": 302.310546875,
+              "y": 719.9608154296875
+            },
+            "overflowX": false,
+            "overflowY": false,
+            "text": "INSPIRE CHANGE"
+          },
+          {
+            "box": {
+              "bottom": 809.7951354980469,
+              "height": 89.83432006835938,
+              "right": 750.8668060302734,
+              "width": 191.7573699951172,
+              "x": 559.1094360351562,
+              "y": 719.9608154296875
+            },
+            "overflowX": false,
+            "overflowY": false,
+            "text": "IT TAKES ALL OF US"
+          },
+          {
+            "box": {
+              "bottom": 809.7951354980469,
+              "height": 89.83432006835938,
+              "right": 959.7264251708984,
+              "width": 191.74913024902344,
+              "x": 767.977294921875,
+              "y": 719.9608154296875
+            },
+            "overflowX": false,
+            "overflowY": false,
+            "text": "NFL.COM/INSPIRECHANGE"
+          }
+        ]
+      },
+      {
+        "case": "compact-long-max-image",
+        "card": {
+          "bottom": 828.6931610107422,
+          "height": 178.2551727294922,
+          "right": 1112.3074645996094,
+          "width": 855.6249389648438,
+          "x": 256.6825256347656,
+          "y": 650.43798828125
+        },
+        "centerError": 0.00421142578125,
+        "face": {
+          "bottom": 810.8676605224609,
+          "height": 103.38639831542967,
+          "right": 1107.3190307617188,
+          "width": 845.6480102539062,
+          "x": 261.6710205078125,
+          "y": 707.4812622070312
+        },
+        "image": {
+          "bottom": 808.7308959960938,
+          "height": 99.819580078125,
+          "right": 1075.2346954345703,
+          "width": 99.8195343017578,
+          "x": 975.4151611328124,
+          "y": 708.9113159179688
+        },
+        "stage": {
+          "bottom": 878.6029510498047,
+          "height": 770.0558471679688,
+          "right": 1368.9984130859375,
+          "width": 1368.9984130859375,
+          "x": 0,
+          "y": 108.54710388183594
+        },
+        "text": [
+          {
+            "box": {
+              "bottom": 809.7951354980469,
+              "height": 89.83432006835938,
+              "right": 540.9014739990234,
+              "width": 238.59092712402344,
+              "x": 302.310546875,
+              "y": 719.9608154296875
+            },
+            "overflowX": false,
+            "overflowY": false,
+            "text": "BUILDING A BETTER FUTURE TOGETHER IN OUR COMMUNITY"
+          },
+          {
+            "box": {
+              "bottom": 809.7951354980469,
+              "height": 89.83432006835938,
+              "right": 748.8880157470703,
+              "width": 190.8760528564453,
+              "x": 558.011962890625,
+              "y": 719.9608154296875
+            },
+            "overflowX": false,
+            "overflowY": false,
+            "text": "EVERY NEIGHBOR. EVERY OPPORTUNITY. TOGETHER WE SUPPORT EDUCATION, CREATE OPPORTUNITY, AND CELEBRATE THE PEOPLE WHO BRING OUR COMMUNITY CLOSER."
+          },
+          {
+            "box": {
+              "bottom": 809.7951354980469,
+              "height": 89.83432006835938,
+              "right": 956.8745880126952,
+              "width": 190.8760528564453,
+              "x": 765.99853515625,
+              "y": 719.9608154296875
+            },
+            "overflowX": false,
+            "overflowY": false,
+            "text": "YOUR ORGANIZATION \u2022 CELEBRATE COMMUNITY \u2022 YOURWEBSITE.EXAMPLE/COMMUNITY"
+          }
+        ]
+      },
+      {
+        "case": "full-long-max-image",
+        "card": {
+          "bottom": 828.6931610107422,
+          "height": 178.2551727294922,
+          "right": 1311.9549522399902,
+          "width": 1254.91162109375,
+          "x": 57.043331146240234,
+          "y": 650.43798828125
+        },
+        "centerError": 6.4849853515625e-05,
+        "face": {
+          "bottom": 810.8676605224609,
+          "height": 103.38639831542967,
+          "right": 1306.9665069580078,
+          "width": 1244.9346923828125,
+          "x": 62.03181457519531,
+          "y": 707.4812622070312
+        },
+        "image": {
+          "bottom": 808.7308959960938,
+          "height": 99.819580078125,
+          "right": 1274.8822479248047,
+          "width": 99.8196258544922,
+          "x": 1175.0626220703125,
+          "y": 708.9113159179688
+        },
+        "stage": {
+          "bottom": 878.6029510498047,
+          "height": 770.0558471679688,
+          "right": 1368.9984130859375,
+          "width": 1368.9984130859375,
+          "x": 0,
+          "y": 108.54710388183594
+        },
+        "text": [
+          {
+            "box": {
+              "bottom": 809.7951354980469,
+              "height": 89.83432006835938,
+              "right": 489.35377502441406,
+              "width": 386.6824340820313,
+              "x": 102.6713409423828,
+              "y": 719.9608154296875
+            },
+            "overflowX": false,
+            "overflowY": false,
+            "text": "BUILDING A BETTER FUTURE TOGETHER IN OUR COMMUNITY"
+          },
+          {
+            "box": {
+              "bottom": 809.7951354980469,
+              "height": 89.83432006835938,
+              "right": 822.9420471191406,
+              "width": 309.3525695800781,
+              "x": 513.5894775390625,
+              "y": 719.9608154296875
+            },
+            "overflowX": false,
+            "overflowY": false,
+            "text": "EVERY NEIGHBOR. EVERY OPPORTUNITY. TOGETHER WE SUPPORT EDUCATION, CREATE OPPORTUNITY, AND CELEBRATE THE PEOPLE WHO BRING OUR COMMUNITY CLOSER."
+          },
+          {
+            "box": {
+              "bottom": 809.7951354980469,
+              "height": 89.83432006835938,
+              "right": 1156.5221557617188,
+              "width": 309.34429931640625,
+              "x": 847.1778564453125,
+              "y": 719.9608154296875
+            },
+            "overflowX": false,
+            "overflowY": false,
+            "text": "YOUR ORGANIZATION \u2022 CELEBRATE COMMUNITY \u2022 YOURWEBSITE.EXAMPLE/COMMUNITY"
+          }
+        ]
+      },
+      {
+        "case": "full",
+        "card": {
+          "bottom": 828.6931610107422,
+          "height": 178.2551727294922,
+          "right": 1311.9549522399902,
+          "width": 1254.91162109375,
+          "x": 57.043331146240234,
+          "y": 650.43798828125
+        },
+        "centerError": 6.4849853515625e-05,
+        "face": {
+          "bottom": 810.8676605224609,
+          "height": 103.38639831542967,
+          "right": 1306.9665069580078,
+          "width": 1244.9346923828125,
+          "x": 62.03181457519531,
+          "y": 707.4812622070312
+        },
+        "image": {
+          "bottom": 808.7309341430664,
+          "height": 96.9678726196289,
+          "right": 1274.8822555541992,
+          "width": 96.96782684326172,
+          "x": 1177.9144287109375,
+          "y": 711.7630615234375
+        },
+        "stage": {
+          "bottom": 878.6029510498047,
+          "height": 770.0558471679688,
+          "right": 1368.9984130859375,
+          "width": 1368.9984130859375,
+          "x": 0,
+          "y": 108.54710388183594
+        },
+        "text": [
+          {
+            "box": {
+              "bottom": 809.7951354980469,
+              "height": 89.83432006835938,
+              "right": 490.45127868652344,
+              "width": 387.7799377441406,
+              "x": 102.6713409423828,
+              "y": 719.9608154296875
+            },
+            "overflowX": false,
+            "overflowY": false,
+            "text": "INSPIRE CHANGE"
+          },
+          {
+            "box": {
+              "bottom": 809.7951354980469,
+              "height": 89.83432006835938,
+              "right": 824.9125061035156,
+              "width": 310.2255554199219,
+              "x": 514.6869506835938,
+              "y": 719.9608154296875
+            },
+            "overflowX": false,
+            "overflowY": false,
+            "text": "IT TAKES ALL OF US"
+          },
+          {
+            "box": {
+              "bottom": 809.7951354980469,
+              "height": 89.83432006835938,
+              "right": 1159.3738708496094,
+              "width": 310.2255554199219,
+              "x": 849.1483154296875,
+              "y": 719.9608154296875
+            },
+            "overflowX": false,
+            "overflowY": false,
+            "text": "NFL.COM/INSPIRECHANGE"
+          }
+        ]
+      }
+    ],
+    "startupObservation": "One reload reported a transient dynamic import failure. The file was present and returned HTTP 200; Reload controller recovered to Connected. Exact transient cause remains unconfirmed."
+  },
+  "railReference": {
+    "scope": "Campaign-only lower news ribbon rail and face; existing breaking-news graphics remain unchanged.",
+    "evidence": [
+      {
+        "file": "work/new156/frame400.jpg",
+        "crop": "work/campaign240/rail-ref400.png",
+        "observation": "Breaking-news ribbon has one straight dark face floor; matching left/right lower metallic wings end in shallow inward bevels."
+      },
+      {
+        "file": "work/new156/frame412.jpg",
+        "crop": "work/campaign240/rail-ref412.png",
+        "observation": "Clear lower edge confirms symmetric wing depth and a shallow central recess, without the previous uneven multi-step profile."
+      },
+      {
+        "file": "work/campaign240/video-evidence/07-36-44-040.jpg",
+        "sourceTimeSeconds": 40.007,
+        "crop": "work/campaign240/rail-refhowie.png",
+        "observation": "EXTRA POINTS variant uses the same straight face floor and mirrored side bevels."
+      }
+    ],
+    "previousMismatch": "The shared news-rails.svg lower outline stepped from y165 at left through y157/y163 in the center and down to y176 at right; campaign screenshot made this asymmetric zigzag visible.",
+    "correction": {
+      "asset": "package/Gridiron-Pages-Upload/campaign240-rails.svg",
+      "normalizedViewBox": [
+        0,
+        0,
+        1760,
+        176
+      ],
+      "faceFloorY": 151,
+      "outerWingFloorY": 165,
+      "centerRecessFloorY": 156,
+      "geometry": "Every lower-outline vertex has a reflected partner around x880. The inner floor is a single horizontal segment from x54 to1706. The center remains visible at inherited clip inset88%, preserving center-out reveal.",
+      "qrBoundsAtMaximum": {
+        "size": 140,
+        "top": 8,
+        "bottom": 148,
+        "rightInset": 52
+      },
+      "animation": "Existing news-metal-in156 and news-face156 entry/exit choreography is inherited unchanged."
+    },
+    "validation": "20 renderer/security/geometry tests passed; root agent owns final browser review.",
+    "limitation": "Geometry is a reference-informed campaign adaptation, not a pixel-perfect claim for an unobserved Inspire Change card."
+  },
+  "preservation": {
+    "originalLogoPNGsUnchanged": 66,
+    "cloudConfigurationChanged": false,
+    "CNAMEChanged": false,
+    "hostedShowMutation": false,
+    "otherGraphicsStyleChanges": "Version-query updates only"
+  },
+  "changedExistingFiles": [
+    "additions-review190.html",
+    "additions-review194.html",
+    "animation-review171.html",
+    "ar-link.js",
+    "asset-library228.js",
+    "audit193-responsive.html",
+    "audit193-updates.html",
+    "audit193.html",
+    "boot.js",
+    "bridge.js",
+    "broadcast-rehearsal.html",
+    "broadcast-rehearsal.js",
+    "capture-review238.html",
+    "capture-review238.js",
+    "cloud/output.js",
+    "cloud/sync.js",
+    "command.html",
+    "core.py",
+    "deck-connect.js",
+    "graphics-audit233-model.js",
+    "graphics-audit233.html",
+    "graphics-audit233.js",
+    "graphics-frames234.html",
+    "graphics-frames234.js",
+    "graphics-review181.html",
+    "graphics-review193.html",
+    "graphics.js",
+    "index.html",
+    "logos-review235.html",
+    "logos-review235.js",
+    "mlb-review236.html",
+    "mlb-review236.js",
+    "overlay-boot.js",
+    "overlay.html",
+    "pair-controller.js",
+    "pair-output.js",
+    "panel.js",
+    "plugin-download.js",
+    "pregame-review.js",
+    "reference-review192.html",
+    "reference.css",
+    "review219.html",
+    "runtime-worker.js",
+    "scorebug-review172.html",
+    "scores-bug224.js",
+    "scores-data203.js",
+    "scores-panel203.js",
+    "scores-players208.js",
+    "scores-render203.js",
+    "scores-review224.html",
+    "scores-review225.html",
+    "scores-review238.html",
+    "scores-review238.js",
+    "scores-sequence224.js",
+    "split192.js",
+    "spotlight-review144.html",
+    "stream-playlist208.js",
+    "team-gallery.html",
+    "team-library.js",
+    "timeout-review237.html",
+    "timeout-review237.js",
+    "transition-check158.html"
+  ],
+  "newOrDocumentationFiles": [
+    "LOCAL-SHOW.txt",
+    "README.md",
+    "Start Local Show.bat",
+    "Start Local Show.command",
+    "campaign-editor240.js",
+    "campaign240-rails.svg",
+    "campaign240.css",
+    "campaign240.js",
+    "start-local.py"
+  ],
+  "completePackageExclusions": [
+    "INSTALL-197.txt",
+    "INSTALL-198.txt",
+    "INSTALL-199.txt",
+    "INSTALL-200.txt",
+    "INSTALL-201.txt",
+    "INSTALL-202.txt",
+    "INSTALL-203.txt",
+    "INSTALL-204.txt",
+    "INSTALL-205.txt",
+    "INSTALL-207.txt",
+    "INSTALL-209.txt",
+    "INSTALL-210.txt",
+    "INSTALL-211.txt",
+    "INSTALL-212.txt",
+    "INSTALL-213.txt",
+    "INSTALL-214.txt",
+    "INSTALL-215.txt",
+    "INSTALL-216.txt",
+    "INSTALL-217.txt",
+    "INSTALL-FIX-196.txt",
+    "START-HERE-217.txt",
+    "UPDATE-171.txt",
+    "UPDATE-172.txt",
+    "UPDATE-173.txt",
+    "UPDATE-174.txt",
+    "UPDATE-175.txt",
+    "UPDATE-176-FILES.txt",
+    "UPDATE-176.txt",
+    "UPDATE-193.txt",
+    "UPDATE-194.txt",
+    "__verify236/",
+    "cloud-test222.html",
+    "work/"
+  ],
+  "limitations": [
+    "Exact Inspire Change broadcast variant was not located in sampled reference videos; this is an editable adaptation of the reviewed news-ribbon family.",
+    "QR containment and original image rendering were verified; phone scanning at final broadcast size remains an operator check.",
+    "Windows launcher was reviewed and logically tested, not run on a Windows machine.",
+    "The local show still needs internet for first-load Pyodide and online feeds.",
+    "No hosted deployment or physical OBS output verification was performed."
+  ]
+}

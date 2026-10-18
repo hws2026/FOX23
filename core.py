@@ -32,7 +32,8 @@ _asset_checked_library=None
 POSITIONS = ['QB','LT','LG','C','RG','RT','WR','WR','TE','RB','WR','DE','DT','DT','DE','LB','LB','LB','CB','CB','FS','SS','K','P']
 NAMES = ['Jordan Ellis','Marcus Reed','Cameron Price','Alex Morgan','Drew Collins','Taylor Brooks','Jalen Carter','Noah Hayes','Mason Cole','Evan Grant','Devin Ross','Cole Bennett','Tyler James','Owen Parker','Blake Foster','Avery Scott','Logan West','Riley Davis','Kai Turner','Miles Ward','Nolan King','Isaiah Bell','Sam Lewis','Jesse Gray']
 FORMATION_LABELS = {'4-3-4': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '3-4-4': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-2-5': ['DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '3-3-5': ['DL', 'DL', 'DL', 'LB', 'LB', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB'], '5-2-4': ['DL', 'DL', 'DL', 'DL', 'DL', 'LB', 'LB', 'CB', 'FS', 'SS', 'CB'], '4-1-6': ['DL', 'DL', 'DL', 'DL', 'LB', 'CB', 'CB', 'FS', 'SS', 'CB', 'CB']}
-GRAPHICS = {'sponsorpick','teamrecord','playerdock','seasonwall','weatherdetail','matchupclean','matchupbadge','comingupmatchup','reporterbadge','languagepromo','splitview','crewfour','playertease','serieshistory','talent','storytease','breaking','countdown','pregameplayer','intro','referee','standings','transition','scoringdrive','none','qbstats','scorebug','matchup','offense','defense','quarterback','player','coach','lowerthird','stats','teamstats','roster','event','period','final','announcers','sponsor','weather','reporter','situation','break'}
+GRAPHICS = {'inspirechange','sponsorpick','teamrecord','playerdock','seasonwall','weatherdetail','matchupclean','matchupbadge','comingupmatchup','reporterbadge','languagepromo','splitview','crewfour','playertease','serieshistory','talent','storytease','breaking','countdown','pregameplayer','intro','referee','standings','transition','scoringdrive','none','qbstats','scorebug','matchup','offense','defense','quarterback','player','coach','lowerthird','stats','teamstats','roster','event','period','final','announcers','sponsor','weather','reporter','situation','break'}
+CAMPAIGN_DEFAULTS = {'campaignLayout':'ribbon','campaignHeadline':'IT TAKES ALL OF US','campaignKicker':'INSPIRE CHANGE','campaignMessage':'','campaignFooter':'NFL.COM/INSPIRECHANGE','campaignPrimary':'#101820','campaignAccent':'#00bce4','campaignText':'#ffffff','campaignLogo':'','campaignImage':'','campaignScale':100,'campaignAlign':'left','campaignImageSize':136,'campaignImageMode':'qr'}
 def roster(side):
     return [{'id':f'{side}-{i+1}', 'name':name, 'number':str(([7,72,64,55,68,77,11,18,86,24,13,90,95,98,91,50,54,56,21,23,30,32,3,9][i]+(2 if side=='home' else 0))%100), 'position':pos,'photo':'','stats':{'YDS':'248','TD':'2','CMP':'19/27'}} for i,(name,pos) in enumerate(zip(NAMES,POSITIONS))]
 def default_state():
@@ -66,6 +67,7 @@ def initial_cue(kind,team='away'):
         for key,value in list(cue.items()):
             if isinstance(value,str) and key not in ['type','team','transition','outTransition']:cue[key]=''
         cue['stats']=[]
+    if kind=='inspirechange':cue.update(title='',subtitle='',**CAMPAIGN_DEFAULTS)
     return cue
 
 def expire_timed_graphic(now=None):
@@ -209,7 +211,10 @@ def ensure_assets():
         for row in team.get('staff',[]):remember(row.get('photo'),(row.get('name') or 'Coach')+' photo','coach')
     for field,label in [('networkLogo','Network logo'),('sponsorLogo','Sponsor logo'),('secondaryLogo','Secondary broadcast logo'),('introLogo','Intro logo'),('conferenceLogo','Transition logo')]:remember(STATE.get('branding',{}).get(field),label,'branding')
     cues=[STATE.get('preview',{}),STATE.get('program',{}).get('graphic',{})]+list(STATE.get('program',{}).get('cueLibrary',{}).values())+[row.get('cue',{}) for row in STATE.get('program',{}).get('playlist',[])]
-    for cue in cues:remember(cue.get('storyImage'),(cue.get('title') or 'Story')+' image','other')
+    for cue in cues:
+        remember(cue.get('storyImage'),(cue.get('title') or 'Story')+' image','other')
+        remember(cue.get('campaignLogo'),'Campaign logo','branding')
+        remember(cue.get('campaignImage'),'Campaign custom image / QR','other')
 
 
 def normalize_score_leagues238(state):
@@ -346,8 +351,9 @@ def _update(action,p):
             if field=='conferenceLogo' and 'autoColor' in target:payload['conferenceAutoColor']=color(target['autoColor'])
             update('branding',payload)
         elif kind=='preview':
-            if target.get('field')!='storyImage':raise ValueError('Choose the story image field.')
-            update('preview',{'type':'seasonwall','storyImage':src})
+            field=target.get('field')
+            if field not in ['storyImage','campaignLogo','campaignImage']:raise ValueError('Choose a story or campaign image field.')
+            update('preview',{'type':'seasonwall' if field=='storyImage' else 'inspirechange',field:src})
         else:raise ValueError('Choose a valid asset destination.')
     elif action=='bottom_scores':
         c=STATE.setdefault('bottomScores',{'league':'NFL','visible':False,'auto':True,'games':[],'feedBugVisible':False,'feedBugGameId':''})
@@ -643,6 +649,8 @@ def _update(action,p):
         if kind=='transition':
             cue['transitionStyle']=style
             STATE['program']['lastTransitionStyle']=style
+        if kind=='inspirechange':
+            for field,value in CAMPAIGN_DEFAULTS.items():cue.setdefault(field,value)
         cue.setdefault('outTransition',cue.get('transition','auto'))
         for k,v in p.items():
             if k=='type':
@@ -653,6 +661,30 @@ def _update(action,p):
             elif k in ['transition','outTransition']:
                 v={'cut':'auto','rail':'auto'}.get(v,v)
                 if v not in (['auto','fade','pattern','teamwall','networkwall'] if kind=='transition' else ['auto','fade']): raise ValueError('Invalid transition.')
+            elif k=='campaignLayout':
+                if v not in ['ribbon','compact']:raise ValueError('Choose a campaign layout.')
+            elif k=='campaignAlign':
+                if v not in ['left','center']:raise ValueError('Choose left or center alignment.')
+            elif k=='campaignImageMode':
+                if v not in ['qr','art']:raise ValueError('Choose QR code or artwork.')
+            elif k in ['campaignPrimary','campaignAccent','campaignText']:v=color(v)
+            elif k=='campaignScale':
+                if isinstance(v,bool):raise ValueError('Use a number for campaign sizing.')
+                v=float(v)
+                if not math.isfinite(v) or not 70<=v<=130:raise ValueError('Use a number between 70 and 130.')
+            elif k=='campaignImageSize':
+                if isinstance(v,bool):raise ValueError('Use a whole number for image size.')
+                v=float(v)
+                if not math.isfinite(v) or not v.is_integer() or not 96<=v<=140:raise ValueError('Use a whole number between 96 and 140.')
+                v=int(v)
+            elif k=='campaignHeadline':
+                v=bounded_text(v,120).replace('\r\n','\n').replace('\r','\n')
+                if len(v.split('\n'))>3 or any(ord(c)<32 and c!='\n' for c in v):raise ValueError('Use up to three headline lines.')
+            elif k in ['campaignKicker','campaignMessage','campaignFooter']:
+                v=bounded_text(v,240 if k=='campaignMessage' else 120)
+                if any(ord(c)<32 for c in v):raise ValueError('Use a single line for this campaign text.')
+            elif k in ['campaignLogo','campaignImage']:
+                if v!='':v=asset_source(v,upload=True)
             elif k in ['newsLabel','newsShowLogo','newsTeamColor']:
                 if isinstance(v,str): v=v=='true'
                 if type(v) is not bool: raise ValueError('Invalid news toggle.')

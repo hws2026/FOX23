@@ -1,0 +1,56 @@
+WLD SPORTS - LOCAL SHOW ON ANOTHER COMPUTER
+
+1. Download and fully extract the COMPLETE LOCAL package. Keep all files and
+   folders together. An UPDATE ZIP must be merged into an existing complete
+   installation; it will not work by itself on a new computer.
+2. Install Python 3 from https://www.python.org/downloads/ if it is not already
+   installed. This launcher uses Python's built-in web server; no pip packages,
+   npm, VS Code, or Live Server extension are required.
+3. Windows: double-click Start Local Show.bat.
+   macOS: double-click Start Local Show.command.
+   If the macOS file is not executable after downloading from GitHub, open
+   Terminal, type "sh " (with a trailing space), drag Start Local Show.command
+   into Terminal, then press Return.
+   Linux: in a terminal in this folder, run python3 start-local.py.
+4. The launcher checks the package and opens:
+   http://127.0.0.1:5502/index.html
+   Keep its terminal window open while using the controller and outputs.
+   Use a current Chrome or Edge browser. Do not double-click index.html.
+5. On the original computer, choose Output & files -> Export show. Copy that
+   JSON file to the new computer, then use Output & files -> Import show.
+   Import replaces that browser's current show, so export it first if needed.
+
+The downloaded program does not include your browser's saved show. Local saves
+belong to the browser profile and exact address. Always use the same
+http://127.0.0.1:5502/ address; localhost, another port, the GitHub website, and
+another browser profile each have separate saved shows. The local launcher
+does not require the hosted show's login and does not modify the shared show.
+
+Uploaded images contained in your exported show can move with the backup.
+Local video files, cameras, and screen/window capture permissions must be
+selected again on the new computer; the JSON backup does not copy those media
+files or device permissions. Keep any original media you need with your show.
+
+The local launcher needs internet on first startup to download the browser
+Python engine (Pyodide); live scores, rosters, weather, and other online feeds
+also need internet. This package is not guaranteed to run fully offline.
+
+OBS: open Output & files and follow its local capture/pairing instructions.
+Keep the controller open. A separate OBS browser profile does not automatically
+share the local controller's saved show.
+
+TROUBLESHOOTING
+- Missing package files: re-extract the COMPLETE LOCAL package, not just an
+  update. Keep the assets, cloud, and broadcast-logos folders.
+- Port 5502 already in use: use the local show server already running, or close
+  the program using the port and run this launcher again. The launcher will
+  not stop another process or choose a different port automatically.
+- Engine download/startup error: check your connection and whether the browser
+  can reach cdn.jsdelivr.net, then use Reload controller. Do not clear browser
+  storage or reset your show to fix a network problem.
+- Check package only: python3 start-local.py --check (Windows: py -3 instead).
+
+Advanced: --no-browser keeps startup in the terminal. --port NUMBER changes
+the address and therefore the browser save location; export/import when moving
+between addresses. The server accepts connections only from this computer
+(127.0.0.1), never from the LAN or internet.

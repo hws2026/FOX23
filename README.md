@@ -1,10 +1,18 @@
-# Gridiron — one-batch GitHub Pages upload
+# WLD SPORTS — complete show package
 
-1. Extract this ZIP. In an empty GitHub repository, choose **Add file → Upload files**. Drag **all the extracted contents**, including `index.html` and the `assets` folder, into the upload area together. Commit once. Do not upload the ZIP itself or an extra enclosing folder.
+For a local show on another computer, extract the **entire ZIP**, then follow [LOCAL-SHOW.txt](LOCAL-SHOW.txt). Run `Start Local Show.command` on Mac or `Start Local Show.bat` on Windows. The launcher checks required files and opens `http://127.0.0.1:5502/index.html`. Python 3 and an internet connection for the browser runtime are required. Do not open `index.html` directly. An UPDATE ZIP alone is not a complete installation.
+
+On the original computer, use **Output & files → Export show**. On the destination computer, start the local panel and import that JSON. Re-select local videos and browser/window captures on the destination computer. Keep backups of your show exports.
+
+**Inspire Change campaign:** Graphics library → News & breaks → Campaigns. Choose a news-style or compact ribbon. Edit colors, text size/alignment, copy, logo and uploaded artwork / QR code; Update preview, then Take Live. The graphic holds until hidden. Save different designs as playlist items. Images and design settings are included in show export/import.
+
+## GitHub Pages hosting
+
+1. Extract this ZIP. Use GitHub Desktop or Git to copy the complete extracted contents into your repository, including `index.html`, `assets`, both logo folders, `cloud`, `ar`, and `.nojekyll`. Commit and push the files at the repository root; do not upload the ZIP itself or an extra enclosing folder. The complete app has thousands of files, so GitHub's browser uploader (100 files per upload) is unsuitable for a single complete upload.
 2. Open **Settings → Pages**. Choose **Deploy from a branch**, **main**, **/(root)**, then Save.
 3. Open the published URL. In the panel, click **Download Stream Deck plugin** to get your site-configured installer. Install it, then drag the Gridiron actions onto your keys.
 
-No terminal, npm install, Python installation or build command is required to use this upload. First load downloads the browser runtime. This folder contains the complete running site's HTML, CSS, JS, and Python control rules.
+No terminal, npm install, Python installation or build command is required for GitHub Pages hosting. First load downloads the browser runtime. This folder contains the complete running site's HTML, CSS, JS, and Python control rules.
 
 OBS: use **Output & files**, open the magenta output in the same browser profile, and Window Capture it with a magenta Chroma Key filter. An ordinary OBS Browser Source does not share your browser's saved state. **Pair OBS** is experimental and unverified on hardware.
 

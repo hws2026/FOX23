@@ -1,4 +1,4 @@
-import {cloudEnabled,connectCloud} from './cloud/sync.js?v=update239';
+import {cloudEnabled,connectCloud} from './cloud/sync.js?v=update240';
 export const base=new URL('.',import.meta.url);
 export const channel=new BroadcastChannel('gridiron-pages:'+base.pathname);
 const originalFetch=globalThis.fetch.bind(globalThis);let remoteRPC,cloudRPC,worker,workerFailure,sequence=0,pending=new Map(),current,readyResolve;
@@ -17,7 +17,7 @@ function startRuntime239(){return new Promise((resolve,reject)=>{
  };
  const deadline=setTimeout(()=>fail(Object.assign(Error('The show engine did not finish starting within 60 seconds. Last step: '+stage+' Reload controller to retry.'),{code:'RUNTIME_INIT_TIMEOUT'})),60000);
  try{
-  worker=new Worker(new URL('runtime-worker.js?v=update239'+(cloudEnabled?'&cloud=1':''),base));
+  worker=new Worker(new URL('runtime-worker.js?v=update240'+(cloudEnabled?'&cloud=1':''),base));
   worker.onmessage=({data})=>{
    if(workerFailure)return;
    if(data.kind==='runtime-startup'){

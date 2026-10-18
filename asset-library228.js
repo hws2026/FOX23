@@ -4,7 +4,7 @@ import {mlbLogoAssignments236} from './mlb-logos236.js';
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const kinds = {team:'Team logos', player:'Players', coach:'Coaches', branding:'Show logos', other:'Other images'};
-const slots = {teamLogo:'Team logo', heroLogo:'Raised team logo / helmet', player:'Player photo', coach:'Coach photo', networkLogo:'Network logo', sponsorLogo:'Sponsor logo', secondaryLogo:'Secondary show logo', introLogo:'Intro logo', conferenceLogo:'Transition logo', storyImage:'Story wall image'};
+const slots = {teamLogo:'Team logo', heroLogo:'Raised team logo / helmet', player:'Player photo', coach:'Coach photo', networkLogo:'Network logo', sponsorLogo:'Sponsor logo', secondaryLogo:'Secondary show logo', introLogo:'Intro logo', conferenceLogo:'Transition logo', storyImage:'Story wall image', campaignLogo:'Campaign logo', campaignImage:'Campaign custom image / QR'};
 const brandingLabels = {networkLogo:'Network logo', sponsorLogo:'Sponsor logo', secondaryLogo:'Secondary show logo', introLogo:'Intro logo', conferenceLogo:'Transition logo'};
 const option = (value, label, selected) => `<option value="${esc(value)}"${value === selected ? ' selected' : ''}>${esc(label)}</option>`;
 
@@ -31,6 +31,12 @@ export function assetUses(state) {
   }
   for (const [field, label] of Object.entries(brandingLabels)) add(state.branding?.[field], label);
   add(state.preview?.storyImage, 'Story wall · preview');
+  const campaignCues = [[state.preview, 'preview'], [state.program?.graphic, 'on air'], ...Object.values(state.program?.cueLibrary || {}).map(cue => [cue, 'saved graphic']), ...(state.program?.playlist || []).map(row => [row.cue, `playlist · ${row.name || 'Campaign'}`])];
+  for (const [cue, label] of campaignCues) {
+    if (cue?.type !== 'inspirechange') continue;
+    add(cue.campaignLogo, `Campaign logo · ${label}`);
+    add(cue.campaignImage, `Campaign custom image / QR · ${label}`);
+  }
   return uses;
 }
 
@@ -47,7 +53,7 @@ export function createAssetLibrary({getState, act, imageFile, toast, render, sam
     if (['teamLogo','heroLogo','player','coach'].includes(slot)) extra += teamSelect(state);
     if (slot === 'player') extra += `<label>Player<select id="asset-person228" required>${groupedPlayerOptions(team.roster, person, {placeholder:'Choose a player'})}</select></label>`;
     if (slot === 'coach') extra += `<label>Coach<select id="asset-person228" required>${option('', 'Choose a coach', person)}${(team.staff || []).map(p => option(p.id, `${p.name} · ${p.role}`, person)).join('')}</select></label>`;
-    return `<form id="asset-assign228"><h3>Assign asset</h3><label>Use as<select id="asset-slot228">${Object.entries(slots).map(([key,label]) => option(key,label,slot)).join('')}</select></label><div class="asset-target228">${extra}</div>${slot === 'storyImage' ? '<p class="help">Opens this image in the Story wall preview. Use Take Live when ready.</p>' : '<p class="help">Assigning replaces the image in this slot. Current team and show images update wherever they are used.</p>'}<button class="primary">Assign asset</button><p id="asset-assignment-status228" role="status"></p></form>`;
+    return `<form id="asset-assign228"><h3>Assign asset</h3><label>Use as<select id="asset-slot228">${Object.entries(slots).map(([key,label]) => option(key,label,slot)).join('')}</select></label><div class="asset-target228">${extra}</div>${slot === 'storyImage' ? '<p class="help">Opens this image in the Story wall preview. Use Take Live when ready.</p>' : ['campaignLogo','campaignImage'].includes(slot) ? '<p class="help">Opens this image in the campaign preview. Use Take Live when ready.</p>' : '<p class="help">Assigning replaces the image in this slot. Current team and show images update wherever they are used.</p>'}<button class="primary">Assign asset</button><p id="asset-assignment-status228" role="status"></p></form>`;
   }
   function cards() {
     const list = visibleItems(), pages = Math.max(1, Math.ceil(list.length / pageSize)); page = Math.min(page, pages - 1);
@@ -93,7 +99,7 @@ export function createAssetLibrary({getState, act, imageFile, toast, render, sam
       let target;
       if (['teamLogo','heroLogo'].includes(chosenSlot)) target = {type:'team',side:chosenSide,field:chosenSlot === 'teamLogo' ? 'logo' : 'heroLogo'};
       else if (['player','coach'].includes(chosenSlot)) { if (!chosenPerson) throw Error(`Choose a ${chosenSlot}.`); target = {type:chosenSlot,side:chosenSide,personId:chosenPerson}; }
-      else if (chosenSlot === 'storyImage') target = {type:'preview',field:'storyImage'};
+      else if (['storyImage','campaignLogo','campaignImage'].includes(chosenSlot)) target = {type:'preview',field:chosenSlot};
       else { target = {type:'branding',field:chosenSlot}; if (chosenSlot === 'conferenceLogo' && sampleLogo) target.autoColor = await sampleLogo(a.src); }
       await act('asset_assign', {id:a.id,target}); refresh(root); toast(`Assigned ${a.name} to ${slots[chosenSlot].toLowerCase()}.`);
     }); };

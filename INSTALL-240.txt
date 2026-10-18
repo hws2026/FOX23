@@ -1,0 +1,26 @@
+WLD 240 - CAMPAIGN RIBBON AND LOCAL SHOW PACKAGE
+
+COMPLETE LOCAL SHOW ZIP: for a new computer. Extract every file and folder.
+Run Start Local Show.command on Mac or Start Local Show.bat on Windows.
+Python 3 is required. See LOCAL-SHOW.txt for startup, show export/import and OBS.
+Keep the launcher window open while using the app. Do not open index.html as a file.
+
+CAMPAIGN LOCAL UPDATE ZIP: merge into an EXISTING COMPLETE installation,
+replacing matching files and keeping all other project files. It is not a
+fresh install. It includes the prior cumulative239 update.
+
+Campaign: Graphics library -> News & breaks -> Campaigns, or select
+Inspire Change - campaign in the Selected graphic menu. Edit copy/colors,
+choose a ribbon size and upload your custom image/QR. Update preview, then
+Take Live. Use Hide graphic to remove it. Images travel in your show export.
+No WLD logo is added automatically. Both sizes remain centered. The text spans
+the ribbon horizontally and the QR stays inside the corrected metal frame.
+
+For hosted use, copy the package into your existing repository using GitHub
+Desktop or Git, commit and push through your normal Pages workflow. Keep your
+existing cloud configuration and custom domain. Reload controller and outputs
+after publishing. This build has not been deployed for you.
+
+The exact Inspire Change variant was not located in the supplied sampled
+videos. This editable version uses the reviewed news-ribbon design family.
+See VALIDATION-240.json for tested coverage and remaining limitations.

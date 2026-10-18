@@ -16,7 +16,7 @@ async function init(){
  py=await loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v0.29.2/full/'});
  postMessage({kind:'runtime-startup',stage:'assets'});
  py.FS.mkdirTree('/studio/data');py.FS.mkdirTree('/studio/catalog');py.FS.mkdirTree('/studio/broadcast-logos226');py.FS.mkdirTree('/studio/broadcast-logos236');
- for(const [url,path] of [['core.py?v=update239','/studio/core.py'],['broadcast-logos226/assignments.json','/studio/broadcast-logos226/assignments.json'],['broadcast-logos236/mlb-assignments.json','/studio/broadcast-logos236/mlb-assignments.json'],['team_library.py?v=photos163','/studio/team_library.py'],['nfl-2026.json?v=photos163','/studio/catalog/nfl-2026.json']]){
+ for(const [url,path] of [['core.py?v=update240','/studio/core.py'],['broadcast-logos226/assignments.json','/studio/broadcast-logos226/assignments.json'],['broadcast-logos236/mlb-assignments.json','/studio/broadcast-logos236/mlb-assignments.json'],['team_library.py?v=photos163','/studio/team_library.py'],['nfl-2026.json?v=photos163','/studio/catalog/nfl-2026.json']]){
   const r=await fetch(url);if(!r.ok)throw Error('Cannot load '+url);py.FS.writeFile(path,await r.text());
  }
  if(saved){py.FS.writeFile('/studio/data/game.json',JSON.stringify(saved.state));py.FS.writeFile('/studio/data/team-library.json',JSON.stringify(saved.library));}
