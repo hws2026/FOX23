@@ -53,6 +53,10 @@ export function createSharedRPC(local, db, {readOnly=false,controllerId=null,onC
         const result=await local(currentRequest);
         if(readOnly)return result;
         if(result.status!==200){
+          // A conditional state read at the confirmed revision did not change
+          // the show. Keep the worker clean instead of reloading every asset on
+          // the next poll. Failures and unfamiliar revisions still roll back.
+          if(request.endpoint==='state'&&result.status===204&&Number(request.query?.since)===baseline.state.revision)localDirty=false;
           // This explicit rejection means the action never ran. A timer may
           // have expired between the revision read and action processing.
           if(controllerId&&request.endpoint==='action'&&result.status===409&&attempt<2)continue;

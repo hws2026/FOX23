@@ -45,9 +45,12 @@ onmessage=({data})=>{queue=queue.then(async()=>{let needsRollback=false;try{
  needsRollback=!cloudMode;
  py.globals.set('request_json',JSON.stringify(data.request));
  const result=JSON.parse(py.runPython('core.pages_request(request_json)'));
+ // Cloud confirmation requests a snapshot explicitly. Avoid serializing the
+ // entire embedded-asset library again for every cloud state/action request.
+ if(!cloudMode){
  const snapshot=JSON.parse(py.runPython('core.pages_snapshot()'));
  const encoded=JSON.stringify(snapshot);
- if(!cloudMode&&encoded!==lastSaved){
+ if(encoded!==lastSaved){
   // Stage the next checkpoint before committing. A quota/transaction failure
   // must never publish the edit or leave it for a later poll to save silently.
   py.runPython('worker_pending231 = '+checkpoint231);
@@ -56,6 +59,7 @@ onmessage=({data})=>{queue=queue.then(async()=>{let needsRollback=false;try{
   try{py.runPython('worker_checkpoint231 = worker_pending231\ndel worker_pending231');}
   catch(e){recoveryError=Error('The show was saved, but the controller must reload before continuing. '+String(e.message||e));throw recoveryError;}
   lastSaved=encoded;
+ }
  }
  needsRollback=false;
  postMessage({id:data.id,result});
