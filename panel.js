@@ -2,7 +2,7 @@ import {campaignFields240,readCampaignImages240,bindCampaignEditor240} from './c
 import {chooseSplitCapture,stopSplitCapture,splitCaptureStatus,releaseUnusedSplitCaptures} from './split-capture238.js?v=update240';
 import {groupedPlayerOptions} from './player-options228.js';
 import {createAssetLibrary} from './asset-library228.js?v=update240';
-import {canControl} from './bridge.js?v=update244';
+import {canControl} from './bridge.js?v=update245';
 import {logoPresetControl226,logoPresetFields226,logoPresetPayload226} from './logo-presets226.js';
 import{createScores}from'./scores-panel203.js?v=update241';
 import{saveSplitVideo}from'./split192.js?v=update240';
