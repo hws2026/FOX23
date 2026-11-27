@@ -103,7 +103,16 @@ async function fillRecords(games,league){
 }
 export async function fetchLeague(league,date='',now=Date.now()){
  if(!paths[league])throw Error('Unknown league');
- const week=leagueScoreWeek(league,date,now),espn=()=>espnSchedule(league,week);
+ const week=leagueScoreWeek(league,date,now),espn=async()=>{
+  try{return await espnSchedule(league,week);}
+  catch(error){
+   // ESPN can reject a date range while its current NFL slate still works.
+   // Only Current week may use that slate; gameInWeek below still filters it.
+   // An undated/TBD event cannot establish that it belongs to the current week.
+   if(league!=='NFL'||date)throw error;
+   return (await espnSchedule(league,{...week,espn:''})).filter(game=>Number.isFinite(Date.parse(game.start)));
+  }
+ };
  let official=null,label='';
  if(league==='MLB'){label='MLB';official=json('https://statsapi.mlb.com/api/v1/schedule?sportId=1&hydrate=team,linescore,probablePitcher,broadcasts'+'&startDate='+week.start+'&endDate='+week.end).then(mlbGames);}
  if(league==='NBA'&&scoreWeek('',now).start===week.start){label='NBA';official=json('https://cdn.nba.com/static/json/liveData/scoreboard/todaysScoreboard_00.json').then(nbaGames);}

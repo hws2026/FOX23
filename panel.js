@@ -4,7 +4,7 @@ import {groupedPlayerOptions} from './player-options228.js';
 import {createAssetLibrary} from './asset-library228.js?v=update240';
 import {canControl} from './bridge.js?v=update240';
 import {logoPresetControl226,logoPresetFields226,logoPresetPayload226} from './logo-presets226.js';
-import{createScores}from'./scores-panel203.js?v=update240';
+import{createScores}from'./scores-panel203.js?v=update241';
 import{saveSplitVideo}from'./split192.js?v=update240';
 let splitDevices=[];
 addEventListener('gridiron-capture238-change',()=>{document.querySelectorAll('[data-split-status238]').forEach(el=>{const slot=el.dataset.splitStatus238,id=document.querySelector('[name=splitCapture'+slot+']')?.value,status=splitCaptureStatus(id);el.textContent=status.label;const stop=document.querySelector('[data-split-stop238="'+slot+'"]');if(stop)stop.disabled=!status.active;});});
