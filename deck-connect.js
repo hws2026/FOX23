@@ -1,4 +1,4 @@
-import{base}from'./bridge.js?v=update243';
+import{base}from'./bridge.js?v=update244';
 import{deckControl}from'./panel.js?v=update240';
 // Mixed cache-key imports must share one button, socket and command history.
 const connectorKey=Symbol.for('gridiron.nfl-deck-connector:'+base.pathname);

@@ -9,12 +9,20 @@ export const cloudEnabled = isCloudSite(config,location.origin,new URL('../', im
 // Serialize each controller's requests. Ownership and show edits use the same
 // database compare-and-swap, so a yielded controller cannot commit a late action.
 export function createSharedRPC(local, db, {readOnly=false,controllerId=null,onControlChange=()=>{},now=Date.now}={}) {
+  // Optional timing diagnostics contain only operation names and elapsed time.
+  const timing=globalThis.location?.search?.includes('debugTiming=1');
+  if(timing){
+    const worker=local,transport=db;
+    local=async request=>{const start=Date.now();try{return await worker(request);}finally{console.debug('FOX23 timing','worker:'+request.endpoint,Date.now()-start);}};
+    db={...transport};
+    for(const name of ['head','read','patch','save'])if(transport[name])db[name]=async(...args)=>{const start=Date.now();try{return await transport[name](...args);}finally{console.debug('FOX23 timing','database:'+name,Date.now()-start);}};
+  }
   let tail=Promise.resolve(),version=null,baseline=null,localDirty=false,active=controllerId?false:!readOnly;
   const owns=()=>!readOnly&&(!controllerId||baseline?.state?.cloudControl?.id===controllerId);
   function notify(){const next=owns();if(next!==active){active=next;onControlChange(active);}}
   const yielded=()=>({status:423,data:{code:'CONTROL_YIELDED',error:'Control moved to another session. This page is watching. Choose Take control to use this page again.'}});
   const confirmed=()=>({status:200,data:{...structuredClone(baseline.state),serverTime:now()/1000}});
-  function serialize(fn){const task=tail.then(fn);tail=task.catch(()=>{});return task;}
+  function serialize(fn){const start=Date.now();const task=tail.then(()=>{if(timing)console.debug('FOX23 timing','queue',Date.now()-start);return fn();});tail=task.catch(()=>{});return task;}
   async function refresh(){
     const head=await db.head();
     if(!head)throw Error('Shared show is missing. No local data has been uploaded.');

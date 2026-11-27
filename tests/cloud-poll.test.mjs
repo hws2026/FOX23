@@ -44,6 +44,16 @@ function fixture({owner='A',controllerId='A',readOnly=false}={}){
 const poll=since=>({endpoint:'state',query:{since}});
 const action={endpoint:'action',body:{action:'score',payload:{},revision:1}};
 
+test('optional timing diagnostics preserve actions and log no show data',async()=>{
+ const entries=[],debug=console.debug;location.search='?debugTiming=1';console.debug=(...args)=>entries.push(args);
+ try{
+  const {rpc,store}=fixture();assert.equal((await rpc(action)).status,200);assert.equal(store.snapshot.state.game.score,1);
+  assert.ok(entries.some(row=>row[1]==='database:save'));
+  assert.ok(entries.some(row=>row[1]==='worker:cloud_snapshot'));
+  for(const row of entries){assert.equal(row.length,3);assert.equal(row[0],'FOX23 timing');assert.match(row[1],/^(queue|worker:[a-z_]+|database:[a-z]+)$/);assert.equal(typeof row[2],'number');}
+ }finally{console.debug=debug;delete location.search;}
+});
+
 test('confirmed unchanged polls reuse loaded worker state',async()=>{
  const {rpc,engine,store}=fixture();
  for(let i=0;i<4;i++)assert.equal((await rpc(poll('1'))).status,204);
