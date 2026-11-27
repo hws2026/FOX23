@@ -5,7 +5,7 @@ status.textContent=new URLSearchParams(location.search).has('remote')?'Waiting f
 try{
  const {startController}=await import('./bridge.js?v=update240');
  await startController();
- await import('./ar-link.js?v=update240');await import('./panel.js?v=update241');
+ await import('./ar-link.js?v=update240');await import('./panel.js?v=update242');
  if(!new URLSearchParams(location.search).has('remote'))await import('./pair-controller.js?v=update240');
  await import('./plugin-download.js?v=update240');await import('./deck-connect.js?v=update240');await import('./stream-playlist208.js?v=update240');
 }catch(e){

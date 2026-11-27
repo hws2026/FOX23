@@ -19,12 +19,13 @@ export function createPlaylist({getState,act,stopLineup,esc,graphicNames,render,
   on('#pl-play',async()=>{if(running)return;stopLineup();if(remaining&&owned){running=true;schedule(remaining);}else await take(true);});
   on('#pl-restart',()=>{pause();remaining=0;selected=items()[0]?.id;render();});
   root.querySelectorAll('[data-pl-row]').forEach(el=>{const id=el.dataset.plRow;
-   const run=fn=>async()=>{if(working)return;try{await fn();}catch(e){toast(e.message,true);}};
+   const run=(fn,allowWhileWorking=false)=>async()=>{if(working&&!allowWhileWorking)return;try{await fn();}catch(e){toast(e.message,true);}};
    el.querySelector('[data-pl-select]').onclick=()=>{pause();remaining=0;selected=id;render();};
    el.querySelector('[data-pl-name]').onchange=run(async()=>{await save(items().map(r=>r.id===id?{...r,name:el.querySelector('[data-pl-name]').value}:r));});
    el.querySelector('[data-pl-seconds]').onchange=run(async()=>{const seconds=Number(el.querySelector('[data-pl-seconds]').value);if(!Number.isFinite(seconds)||seconds<1||seconds>300)throw Error('Hold time must be 1–300 seconds.');await save(items().map(r=>r.id===id?{...r,seconds}:r));});
    el.querySelectorAll('[data-pl-move]').forEach(b=>b.onclick=run(async()=>{const rows=[...items()],i=rows.findIndex(r=>r.id===id),j=i+Number(b.dataset.plMove);if(j<0||j>=rows.length)return;[rows[i],rows[j]]=[rows[j],rows[i]];await save(rows);}));
-   el.querySelector('[data-pl-load]').onclick=run(async()=>{pause();await act('preview',items().find(r=>r.id===id).cue);toast('Loaded into preview. Edit it in the graphics library.');});
+   // Preview loads queue safely behind a pending take; other row edits remain guarded.
+   el.querySelector('[data-pl-load]').onclick=run(async()=>{pause();await act('preview',items().find(r=>r.id===id).cue);toast('Loaded into preview. Edit it in the graphics library.');},true);
    el.querySelector('[data-pl-replace]').onclick=run(()=>save(items().map(r=>r.id===id?{...r,cue:structuredClone(getState().preview)}:r)));
    el.querySelector('[data-pl-delete]').onclick=run(()=>save(items().filter(r=>r.id!==id)));
   });renderStatus();
